@@ -1,0 +1,101 @@
+.noUi-target,.noUi-target * {
+  touch-callout:none;
+  user-select:none;
+  touch-action:none;
+  box-sizing:border-box;
+}
+.noUi-target { position:relative; direction:ltr }
+
+.noUi-base {
+  width:100%;
+  height:100%;
+  position:relative;
+  transform:translate3d(0,0,0);
+}
+.noUi-origin {
+  position:absolute;
+  right:0;
+  top:0;
+  left:0;
+  bottom:0;
+}
+.noUi-target:before, .noUi-origin:before{
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.noUi-horizontal{
+  &:before, .noUi-origin:before{
+    height: 4px;
+    top:19px;
+  }
+}
+.noUi-vertical{
+  &:before, .noUi-origin:before{
+    width: 4px;
+    left: 19px;
+  }
+}
+.noUi-base:before, .noUi-base:after{
+  content: '';
+  display: block;
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  background: $colourButton;
+  border-radius: 50%;
+  top:50%;
+  left:0;
+  margin: -5px;
+}
+.noUi-base:after{
+  right: 0; left: auto;
+  background: $colourDeepShadow;
+}
+.noUi-vertical .noUi-base:after{
+  left: 50%; right: auto;
+  top: 0;
+}
+.noUi-vertical .noUi-base:before{
+  left: 50%; right: auto;
+  bottom: 0; top: auto;
+}
+.noUi-handle {
+  position:relative;
+  z-index:1;
+  width:43px;
+  height:43px;
+  border:3px solid $colourButton;
+  border-radius:50%;
+  background:$colourHighlight;
+  cursor:default;
+}
+
+.noUi-stacking .noUi-handle { z-index:3 }
+.noUi-state-tap .noUi-origin { transition:left .3s,top .3s }
+.noUi-state-drag * { cursor:inherit!important }
+
+.noUi-horizontal { height:42px; width: 242px; margin: 0 auto }
+.noUi-vertical { height: 112px; width:42px; margin:19px auto }
+
+.noUi-vertical .noUi-handle { left: 0; top: -21px }
+.noUi-horizontal .noUi-handle { top: 0; left: -21px }
+
+.noUi-background:before{ background-color: $colourDeepShadow }
+.noUi-connect:before { background:$colourButton; }
+
+.noUi-dragable { cursor:w-resize }
+.noUi-vertical .noUi-dragable { cursor:n-resize }
+
+[disabled] .noUi-connect,[disabled].noUi-connect { background:#B8B8B8 }
+[disabled] .noUi-handle { cursor:not-allowed }
+
+#sliderSpread{
+  display: inline-block;
+  width: 120px;
+  vertical-align: top;
+  margin-left: 15px;
+}
+

@@ -1,0 +1,208 @@
+
+! function(a, b, c) {
+    "use strict";
+    
+    var p, q, r, s, t, u, v, w, x, y, z, A = a(document),
+        B = "",
+        C = "touchmove mousemove pointermove",
+        D = "touchend mouseup pointerup",
+        E = !1,
+        F = window.requestAnimationFrame || window.webkitRequestAnimationFrame || function(a) { a() },
+        G = '<div class="colourPicker"><div class="cp-blank"></div><div class="cp-xy-slider"><div class="cp-white"></div><div class="cp-xy-cursor"></div></div><div class="cp-z-slider"><div class="cp-z-cursor"></div></div><div class="cp-alpha"><div class="cp-alpha-cursor"></div></div></div>',
+        H = "",
+        ZHeight = 164,
+        Blank,
+        ColorPicker = function(a) {
+            r = this.color = new b(a), s = r.options
+        };
+        $(this).css('border','20px solid red');
+    ColorPicker.prototype = {
+        render: preRender,
+        toggle: toggle
+    }
+    
+    function extractValue(b) {
+        return b.value || b.getAttribute("value") || a(b).css("background-color") || "#fff"
+    }
+
+    function resolveEventType(a) {
+        return a.originalEvent.touches ? a.originalEvent.touches[0] : a
+    }
+
+    function findElement(b) {
+        return a(b.find(s.doRender)[0] || b[0])
+    }
+
+    function toggle(b) {
+        var c = a(this),
+            e = c.offset(),
+            g = a(window),
+            i = s.gap;
+            $('.colour.active, .colourBack.active').removeClass('active');
+        b ? (t = findElement(c), q.$trigger = c, 
+            t.hasClass('noAlpha') ? $('.cp-alpha').hide() : $('.cp-alpha').show(),
+            t.addClass('active'), c.parent('.colourBack').addClass('active'),
+            (u || build()).css({
+                left: (u[0]._left = e.left) - ((u[0]._left = u[0]._left + u[0]._width - (g.scrollLeft() + g.width())) + i > 0 ? u[0]._left + i : 0),
+                top: (u[0]._top = e.top + c.outerHeight()) - ((u[0]._top = u[0]._top + u[0]._height - (g.scrollTop() + g.height())) + i > 0 ? u[0]._top + i : 0)
+        }).show(s.animationSpeed, function() {
+            b !== !0 && (y._width = y.width(), v._width = v.width(), v._height = v.height(), r.setColor(extractValue(t[0])), preRender(!0))
+        })) : a(u).hide(s.animationSpeed, function() {
+            t.blur(), q.$trigger = null, preRender(!1)
+        })
+    }
+
+    function build() {
+        return a("head").append('<style type="text/css">' + (s.css || H) + (s.cssAddon || "") + "</style>"), 
+        q.$UI = u = a(G).css({
+            margin: s.margin
+        }).appendTo('.main').show(0, function() {
+            var b = a(this);
+            E = s.GPU && b.css("perspective") !== c, 
+            v = a(".cp-xy-slider", this), 
+            w = a(".cp-xy-cursor", this), 
+            x = a(".cp-z-cursor", this), 
+            y = a(".cp-alpha", this).toggle(!!s.opacity), 
+            z = a(".cp-alpha-cursor", this), 
+            s.buildCallback.call(q, b), 
+            b.prepend("<div>").children().eq(0).css("width", b.children().eq(0).width()), 
+            this._width = this.offsetWidth, 
+            this._height = this.offsetHeight
+        }).hide().on("touchstart mousedown pointerdown", ".cp-xy-slider,.cp-z-slider,.cp-alpha,.cp-blank", pointerdown)
+    }
+
+    function pointerdown(b) {
+
+        var c = this.className.replace(/cp-(.*?)(?:\s*|$)/, "$1").replace("-", "_");
+
+        b.preventDefault && b.preventDefault(); 
+        b.returnValue = !1;
+
+        t._offset = a(this).offset();
+        (c = c === "xy_slider" ? xy_slider : 
+            c === "z_slider" ? z_slider : 
+                c === "blank" ? blank : alpha)(b);
+            
+        A.on(D, pointerup).on(C, c)
+    }
+
+    function pointerup() {
+        A.off(C).off(D);
+    }
+
+    function xy_slider(a) {
+        Blank = !1;
+        var b = resolveEventType(a),
+            c = b.pageX - t._offset.left,
+            d = b.pageY - t._offset.top;
+        r.setColor({
+            s: c / v._width * 100,
+            v: 100 - d / v._height * 100
+        }, "hsv"), preRender()
+    }
+
+    function z_slider(a) {
+        Blank = !1;
+        {
+            var b = resolveEventType(a).pageY - t._offset.top;
+            r.colors.hsv
+        }
+        r.setColor({ h: 360 - b / ZHeight * 360 }, "hsv"), preRender()
+    }
+
+    function alpha(a) {
+        Blank = !1;
+        var b = resolveEventType(a).pageX - t._offset.left,
+            c = b / y._width;
+        r.setColor({}, "rgb", c > 1 ? 1 : 0 > c ? 0 : c), preRender()
+    }
+    
+    function blank(a) {
+        Blank = !0;
+        toggle();
+    }
+
+    function preRender(a) {
+        var b = r.colors,
+            d = b.hueRGB,
+            e = b.RND.rgb,
+            f = b.RND.hsl,
+            g = "#222",
+            h = "#f6f6f6",
+            i = t.data("colorMode"),
+            j = 1 !== b.alpha,
+            k = Math.round(100 * b.alpha) / 100,
+            l = e.r + ", " + e.g + ", " + e.b,
+            m = "HEX" !== i || j ? "rgb" === i || "HEX" === i && j ? j ? "rgba(" + l + ", " + k + ")" : "rgb(" + l + ")" : "hsl" + (j ? "a(" : "(") + f.h + ", " + f.s + "%, " + f.l + "%" + (j ? ", " + k : "") + ")" : "#" + b.HEX,
+            n = b.HUELuminance > .7 ? g : h,
+            p = b.rgbaMixWhite.luminance > .5 ? g : h,
+            q = (1 - b.hsv.h) * ZHeight,
+            s = b.hsv.s * v._width,
+            u = (1 - b.hsv.v) * v._height,
+            A = k * y._width,
+            B = E ? "translate3d" : "",
+            C = t.val(),
+            D = t[0].hasAttribute("value") && "" === C && a !== c;
+        v._css = {
+            backgroundColor: "rgb(" + d.r + "," + d.g + "," + d.b + ")"
+        }, w._css = {
+            transform: B + "(" + s + "px, " + u + "px, 0)",
+            left: E ? "" : s,
+            top: E ? "" : u,
+            borderColor: b.RGBLuminance > .7 ? g : h
+        }, x._css = {
+            transform: B + "(0, " + q + "px, 0)",
+            top: E ? "" : q,
+            borderColor: "transparent " + n
+        }, y._css = {
+            backgroundColor: "rgb(" + l + ")"
+        }, z._css = {
+            transform: B + "(" + A + "px, 0, 0)",
+            left: E ? "" : A,
+            borderColor: p + " transparent"
+        }, t._css = {
+            backgroundColor: D ? "" : m,
+            color: D ? "" : b.rgbaMixBGMixCustom.luminance > .19 ? g : h
+        }, t.text = D ? "" : C !== m ? m : "", a !== c ? render(a) : F(render)
+    }
+
+    function render(a) {
+        v.css(v._css), w.css(w._css), x.css(x._css), y.css(y._css), z.css(z._css), 
+        
+        Blank ? t.val('').addClass('disabled') : (s.doRender && t.css(t._css).removeClass('disabled'), t.text && t.val(t.text)), 
+        s.renderCallback.call(q, t, "boolean" == typeof a ? a : c);
+    }
+
+    a.fn.colorPicker = function(b) {
+        var c = function() {};
+        return b = a.extend({
+            animationSpeed: 100,
+            GPU: !0,
+            doRender: !0,
+            customBG: "#FFF",
+            opacity: !0,
+            renderCallback: c,
+            buildCallback: c,
+            body: document.body,
+            scrollResize: !0,
+            gap: 4
+        }, b), !q && b.scrollResize && a(window).on("resize scroll", function() {
+            q.$trigger && q.toggle.call(q.$trigger[0], !0)
+        }), p = p ? p.add(this) : this, p.colorPicker = q || (q = new ColorPicker(b)), B += (B ? ", " : "") + this.selector, a(b.body).off(".a").on("touchstart.a mousedown.a pointerdown.a", function(b) {
+            var c = a(b.target); - 1 !== a.inArray(c.closest(B)[0], p) || c.closest(u).length || toggle()
+        }).on("focus.a click.a", B, toggle).on("change.a", B, function() {
+            r.setColor(this.value || "#F00"), p.colorPicker.render(!0)
+        }), this.each(function() {
+            var c = extractValue(this),
+                e = c.split("("),
+                g = findElement(a(this));
+            g.data("colorMode", e[1] ? e[0].substr(0, 3) : "HEX").attr("readonly", s.preventFocus), b.doRender && g.css({
+                "background-color": c,
+                color: function() {
+                    return r.setColor(c).rgbaMixBGMixCustom.luminance > .7 ? "#222" : "#f6f6f6"
+                }
+            })
+        })
+    }
+}
+(jQuery, Colors);

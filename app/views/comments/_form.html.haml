@@ -1,0 +1,18 @@
+- autofocus ||= false
+= form_for comment, url: (comment.new_record? ? comments_path : comment_path(comment.id)), id: 'commentForm', remote: true do |f|
+  = f.hidden_field :commentable_type, value: comment.commentable_type || commentable.class.name, id: 'commentableType'
+  = f.hidden_field :commentable_id, value: comment.commentable_id || commentable.id, id: 'commentableId'
+  .table.wide100
+    .cell.wide100
+      .resizable.relative
+        = f.text_area :body, class: 'resizable', rows: nil, cols: nil, id: 'commentInput'
+        %pre.resizable <span></span>
+    %label.cell.button 
+      <svg class='icon iGen'><use xlink:href='#plane' /></svg>
+      = f.submit class: 'hidden', id: 'commentSubmit'
+    
+  
+        
+    
+      
+          

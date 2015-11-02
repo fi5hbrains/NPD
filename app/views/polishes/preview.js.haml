@@ -1,0 +1,3 @@
+$('#previewWrapper').html('#{j(render('polish_preview').html_safe)}');
+$('.removeLayerField').filter(function() {return $( this ).val( ) === "1";}).parent().parent().parent().remove();
+$('#changes').children().val('')

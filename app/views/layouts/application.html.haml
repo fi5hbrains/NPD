@@ -1,0 +1,14 @@
+!!!
+%html{lang: I18n.locale}
+  %head
+    %title Interpol
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'profile', 'data-turbolinks-track' => false if (params[:controller] == 'users' && params[:action] == 'edit')
+    = javascript_include_tag 'lab', 'data-turbolinks-track' => false if params[:lab]
+    = csrf_meta_tags
+  %body
+    %svg{height: 0, width: 0, style: 'display:block', xmlns: 'http://www.w3.org/2000/svg'}
+      %defs{id: 'defs'}
+    = render 'navigation'
+    = yield

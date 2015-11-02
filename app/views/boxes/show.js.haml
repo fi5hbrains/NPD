@@ -1,0 +1,29 @@
+- if params[:action] == 'gather'
+  - if @addable.size > 0
+    $('#searchResults').html('#{j(render(@addable, add: true).html_safe)}');
+  $('#gather').show()
+  history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}/gather');
+- elsif params[:edit]
+  var collection = $('.bigPolish');
+  collection.find('.roundButton').show();
+  collection.each(function() {
+  var id = $(this).data('id');
+  $(this).children('a').attr('href', '/collect/' + id + '?box=#{@box.slug}&from_catalogue=true').attr('data-method','post').attr('rel','nofollow').attr('data-remote','true')
+  });
+  $('#goEdit').hide();
+  $('#doneEditing').show();
+  - if %(collection wishlist giveaway).include?(@box.slug)
+    $('h1').find('a').hide();
+  - else 
+    $('h1').hide();
+    $('#boxNameField').show();
+  history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}/edit');
+- else
+  $('#secondarySearchResults').html('#{j(render(@polishes, big_polish: true).html_safe)}');
+  $('#goEdit').show();
+  $('#doneEditing').hide();
+  $('#gather').hide();
+  $('h1').show();
+  $('h1').find('a').show();
+  $('#boxNameField').hide();
+  history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}');

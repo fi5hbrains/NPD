@@ -1,0 +1,23 @@
+- if params[:from_catalogue]
+  var polish = $('.bigPolish[data-id=#{params[:polish_id]}]');
+  polish.remove();
+  - if @next_item
+    - if @is_in
+      $('#searchResults').append('#{j(render(@next_item, add: true).html_safe)}');    
+    - else
+      $('#secondarySearchResults').append('#{j(render(@next_item, remove: true).html_safe)}');    
+-else
+  - if %w(collection wishlist giveaway).include? @box.slug
+    - if @is_in
+      $('##{@box.slug}List').next('.icon').show();
+    - else 
+      $('##{@box.slug}List').next('.icon').hide();
+  - else
+    - if @box_is_new
+      $('#boxesList').children('.formLi').before('<li class="notCurrent"><a id="#{@box.slug}List" data-remote="true" rel="nofollow" data-method="post" href="/collect/#{@item.polish_id}?box=#{@box.name}">#{@box.name} <svg class="icon isOk check"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#check"></use></svg><svg class="icon isOk plus" style="visibility: hidden;"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#plus"></use></svg></a></li>')
+    - elsif @is_in
+      $('##{@box.slug}List').children('.plus').first().css('visibility','hidden');
+      $('##{@box.slug}List').children('.check').first().css('visibility','visible');
+    - else
+      $('##{@box.slug}List').children('.check').first().css('visibility','hidden');
+      $('##{@box.slug}List').children('.plus').first().css('visibility','visible');

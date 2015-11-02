@@ -1,0 +1,7 @@
+%h1= @user.name
+.avatar
+  -# = image_tag @user.avatar.thumb
+  = image_tag @user.avatar.url, id: 'avatar'
+
+#editForm
+  = render 'edit_form'  

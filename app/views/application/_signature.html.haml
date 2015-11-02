@@ -1,0 +1,52 @@
+- return unless signable
+- name       ||= false
+- date       ||= false
+- stats      ||= false
+- tags       ||= false
+- avatar     ||= false
+- bottom_up  ||= false
+- no_flow    ||= false
+- nobr_lines ||= []
+- setup = [('name' if name), ('date' if date), ('stats' if stats), ('tags' if tags)]
+- signable ||= @entry
+- users ||= (@users || [])
+- user ||= users.detect{|u| u.id == signable.user_id} || User.find(signable.user_id) || User.ghost
+- s_class = ['idBlock signature', ('noFlow' if no_flow), ('bottomUp' if bottom_up)].reject{ |c| !c}.join(' ')
+%div{class: s_class}<
+  - if avatar
+    = link_to (image_tag user.avatar.url('thumb'), class: 'avatar'), user, class: 'pic'
+  .info
+    - setup.each_with_index do |p,i|
+      - if p
+        - p_class = p + (' inline' if nobr_lines.include?(i) || nobr_lines.include?(i-1)).to_s
+        %p{class: p_class}
+          - if i == 0
+            %strong= link_to user.name, user
+          - elsif i ==1
+            %svg{class: 'icon iStats'} <use xlink:href='#clock' />
+            %time{datetime: signable.updated_at}= time_ago_in_words signable.updated_at
+          - elsif i ==2
+            %svg{class: 'icon iStats'} <use xlink:href='#eye' />
+            275
+            %svg{class: 'icon iStats'} <use xlink:href='#heart' />
+            0
+            %svg{class: 'icon iStats'} <use xlink:href='#bubble' />
+            21
+            %svg{class: 'icon iStats'} <use xlink:href='#camera' />
+            7        
+          - elsif i ==3
+            %svg{class: 'icon iStats'} <use xlink:href='#tag' />
+            = link_to 'lalala', '#'
+            = link_to 'глиттер', '#'
+            = link_to 'мимими', '#'
+            = link_to 'lalala', '#'
+            = link_to 'глиттер', '#'
+            = link_to 'мимими', '#'
+            = link_to '#' do
+              %svg{class: 'icon hoverBack withText'}> <use xlink:href='#pencil' />
+              Править
+
+
+  
+      
+      

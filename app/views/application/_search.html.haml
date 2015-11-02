@@ -1,0 +1,13 @@
+- setup ||= %w(brand polish colour)
+- css = ' ' + (css || '')
+- id ||= 'search'
+
+= form_tag search_path, method: 'GET', class: 'searchWrapper formIndent' + css, id: id + 'Wrapper' do 
+  .search{id: id}
+    - setup.each do |p|
+      .cell
+        = text_field_tag p, (params[p] || (@brand.name if p == 'brand' && @brand)),  placeholder: t("search.#{p}"), autocomplete: 'off', class: 'search' + p.capitalize, id: id + p.capitalize
+        :javascript
+          var #{id + p.capitalize} = new Awesomplete(document.getElementById('#{id + p.capitalize}'));
+          #{id + p.capitalize}.list = #{p == 'colour' ? Defaults::COLOURS[I18n.locale].keys.to_s.html_safe : []};
+  = button_tag "<svg class='icon linkLike iGen'><use xlink:href=#magnify /></svg>".html_safe, id: id + 'Button', class: 'inField', name: nil

@@ -1,0 +1,15 @@
+%section#listing.block.left
+  %h2
+    = @brand.name
+    - unless %w(new edit redress).include? params[:action]
+      = link_to new_brand_polish_path(@brand) do
+        <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
+      
+  = render 'search', setup: %w(brand polish)
+  #controls.controls.bigMargin
+    %span.selected= 'All'
+    %span= link_to 'Not Bottled'
+    %span= link_to 'Drafts'
+    
+  #searchResults.wide100
+    = render @polishes, no_vote: true

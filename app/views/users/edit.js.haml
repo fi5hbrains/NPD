@@ -1,0 +1,6 @@
+$('#avatar').attr('src','#{@user.avatar.url}');
+JcropAPI = $('#jcrop').data('Jcrop');
+JcropAPI.destroy();
+$('#jcrop').attr('src',"#{escape_javascript(@user.avatar.url + '?' + Time.now.to_s)}").width('').height('');
+
+

@@ -1,0 +1,3 @@
+$('#searchResults').prepend('#{j(render @copy).html_safe}');
+var polishes = $('#searchResults').children('.polish');
+if( polishes.size() > 6){ polishes.last().remove(); }

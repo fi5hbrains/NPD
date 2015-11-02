@@ -1,0 +1,52 @@
+.idBlock.user.botomUp
+  = image_tag @user.avatar.url('big_thumb'), class: 'left avatar big'
+  .info
+    %h1= @user.name
+    -if current_user == @user
+      .iconArray
+        = link_to 'Log out', user_session_path, method: :delete
+        = link_to 'Edit', edit_user_path(@user)
+%p#about.clearFix= @user.about
+#userStats<
+  = link_to nil, class: 'wide25 inline noDecor' do
+    %h4.textLike.smallMargin Entries
+    %p.notable 0
+  = link_to user_box_path(@user,'collection'), class: 'wide25 inline noDecor' do
+    %h4.textLike.smallMargin Collection
+    %p.notable= @user.boxes.find_by(slug: 'collection').box_items.count
+  = link_to '', class: 'wide25 inline noDecor' do
+    %h4.textLike.smallMargin Followers
+    %p.notable 0
+  = link_to '', class: 'wide25 inline noDecor' do
+    %h4.textLike.smallMargin Following
+    %p.notable 24
+#quests.left.wide50   
+  %h2 Quests
+#lists.left.wide50
+  %h2 
+    Lists
+    = link_to '' do
+      <svg class='icon iGen roundButton'><use xlink:href=#plus /></svg>
+
+  %ul#Lists
+    - @user.boxes.each do |box|
+      - unless box.slug == 'collection'
+        %li
+          = link_to user_box_path(@user, box.slug), class: 'noDecor' do
+            %span.linkLike= box.name
+            %span.textLike.inactive= "(#{box.box_items.count})"
+%h2 
+  Invitation Pass-phrases
+  = link_to get_invite_path, method: 'post', remote: true do
+    <svg class='icon iGen roundButton'><use xlink:href=#plus /></svg>
+%ul#invites
+  - (invites = @user.invites).each do |invite|
+    %li
+      - if invite.used_by
+        - user = User.find(invite.used_by)
+        %span.inactive= invite.word
+        = link_to user do
+          = image_tag user.avatar.url('thumb'), class: 'avatar tiny'
+          = user.name
+      -else
+        %span.selectable= invite.word

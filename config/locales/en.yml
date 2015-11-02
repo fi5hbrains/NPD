@@ -1,0 +1,134 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  welcome: 
+    hi: 'Hello!'
+  form:
+    enter: 'Enter'
+    signup: 'Sign Up'
+    login: 'Log In'
+    save: 'Save'
+    update: 'Update'
+    preview: 'Preview'
+    confirm: 'Are you sure?'
+    edit: 'Edit'
+    done_editing: 'Done'
+    action:
+      new: 'Save'
+      create: 'Save'
+      edit: 'Update'
+      update: 'Update'
+      redress: 'Update'
+  controls:
+    edit: 'Edit'
+    clone: 'Clone'
+    redress: 'Redress'
+    delete: 'Delete'
+    lock: 'Lock'
+    unlock: 'Unlock'
+  placeholder:
+    name: 'Name'
+    password: 'Password'
+    invite_phrase: 'Invite Phrase'
+    brand_name: 'Brand Name'
+    polish_name: 'Polish Name'
+    number: 'Number'
+    year: 'Year'
+    collection: 'Collection'
+    synonym: 'Names separated by semicolon'
+    link: 'Website'
+    bottle_name: 'Name'
+    blur: 'Blur Level'
+    add_images: 'Add Layer Images'
+    new_list: 'Add to new list'
+
+  navigation:
+    home: 'Home'
+    catalogue: 'Catalogue'
+    diary: 'Diary'
+    personal: 'Personal'
+    settings: 'Settings'
+    lab: 'Laboratory'
+    other: 'Nowhere'
+    
+  search:
+    brand: 'Brand'
+    polish: 'Polish'
+    colour: 'Colour'
+    find: 'Find'
+    
+  comments:
+    header: 'Comments'
+    
+  user:
+    list:
+      collection: 'Collection'
+      wishlist: 'Wishlist'
+      giveaway: 'Giveaway'
+
+  catalogue:  
+    titles:
+      similar: 'Similar Polishes'
+  lab:
+    new_brand: 'Add a Brand'
+    new_polish: 'New Polish'
+    edit_brand: 'Edit'
+    brands: 'Brands'
+    titles:
+      polish_new: New Polish
+      polish_update: Update Polish
+    section:
+      bottle: 'Bottle'
+      highlight: 'Highlight'
+      add_layer: 'Add Particles'
+      shimmer: 'Shimmer'
+      glitter: 'Glitter'
+      flakes: 'Flakes'
+      sand: 'Sand'
+      matte: 'Matte'
+      wax: 'Wax'
+      glass: 'Glass'
+      mirror: 'Mirror'
+      base: 'Base'
+      highlight_colour: 'Highlight Colour'
+      light: 'Light'
+      shadow: 'Shadow'
+      colour: 'Colour'
+      colour1: 'Colour 1'
+      colour2: 'Colour 2'
+      colour3: 'Colour 3'
+      cold: 'Cold Colour'
+      size: 'Size'
+      density: 'Density'
+      holo: 'Holo'
+      magnet: 'Magnet'
+      opacity: 'Opacity'
+      water: 'Water'
+      juice: 'Juice'
+      syrup: 'Syrup'
+      jelly: 'Jelly'
+      cream: 'Cream'
+    
+
+    
+    
+    

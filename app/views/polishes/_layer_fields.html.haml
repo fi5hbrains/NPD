@@ -1,0 +1,60 @@
+.layer.animated
+  .table
+    .cell.wide100.vMiddle
+      %h3= l.layer_type.capitalize
+    - unless l.layer_type == 'base'
+      .cell.noWrap.vMiddle
+        = link_to "<svg class='icon hoverBack'><use xlink:href='#dolly' /></svg>".html_safe, '#'
+        %span.removeLayer  <svg class='icon iRed hoverBack'><use xlink:href='#trash' /></svg>
+        = l_f.hidden_field :_destroy, class: 'removeLayerField'
+  = l_f.hidden_field :layer_type, value: l.layer_type
+  = l_f.hidden_field :ordering, value: l.ordering, id: nil, class: 'orderingField'
+  
+  - if l.layer_type == 'glitter'
+    .array
+      - Defaults::GLITTERS.each do |p|
+        .arrayItem>
+          = l_f.radio_button :particle_type, p, class: 'hidden', checked: p == 'hexagon'
+          = l_f.label "particle_type_#{p}", "<svg class='icon iMid'><use xlink:href='#p#{p.capitalize}' /></svg>".html_safe
+
+  .array.colours
+    .arrayItem>
+      = l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
+      = t 'lab.section.colour1'
+    .arrayItem>
+      = l_f.text_field :c_duo  ,  class: 'colour noAlpha disabled disableable'
+      = t 'lab.section.colour2'
+    .arrayItem>
+      = l_f.text_field :c_multi,  class: 'colour noAlpha disabled disableable'
+      = t 'lab.section.colour3'
+    - if l.layer_type == 'base'
+      .arrayItem>
+        = l_f.text_field :c_cold, class: 'colour noAlpha disabled disableable'
+        = t 'lab.section.cold'
+      .arrayItem>
+    .arrayItem>
+      .colourBack= l_f.text_field :highlight_colour, class: 'colour alpha', value: l.highlight_colour || 'white'
+      = t 'lab.section.light'
+    .arrayItem>
+      .colourBack= l_f.text_field :shadow_colour   , class: 'colour alpha', value: l.shadow_colour || 'rgba(0,0,0,.2)'
+      = t 'lab.section.shadow'
+
+  - unless l.layer_type == 'base'    
+    .array
+      - %w(Particle_size Particle_density Opacity Holo_intensity Magnet_intensity).each do |p|
+        - if (p != 'Magnet_intensity' || l.layer_type == 'shimmer') && (p != 'Holo_intensity' || l.layer_type != 'sand')
+          .arrayItem>
+            %div{class: "sliderV p#{p}"}
+            = l_f.hidden_field p.downcase, value: (l.send(p.downcase) || Defaults::LAYER[p.downcase.to_sym])
+            <svg class='icon iSlider'><use xlink:href='#s#{p}' /></svg>
+            = t "lab.section.#{p.downcase}"
+      
+  - if l.layer_type == 'shimmer'
+    .array.magnets.hidden
+      - Defaults::MAGNETS.each do |m|
+        .arrayItem>
+          = f.label "magnet_#{m}", "<svg class='icon iMid'><use xlink:href='#m#{m.capitalize}' /></svg>".html_safe, class: 'uncheckable external'
+          
+- if l.ordering > 1
+  <svg class='iSwap' data-ordering='#{l.ordering}'><use xlink:href='#swap' /></svg>
+          

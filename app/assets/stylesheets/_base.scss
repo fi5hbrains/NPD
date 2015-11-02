@@ -1,0 +1,455 @@
+// Sanitation //
+hr{
+  border: 1px solid;
+  margin: -1px 0;
+}
+body, .textMain{
+  font-size: $fontSizeBase; 
+  line-height: 20px;
+  font-family: $fontMain; 
+  font-weight: 300;
+  color: $colourFont;   
+}
+body{ 
+  background: $colourBack;
+  margin: 0; 
+  padding: 70px 20px 0;
+}
+h1, h2, h3{ 
+  color: $colourHeader;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  line-height: 40px;
+}
+h1{
+  font-size: 40px;
+  margin-top: 48px;
+}
+h2{
+  font-weight: bold;
+  font-size: 26px;
+  margin-top: 40px;
+}
+h3{ 
+  font-size: 19px; 
+  line-height: 20px;
+}
+h3.bigMargin { margin-top: 42px }
+h4{
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 20px;
+  margin-top: 10px;
+}
+ul { padding: 0 }
+li { 
+  display: block;
+  width: 100%;
+  padding: 7px 0;
+  font-size: 18px;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+p, ul, ol, table, blockquote{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+ul ul, ol ol, ul ol, ol ul{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+b, strong, em, small, code { line-height: 1 }
+sup, sub{
+  vertical-align: baseline;
+  position: relative;
+  top: -0.4em;
+}
+sub { top: 0.4em }
+time { color: $colourStatsIcon }
+
+.block{ 
+  width: 290px; margin-right: 20px;
+  .arrayItem { margin-right: 10px }
+  .array > .arrayItem:nth-child(5n+5) { margin-right: -50px }
+}
+.blockx2 .block + .block {margin-right: 0;}
+.blockx2{ 
+  width: 600px; margin-right: 20px;
+  .array > .arrayItem:nth-child(10n+10) { margin-right: -50px }
+}
+.arrayItem{
+  display: inline-block;
+  width: 50px;
+  vertical-align: top;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 16px;
+}
+
+.spotable, .spotable > .img { transition: -webkit-filter .5s, filter .5s }
+.spotable{ 
+  display: inline-block;
+  vertical-align: top;
+  margin: -14px -12px;
+  background: radial-gradient(circle closest-side, rgba(255,255,255, 0) 40%, rgba(255,255,255,0) 93%);
+  &:hover { background: radial-gradient(circle closest-side, rgba(255,255,255,.8) 60%, rgba(255,255,255,0) 93%) }
+}
+input:checked + .spotable, .spotable.active { background: radial-gradient(circle closest-side, rgba(255,255,255,.5) 60%, rgba(255,255,255,0) 93%) }
+.spotable > .img { filter: brightness(99%) }
+.spotable > .img:hover { filter: brightness(140%) }
+
+label.active > svg, input:checked + label > svg { fill: $colourHeader }
+
+a{ 
+  color: $colourLink;
+  h4.notable{ 
+    color: $colourFont;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-decoration: none;
+ }
+  p.notable{
+    margin-top: 10px;
+    margin-bottom:0;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+a:visited { color: $colourLink; }
+a:hover{ color: $colourLinkHover }
+
+.animated{
+  animation-duration: .4s;
+  animation-fill-mode: both;
+}
+.shake { animation-name: shake }
+@keyframes shake{
+  0%, 100%      { transform: translateX(0)     }
+  15%, 45%, 75% { transform: translateX(-10px) }
+  30%, 60%      { transform: translateX(10px)  }
+  90%           { transform: translateX(5px)   }
+}
+.upped { animation-name: upped }
+@keyframes upped{
+  0% { transform: translateY(150px) }
+  100% { transform: translateY(0) }
+}
+.downed { animation-name: downed }
+@keyframes downed{
+  0% { transform: translateY(-150px) }
+  100% { transform: translateY(0) }
+}
+.controls{
+  font-size: 18px;
+  mardin-top: 20px;
+  margin-bottom: 20px;
+  span{
+    display: inline-block;
+    padding: 4px .5em 1px;
+    border-radius: $radiusMain;    
+  }
+  a { text-decoration: none }
+  .selected {
+    background: $colourHeader;
+    color: white;
+  }
+  .active { background: $colourButton }
+  .active a { color: white }
+}
+
+// ------------------------------ ID Blocks ------------------------------ //
+.avatar{
+  height: 48px;
+  width: 48px;
+  border-radius: $radiusMain;
+  overflow: hidden;
+}
+.avatar.big { width: 96px; height: 96px; margin-right: 10px }
+.avatar.tiny { width:24px; height: 24px }
+.bigPolish, .idBlock{
+  vertical-align: top;
+  font-size: 12px;
+  line-height: $lineHeightSmall;
+  p { margin: 0 }
+}
+.bigPolish{ 
+  position:relative;
+  width: 96.3px;
+  margin: -10px 0 15px;
+  text-align: center;
+  display:inline-block;
+  & > a { display: inline-block }
+}
+.polish { display: inline-block }
+.idBlock > .pic{
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+.bigPolish img{ 
+  height: 139px;
+  width: 128px;
+  margin: 0 -14px 4px -14px;
+}
+.idBlock.polish > .pic > img { width: 64px; height: 69px }
+.idBlock.user {min-height: 96px }
+.idBlock.signature > .pic { margin-top: 3px }
+
+.noFlow + .body, .noFlow > .info { margin-left: 53px }
+.bottomUp{
+  & > .pic{
+    display: inline-block;
+    float: none;
+  }
+  .info{
+    display: inline-block;
+    width: calc(100% - 53px);
+    margin-left: 0;
+  }
+}
+.idBlock.polish.bottomUp > .info { width: calc(100% - 64px) }
+.idBlock.polish.bottomUp > .pic { margin-right: 0 }
+.idBlock.polishStats.bottomUp{
+  margin-top: -16px;
+  .pic { margin-right: 10px }
+  svg.star { width: 70px; height: 70px; fill: $colourSunday }
+  & > .info { width: calc(100% - 80px) }
+}
+.idBlock .inline { margin-right: 7px }
+.iconArray > *:not(:last-child){ margin-right: 11px }
+.iconArray.withText > *:not(:last-child){ margin-right: 16px }
+
+// ------------------------------ Forms ------------------------------ //
+button::-moz-focus-inner { border: 0; padding: 0 }
+.searchWrapper{
+  display: inline-block;
+  position:relative;
+  vertical-align: top;
+}
+.formIndent { margin: 0 -4px 0 -9px }
+.formWide50 { 
+  width: calc(50% + 9px);
+  margin: 34px 0 0 -9px;
+}
+.search{ 
+  display: inline-table;
+  width: 100%;
+}
+form img { vertical-align: middle }
+.columnForm{ input, .button, .previewButton { margin-bottom: 5px } }
+input, textarea, button, .button, .roundButton{ 
+  &:focus{
+    position:relative; 
+    outline: none; 
+    box-shadow: 0 0 0 1px $colourMain; 
+    z-index: 1 
+  }
+  &:hover { background: $colourHighlight }
+}
+input, button, textarea, pre, .button, .previewButton, .roundButton{
+  font-size: $fontSizeBase;
+  display: block;
+  line-height: 44px;
+  min-height: 48px;
+  min-width: 48px;
+  border-radius: $radiusMain;
+  border: 0 rgba(0,0,0,0);
+  background: $colourForm;
+  padding: 2px 10px;
+  box-sizing: border-box;
+}
+input[type=submit], button, .button, .previewButton, .roundButton{
+  text-align: center;
+  user-select: none;
+  color: white;
+  background: $colourButton;
+  text-decoration: none;
+  &:disabled { background: silver }
+  .icon{ 
+    fill: white;
+    vertical-align:middle;
+  }
+}
+.cell.button { padding: 0; vertical-align: middle }
+input[name=preview], button[name=preview],.previewButton, .roundButton { background-color: $colourMain }
+input[type=submit], button, .button { &:hover { background: lighten($colourButton, $lightenOnHover) } }
+input[name=preview], button[name=preview],.previewButton, .roundButton { &:hover { background: lighten($colourMain, $lightenOnHover) } }
+input[type=text]{ width: 100% }
+textarea.resizable, pre.resizable{
+  padding:14px 10px;
+  font-family: $fontMain;
+  line-height: 20px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  margin: 0;
+}
+textarea.resizable{ 
+  position: absolute;
+  resize: none; 
+  width: 100%; 
+  height: 100%; 
+}
+pre.resizable{ min-height: 48px; max-height: 200px; overflow: hidden; visibility: hidden;}
+#note {
+  textarea, pre { font-size: 15px }
+  textarea:not(:focus){
+    background:none;
+    font-family: georgia;
+    font-style: italic;
+  }
+  textarea:hover { background: $colourHighlight }
+  pre { max-height: none }
+}
+
+button.inField{
+  cursor: pointer;
+  position: absolute;
+  background: none;
+  right: -6px;
+  top: -3px;
+  z-index: 3;
+  .icon { fill: $colourButton; margin-bottom: -5px; background: none }
+}
+button.inField:focus{ box-shadow: none; outline: none }
+button.inField:focus .icon{ fill: white }
+.icon.roundButton{
+  display: inline-block;
+  position:absolute;
+  height: 32px;
+  width: 32px;
+  min-height: 0;
+  min-width: 0;
+  border-radius: 50%;
+  left: 32px;
+  top: 80px;
+  padding: 7px;
+  fill: white;
+  &:hover { fill: white }
+}
+.icon.isOk.roundButton{
+  position:relative;
+  height: 22px;
+  width: 22px;
+  top: auto;
+  left: auto;
+  margin: 0 1px 12px -23px;
+  padding: 2px;
+  border-radius: $radiusMain;
+}
+.roundButton.important { background-color: $colourBad }
+a:hover{
+  .button { background: lighten($colourButton, $lightenOnHover) }
+  .previewButton, .roundButton { background: lighten($colourMain, $lightenOnHover) }
+  .roundButton.important { background-color: lighten($colourBad, $lightenOnHover) }
+}
+h1, h2, h3 { .icon.roundButton {
+    position: static;
+    margin-bottom: -5px;
+  } 
+}
+.gloss{
+  display: block;
+  width:48px;
+  min-height:48px;
+  margin: 13px;
+  background: url(gloss_samples.png) -4px -2px no-repeat
+}
+.gloss[for=polish_gloss_type_wax]{ background-position:    -64px  -2px}
+.gloss[for=polish_gloss_type_glass]{ background-position:  -126px -2px}
+.gloss[for=polish_gloss_type_mirror]{ background-position: -185px -2px}
+input:checked + .spotable > .gloss{ background-position-y: -55px}
+
+form .table{ margin-bottom: 6px }
+// ----------------------------- Comment ------------------------------ //
+.comment{
+  position: relative;
+  min-height: 48px;
+  clear: both;
+  margin-bottom: 20px;
+  &:first-child{margin-top: 20px }
+}
+.comment.secondary { padding-left: 36px }
+.comment.tertiary { padding-left: 72px }
+.voteCounter{
+  position: absolute;
+  text-align: center;
+  padding: 5px 0;
+  right: 6px;
+  top: -7px;
+  width: 36px;
+  min-height: 20px;
+  z-index: 1;
+}
+.voteCounter .icon{ position:absolute; display: none; left: 0; opacity: 0; transition: opacity .25s ease-in-out }
+.voteUp .icon{top: -35px }
+.voteDown .icon{bottom: -35px }
+.voteCounter:hover .icon{ display: block; opacity: 1; z-index: 2 }
+.vote.negative{color: $colourBad }
+.vote.positive{color: $colourGood }
+
+// ------------------------------ Polish ------------------------------ //
+#coatsWrapper{
+  position:relative;
+  width:125px;
+  height:250px;
+  overflow:hidden;
+  img{ 
+    left: -2px; 
+    height: 100%; 
+  }
+}
+#previewWrapper {
+  overflow: hidden;
+  position:relative;
+  width: 290px;
+  height: 512px;
+  border-radius: $radiusMain;
+  img { 
+    width: 305px;
+    height: 572px;
+    margin: -36px -7px;
+  }
+}
+#rating{
+  font-size: 24px;
+  position:absolute;
+  width: 100%;
+  text-align: center;
+  top:33px;
+}
+.biggestBottle{
+  width: 200px;
+  height: 216px;
+  margin: 36px -18px 20px -18px;
+}
+.bottleThumb{
+  width: 64px;
+  height: 69px;
+  margin: 3px 5px;
+}
+.spotable.bottleThumbWrapper{ margin:-10px -13px 0;}
+
+// ------------------------------ Local ------------------------------ //
+#boxNameField{ font-size: 36px }
+#note { margin-bottom: -42px }
+.banners{
+  width:300px;
+  margin-right: -10px;
+}
+.banners li{
+  vertical-align: top;
+  display: inline-block;
+  margin-right:10px;
+  margin-bottom: 10px;
+  text-align:center;
+  max-width: 290px;
+  padding:0;
+  font-size: 12px;
+  line-height: 16px;
+  img { width: 100% }
+  span { margin-bottom: 5px; display: inline-block }
+}
+li.w140{
+  width: 140px;
+}

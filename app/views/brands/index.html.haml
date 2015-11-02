@@ -1,0 +1,11 @@
+%section#listing.block
+  %h2
+    = t('lab.brands')
+    = link_to new_brand_path do
+      <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
+
+  = render 'search', setup: %w(brand polish)
+  
+  %table#selection.wide100
+    = render @brands
+

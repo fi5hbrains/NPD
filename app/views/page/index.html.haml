@@ -1,0 +1,139 @@
+#notice= raw(notice)
+-if current_user
+  = link_to current_user.name, current_user
+  = link_to 'Log out', user_session_path, method: :delete
+%h2.centeredText= t('welcome.hi')
+
+#loginForm.block.center.animated
+  = form_for @user, url: '/', remote: true do |f|
+    #idName.table.wide100
+      .cell#avatar
+        = image_tag ( @suspect ? @suspect.avatar : 'defaults/avatars/0.png'), class: 'avatar'
+      .cell.wide100
+        = f.text_field :name, placeholder: t('placeholder.name'), class: 'wide100 inline', autofocus: @focus == 'user_name'
+    #idPwd.table.wide100
+      .cell.wide100
+        %input{type: (@suspect ? 'password' : 'text'), name: 'user[password]', id: 'user_password', class: 'wide100 inline', autocomplete: 'off', placeholder: t('placeholder.password')}
+      .cell
+        = button_tag class: 'inline noWrap', name: (@button_name), id: 'user_submit' do
+          = @submit_text
+  
+    #phrase.table.wide100.hidden
+      .cell.wide100
+        = f.text_field :invite_phrase, autocomplete: 'off', placeholder: t('placeholder.invite_phrase'), autofocus: @focus == 'user_invite_phrase', class: 'wide100 inline'
+      .cell
+        = button_tag class: 'inline noWrap', name: (@button_name) do
+          = t('form.signup')
+          
+<svg class='icon iStats'><use xlink:href='#camera' /></svg>
+<svg class='icon iStats'><use xlink:href='#eye' /></svg>
+<svg class='icon iStats'><use xlink:href='#clock' /></svg>
+<svg class='icon iStats'><use xlink:href='#bubble' /></svg>
+<svg class='icon iStats'><use xlink:href='#tag' /></svg>
+<svg class='icon iStats'><use xlink:href='#heart' /></svg>
+
+<svg class='icon iSlider'><use xlink:href='#sHeight' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sPointy' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sSquare' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sBlur' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sSharp' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sOpacity' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sParticle_size' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sHolo_intensity' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sWater' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sJuice' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sSyrup' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sJelly' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sCream' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sMagnet_intensity' /></svg>
+<svg class='icon iSlider'><use xlink:href='#sParticle_density' /></svg>
+<svg class='icon iMid'><use xlink:href='#pHexagon' /></svg>
+<svg class='icon iMid'><use xlink:href='#pSquare' /></svg>
+<svg class='icon iMid'><use xlink:href='#pCircle' /></svg>
+<svg class='icon iMid'><use xlink:href='#pStar' /></svg>
+<svg class='icon iMid'><use xlink:href='#pHeart' /></svg>
+<svg class='icon iMid'><use xlink:href='#pHalfmoon' /></svg>
+<svg class='icon iMid'><use xlink:href='#pSnow' /></svg>
+<svg class='icon iMid'><use xlink:href='#pRhombus' /></svg>
+<svg class='icon iMid'><use xlink:href='#pStick' /></svg>
+<svg class='icon iMid'><use xlink:href='#mStar' /></svg>
+<svg class='icon iMid'><use xlink:href='#mTree' /></svg>
+<svg class='icon iMid'><use xlink:href='#mHatch' /></svg>
+<svg class='icon iMid'><use xlink:href='#mH_stripes' /></svg>
+<svg class='icon iMid'><use xlink:href='#mD_stripes' /></svg>
+
+<svg class='icon iSlider'><use xlink:href='#swap' /></svg>
+<svg class='icon iPolish'><use xlink:href='#collection' /></svg>
+<svg class='icon iPolish'><use xlink:href='#wishlist' /></svg>
+<svg class='icon iPolish'><use xlink:href='#giveaway' /></svg>
+<svg class='icon iPolish'><use xlink:href='#scroll' /></svg>
+<svg class='icon iGen'><use xlink:href='#thumb' /></svg>
+<svg class='icon iGen'><use xlink:href='#thumbDown' /></svg>
+<svg class='icon iGen'><use xlink:href='#pencil' /></svg>
+<svg class='icon iGen'><use xlink:href='#down' /></svg>
+<svg class='icon iGen'><use xlink:href='#up' /></svg>
+<svg class='icon iGen'><use xlink:href='#flag' /></svg>
+<svg class='icon iGen'><use xlink:href='#gear' /></svg>
+<svg class='icon iGen'><use xlink:href='#calendar' /></svg>
+<svg class='icon iGen'><use xlink:href='#trash' /></svg>
+<svg class='icon iGen'><use xlink:href='#nail' /></svg>
+<svg class='icon iGen'><use xlink:href='#plus' /></svg>
+<svg class='icon iGen'><use xlink:href='#minus' /></svg>
+<svg class='icon iGen'><use xlink:href='#magnify' /></svg>
+<svg class='icon iGen'><use xlink:href='#undo' /></svg>
+<svg class='icon iGen'><use xlink:href='#check' /></svg>
+<svg class='icon iGen'><use xlink:href='#dolly' /></svg>
+<svg class='icon iGen'><use xlink:href='#plane' /></svg>
+<svg class='icon iGen'><use xlink:href='#less' /></svg>
+<svg class='icon iGen'><use xlink:href='#more' /></svg>
+<svg class='icon iGen'><use xlink:href='#x' /></svg>
+<svg class='icon iGen'><use xlink:href='#pour' /></svg>
+<svg class='icon iGen'><use xlink:href='#key' /></svg>
+<svg class='icon iGen'><use xlink:href='#lock' /></svg>
+
+<svg class='icon iNav'><use xlink:href='#aZ' /></svg>
+<svg class='icon iNav'><use xlink:href='#zA' /></svg>
+<svg class='icon iNav'><use xlink:href='#stars' /></svg>
+<svg class='icon iNav'><use xlink:href='#starsR' /></svg>
+<svg class='icon iNav'><use xlink:href='#bubbles' /></svg>
+<svg class='icon iNav'><use xlink:href='#bubblesR' /></svg>
+<svg class='icon iNav'><use xlink:href='#bottles' /></svg>
+<svg class='icon iNav'><use xlink:href='#bottlesR' /></svg>
+<svg class='icon iNav'><use xlink:href='#wrench' /></svg>
+<svg class='icon iNav'><use xlink:href='#brush' /></svg>
+<svg class='icon iNav'><use xlink:href='#frame' /></svg>
+<svg class='icon iNav'><use xlink:href='#faq' /></svg>
+<svg class='icon iNav'><use xlink:href='#book' /></svg>
+<svg class='icon iNav'><use xlink:href='#catalogue' /></svg>
+<svg class='icon iNav'><use xlink:href='#settings' /></svg>
+<svg class='icon iNav'><use xlink:href='#bigPlus' /></svg>
+<svg class='icon iNav'><use xlink:href='#puls' /></svg>
+<svg class='icon iNav'><use xlink:href='#home' /></svg>
+<svg class='icon iNav'><use xlink:href='#portrait' /></svg>
+<svg class='icon iNav'><use xlink:href='#lab' /></svg>
+<svg class='icon iNav'><use xlink:href='#eWeek' /></svg>
+<svg class='icon iNav'><use xlink:href='#eMonth' /></svg>
+<svg class='icon iNav'><use xlink:href='#dWeek' /></svg>
+<svg class='icon iNav'><use xlink:href='#dMonth' /></svg>
+<svg class='icon iNav'><use xlink:href='#eYear' /></svg>
+<svg class='icon iNav'><use xlink:href='#dYear' /></svg>
+<svg class='icon iNav'><use xlink:href='#cup' /></svg>
+<svg class='icon iNav'><use xlink:href='#plant' /></svg>
+<svg class='icon iNav'><use xlink:href='#personal' /></svg>
+<svg class='icon iNav'><use xlink:href='#bigScroll' /></svg>
+<svg class='icon iNav'><use xlink:href='#101' /></svg>
+<svg class='icon iNav'><use xlink:href='#bell' /></svg>
+<svg class='icon iNav'><use xlink:href='#radio' /></svg>
+<svg class='icon iNav'><use xlink:href='#diary' /></svg>
+<svg class='icon i64'><use xlink:href='#swatch' /></svg>
+= image_tag 'spinner.svg'
+- if polish = Polish.last
+  %p
+    = render polish
+    = render polish, big_polish: true
+    = render polish, add: true
+    = render polish, remove: true
+    
+  
+%p
+  = render 'signature', name: true, avatar: true, date: true, stats: true, tags: true, signable: Comment.last

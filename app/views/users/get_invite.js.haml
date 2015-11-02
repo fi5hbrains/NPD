@@ -1,0 +1,2 @@
+- if @invite
+  $('#invites').append('#{j(content_tag 'li', content_tag('span', @invite, class: 'selectable')).html_safe}');

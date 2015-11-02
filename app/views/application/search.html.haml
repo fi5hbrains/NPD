@@ -1,0 +1,10 @@
+.block.left.bigMargin
+  = render 'search'
+  - if @brands
+    %h2 brands
+    %table.wide50
+      = render @brands
+  - if @polishes
+    %h2 polishes
+    = render @polishes
+  #searchResult

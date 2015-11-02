@@ -1,0 +1,59 @@
+= render 'brands/show'
+
+%section#polish.block.left{'data-id' => @polish.id}>
+  %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number) + @polish.name.to_s), length: 50, separator: /_|-| /
+  %h4
+    = link_to 'Collection Name', '#'
+    –
+    = link_to '2012', '#'
+  = bottle_or_spinner @polish.bottle_url, @polish.bottling_status, {class: 'left biggestBottle'}
+  #coatsWrapper.left
+    = image_tag @polish.preview_url
+    = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
+  %p.clearFix.smallMargin
+    - if @synonyms.size > 0
+      %strong Synonyms:
+      = @synonyms.map(&:name).join(', ')
+    %br
+    %strong Rating:    
+    = @polish.rating.round(3)
+    = @polish.votes_count
+    = 'vote'.pluralize(@polish.votes_count)
+  = render 'polishes/controls', polish: @polish, with_text: true
+%aside#ads.block.left
+  %h3.bigMargin.inactive 
+    Advertisment
+    %span.right.textMain= link_to 'Advertize with us'
+  %ul.banners<
+    %li>
+      = link_to '' do
+        = image_tag 'ads/adsense.gif'
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/hypnotic.jpg'
+        %span Hypnotic Polish
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/picture.jpg'
+        %span piCture pOlish
+    %li.w140.left>
+      = link_to '' do
+        = image_tag 'ads/prime-cuticle.png'
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/nuffnang.png'
+        %span Blog Advertizing Community
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/silly.jpg'
+    %li>
+      = link_to '' do
+        = image_tag 'ads/crows.jpg'
+        %span Shop Now
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/spell.jpg'
+    %li.w140>
+      = link_to '' do
+        = image_tag 'ads/pretty.jpg'
+

@@ -1,0 +1,26 @@
+id=MagickCache
+magick-signature=4026865107
+class=DirectClass  colors=0  matte=False
+columns=305  rows=600 depth=8
+colorspace=sRGB
+compression=Zip  quality=0
+units=PixelsPerCentimeter
+resolution=28.35x28.35
+page=305x600+0+0
+rendering-intent=Perceptual
+gamma=0.454545
+red-primary=0.63999,0.33001  green-primary=0.3,0.6  blue-primary=0.15,0.05999
+white-point=0.31269,0.32899
+date:create=2015-10-05T16:57:13+03:00
+date:modify=2015-10-05T16:57:06+03:00
+png:cHRM={chunk was found (see Chromaticity, above)}
+png:IHDR.bit-depth-orig=8
+png:IHDR.bit_depth=8
+png:IHDR.color-type-orig=2
+png:IHDR.color_type={2 (Truecolor)}
+png:IHDR.interlace_method={0 (Not interlaced)}
+png:IHDR.width,height={305, 600}
+png:pHYs={x_res=2835, y_res=2835, units=1}
+png:sRGB={intent=0 (Perceptual Intent)}
+
+:

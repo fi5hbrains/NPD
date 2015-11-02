@@ -1,0 +1,12 @@
+- if @polish
+  $('#rating').text('#{@polish.rating.round(1)}');
+  $('#votesCount').text(#{@polish.votes_count});
+- if @comment
+  var voteBox = $('.comment[data-id=#{@comment.id}]').find('.vote');
+  voteBox.text('#{@comment.rating > 0 ? "+#{@comment.rating}" : @comment.rating}');
+  - if @comment.rating > 0 
+    voteBox.removeClass('negative').addClass('positive');
+  - elsif @comment.rating < 0
+    voteBox.removeClass('positive').addClass('negative');
+  - else
+    voteBox.removeClass('positive negative');

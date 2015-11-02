@@ -1,0 +1,19 @@
+= render 'show'
+    
+%section#action.left.block
+  %h3.bigMargin
+    Bottles
+    = link_to new_brand_bottle_path(@brand) do
+      <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
+  .array
+    - @bottles.each do |bottle|
+      .arrayItem>
+        .spotable.bottleThumbWrapper>= link_to (image_tag bottle.base_thumb_url, class: 'bottleThumb img'), new_brand_polish_path(@brand, bottle: bottle.id)
+        = bottle.name
+    
+  = link_to 'Edit', edit_brand_path(@brand)
+  \|
+  = link_to 'Back', brands_path 
+
+
+    

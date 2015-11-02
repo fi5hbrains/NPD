@@ -1,0 +1,123 @@
+module ApplicationHelper
+  include ColourMethods
+  
+  def set_section
+    condition = false
+    {
+      'home' => {
+        class: (current = params[:controller] == 'page') ? condition ||= 'current' : 'notCurrent',
+        if: params[:action] != 'index' || !current,
+        path: root_path
+      },
+      'diary' => {
+        class: 'notCurrent inactive',
+        if: false,
+        path: ''
+      },
+      'catalogue' => {
+        class: (current = !in_lab? && (params[:controller] == 'polishes' || params[:controller] == 'brands')) ? condition ||= 'current' : 'notCurrent',
+        if: params[:controller] == 'brands' || params[:action] != 'index' || !current,
+        path: catalogue_path
+      },
+      'personal' => {
+        class: ((current = params[:controller] == 'users' && params[:action] == 'show') || params[:controller] == 'boxes') ? condition ||= 'current' : 'notCurrent',
+        if: !current && current_user,
+        path: current_user ? user_path(current_user) : ''
+      },
+      'settings' => (
+        if current_user
+          {
+            class: (current = params[:controller] == 'users' && params[:action] == 'edit') ? condition ||= 'current' : 'notCurrent',
+            if: !current,
+            path: edit_user_path(current_user)
+          }
+        else 
+          { class: 'hidden', if: false, path: '' }
+        end 
+      ),
+      'lab' => {
+        class: in_lab? ? condition ||= 'current' : current_user ? 'notCurrent' : 'notCurrent inactive',
+        if: params[:action] != 'index' || !current,
+        path: brands_path
+      },
+      'other' => {
+        class: condition ? 'hidden' : condition ||= 'current' ,
+        if: false
+      }
+    }
+  end
+  
+  def set_nav_icons section
+    current = section.detect{|k,v| v[:class] == 'current'}
+    if current
+      case current[0]
+      when 'home'
+        {
+          'cup' => nil,
+          'plant' => nil,
+          'book' => nil,
+          'faq' => nil,
+        }
+      when 'catalogue'
+        {
+          (cookies[:polish_sort] == 'slug desc' ? 'zA' : 'aZ') => [switch_path('polish_sort', (cookies[:polish_sort] == 'slug desc' ? 'slug asc' : 'slug desc')), !cookies[:polish_sort] || cookies[:polish_sort] =~ /slug/], 
+          (cookies[:polish_sort] == 'rating asc' ? 'stars' : 'starsR') => [switch_path('polish_sort', (cookies[:polish_sort] == 'rating desc' ? 'rating asc' : 'rating desc')), cookies[:polish_sort] =~ /rating/], 
+          (cookies[:polish_sort] == 'comments_count asc' ? 'bubbles' : 'bubblesR') => [switch_path('polish_sort', (cookies[:polish_sort] == 'comments_count desc' ? 'comments_count asc' : 'comments_count desc')), cookies[:polish_sort] =~ /comments/], 
+          (cookies[:polish_sort] == 'slug asc' ? 'bottles' : 'bottlesR') => nil
+        }
+      when 'personal'
+        {
+          'portrait'  => true, 
+          'puls'      => '', 
+          'bigScroll' => '', 
+          'bell'      => ''
+        }
+      when 'lab'
+        {'101' => nil}
+      when 'settings'
+        {
+          'frame'  => true, 
+          'brush'  => '', 
+          'wrench' => '', 
+          'radio'  => ''
+        }
+      when 'other'
+        {}
+      end
+    else
+      {}
+    end
+  end
+  
+  def render_nav_icon icons, key
+    svg_class = 'icon iNav option'
+    options = icons[key]
+    if options.class.name == 'Array'
+      link = options[0]
+      is_active = options[1]
+    else
+      link = options
+      is_active = (options == true)
+    end
+    svg_class += ' inactive' if icons[key] == nil
+    svg_class += ' active' if is_active
+    
+    icon = content_tag :svg, class: svg_class do
+      tag :use, 'xlink:href' => "##{key}"
+    end
+    if link.blank?
+      icon
+    else
+      content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow"
+    end
+  end
+  
+  def get_colour_names c
+    c = colour_to_hsl(c)
+    Defaults::COLOURS[I18n.locale].select do |k,v| 
+      (v[:h].include?( c[0]) || (v[:h2].include?( c[0]) if v[:h2])) && 
+      v[:s].include?( c[1]) && 
+      v[:l].include?( c[2])
+    end.keys
+  end
+end

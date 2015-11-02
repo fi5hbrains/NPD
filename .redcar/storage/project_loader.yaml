@@ -1,0 +1,14 @@
+--- 
+open_files: 
+  - app/helpers/application_helper.rb
+  - app/controllers/user_sessions_controller.rb
+  - app/views/application/_navigation.html.haml
+  - app/controllers/application_controller.rb
+  - app/controllers/polishes_controller.rb
+  - app/views/polishes/index.html.haml
+  - app/views/polishes/catalogue_show.html.haml
+  - config/initializers/session_store.rb
+  - Gemfile
+  - app/assets/javascripts/local.coffee
+  - app/models/polish.rb
+  - lib/colour_methods.rb

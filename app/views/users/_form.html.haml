@@ -1,0 +1,17 @@
+= form_for @user, html: {id: 'signUp'} do |f|
+  = f.text_field :name, placeholder: 'Name', id: 'signup_user_name'
+  = f.text_field :password, placeholder: 'Password', autocomplete: 'off', id: 'signup_user_password'
+  - unless User.count < 1
+    = f.submit 'Sign Up', name: 'to_parole', disabled: @disabled
+    = f.text_field :invite_phrase, placeholder: 'Invite code' 
+  = f.submit 'sign up', disabled: @disabled
+  = f.submit 'update', name: 'update', style: 'display:none'
+
+
+= form_for @user, url: user_session_path, method: :post, html: {id: 'logIn'} do |f|
+  = f.text_field :name, placeholder: 'Name', id: 'login_user_name'
+  = f.password_field :password, placeholder: 'Password', autocomplete: 'off', id: 'login_user_password'
+  = f.submit 'log in', disabled: @disabled
+  = f.submit 'update', name: 'update', style: 'display:none'
+
+

@@ -1,0 +1,11 @@
+= form_for @brand, html: {class: 'columnForm'} do |f|
+  - if @brand.errors.any?
+    #error_explanation
+      %h3= "#{pluralize(@brand.errors.count, "error")} prohibited this brand from being saved:"
+      %ul
+        - @brand.errors.full_messages.each do |msg|
+          %li= msg
+          
+  = f.text_field :synonym_list, placeholder: t('placeholder.synonym'), autofocus: 'autofocus'
+  = f.text_field :link, placeholder: t('placeholder.link')
+  = f.submit t('form.save'), class: 'wide100'

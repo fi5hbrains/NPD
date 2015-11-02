@@ -1,0 +1,50 @@
+.relative { position: relative }
+.absolute { position: absolute; left: 0; top: 0 }
+
+.left { float: left }
+.right { float: right }
+.center { margin-left: auto; margin-right: auto }
+.clearFix { clear: both }
+.centeredText { text-align: center }
+.vMiddle { vertical-align: middle }
+
+.wide100 { width: 100%; margin-left: 0; margin-right: 0 }
+.wide50 { width: 50% }
+.wide25 { width: 25% }
+.wideAuto { width: auto }
+.tall100 { height: 100% }
+.rounded { border-radius: $radiusMain }
+.bigMargin { margin-top: 40px; margin-bottom: 20px }
+.smallMargin { margin-bottom: 10px }
+
+table, .table { border-collapse: collapse; display: table }
+.row { display: table-row }
+.cell { display: table-cell }
+td:not(:last-child), .cell:not(:last-child) { padding-right: 8px }
+.row:not(:last-child) .cell{ padding-bottom: 6px }
+.hidden { display: none }
+.inline { display: inline-block }
+.inlineWrapper > * { display: inline-block; &:not(:last-child) { margin-right: 6px } }
+.screen { mix-blend-mode: screen }
+
+.strong { font-weight: bold }
+.noWrap { white-space: nowrap }
+.noDecor { text-decoration: none }
+.textLike{ color: $colourFont; text-decoration: none }
+a:hover .textLike{ color: $colourLinkHover }
+.linkLike{ text-decoration: underline; color: $colourLink; cursor: pointer; }
+a:hover .linkLike, .linkLike:hover { color: $colourLinkHover }
+.truncatable {  word-wrap: break-word }
+a:hover .hoverBack, .linkLike.hoverBack:hover { background-color: $colourHighlight; border-radius: $radiusMain }
+.lightBack{ background-color: $colourHighlight; border-radius: $radiusMain }
+.greenBack{ background-color: $colourMain; border-radius: $radiusMain }
+
+.noTransition { transition: none }
+
+.inactive{
+  cursor: default !important;
+  color: rgba($colourFont, .2);
+  fill: rgba($colourFont, .2);
+  text-decoration: none;
+  .icon { fill: rgba($colourFont, .2) }
+}

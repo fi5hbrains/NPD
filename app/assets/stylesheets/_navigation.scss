@@ -1,0 +1,177 @@
+#navBar{
+  user-select: none;
+  box-sizing: border-box;
+  position: fixed;
+  height: 64px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 8px 20px;
+  border-top: .1em solid rgba(255,255,255,0.5);
+  border-bottom: .1em solid rgba(0,0,0,0.3);
+  background: linear-gradient(to bottom, rgba(255,255,255,.1) 0%, rgba(0,0,0,.1) 100%);
+  background-color: $colourMain;
+  z-index: 10;
+  transition: top .6s;
+  box-shadow: 0 5px 2px rgba(0,0,0,.12), 0 15px 20px rgba($colourMain,.2);
+  a { text-decoration: none }
+}
+#navBar.unpin { top: -66px }
+.menu{
+  position: relative;
+  list-style-type: none;
+  color: rgba(0,0,0,.6);
+  background-color: white;
+  line-height: 36px;
+  font-size: 14px;
+  border-radius: $radiusMain*2;
+  transition:all $speedDropdown;
+  display: inline-block;
+  position: relative;
+  margin: -3px;
+  padding: 48px 0 0;
+  border: 3px solid $colourMain;
+  z-index: 5;
+  width: 100%;
+  a{ 
+    width: 100%;
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,.6); 
+    transition:color $speedDropdown;
+    .icon.option { fill: white }
+  }
+  a:hover{
+    color: white;
+    .iNav, .icon.option { fill: white }
+  }
+  .switch{ 
+    position: absolute;
+    padding: 19px 20px; 
+    top: 0;
+    right: 3px;
+    transition:all $speedDropdown;
+  }
+  a.switch{
+    width: auto;
+    padding: 9px 8px;
+  }
+  .icon { vertical-align: bottom }
+  .iNav { margin-right: 5px; fill: $colourStatsIcon }
+  .iPolish { margin: 0 -5px -2px }
+  li{ 
+    overflow: hidden;
+    transition:all $speedDropdown;
+    border-radius: $radiusMain;
+  }
+  .isOk{
+    float: right;
+    margin: -8px 0 -6px -36px;
+    transition:all $speedDropdown;
+  }
+  .current{
+    position:absolute;
+    display: block;
+    font-size: 18px;
+    top: 0;
+    left: 0;
+    padding: 6px;
+    height: 48px;
+  }
+  .notCurrent{
+    height: 0;
+    padding: 0 12px;
+    cursor: pointer;
+    .iNav{
+      height: 18px;
+      width: 18px;
+      margin-bottom: 2px;
+    }
+  }
+  .notCurrent:hover{
+    background-color: rgba($colourMain,.6);
+    color: white;
+    a { color: white }
+    .icon { fill: white }
+  }
+  .formLi{
+    width: calc(100% - 12px);
+    margin: 0 auto;
+    height: 0;
+    padding:0;
+    .icon{padding: 0; vertical-align: middle;}
+  }
+  table { margin: 0 }
+}
+.menu.hover, .menu.active{
+  padding: 51px 3px 3px;
+  margin: -6px;
+  .current{
+    width: calc(100% - 6px);
+    top: 3px;
+    left: 3px;
+  }
+}
+.menu.active{
+  .current{
+    a { color: white }
+    .iNav { fill: white }
+  }
+  .notCurrent{ 
+    padding: 7px 12px;
+    height: auto;
+    a:hover .icon { background: none }
+  }
+  .formLi { height: 50px; margin: 12px auto }
+  .formLi.smallMargin { margin-top: 0; margin-bottom: 4px }
+}
+#dropMenu.menu{
+  width: 166px;
+  .switch { fill: $colourStatsIcon; padding: 16px 6px; }
+  .switch:hover { fill: white; background: none }
+  .current { background-color: rgba($colourMain,.6) }
+  .notCurrent { font-size: 18px; padding-right: 0 }
+}
+#dropMenu.menu.active, #dropMenu.menu.hover{
+  padding-top: 51px;
+  .switch{padding: 19px 9px; fill: white  }
+}
+#dropMenu.menu.active{  
+  padding: 62px 3px 10px;
+  li.current { color: white }
+  .current .iNav { fill: white }
+}
+#boxesList{
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  margin: -7px 0 0 -3px;
+}
+#boxesList.active, #boxesList.hover { margin: -10px 0 0 -6px }
+#boxesList.active { visibility: visible }
+#gather { 
+  position: absolute;
+  top: 42px;
+}
+.option{
+  vertical-align: top;
+  padding: 6px;
+  margin-left: 16px;
+  cursor: pointer;
+  border-radius: $radiusMain;
+}
+.option.active, .option:not(.inactive):hover{
+  background-color: rgba(255,255,255,.4);
+  fill: white;
+}
+.notify{
+  position: absolute;
+  background-color: $colourHeader;
+  border-radius: $radiusMain;
+  font-size: 12px;
+  padding: 4px 7px;
+  color: white;
+  display: inline-block;
+  margin-top: -5px;
+  margin-left: -10px;
+}

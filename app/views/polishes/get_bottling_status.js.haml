@@ -1,0 +1,7 @@
+var img = $('[data-id=#{@polish.id}]').find('.getBottlingStatus');
+var thumb = '#{@polish.bottle_url('thumb')}';
+var big = '#{@polish.bottle_url('big')}';
+var src = '#{@polish.bottle_url}';
+if (img.hasClass('big')){img.attr('src', big);} 
+else if (img.hasClass('thumb')){img.attr('src', thumb);}
+else {img.attr('src', src);}

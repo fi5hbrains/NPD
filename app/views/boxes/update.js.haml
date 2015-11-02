@@ -1,0 +1,3 @@
+$('#doneEditing').children('a').attr('href','/#{current_user.slug}/#{@box.slug}');
+$('h1').text('#{@box.name}');
+$('#goEdit').children('a').attr('href','/#{current_user.slug}/#{@box.slug}/edit');

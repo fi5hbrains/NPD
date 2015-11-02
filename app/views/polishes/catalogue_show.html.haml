@@ -1,0 +1,49 @@
+.blockx2
+  %h1.smallMargin= truncate (@polish.brand_name + ' – ' + (@polish.number + ' ' if @polish.number) + @polish.name.to_s), length: 50, separator: /_|-| /
+  
+  %h4
+    - if @polish.collection
+      = link_to @polish.collection, '#'
+    - if @polish.collection
+      –
+    - if @polish.release_year
+      = link_to @polish.release_year, '#'
+      ,
+    - get_colour_names([@polish.h,@polish.s,@polish.l]).each do |colour|
+      = link_to colour, catalogue_path(colour: colour)
+  .block.left{'data-id' => @polish.id}>
+    = bottle_or_spinner @polish.bottle_url, @polish.bottling_status, {class: 'left biggestBottle'}
+    #coatsWrapper.left
+      = image_tag @polish.preview_url
+      = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
+  .block.left
+    .idBlock.polishStats.bottomUp<
+      .pic.relative>
+        <svg class='star'> <use xlink:href='#star'/></svg>
+        #rating= @polish.rating.round(1)
+      .info>
+        #voteBox.voteBox
+          = render 'stars', polish: @polish
+        %p
+          %span#votesCount= @polish.votes_count
+          = 'vote'.pluralize @polish.votes_count
+    - if current_user
+      = render 'collections'  
+      #note.resizable.relative{'data-polish_id' => @polish.id}
+        = text_area_tag :body, current_user.notes.find_by_polish_id(@polish.id).try(:body) , placeholder: 'leave a note', class: 'resizable', rows: nil, cols: nil, id:'noteBody'
+        %pre.resizable <span></span>
+        
+  %section
+    %h2.clearFix= t 'comments.header'
+    - unless params[:edit_id] || params[:reply_id]
+      = render 'comments/form', comment: Comment.new, commentable: @polish
+    #comments= render @comments
+  
+  %section
+    %h2
+      = t 'catalogue.titles.similar'
+      #sliderSpread{'data-start' => cookies[:spread] || 80, 'data-polish_id' => @polish.id }
+    #searchResults
+      = render @related, no_brand: false
+= console
+      

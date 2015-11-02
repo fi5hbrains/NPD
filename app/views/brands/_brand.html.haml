@@ -1,0 +1,6 @@
+%tr
+  %td.wide100
+    = link_to brand.name, brand
+  %td.noWrap.iconArray<
+    = link_to "<svg class='icon hoverBack'><use xlink:href='#pencil' /></svg>".html_safe, edit_brand_path(brand)
+    = link_to "<svg class='icon hoverBack'><use xlink:href='#trash' /></svg>".html_safe, brand, method: :delete, data: { confirm: t('form.confirm') }

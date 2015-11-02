@@ -1,0 +1,124 @@
+.strokeBase{stroke: $colourPlaceholder; stroke-width: 2 }
+.fillBase{ fill: $colourPlaceholder }
+.strokeActive{stroke: $colourButton; stroke-width: 2 }
+.strokeWide{ stroke-width: 8 }
+.strokeMed{ stroke-width: 3; stroke-linecap: round }
+.noFill{fill: none;}
+
+// ------------------------------ Icons ------------------------------ //
+.icon {
+  display: inline-block;
+  fill: $colourPlaceholder;
+  height: 18px;
+  width: 20px;
+  padding: 9px 8px;
+}
+.iNav{
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  vertical-align: text-bottom;  
+  fill: $colourStatsIcon;
+  transition:fill $speedDropdown;
+}
+.iSlider{
+  height: 23px;
+  width: 32px;
+  margin: 0 -4px;
+  padding: 0;
+  fill: $colourButton;
+}
+.iPolish{
+  height: 24px;
+  width: 31px;
+  margin: 6px 0 10px;
+  padding: 7px 4px;
+}
+.iPolish.wishlist { padding: 8px 5px 7px 3px }
+.iMid{
+  fill: $colourButton;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+.iStats{
+  width: 13px;
+  height: 11px;
+  margin-bottom: -1px ; 
+  padding: 0;
+  fill: &colourStatsIcon;
+  &:not(:first-child) { margin-left: 5px }
+}
+.iSwap{
+  display: block;
+  height: 31px;
+  width: 31px;
+  padding: 8px;
+  margin: 6px auto;
+  fill: $colourButton;
+  cursor: pointer;
+  transform: rotate(0deg);
+  z-index: 1;
+  transition: transform .5s;
+  &:hover { 
+    border-radius: 50%;
+    background-color: $colourHighlight;
+    fill: lighten($colourButton, $lightenOnHover) ;
+    transform: rotate(180deg);
+  } 
+}
+.i64{
+  height: 64px;
+  width:64px;
+}
+.i64.centered{
+  display: block;
+  margin: 10px auto;
+}
+.voteBox{
+  position: relative;
+  width: 70px; 
+  height: 14px;
+}
+.icon.withText{ 
+  margin: 2px 4px -6px 0; 
+  padding: 3px 2px;
+}
+a:not(:first-child) .icon.withText{margin-left: 5px }
+
+a { 
+  .icon:not(.iNav) { fill: $colourButton } 
+  .icon.button, .roundButton { fill: white }
+}
+a:hover { 
+  .icon:not(.option) { fill: lighten($colourButton, $lightenOnHover) } 
+  .icon.button,.roundButton { fill: white }
+}
+a[data-method=delete] .icon{ fill: $colourBad }
+a[data-method=delete]:hover .icon{ fill: lighten($colourBad, $lightenOnHover) }
+.linkLike { fill:$colourButton }
+.linkLike:hover { fill: lighten($colourButton, $lightenOnHover) }
+.icon.check { fill: $colourMain }
+.iRed { fill: $colourBad }
+// ------------------------------ Stars ------------------------------ //
+.star{
+  height: 28px;
+  width: 28px;
+}
+.stars{
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  fill: $colourDeepShadow;
+  transition:fill $speedDropdown, width $speedDropdown;  
+}
+.stars.default{ fill: $colourStatsIcon }
+.stars.voted{ fill: $colourSunday }
+.stars.active{ fill: white }
+
+#voteBox{
+  width: 200px;
+  height: 40px;
+  margin-bottom: 6px;
+}

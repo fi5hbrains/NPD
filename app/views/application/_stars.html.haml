@@ -1,0 +1,3 @@
+- vote = (@user_votes.detect{|vote| vote.votable_type == 'Polish' && vote.votable_id == polish.id}.try(:rating) if @user_votes)
+<svg class='stars'><use xlink:href='#star5'/></svg>
+<svg class='stars #{vote ? 'voted' : 'default'} absolute' data-id='#{polish.id}' style="width:#{vote ? vote * 20 : (polish.rating * 2).round * 10}%" viewBox='0 0 70 14' preserveAspectRatio='xMinYMin slice'><use xlink:href='#star5'/></svg>

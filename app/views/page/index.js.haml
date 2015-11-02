@@ -1,0 +1,26 @@
+$('#user_submit').html("#{@submit_text}").attr('name',"#{@button_name}");
+
+- if @suspect
+  $('#avatar img').attr('src', "#{escape_javascript(@suspect.avatar.thumb.url)}");
+  $('#user_password').attr('type','password');
+- else
+  $('#avatar img').attr('src', '/assets/defaults/avatars/0.png');
+  $('#user_password').attr('type','text');
+  
+- if @shake
+  var $shakable = $('#loginForm').removeClass('shake');
+  setTimeout(function() { $shakable.addClass('shake') }, 5);
+
+- if params[:preview]
+  - if @user.errors[:name].empty? && @user.errors[:password].empty?
+    $('#idName, #idPwd').addClass('hidden');
+    $('#phrase').removeClass('hidden');
+  - else
+    $('#idName, #idPwd').removeClass('hidden');
+    $('#phrase').addClass('hidden');
+
+$("##{@focus}").focus();
+    
+  
+
+  

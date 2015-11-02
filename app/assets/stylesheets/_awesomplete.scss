@@ -1,0 +1,82 @@
+[hidden] { display: none; }
+
+.visually-hidden {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+}
+
+div.awesomplete {
+	display: inline-block;
+	position: relative;
+  width: 100%;
+}
+
+div.awesomplete > input {
+	display: block;
+	position: relative;
+  z-index: 2;
+}
+
+div.awesomplete > ul {
+	position: absolute;
+	left: 0;
+  top: 0;
+	z-index: 1;
+	width: calc(100% + 6px);
+	list-style: none;
+	padding: 3px;
+  margin: -6px;
+	border-radius: $radiusMain*2;
+	background: white;
+  padding: 54px 0 0;
+  border: 3px solid $colourMain;
+	text-shadow: none;
+}
+
+div.awesomplete > ul[hidden],
+div.awesomplete > ul:empty {
+	display: none;
+}
+
+@supports (transform: scale(0)) {
+	div.awesomplete > ul {
+		transition: $speedDropdown;
+		transform-origin: 50% -2px;
+	}
+	
+	div.awesomplete > ul[hidden],
+  div.awesomplete > ul:empty {
+		opacity: 0;
+		transform: scale(0);
+		display: block;
+		transition-timing-function: ease;
+	}
+}
+
+div.awesomplete > ul > li {
+	position: relative;
+	padding: 6px 12px;
+	cursor: pointer;
+}
+
+div.awesomplete > ul > li:hover {
+	background: rgba($colourMain,.4);
+}
+
+div.awesomplete > ul > li[aria-selected="true"] {
+	background: $colourMain;
+	color: white;
+}
+
+div.awesomplete mark {
+  color: $colourHeader;
+  background:none;
+}
+
+div.awesomplete li:hover mark {
+}
+
+div.awesomplete li[aria-selected="true"] mark {
+  color: white;
+
+}

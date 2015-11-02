@@ -1,0 +1,8 @@
+= form_for @bottle, url: brand_bottles_path(@brand), html: { multipart: true, class: 'columnForm'} do |f|
+  = f.text_field :name, placeholder: t('placeholder.bottle_name')
+  #bottleLayers= render 'upload_preview' if @bottle.layers.count > 0
+  = f.file_field :layers, multiple: true, 'data-updatable' => true, class: 'hidden'
+  = f.label :layers, t('placeholder.add_images'), class: 'previewButton inline'
+  = f.number_field :blur, placeholder: t('placeholder.blur'), min: 0, max: 100
+  = f.submit t('form.preview'), name: 'preview', class: 'previewButton'
+  = f.submit

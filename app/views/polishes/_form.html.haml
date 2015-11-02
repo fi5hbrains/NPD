@@ -1,0 +1,70 @@
+= form_for [@brand, @polish], html: {multipart: true, id: 'polishForm', class: nil}  do |f|
+  .block.main.left
+    %h2= t 'lab.titles.polish_' + params[:action]
+    - if @polish.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@polish.errors.count, "error")} prohibited this polish from being saved:"
+        %ul
+          - @polish.errors.full_messages.each do |msg|
+            %li= msg
+            
+    #changes
+      = fields_for 'changes' do |c|
+        - @polish.layers.each do |l|
+          = c.hidden_field l.ordering, value: 0
+    .table
+      .row
+        .cell= f.text_field :synonym_list, placeholder: t('placeholder.synonym'), class: 'wide100', autofocus: 'autofocus'
+        .cell.wide25= f.text_field :number, placeholder: t('placeholder.number')
+      .row
+        .cell= f.text_field :collection, placeholder: t('placeholder.collection')
+        .cell.wide25= f.text_field :release_year, placeholder: t('placeholder.year')
+    
+    <svg class='icon i64 centered linkLike switch'><use xlink:href='#swatch' /></svg>
+
+    
+    %h3= t('lab.section.bottle')
+    .array<
+      - @bottles.each do |bottle|
+        .arrayItem>
+          = f.radio_button :bottle_id, bottle.id, class: 'hidden', checked: (bottle.id == @polish.bottle_id)
+          = f.label "bottle_id_#{bottle.id}", image_tag( bottle.base_thumb_url, class: 'bottleThumb img'), class: 'spotable bottleThumbWrapper'
+          = bottle.name
+    - unless params[:action] == 'redress' || params[:redress]  
+      %h3= t('lab.section.highlight')
+      
+      .array<
+        - %w(matte wax glass mirror).each do |g|
+          .arrayItem>
+            = f.radio_button :gloss_type, g, class: 'hidden', checked: (g == @polish.gloss_type || g == 'glass')
+            .spotable= f.label "gloss_type_#{g}" , '&nbsp;'.html_safe, class: 'gloss img'
+            = t('lab.section.' + g)
+        .arrayItem>
+          = f.text_field :gloss_colour, class: 'colour noAlpha', value: @polish.gloss_colour || '#dadada'
+          = t('lab.section.highlight_colour')
+      
+      %h3= t('lab.section.add_layers')
+      - %w(shimmer flake glitter sand).each do |type|
+        = link_to_add_layer type, f
+        
+      - Defaults::MAGNETS.each do |m|
+        = f.radio_button :magnet, m, class: 'hidden external uncheckable'
+    
+      #layers
+        = f.fields_for :layers, @polish.layers.sort{ |a,b| b.ordering <=> a.ordering} do |ff|
+          = render 'layer_fields', l: ff.object, l_f: ff, f: f
+          
+      #sliderBaseOpacity 
+      .array#labelsBaseOpacity
+        - %w(water juice syrup jelly cream).each do |o|
+          .arrayItem{id: o + 'Val'}>
+            <svg class='icon iSlider'><use xlink:href='#s#{o.capitalize}' /></svg>
+            = t 'lab.section.' + o
+      = f.hidden_field :opacity, value: @polish.opacity || 87.5, id: 'baseOpacity'
+      
+  .block#preview.left
+    #previewWrapper.bigMargin
+      = render'polish_preview'
+    .inlineWrapper<
+      = f.submit t('form.preview'), name: 'preview'
+      = f.submit t('form.action.' + params[:action]), name: params[:action]
