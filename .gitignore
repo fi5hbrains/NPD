@@ -54,3 +54,4 @@ bower.json
 /public/assets/polish_tmp/*
 /public/assets/users/*
 /config/database.yml
+/config/secrets.yml

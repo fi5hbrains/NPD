@@ -557,9 +557,6 @@ cursor_positions:
   - :path: app/assets/javascripts/polish.coffee
     :cursor_offset: 385
     :timestamp: 2015-10-22 12:02:12 +04:00
-  - :path: config/secrets.yml
-    :cursor_offset: 472
-    :timestamp: 2015-04-09 20:56:52 +04:00
   - :path: config/environments/development.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -627,4 +624,7 @@ cursor_positions:
   - :path: Gemfile
     :cursor_offset: 941
     :timestamp: 2015-11-02 20:58:02 +03:00
+  - :path: config/secrets.yml
+    :cursor_offset: 449
+    :timestamp: 2015-04-09 20:56:52 +04:00
 files_to_retain: 0
