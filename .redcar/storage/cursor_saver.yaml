@@ -569,9 +569,6 @@ cursor_positions:
   - :path: app/models/polish.rb
     :cursor_offset: 1018
     :timestamp: 2015-10-27 08:05:38 +03:00
-  - :path: Gemfile
-    :cursor_offset: 514
-    :timestamp: 2015-10-03 11:19:10 +04:00
   - :path: app/views/application/_navigation.html.haml
     :cursor_offset: 516
     :timestamp: 2015-10-30 13:56:52 +03:00
@@ -618,4 +615,16 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 331
     :timestamp: 2015-10-31 21:29:14 +03:00
+  - :path: (
+    :cursor_offset: 0
+    :timestamp: 2015-08-31 16:40:40 +04:00
+  - :path: .gitignore
+    :cursor_offset: 274
+    :timestamp: 2015-11-02 22:12:50 +03:00
+  - :path: config/database.example.yml
+    :cursor_offset: 2808
+    :timestamp: 2015-11-02 20:37:50 +03:00
+  - :path: Gemfile
+    :cursor_offset: 941
+    :timestamp: 2015-11-02 20:58:02 +03:00
 files_to_retain: 0
