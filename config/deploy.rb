@@ -11,6 +11,7 @@ set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log public/uploads public/assets/brands public/assets/users public/assets/polish_tmp public/assets/font public/assets/polish_parts}
 set :branch, "master"
 set :rails_env, "production" #added for delayed job  
+set :passenger_restart_with_touch, true
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -32,10 +33,10 @@ namespace :deploy do
   end
   after "deploy:setup", "deploy:setup_config"
   
-  task :symlink_config, roles: :app do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-  end
-  after "deploy:finalize_update", "deploy:symlink_config"
+  # task :symlink_config, roles: :app do
+  #   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  # end
+  # after "deploy:finalize_update", "deploy:symlink_config"
   
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
@@ -45,12 +46,13 @@ namespace :deploy do
       exit
     end
   end
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
+
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     execute :touch, release_path.join('tmp/restart.txt')
+  #   end
+  # end
   
   before "deploy", "deploy:check_revision"
   
