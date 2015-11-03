@@ -1,8 +1,7 @@
 lock '3.4.0'
-server "176.58.98.66", :web, :app, :db, primary: true
 set :application, "NPD"
-set :user, "deployer"
-set :deploy_to, "/home/#{user}/#{application}"
+application = 'NPD'
+set :deploy_to, "/home/deployer/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :scm, "git"
@@ -13,8 +12,6 @@ set :branch, "master"
 set :rails_env, "production" #added for delayed job  
 set :passenger_restart_with_touch, true
 
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
 namespace :deploy do
   # %w[start stop restart].each do |command|
   #   desc "#{command} unicorn server"
@@ -23,29 +20,29 @@ namespace :deploy do
   #   end
   # end
   
-  task :setup_config, roles: :app do
-    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
-    # sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
-    run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
-    put File.read("config/secrets.example.yml"), "#{shared_path}/config/secrets.yml"
-    puts "Now edit the config files in #{shared_path}."
-  end
-  after "deploy:setup", "deploy:setup_config"
+  # task :setup_config, roles: :app do
+  #   sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+  #   # sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+  #   run "mkdir -p #{shared_path}/config"
+  #   put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+  #   put File.read("config/secrets.example.yml"), "#{shared_path}/config/secrets.yml"
+  #   puts "Now edit the config files in #{shared_path}."
+  # end
+  # after "deploy:setup", "deploy:setup_config"
   
   # task :symlink_config, roles: :app do
   #   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   # end
   # after "deploy:finalize_update", "deploy:symlink_config"
   
-  desc "Make sure local git is in sync with remote."
-  task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      puts "WARNING: HEAD is not the same as origin/master"
-      puts "Run `git push` to sync changes."
-      exit
-    end
-  end
+  # desc "Make sure local git is in sync with remote."
+  # task :check_revision, roles: :web do
+  #   unless `git rev-parse HEAD` == `git rev-parse origin/master`
+  #     puts "WARNING: HEAD is not the same as origin/master"
+  #     puts "Run `git push` to sync changes."
+  #     exit
+  #   end
+  # end
 
   # desc 'Restart application'
   # task :restart do
@@ -60,9 +57,9 @@ namespace :deploy do
   after :finishing, 'deploy:cleanup'
   
   #delayed_job
-  after "deploy:stop",    "delayed_job:stop"
-  after "deploy:start",   "delayed_job:start"
-  after "deploy:restart", "delayed_job:restart"
+  # after "deploy:stop",    "delayed_job:stop"
+  # after "deploy:start",   "delayed_job:start"
+  # after "deploy:restart", "delayed_job:restart"
 end
 
 # # config valid only for current version of Capistrano
