@@ -46,7 +46,7 @@
   height: 11px;
   margin-bottom: -1px ; 
   padding: 0;
-  fill: &colourStatsIcon;
+  fill: $colourStatsIcon;
   &:not(:first-child) { margin-left: 5px }
 }
 .iSwap{

@@ -139,9 +139,6 @@ cursor_positions:
   - :path: app/assets/javascripts/color_picker.js
     :cursor_offset: 9673
     :timestamp: 2015-05-23 06:53:18 +04:00
-  - :path: app/assets/stylesheets/application.css
-    :cursor_offset: 683
-    :timestamp: 2015-05-12 10:41:01 +04:00
   - :path: app/assets/javascripts/colour picker tmp.js
     :cursor_offset: 16229
     :timestamp: 2015-05-24 07:41:19 +04:00
@@ -304,9 +301,6 @@ cursor_positions:
   - :path: db/schema.rb
     :cursor_offset: 0
     :timestamp: 2015-10-03 11:23:52 +04:00
-  - :path: app/assets/javascripts/colour_picker.js
-    :cursor_offset: 13755
-    :timestamp: 2015-10-09 09:11:46 +04:00
   - :path: app/views/brands/_brand.html.haml
     :cursor_offset: 228
     :timestamp: 2015-10-10 04:33:08 +04:00
@@ -327,26 +321,14 @@ cursor_positions:
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 25
     :timestamp: 2015-05-23 06:53:13 +04:00
-  - :path: config/initializers/assets.rb
-    :cursor_offset: 491
-    :timestamp: 2015-05-23 20:11:10 +04:00
-  - :path: config/environment.rb
-    :cursor_offset: 170
-    :timestamp: 2015-08-10 10:13:39 +04:00
   - :path: app/assets/javascripts/profile.js
     :cursor_offset: 41
     :timestamp: 2015-05-22 07:31:22 +04:00
-  - :path: app/assets/stylesheets/assamblage.scss
-    :cursor_offset: 178
-    :timestamp: 2015-10-11 15:42:10 +04:00
   - :path: app/assets/javascripts/awesomplete.js
     :cursor_offset: 2919
     :timestamp: 2015-10-11 19:04:20 +04:00
     :selection_offset: 2923
     :block_selection_mode: false
-  - :path: app/assets/stylesheets/_awesomplete.scss
-    :cursor_offset: 173
-    :timestamp: 2015-10-12 19:44:43 +04:00
   - :path: app/views/polishes/edit.html.haml
     :cursor_offset: 38
     :timestamp: 2015-10-15 20:31:25 +04:00
@@ -445,17 +427,9 @@ cursor_positions:
   - :path: app/assets/stylesheets/_base.scss
     :cursor_offset: 10157
     :timestamp: 2015-10-18 20:26:32 +04:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 271
-    :timestamp: 2015-10-17 20:35:17 +04:00
-    :selection_offset: 265
-    :block_selection_mode: false
   - :path: app/assets/javascripts/smart_poll.js
     :cursor_offset: 104
     :timestamp: 2015-10-21 08:26:45 +04:00
-  - :path: app/assets/javascripts/application.js
-    :cursor_offset: 726
-    :timestamp: 2015-10-21 04:08:06 +04:00
   - :path: app/assets/images/spinner.svg
     :cursor_offset: 767
     :timestamp: 2015-10-21 03:22:07 +04:00
@@ -497,9 +471,6 @@ cursor_positions:
   - :path: app/views/application/autocomplete.js.haml
     :cursor_offset: 80
     :timestamp: 2015-10-23 22:05:40 +04:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 6027
-    :timestamp: 2015-10-24 12:58:48 +04:00
   - :path: app/models/synonym.rb
     :cursor_offset: 112
     :timestamp: 2015-05-13 06:43:35 +04:00
@@ -514,9 +485,6 @@ cursor_positions:
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 479
     :timestamp: 2015-10-25 09:10:21 +03:00
-  - :path: app/assets/stylesheets/_colour_picker.scss
-    :cursor_offset: 2065
-    :timestamp: 2015-10-24 13:20:23 +04:00
   - :path: app/uploaders/reference_uploader.rb
     :cursor_offset: 144
     :timestamp: 2015-10-26 20:12:54 +03:00
@@ -540,14 +508,6 @@ cursor_positions:
   - :path: app/models/user_session.rb
     :cursor_offset: 80
     :timestamp: 2015-10-27 09:42:09 +03:00
-  - :path: app/assets/stylesheets/_icons.scss
-    :cursor_offset: 1724
-    :timestamp: 2015-10-29 17:41:03 +03:00
-  - :path: app/assets/stylesheets/_navigation.scss
-    :cursor_offset: 1414
-    :timestamp: 2015-10-29 17:40:14 +03:00
-    :selection_offset: 1392
-    :block_selection_mode: false
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 0
     :timestamp: 2015-09-25 19:47:32 +04:00
@@ -557,9 +517,6 @@ cursor_positions:
   - :path: app/assets/javascripts/polish.coffee
     :cursor_offset: 385
     :timestamp: 2015-10-22 12:02:12 +04:00
-  - :path: config/environments/development.rb
-    :cursor_offset: 0
-    :timestamp: 2015-04-09 20:56:52 +04:00
   - :path: app/models/polish.rb
     :cursor_offset: 1018
     :timestamp: 2015-10-27 08:05:38 +03:00
@@ -583,45 +540,24 @@ cursor_positions:
   - :path: config/routes.rb
     :cursor_offset: 547
     :timestamp: 2015-10-27 08:58:50 +03:00
-  - :path: config/application.rb
-    :cursor_offset: 0
-    :timestamp: 2015-10-03 11:27:25 +04:00
-  - :path: config/environments/production.rb
-    :cursor_offset: 0
-    :timestamp: 2015-04-09 20:56:52 +04:00
   - :path: app/controllers/brands_controller.rb
     :cursor_offset: 802
     :timestamp: 2015-10-25 09:22:41 +03:00
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 2036
     :timestamp: 2015-11-01 09:00:51 +03:00
-  - :path: app/controllers/user_sessions_controller.rb
-    :cursor_offset: 645
-    :timestamp: 2015-11-01 09:44:53 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 331
-    :timestamp: 2015-10-31 21:29:14 +03:00
   - :path: (
     :cursor_offset: 0
     :timestamp: 2015-08-31 16:40:40 +04:00
-  - :path: .gitignore
-    :cursor_offset: 274
-    :timestamp: 2015-11-02 22:12:50 +03:00
   - :path: config/database.example.yml
     :cursor_offset: 2808
     :timestamp: 2015-11-02 20:37:50 +03:00
-  - :path: Gemfile
-    :cursor_offset: 941
-    :timestamp: 2015-11-02 20:58:02 +03:00
   - :path: lib/colour_methods.rb
     :cursor_offset: 267
     :timestamp: 2015-11-04 09:06:43 +03:00
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 1585
     :timestamp: 2015-11-04 10:34:42 +03:00
-  - :path: config/database.yml
-    :cursor_offset: 672
-    :timestamp: 2015-11-04 19:39:54 +03:00
   - :path: config/secrets.yml
     :cursor_offset: 963
     :timestamp: 2015-11-04 19:46:18 +03:00
@@ -630,4 +566,78 @@ cursor_positions:
   - :path: app/assets/javascripts/colour_backup.git_ignore
     :cursor_offset: 0
     :timestamp: 2015-10-09 07:05:12 +04:00
+  - :path: app/assets/stylesheets/application.css
+    :cursor_offset: 673
+    :timestamp: 2015-11-04 21:05:50 +03:00
+  - :path: config/initializers/assets.rb
+    :cursor_offset: 491
+    :timestamp: 2015-05-23 20:11:10 +04:00
+  - :path: config/environments/production.rb
+    :cursor_offset: 1343
+    :timestamp: 2015-04-09 20:56:52 +04:00
+  - :path: config/environments/development.rb
+    :cursor_offset: 0
+    :timestamp: 2015-04-09 20:56:52 +04:00
+  - :path: config/environment.rb
+    :cursor_offset: 170
+    :timestamp: 2015-08-10 10:13:39 +04:00
+  - :path: config/database.yml
+    :cursor_offset: 672
+    :timestamp: 2015-11-04 19:39:54 +03:00
+  - :path: config/application.rb
+    :cursor_offset: 0
+    :timestamp: 2015-10-03 11:27:25 +04:00
+  - :path: app/assets/stylesheets/assamblage.scss
+    :cursor_offset: 178
+    :timestamp: 2015-10-11 15:42:10 +04:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 265
+    :timestamp: 2015-10-17 20:35:17 +04:00
+  - :path: app/assets/stylesheets/_navigation.scss
+    :cursor_offset: 1392
+    :timestamp: 2015-10-29 17:40:14 +03:00
+  - :path: app/assets/stylesheets/_colour_picker.scss
+    :cursor_offset: 2065
+    :timestamp: 2015-10-24 13:20:23 +04:00
+  - :path: app/assets/stylesheets/_awesomplete.scss
+    :cursor_offset: 173
+    :timestamp: 2015-10-12 19:44:43 +04:00
+  - :path: app/assets/javascripts/colour_picker.js
+    :cursor_offset: 13755
+    :timestamp: 2015-10-09 09:11:46 +04:00
+  - :path: app/assets/stylesheets/_icons.scss
+    :cursor_offset: 1728
+    :timestamp: 2015-10-29 17:41:03 +03:00
+  - :path: database.yml
+    :cursor_offset: 167
+    :timestamp: 2015-11-04 19:42:18 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 989
+    :timestamp: 2015-11-04 10:39:40 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 597
+    :timestamp: 2015-11-04 21:12:49 +03:00
+  - :path: app/controllers/user_sessions_controller.rb
+    :cursor_offset: 645
+    :timestamp: 2015-11-01 09:44:53 +03:00
+  - :path: Gemfile
+    :cursor_offset: 1037
+    :timestamp: 2015-11-03 22:48:31 +03:00
+  - :path: config/deploy.rb
+    :cursor_offset: 155
+    :timestamp: 2015-11-03 22:57:56 +03:00
+  - :path: config/deploy/production.rb
+    :cursor_offset: 452
+    :timestamp: 2015-11-03 21:35:31 +03:00
+  - :path: Capfile
+    :cursor_offset: 693
+    :timestamp: 2015-11-03 22:47:43 +03:00
+    :selection_offset: 665
+    :block_selection_mode: false
+  - :path: .gitignore
+    :cursor_offset: 412
+    :timestamp: 2015-11-04 20:51:23 +03:00
+  - :path: app/assets/javascripts/application.js
+    :cursor_offset: 726
+    :timestamp: 2015-10-21 04:08:06 +04:00
 files_to_retain: 0
