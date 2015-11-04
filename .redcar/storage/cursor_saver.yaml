@@ -627,4 +627,7 @@ cursor_positions:
     :timestamp: 2015-11-04 19:46:18 +03:00
     :selection_offset: 934
     :block_selection_mode: false
+  - :path: app/assets/javascripts/colour_backup.git_ignore
+    :cursor_offset: 0
+    :timestamp: 2015-10-09 07:05:12 +04:00
 files_to_retain: 0

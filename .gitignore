@@ -12,7 +12,7 @@
 !/log/.keep
 /tmp
 
-
+*.git_ignore
 *.rbc
 capybara-*.html
 .rspec
