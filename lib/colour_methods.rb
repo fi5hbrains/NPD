@@ -1,11 +1,11 @@
 module ColourMethods
-  def get_alpha rgba
+  def get_alpha colour
     if a = colour =~ /[0-9a-fA-F]{8}/
       colour[a,8][-2,2].to_i(16).to_s
     elsif colour =~ /[0-9a-fA-F]{4}/
       (colour[a,4][-1]*2).to_i(16).to_s
     elsif colour =~ /(\d{1,3}), *(\d{1,3}), *(\d{1,3})/
-      ((rgba.split(',')[3].gsub(')','') || 1).to_f * 100).round.to_s       
+      ((colour.split(',')[3].gsub(')','') || 1).to_f * 100).round.to_s       
     end
   end
   

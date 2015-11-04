@@ -560,18 +560,12 @@ cursor_positions:
   - :path: config/environments/development.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: lib/colour_methods.rb
-    :cursor_offset: 1429
-    :timestamp: 2015-10-30 21:35:03 +03:00
   - :path: app/models/polish.rb
     :cursor_offset: 1018
     :timestamp: 2015-10-27 08:05:38 +03:00
   - :path: app/views/application/_navigation.html.haml
     :cursor_offset: 516
     :timestamp: 2015-10-30 13:56:52 +03:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 960
-    :timestamp: 2015-10-31 18:41:53 +03:00
   - :path: app/assets/javascripts/local.coffee
     :cursor_offset: 611
     :timestamp: 2015-10-30 20:25:16 +03:00
@@ -595,11 +589,6 @@ cursor_positions:
   - :path: config/environments/production.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: config/database.yml
-    :cursor_offset: 2864
-    :timestamp: 2015-11-02 20:37:50 +03:00
-    :selection_offset: 2849
-    :block_selection_mode: false
   - :path: app/controllers/brands_controller.rb
     :cursor_offset: 802
     :timestamp: 2015-10-25 09:22:41 +03:00
@@ -624,7 +613,18 @@ cursor_positions:
   - :path: Gemfile
     :cursor_offset: 941
     :timestamp: 2015-11-02 20:58:02 +03:00
+  - :path: lib/colour_methods.rb
+    :cursor_offset: 267
+    :timestamp: 2015-11-04 09:06:43 +03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 1585
+    :timestamp: 2015-11-04 10:34:42 +03:00
+  - :path: config/database.yml
+    :cursor_offset: 672
+    :timestamp: 2015-11-04 19:39:54 +03:00
   - :path: config/secrets.yml
-    :cursor_offset: 449
-    :timestamp: 2015-04-09 20:56:52 +04:00
+    :cursor_offset: 963
+    :timestamp: 2015-11-04 19:46:18 +03:00
+    :selection_offset: 934
+    :block_selection_mode: false
 files_to_retain: 0

@@ -56,6 +56,7 @@ class ApplicationController < ActionController::Base
       @polishes = @polishes.order(sort)
     end
   end
+  
   def autocomplete
     @id = params[:id]
     if !params[:brand].blank?

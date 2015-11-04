@@ -14,12 +14,13 @@
     @synonyms = @polish.synonyms.to_a
     @synonyms.shift
     @comments = @polish.comments
-    @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
     set_users @comments
     if !in_lab?
       @related = Polish.
         coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], 100 - (cookies[:spread].to_i || 80 ))
       render 'catalogue_show'
+    else
+      @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
     end
   end
   
@@ -29,11 +30,13 @@
     @polish = Polish.new
     @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
     @polish.layers.new(layer_type: 'base')
+    @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
   end
 
   def edit
     set_polish
     set_bottles
+    @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
     @layers = @polish.layers
     generate_preview
   end
@@ -92,6 +95,7 @@
       flatten_layers
       redirect_to @brand, notice: 'Polish was successfully created.' 
     else
+      @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
       render :new
     end
   end

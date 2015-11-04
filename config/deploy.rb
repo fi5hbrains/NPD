@@ -1,11 +1,10 @@
 lock '3.4.0'
 set :application, "NPD"
-application = 'NPD'
-set :deploy_to, "/home/deployer/#{application}"
+set :deploy_to, "/home/deployer/NPD"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :scm, "git"
-set :repository, "git@github.com:fi5hbrains/#{application}.git"
+set :repo_url, "git@github.com:fi5hbrains/NPD.git"
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log public/uploads public/assets/brands public/assets/users public/assets/polish_tmp public/assets/font public/assets/polish_parts}
 set :branch, "master"
@@ -51,7 +50,7 @@ namespace :deploy do
   #   end
   # end
   
-  before "deploy", "deploy:check_revision"
+  # before "deploy", "deploy:check_revision"
   
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'

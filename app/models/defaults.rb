@@ -7,6 +7,9 @@ class Defaults < ActiveRecord::Base
   LAYER = { particle_size: 50, particle_density: 25, opacity: 95 }
   MAGNETS = %w(d_stripes tree star hatch h_stripes)
   GLITTERS = %w(hexagon circle stick square star heart snow halfmoon rhombus)
+  PER = {
+    lab_polishes: 12
+  }
   CANVAS = [305,572]
   COLOURS = {
     en: {

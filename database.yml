@@ -1,0 +1,9 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+production:
+  <<: *default
+  database: INPD_production
+  username: Deputy
+  password: Tmuzwa7627
