@@ -471,9 +471,6 @@ cursor_positions:
   - :path: app/views/application/autocomplete.js.haml
     :cursor_offset: 80
     :timestamp: 2015-10-23 22:05:40 +04:00
-  - :path: app/models/synonym.rb
-    :cursor_offset: 112
-    :timestamp: 2015-05-13 06:43:35 +04:00
   - :path: app/models/brand.rb
     :cursor_offset: 749
     :timestamp: 2015-09-30 21:10:53 +04:00
@@ -499,12 +496,6 @@ cursor_positions:
   - :path: db/migrate/20150413140304_initialize.rb
     :cursor_offset: 3491
     :timestamp: 2015-10-20 13:06:40 +04:00
-  - :path: app/models/user.rb
-    :cursor_offset: 1619
-    :timestamp: 2015-09-25 19:37:58 +04:00
-  - :path: app/models/user_vote.rb
-    :cursor_offset: 128
-    :timestamp: 2015-09-02 21:08:53 +04:00
   - :path: app/models/user_session.rb
     :cursor_offset: 80
     :timestamp: 2015-10-27 09:42:09 +03:00
@@ -587,9 +578,6 @@ cursor_positions:
   - :path: config/application.rb
     :cursor_offset: 0
     :timestamp: 2015-10-03 11:27:25 +04:00
-  - :path: app/assets/stylesheets/assamblage.scss
-    :cursor_offset: 178
-    :timestamp: 2015-10-11 15:42:10 +04:00
   - :path: app/assets/stylesheets/_variables.scss
     :cursor_offset: 265
     :timestamp: 2015-10-17 20:35:17 +04:00
@@ -605,9 +593,6 @@ cursor_positions:
   - :path: app/assets/javascripts/colour_picker.js
     :cursor_offset: 13755
     :timestamp: 2015-10-09 09:11:46 +04:00
-  - :path: app/assets/stylesheets/_icons.scss
-    :cursor_offset: 1728
-    :timestamp: 2015-10-29 17:41:03 +03:00
   - :path: database.yml
     :cursor_offset: 167
     :timestamp: 2015-11-04 19:42:18 +03:00
@@ -623,21 +608,40 @@ cursor_positions:
   - :path: Gemfile
     :cursor_offset: 1037
     :timestamp: 2015-11-03 22:48:31 +03:00
-  - :path: config/deploy.rb
-    :cursor_offset: 155
-    :timestamp: 2015-11-03 22:57:56 +03:00
-  - :path: config/deploy/production.rb
-    :cursor_offset: 452
-    :timestamp: 2015-11-03 21:35:31 +03:00
-  - :path: Capfile
-    :cursor_offset: 693
-    :timestamp: 2015-11-03 22:47:43 +03:00
-    :selection_offset: 665
-    :block_selection_mode: false
   - :path: .gitignore
     :cursor_offset: 412
     :timestamp: 2015-11-04 20:51:23 +03:00
   - :path: app/assets/javascripts/application.js
     :cursor_offset: 726
     :timestamp: 2015-10-21 04:08:06 +04:00
+  - :path: app/assets/stylesheets/assamblage.scss
+    :cursor_offset: 178
+    :timestamp: 2015-11-04 21:14:18 +03:00
+  - :path: app/assets/stylesheets/_icons.scss
+    :cursor_offset: 2505
+    :timestamp: 2015-11-04 21:15:33 +03:00
+    :selection_offset: 2513
+    :block_selection_mode: false
+  - :path: Capfile
+    :cursor_offset: 693
+    :timestamp: 2015-11-03 22:47:43 +03:00
+    :selection_offset: 665
+    :block_selection_mode: false
+  - :path: config/deploy/production.rb
+    :cursor_offset: 452
+    :timestamp: 2015-11-03 21:35:31 +03:00
+  - :path: config/deploy.rb
+    :cursor_offset: 13
+    :timestamp: 2015-11-03 22:57:56 +03:00
+  - :path: app/models/user.rb
+    :cursor_offset: 1619
+    :timestamp: 2015-09-25 19:37:58 +04:00
+  - :path: app/models/user_vote.rb
+    :cursor_offset: 128
+    :timestamp: 2015-09-02 21:08:53 +04:00
+  - :path: app/models/synonym.rb
+    :cursor_offset: 113
+    :timestamp: 2015-05-13 06:43:35 +04:00
+    :selection_offset: 88
+    :block_selection_mode: false
 files_to_retain: 0
