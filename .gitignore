@@ -50,7 +50,6 @@ bower.json
 
 .redcar
 /public/assets/brands/*
-/public/assets/polish_parts/*
 /public/assets/polish_tmp/*
 /public/assets/users/*
 /config/database.yml
