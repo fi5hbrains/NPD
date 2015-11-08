@@ -2,12 +2,12 @@ class Magick < ActiveRecord::Base
   
   def self.composite front, back, output = nil, options ='', mask = ''
     output ||= back
-    `/usr/local/bin/composite #{self.p(front) + ' ' + self.p(back) + ' ' + self.p(mask) + ' ' + options + ' ' + self.p(output)}`
+    `composite #{self.p(front) + ' ' + self.p(back) + ' ' + self.p(mask) + ' ' + options + ' ' + self.p(output)}`
   end  
   
   def self.convert source, options, output = nil
     output ||= source
-    `/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}` 
+    `convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}` 
     # "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
   end  
   
