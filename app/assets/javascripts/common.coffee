@@ -19,7 +19,7 @@ $(document).on 'ready page:load', ->
   $('label.uncheckable').uncheckableRadioLabel()
 
   icons = new XMLHttpRequest
-  icons.open 'GET', 'icons_common.xml', true
+  icons.open 'GET', '/icons_common.xml', true
   icons.send()
   icons.onload = (e) -> $('#defs').html( icons.responseText )
     

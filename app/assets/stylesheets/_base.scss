@@ -353,7 +353,7 @@ h1, h2, h3 { .icon.roundButton {
   width:48px;
   min-height:48px;
   margin: 13px;
-  background: url(gloss_samples.png) -4px -2px no-repeat
+  background: image-url("gloss_samples.png") -4px -2px no-repeat
 }
 .gloss[for=polish_gloss_type_wax]{ background-position:    -64px  -2px}
 .gloss[for=polish_gloss_type_glass]{ background-position:  -126px -2px}

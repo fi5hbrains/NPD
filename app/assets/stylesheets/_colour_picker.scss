@@ -46,7 +46,7 @@ div.cp-blank{
   height: 46px;
   margin:0 0 6px 6px;
   border: 1px solid;
-  background: url(colour_picker.png)
+  background: image-url("colour_picker.png")
 }
 .cp-z-slider{
   float:right;
@@ -67,7 +67,7 @@ div.cp-blank{
   width:100%;
   height:48px;
   margin-top:6px;
-  background: right top url(colour_picker.png);
+  background: right top image-url("colour_picker.png");
 }
 .cp-alpha-cursor{
   position:absolute;
@@ -85,7 +85,7 @@ div.cp-blank{
   overflow:hidden;
   height:48px;
   width:48px;
-  background: -48px top url(colour_picker.png);
+  background: -48px top image-url("colour_picker.png");
   border-radius: $radiusMain;
   margin-bottom:2px;
   z-index: 0;
@@ -99,6 +99,6 @@ input.colour{
   z-index: 0;
 }
 input.colour.active { width: 290px }
-input.colour.disabled{ background: url(colour_picker.png) #eee !important }
+input.colour.disabled{ background: image-url("colour_picker.png") #eee !important }
 .colourBack.active, .colour.active{ z-index: 6 }
 
