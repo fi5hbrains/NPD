@@ -55,9 +55,9 @@ module ColourMethods
         h2 = nil
       end
       s = hsl[1] - spread .. hsl[1] + spread
-      l = hsl[2] - spread * 2 .. hsl[2] + spread * 2
+      l = hsl[2] - spread .. hsl[2] + spread
       opacity = hsl[3].blank? ? 100 : hsl[3].class.name == 'Float' ? hsl[3] * 100 : hsl[3]
-      o = opacity - spread .. opacity + spread
+      o = opacity - spread * 2 .. opacity + spread * 2
     else
       h = h2 = s = l = o = nil      
     end  

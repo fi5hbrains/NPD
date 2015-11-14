@@ -1,4 +1,4 @@
-1447143203
+1447511715
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -134,6 +134,7 @@ filename	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  de
 fill	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def fill 
 findElement	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function findElement($elm)
 find_bottle	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def find_bottle;
+find_related	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def find_related 
 find_root	/Users/fish/Dropbox/work/Interpol/app/models/comment.rb	  def find_root 
 flatten_layers	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def flatten_layers
 gather	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def gather
@@ -198,6 +199,7 @@ redress	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb
 rename_polish_files	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def rename_polish_files 
 render	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function render(toggled)
 render_nav_icon	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def render_nav_icon 
+reorder	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def reorder
 resize	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def resize(source = self, width = 48)
 resize	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def resize(source = self, width = 64, height = 69)
 resolveEventType	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function resolveEventType(event)

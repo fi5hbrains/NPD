@@ -60,10 +60,10 @@ module ApplicationHelper
         }
       when 'catalogue'
         {
-          (cookies[:polish_sort] == 'slug desc' ? 'zA' : 'aZ') => [switch_path('polish_sort', (cookies[:polish_sort] == 'slug desc' ? 'slug asc' : 'slug desc')), !cookies[:polish_sort] || cookies[:polish_sort] =~ /slug/], 
-          (cookies[:polish_sort] == 'rating asc' ? 'stars' : 'starsR') => [switch_path('polish_sort', (cookies[:polish_sort] == 'rating desc' ? 'rating asc' : 'rating desc')), cookies[:polish_sort] =~ /rating/], 
-          (cookies[:polish_sort] == 'comments_count asc' ? 'bubbles' : 'bubblesR') => [switch_path('polish_sort', (cookies[:polish_sort] == 'comments_count desc' ? 'comments_count asc' : 'comments_count desc')), cookies[:polish_sort] =~ /comments/], 
-          (cookies[:polish_sort] == 'slug asc' ? 'bottles' : 'bottlesR') => nil
+          ((s = cookies[:polish_sort]) == 'slug desc' ? 'zA' : 'aZ') => [switch_path('polish_sort', (s == 'slug asc' ? 'slug desc' : 'slug asc')), !s || s =~ /slug/, 'slug'], 
+          (s == 'rating asc' ? 'starsR' : 'stars') => [switch_path('polish_sort', (s == 'rating desc' ? 'rating asc' : 'rating desc')), s =~ /rating/, 'rating'] , 
+          (s == 'comments_count asc' ? 'bubblesR' : 'bubbles') => [switch_path('polish_sort', (s == 'comments_count desc' ? 'comments_count asc' : 'comments_count desc')), s =~ /comments/,'comments'], 
+          (s == 'bottles asc' ? 'bottlesR' : 'bottles') => nil
         }
       when 'personal'
         {
@@ -95,6 +95,7 @@ module ApplicationHelper
     if options.class.name == 'Array'
       link = options[0]
       is_active = options[1]
+      id = options[2]
     else
       link = options
       is_active = (options == true)
@@ -108,7 +109,7 @@ module ApplicationHelper
     if link.blank?
       icon
     else
-      content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow"
+      content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow", id: (id + 'Icon' if id)
     end
   end
   

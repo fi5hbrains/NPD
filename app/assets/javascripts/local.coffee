@@ -24,7 +24,7 @@ $(document).on 'ready page:load', ->
         
     spreadSlider.noUiSlider.on 'change', ->
       $.ajax 
-        url: '/search'
+        url: '/find_related'
         data: 'polish_id=' + $(spreadSlider).data('polish_id') + '&spread=' + (100 - spreadSlider.noUiSlider.get())
         type: 'GET'
         dataType: "script"

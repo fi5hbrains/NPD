@@ -4,7 +4,7 @@
     = link_to new_brand_path do
       <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
 
-  = render 'search', setup: %w(brand polish)
+  = render 'search', setup: %w(brand), css: 'wide100'
   
   %table#selection.wide100
     = render @brands

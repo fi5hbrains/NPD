@@ -10,4 +10,4 @@
         :javascript
           var #{id + p.capitalize} = new Awesomplete(document.getElementById('#{id + p.capitalize}'));
           #{id + p.capitalize}.list = #{p == 'colour' ? Defaults::COLOURS[I18n.locale].keys.to_s.html_safe : []};
-  = button_tag "<svg class='icon linkLike iGen'><use xlink:href=#magnify /></svg>".html_safe, id: id + 'Button', class: 'inField', name: nil
+  = button_tag "<svg class='icon linkLike'><use xlink:href=#magnify /></svg>".html_safe, id: id + 'Button', class: 'inField', name: nil

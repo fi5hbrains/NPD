@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   include Slugify
 
-  helper_method :current_user_session, :current_user, :in_lab?, :coat
+  helper_method :current_user_session, :current_user, :in_lab?, :coat, :set_catalogue_icons
 
   def set_users signables; User.find(signables.pluck(:user_id)) end
   def set_brand; @brand = Brand.find_by_slug(slugify params[:brand_id]) end
@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
   end
   def search brand = nil, colour = nil, spread = nil, sort = nil
     colour ||= params[:colour]
-    cookies[:spread] = 100 - params[:spread].to_i if params[:spread]
     spread ||= params[:spread]
     @brand ||= brand
     @polish = Polish.find(params[:polish_id]) if params[:polish_id]
@@ -76,7 +75,7 @@ class ApplicationController < ActionController::Base
     @brand_names ||= []
     @polish_names ||= []
   end
-  
+
   def path; Rails.root.join('public').to_s end
   def in_lab?; params[:lab] end
   def in_box? box, polish; (box || []).detect{|item| item.polish_id == polish.id} end 

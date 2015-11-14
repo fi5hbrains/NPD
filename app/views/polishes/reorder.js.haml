@@ -1,0 +1,3 @@
+$('#navBar').replaceWith('#{j(render 'navigation').html_safe}')
+- if @polishes
+  $('#polishes').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');

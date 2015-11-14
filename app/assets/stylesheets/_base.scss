@@ -16,27 +16,28 @@ body{
   padding: 70px 20px 0;
 }
 h1, h2, h3{ 
+  font-family: $fontHead;
   color: $colourHeader;
   margin-top: 20px;
   margin-bottom: 20px;
   line-height: 40px;
 }
 h1{
-  font-size: 40px;
+  font-size: $fontSizeHead*2;
   margin-top: 48px;
 }
 h2{
   font-weight: bold;
-  font-size: 26px;
+  font-size: $fontSizeHead*1.3;
   margin-top: 40px;
 }
 h3{ 
-  font-size: 19px; 
+  font-size: $fontSizeHead;
   line-height: 20px;
 }
 h3.bigMargin { margin-top: 42px }
 h4{
-  font-size: 18px;
+  font-size: $fontSizeHead*0.9;
   font-weight: normal;
   line-height: 20px;
   margin-top: 10px;
@@ -46,7 +47,7 @@ li {
   display: block;
   width: 100%;
   padding: 7px 0;
-  font-size: 18px;
+  font-size: $fontSizeBase*1.125;
   line-height: 24px;
   box-sizing: border-box;
 }
@@ -111,7 +112,7 @@ a{
   p.notable{
     margin-top: 10px;
     margin-bottom:0;
-    font-size: 26px;
+    font-size: $fontSizeHead*1.3;
     font-weight: bold;
     text-decoration: none;
   }
@@ -141,7 +142,7 @@ a:hover{ color: $colourLinkHover }
   100% { transform: translateY(0) }
 }
 .controls{
-  font-size: 18px;
+  font-size: $fontSizeBase*1.4;
   mardin-top: 20px;
   margin-bottom: 20px;
   span{
@@ -169,7 +170,7 @@ a:hover{ color: $colourLinkHover }
 .avatar.tiny { width:24px; height: 24px }
 .bigPolish, .idBlock{
   vertical-align: top;
-  font-size: 12px;
+  font-size: $fontSizeBase*0.93;
   line-height: $lineHeightSmall;
   p { margin: 0 }
 }
@@ -248,6 +249,7 @@ input, textarea, button, .button, .roundButton{
   &:hover { background: $colourHighlight }
 }
 input, button, textarea, pre, .button, .previewButton, .roundButton{
+  font-family: $fontMain;
   font-size: $fontSizeBase;
   display: block;
   line-height: 44px;
@@ -292,10 +294,13 @@ textarea.resizable{
 }
 pre.resizable{ min-height: 48px; max-height: 200px; overflow: hidden; visibility: hidden;}
 #note {
-  textarea, pre { font-size: 15px }
+  textarea, pre { 
+    font-size: $fontSizeBase*1.2;
+    font-family: $fontMain;
+  }
   textarea:not(:focus){
     background:none;
-    font-family: georgia;
+    font-family: cursive;
     font-style: italic;
   }
   textarea:hover { background: $colourHighlight }
@@ -315,15 +320,14 @@ button.inField:focus{ box-shadow: none; outline: none }
 button.inField:focus .icon{ fill: white }
 .icon.roundButton{
   display: inline-block;
-  position:absolute;
   height: 32px;
   width: 32px;
   min-height: 0;
   min-width: 0;
   border-radius: 50%;
-  left: 32px;
-  top: 80px;
-  padding: 7px;
+  padding: 7px 6px;
+  margin-bottom: -7px;
+  margin-left: 10px;
   fill: white;
   &:hover { fill: white }
 }
@@ -343,11 +347,7 @@ a:hover{
   .previewButton, .roundButton { background: lighten($colourMain, $lightenOnHover) }
   .roundButton.important { background-color: lighten($colourBad, $lightenOnHover) }
 }
-h1, h2, h3 { .icon.roundButton {
-    position: static;
-    margin-bottom: -5px;
-  } 
-}
+h1, h2 { .icon.roundButton { margin-bottom: -5px }}
 .gloss{
   display: block;
   width:48px;
@@ -412,7 +412,7 @@ form .table{ margin-bottom: 6px }
   }
 }
 #rating{
-  font-size: 24px;
+  font-size: $fontSizeBase*1.9;
   position:absolute;
   width: 100%;
   text-align: center;
@@ -431,7 +431,10 @@ form .table{ margin-bottom: 6px }
 .spotable.bottleThumbWrapper{ margin:-10px -13px 0;}
 
 // ------------------------------ Local ------------------------------ //
-#boxNameField{ font-size: 36px }
+#boxNameField{ 
+  font-family: $fontHead;
+  font-size: $fontSizeHead*1.8;
+}
 #note { margin-bottom: -42px }
 .banners{
   width:300px;
@@ -445,7 +448,7 @@ form .table{ margin-bottom: 6px }
   text-align:center;
   max-width: 290px;
   padding:0;
-  font-size: 12px;
+  font-size: $fontSizeBase*0.9;
   line-height: 16px;
   img { width: 100% }
   span { margin-bottom: 5px; display: inline-block }

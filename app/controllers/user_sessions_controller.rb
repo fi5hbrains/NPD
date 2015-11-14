@@ -16,9 +16,13 @@ class UserSessionsController < ApplicationController
   def switch
     cookies[params[:switch]] = params[:option]
     logger.debug params[:switch] + ': ' + cookies[params[:switch]]
-    respond_to do |format|
-      format.html { redirect_to :back}
-      format.json { redirect_to '/search?' + env["HTTP_REFERER"].split('?')[1] }
+    if params[:switch] == 'polish_sort'
+      respond_to do |format|
+        format.html { redirect_to :back}
+        format.js { redirect_to '/reorder?' + env["HTTP_REFERER"].split('?')[1].to_s }
+      end
+    else
+      redirect_to :back
     end
   end
 

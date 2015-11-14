@@ -4,7 +4,7 @@
   def index
     set_brand
     search
-    @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(12)
+    @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(48)
   end
 
   def show
@@ -16,11 +16,10 @@
     @comments = @polish.comments
     set_users @comments
     if !in_lab?
-      @related = Polish.
-        coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], 100 - (cookies[:spread].to_i || 80 ))
+      find_related @polish
       render 'catalogue_show'
     else
-      @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
+      @polishes = @brand.polishes.order('created_at desc').page(params[:page])
     end
   end
   
@@ -181,6 +180,19 @@
   def get_bottling_status
     @polish = Polish.find(params[:id])
     head 204, content_type: "text/html" unless @polish.bottling_status
+  end
+  
+  def find_related polish = nil, spread = nil
+    cookies[:spread] = params[:spread].to_i if params[:spread]
+    @polish = polish || Polish.find(params[:polish_id]) if params[:polish_id]
+    spread = spread || cookies[:spread] || 20
+    @related = Polish.
+      coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], spread)
+  end
+  
+  def reorder
+    (params[:polish] || params[:brand] || params[:colour]) ? search : @polishes = Polish.all
+    @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(48)
   end
   
   def note

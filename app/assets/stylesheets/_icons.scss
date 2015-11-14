@@ -84,6 +84,12 @@
   margin: 2px 4px -6px 0; 
   padding: 3px 2px;
 }
+.icon.logo{
+  width: 94px;
+  margin-left: -6px;
+  margin-right: 16px;
+}
+.icon.logo.option:hover { background: none }
 a:not(:first-child) .icon.withText{margin-left: 5px }
 
 a { 
