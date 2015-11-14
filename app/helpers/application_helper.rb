@@ -60,9 +60,9 @@ module ApplicationHelper
         }
       when 'catalogue'
         {
-          ((s = cookies[:polish_sort]) == 'slug desc' ? 'zA' : 'aZ') => [switch_path('polish_sort', (s == 'slug asc' ? 'slug desc' : 'slug asc')), !s || s =~ /slug/, 'slug'], 
-          (s == 'rating asc' ? 'starsR' : 'stars') => [switch_path('polish_sort', (s == 'rating desc' ? 'rating asc' : 'rating desc')), s =~ /rating/, 'rating'] , 
-          (s == 'comments_count asc' ? 'bubblesR' : 'bubbles') => [switch_path('polish_sort', (s == 'comments_count desc' ? 'comments_count asc' : 'comments_count desc')), s =~ /comments/,'comments'], 
+          ((s = cookies[:polish_sort]) == 'slug desc' ? 'zA' : 'aZ') => [switch_path('polish_sort', (s == 'slug asc' ? 'slug desc' : 'slug asc')), !s || s =~ /slug/], 
+          (s == 'rating asc' ? 'starsR' : 'stars') => [switch_path('polish_sort', (s == 'rating desc' ? 'rating asc' : 'rating desc')), s =~ /rating/] , 
+          (s == 'comments_count asc' ? 'bubblesR' : 'bubbles') => [switch_path('polish_sort', (s == 'comments_count desc' ? 'comments_count asc' : 'comments_count desc')), s =~ /comments/], 
           (s == 'bottles asc' ? 'bottlesR' : 'bottles') => nil
         }
       when 'personal'
@@ -109,7 +109,7 @@ module ApplicationHelper
     if link.blank?
       icon
     else
-      content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow", id: (id + 'Icon' if id)
+      content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow", class: 'navOption'
     end
   end
   
