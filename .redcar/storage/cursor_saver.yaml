@@ -602,9 +602,6 @@ cursor_positions:
   - :path: app/views/application/_search.html.haml
     :cursor_offset: 707
     :timestamp: 2015-11-12 22:25:29 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 7448
-    :timestamp: 2015-11-13 18:14:14 +03:00
   - :path: lib/colour_methods.rb
     :cursor_offset: 1832
     :timestamp: 2015-11-13 14:51:50 +03:00
@@ -664,4 +661,7 @@ cursor_positions:
   - :path: bin/rails
     :cursor_offset: 0
     :timestamp: 2015-11-15 12:40:35 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 3284
+    :timestamp: 2015-11-15 07:34:10 +03:00
 files_to_retain: 0
