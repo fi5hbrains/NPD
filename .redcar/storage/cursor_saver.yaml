@@ -661,4 +661,7 @@ cursor_positions:
     :timestamp: 2015-11-14 17:00:07 +03:00
     :selection_offset: 163
     :block_selection_mode: false
+  - :path: bin/rails
+    :cursor_offset: 0
+    :timestamp: 2015-11-15 12:40:35 +03:00
 files_to_retain: 0

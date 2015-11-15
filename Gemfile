@@ -13,6 +13,7 @@ gem 'delayed_job_active_record'
 gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
 gem 'authlogic'
 gem 'kaminari'
+gem 'daemons'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
