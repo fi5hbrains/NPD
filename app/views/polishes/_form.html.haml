@@ -21,7 +21,7 @@
         .cell.wide25= f.text_field :release_year, placeholder: t('placeholder.year')
     
     - unless simple_form = (params[:action] == 'redress' || params[:redress])
-      = f.file_field :reference, class: 'hidden'
+      = f.file_field :reference, class: 'hidden', 'data-updatable' => true
       = f.hidden_field :reference_cache 
       #reference
         %div= render 'reference' if @polish.reference?

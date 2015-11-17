@@ -285,9 +285,6 @@ cursor_positions:
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 25
     :timestamp: 2015-05-23 06:53:13 +04:00
-  - :path: app/assets/javascripts/profile.js
-    :cursor_offset: 41
-    :timestamp: 2015-05-22 07:31:22 +04:00
   - :path: app/assets/javascripts/awesomplete.js
     :cursor_offset: 2919
     :timestamp: 2015-10-11 19:04:20 +04:00
@@ -367,9 +364,6 @@ cursor_positions:
     :timestamp: 2015-10-19 16:17:44 +04:00
     :selection_offset: 4499
     :block_selection_mode: false
-  - :path: app/assets/javascripts/smart_poll.js
-    :cursor_offset: 104
-    :timestamp: 2015-10-21 08:26:45 +04:00
   - :path: app/assets/images/spinner.svg
     :cursor_offset: 767
     :timestamp: 2015-10-21 03:22:07 +04:00
@@ -451,9 +445,6 @@ cursor_positions:
   - :path: app/models/user_vote.rb
     :cursor_offset: 128
     :timestamp: 2015-09-02 21:08:53 +04:00
-  - :path: app/assets/javascripts/polish.coffee
-    :cursor_offset: 385
-    :timestamp: 2015-10-22 12:02:12 +04:00
   - :path: .gitignore
     :cursor_offset: 541
     :timestamp: 2015-11-08 09:19:50 +03:00
@@ -540,9 +531,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_variables.scss
     :cursor_offset: 62
     :timestamp: 2015-11-12 22:20:26 +03:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 1011
-    :timestamp: 2015-11-08 21:25:46 +03:00
   - :path: app/views/application/autocomplete.js.haml
     :cursor_offset: 82
     :timestamp: 2015-10-23 22:05:40 +04:00
@@ -555,9 +543,6 @@ cursor_positions:
   - :path: app/views/polishes/find_related.js.haml
     :cursor_offset: 61
     :timestamp: 2015-11-13 12:27:20 +03:00
-  - :path: app/assets/javascripts/local.coffee
-    :cursor_offset: 718
-    :timestamp: 2015-11-13 12:20:08 +03:00
   - :path: app/views/polishes/index.html.haml
     :cursor_offset: 133
     :timestamp: 2015-10-31 16:45:38 +03:00
@@ -626,15 +611,6 @@ cursor_positions:
   - :path: app/views/polishes/catalogue_show.html.haml
     :cursor_offset: 1715
     :timestamp: 2015-11-13 12:25:33 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 6408
-    :timestamp: 2015-11-16 17:49:50 +03:00
-  - :path: app/views/polishes/preview.js.haml
-    :cursor_offset: 428
-    :timestamp: 2015-11-17 11:47:26 +03:00
-  - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 1243
-    :timestamp: 2015-11-17 11:19:14 +03:00
   - :path: app/models/polish.rb
     :cursor_offset: 1018
     :timestamp: 2015-10-27 08:05:38 +03:00
@@ -664,10 +640,36 @@ cursor_positions:
   - :path: app/views/boxes/show.js.haml
     :cursor_offset: 1046
     :timestamp: 2015-11-17 10:59:19 +03:00
-  - :path: app/views/polishes/_reference.html.haml
-    :cursor_offset: 73
-    :timestamp: 2015-11-17 11:32:21 +03:00
   - :path: app/assets/stylesheets/_base.scss
     :cursor_offset: 11447
     :timestamp: 2015-11-17 11:35:30 +03:00
+  - :path: app/views/polishes/_reference.html.haml
+    :cursor_offset: 716
+    :timestamp: 2015-11-17 14:11:23 +03:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 1181
+    :timestamp: 2015-11-17 19:46:38 +03:00
+  - :path: app/assets/javascripts/local.coffee
+    :cursor_offset: 917
+    :timestamp: 2015-11-13 12:20:08 +03:00
+    :selection_offset: 932
+    :block_selection_mode: false
+  - :path: app/assets/javascripts/polish.coffee
+    :cursor_offset: 385
+    :timestamp: 2015-10-22 12:02:12 +04:00
+  - :path: app/assets/javascripts/profile.js
+    :cursor_offset: 41
+    :timestamp: 2015-05-22 07:31:22 +04:00
+  - :path: app/assets/javascripts/smart_poll.js
+    :cursor_offset: 210
+    :timestamp: 2015-10-21 08:26:45 +04:00
+  - :path: app/views/polishes/preview.js.haml
+    :cursor_offset: 452
+    :timestamp: 2015-11-17 13:34:46 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 6411
+    :timestamp: 2015-11-17 11:50:14 +03:00
+  - :path: app/views/polishes/_form.html.haml
+    :cursor_offset: 1549
+    :timestamp: 2015-11-17 19:46:33 +03:00
 files_to_retain: 0

@@ -1,4 +1,4 @@
-1447758830
+1447779634
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -102,9 +102,9 @@ create	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	 
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def create
-create	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def create
+create	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def create
 crop_and_resize	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def crop_and_resize(c = '192x192+0+0', width = 192)
 crop_coords	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 current_user	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def current_user
@@ -114,16 +114,16 @@ destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def destroy
-destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def destroy
+destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def destroy
 do	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	    icon = content_tag :svg, class: svg_class do
 down	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.down
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def edit
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def edit
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def edit
-edit	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def edit
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def edit
+edit	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def edit
 entry_params	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	    def entry_params
 excluded_name?	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def excluded_name?
 extension_white_list	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def extension_white_list;
@@ -161,8 +161,8 @@ in_lab?	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
-index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def index
+index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def index
 init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function init()
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 
@@ -182,9 +182,9 @@ name_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def name_to
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def new
-new	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def new
+new	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def new
 note	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def note
 opacity_mask	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def opacity_mask
 p	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def p 
@@ -216,8 +216,8 @@ set_brand	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controll
 set_collections	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def set_collections
 set_colour	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def set_colour
 set_entry	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	    def set_entry
-set_name	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def set_name
 set_name	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def set_name
+set_name	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def set_name
 set_nav_icons	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def set_nav_icons 
 set_polish	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def set_polish
 set_section	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def set_section
@@ -229,8 +229,8 @@ shadow_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def shadow_u
 show	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def show
 show	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def show
 show	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def show
-show	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def show
 show	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def show
+show	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def show
 slugify	/Users/fish/Dropbox/work/Interpol/lib/slugify.rb	  def slugify 
 store_dir	/Users/fish/Dropbox/work/Interpol/app/uploaders/lalala_uploader.rb	  def store_dir
 store_dir	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def store_dir
@@ -254,8 +254,8 @@ update	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	
 update	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def update
 update	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def update
 update	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def update
-update	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def update
 update	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def update
+update	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def update
 user_params	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	    def user_params
 valid_invite?	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def valid_invite?
 vote	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def vote
