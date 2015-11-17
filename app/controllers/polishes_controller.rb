@@ -217,7 +217,7 @@
   def polish_params
     params.require(:polish).permit(
       :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
-      :gloss_colour, :opacity, :reference,
+      :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
       {layers_attributes: [ 
         :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
         :highlight_colour, :shadow_colour, :opacity, :particle_type, :particle_size, 

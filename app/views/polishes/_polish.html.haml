@@ -12,11 +12,11 @@
       - if add && @box
         = link_to collect_path(polish.id, box: @box.slug, from_catalogue: true), method: :post, remote: true do
           = bottle_or_spinner polish.bottle_url('big'), polish.bottling_status
-          <svg class='icon roundButton'><use xlink:href=#plus /></svg>
+          <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
       - else
         = link_to (remove ? collect_path(polish.id, box: @box.slug, from_catalogue: true) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), method: (remove ? 'post' : 'get'), remote: remove do
           = bottle_or_spinner polish.bottle_url('big'), polish.bottling_status
-          <svg class='icon roundButton important' style='#{('display:none' unless remove)}'><use xlink:href=#trash /></svg>    
+          <svg class='icon button roundButton important' style='#{('display:none' unless remove)}'><use xlink:href=#trash /></svg>    
       .info
         %p.truncatable= link_to truncate(polish.name_or_number, length: 30, ), catalogue_brand_polish_path(polish.brand_slug, polish.slug)
         - unless no_vote

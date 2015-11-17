@@ -3,7 +3,7 @@
   %h1.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}
     = @box.adapt_name
     = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), remote: true do
-      <svg class='icon iGen roundButton'><use xlink:href=#plus /></svg>  
+      <svg class='icon button roundButton'><use xlink:href=#plus /></svg>  
   #controls.controls
     %span= link_to 'Upload' 
     %span= link_to 'Download' 
@@ -12,10 +12,13 @@
   #secondarySearchResults<
     = render @polishes, big_polish: true
     
-  #gather.menu.active{style: ('display:none' unless params[:action] == 'gather')}
-    .noWrap.current
-      <svg class='icon'><use xlink:href='#plus'/></svg>
-      = @box.name
+  #gather{class: (params[:action] == 'gather' ? 'menu active' : 'menu' )}
+    .current
+      %span.header
+        - if %(collection wishlist giveaway).include?(@box.slug)
+          = t('user.lists.' + @box.slug)
+        - else
+          = @box.name
     = link_to "<svg class='icon' data-activate='#boxesList'><use xlink:href='#x'/></svg>".html_safe, user_box_path(@user,@box.slug), class: 'switch wideAuto', remote: true
     .formLi.smallMargin= render 'search', setup: %w(brand polish), css: 'wide100'
     #searchResults<

@@ -1,4 +1,4 @@
-1447589792
+1447758830
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -131,6 +131,7 @@ extension_white_list	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploa
 extension_white_list	/Users/fish/Dropbox/work/Interpol/app/uploaders/reference_uploader.rb	  def extension_white_list;
 extractValue	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function extractValue(elm)
 filename	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def filename
+filename	/Users/fish/Dropbox/work/Interpol/app/uploaders/reference_uploader.rb	  def filename
 fill	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def fill 
 findElement	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function findElement($elm)
 find_bottle	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def find_bottle;

@@ -32,6 +32,8 @@ en:
     confirm: 'Are you sure?'
     edit: 'Edit'
     done_editing: 'Done'
+    choose_file: 'Choose File'
+    upolad_reference: 'Upload a Reference Image'
     action:
       new: 'Save'
       create: 'Save'
@@ -60,6 +62,7 @@ en:
     blur: 'Blur Level'
     add_images: 'Add Layer Images'
     new_list: 'Add to new list'
+    http: 'or paste in a URL'
 
   navigation:
     home: 'Home'
@@ -85,12 +88,14 @@ en:
       wishlist: 'Wishlist'
       giveaway: 'Giveaway'
 
-  catalogue:  
+  catalogue: 
     titles:
       similar: 'Similar Polishes'
+      lists: 'Lists:'
   lab:
     new_brand: 'Add a Brand'
     new_polish: 'New Polish'
+    new_polish_bottles: 'Bottles for New Polish'
     edit_brand: 'Edit'
     brands: 'Brands'
     titles:

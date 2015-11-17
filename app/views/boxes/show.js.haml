@@ -1,7 +1,7 @@
 - if params[:action] == 'gather'
   - if @addable.size > 0
     $('#searchResults').html('#{j(render(@addable, add: true).html_safe)}');
-  $('#gather').show()
+  $('#gather').addClass('active');
   history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}/gather');
 - elsif params[:edit]
   var collection = $('.bigPolish');
@@ -22,7 +22,7 @@
   $('#secondarySearchResults').html('#{j(render(@polishes, big_polish: true).html_safe)}');
   $('#goEdit').show();
   $('#doneEditing').hide();
-  $('#gather').hide();
+  $('#gather').removeClass('active');
   $('h1').show();
   $('h1').find('a').show();
   $('#boxNameField').hide();

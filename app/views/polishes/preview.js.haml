@@ -1,3 +1,8 @@
 $('#previewWrapper').html('#{j(render('polish_preview').html_safe)}');
 $('.removeLayerField').filter(function() {return $( this ).val( ) === "1";}).parent().parent().parent().remove();
-$('#changes').children().val('')
+$('#changes').children().val('');
+$('#loadReference').removeClass('active');
+- if @polish.reference?
+  $('#polish_remote_reference_url').val('');
+  $('#polish_reference').val('');
+  $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');

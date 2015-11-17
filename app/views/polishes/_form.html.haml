@@ -1,5 +1,5 @@
 = form_for [@brand, @polish], html: {multipart: true, id: 'polishForm', class: nil}  do |f|
-  .block.main.left
+  .block.main.left.relative
     %h2= t 'lab.titles.polish_' + params[:action]
     - if @polish.errors.any?
       #error_explanation
@@ -20,7 +20,20 @@
         .cell= f.text_field :collection, placeholder: t('placeholder.collection')
         .cell.wide25= f.text_field :release_year, placeholder: t('placeholder.year')
     
-    <svg class='icon i64 centered linkLike switch'><use xlink:href='#swatch' /></svg>
+    - unless simple_form = (params[:action] == 'redress' || params[:redress])
+      = f.file_field :reference, class: 'hidden'
+      = f.hidden_field :reference_cache 
+      #reference
+        %div= render 'reference' if @polish.reference?
+      #loadReference.menu
+        .current
+          %span.header= t('form.upload_reference')
+        .formLi.smallMargin 
+          .table.wide100
+            .cell= f.label :reference, t('form.choose_file'), class: 'button'
+            .cell= f.text_field :remote_reference_url, placeholder: t('placeholder.http')
+        <svg class='icon linkLike switch' data-activate='#loadReference'><use xlink:href='#x'/></svg>
+      <svg class='icon i64 centered linkLike switch' data-activate='#loadReference'><use xlink:href='#swatch'/></svg>
 
     
     %h3= t('lab.section.bottle')
@@ -30,7 +43,7 @@
           = f.radio_button :bottle_id, bottle.id, class: 'hidden', checked: (bottle.id == @polish.bottle_id)
           = f.label "bottle_id_#{bottle.id}", image_tag( bottle.base_thumb_url, class: 'bottleThumb img'), class: 'spotable bottleThumbWrapper'
           = bottle.name
-    - unless params[:action] == 'redress' || params[:redress]  
+    - unless simple_form        
       %h3= t('lab.section.highlight')
       
       .array<

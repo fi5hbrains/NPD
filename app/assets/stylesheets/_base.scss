@@ -349,6 +349,11 @@ button.inField:focus .icon{ fill: white }
   border-radius: $radiusMain;
 }
 .roundButton.important { background-color: $colourBad }
+.bigPolish .roundButton{
+  position: absolute;
+  top: 85px;
+  left: 25px;
+}
 a:hover{
   .button { background: lighten($colourButton, $lightenOnHover) }
   .previewButton, .roundButton { background: lighten($colourMain, $lightenOnHover) }
@@ -462,4 +467,11 @@ form .table{ margin-bottom: 6px }
 }
 li.w140{
   width: 140px;
+}
+#reference{
+  position:fixed;
+  width: 300px;
+  top: 79px;
+  left:15px;
+  z-index: 3;  
 }

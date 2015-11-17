@@ -18,7 +18,8 @@
 }
 #navBar.unpin { top: -66px }
 .menu{
-  position: relative;
+  visibility: hidden;
+  position: absolute;
   list-style-type: none;
   color: rgba(0,0,0,.6);
   background-color: white;
@@ -27,12 +28,12 @@
   border-radius: $radiusMain*2;
   transition:all $speedDropdown;
   display: inline-block;
-  position: relative;
   margin: -3px;
   padding: 48px 0 0;
   border: 3px solid $colourMain;
   z-index: 5;
   width: 100%;
+  overflow: hidden;
   & > li > a{ 
     width: 100%;
     text-decoration: none;
@@ -54,9 +55,8 @@
   }
   a.switch{
     width: auto;
-    padding: 9px 8px;
+    padding: 9px 7px;
   }
-  .icon { vertical-align: bottom }
   .iNav { margin-right: 5px; fill: $colourStatsIcon }
   .iPolish { margin: 0 -5px -2px }
   li{ 
@@ -113,7 +113,9 @@
   }
 }
 .menu.active{
+  visibility: visible;
   .current{
+    span.header { padding-left: 5px }
     a { color: white }
     .iNav { fill: white }
   }
@@ -126,6 +128,8 @@
   .formLi.smallMargin { margin-top: 0; margin-bottom: 4px }
 }
 #dropMenu.menu{
+  visibility: visible;
+  position: relative;
   width: 166px;
   .switch { fill: $colourStatsIcon; padding: 16px 6px; }
   .switch:hover { fill: white; background: none }
@@ -142,17 +146,17 @@
   .current .iNav { fill: white }
 }
 #boxesList{
-  visibility: hidden;
-  position: absolute;
   left: 0;
   margin: -7px 0 0 -3px;
 }
 #boxesList.active, #boxesList.hover { margin: -10px 0 0 -6px }
-#boxesList.active { visibility: visible }
+#boxesList > .current {
+  height: 38px;
+  padding: 12px 45px 0 10px;}
 #gather { 
-  position: absolute;
   top: 42px;
 }
+#loadReference { }
 .option{
   vertical-align: top;
   padding: 6px;
