@@ -22,8 +22,10 @@ $(document).on 'ready page:load', ->
   icons.open 'GET', '/icons_common.xml', true
   icons.send()
   icons.onload = (e) -> $('#defs').html( icons.responseText )
-    
-  $('input[name=polish], input[name=brand]').doneTyping ->
+  
+  $('.labSearch').find('input[name=polish], input[name=brand]').doneTyping ->
+    $(this).closest('form').submit()
+  $('.completable').find('input[name=polish], input[name=brand]').doneTyping ->
     $.ajax 
       url: '/autocomplete'
       data: $(this).closest('.searchWrapper').serialize() + '&id=' + $(this).closest('.search').attr('id')

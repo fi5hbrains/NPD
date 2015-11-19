@@ -4,9 +4,11 @@
     = link_to new_brand_path do
       <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
 
-  = render 'search', setup: %w(brand), css: 'wide100'
+  = render 'search', setup: %w(brand), css: 'wide100', lab_search: true, remote: true
   
-  %table#selection.wide100
-    = render @brands
-  = paginate @brands
+  %table#searchResults.wide100.hidden
+  #results
+    %table.wide100
+      = render @brands
+    = paginate @brands, window: 1, outer_window: 1
 

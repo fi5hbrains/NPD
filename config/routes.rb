@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   patch 'boxes/:id', to: 'boxes#update', as: 'update_box'
   get 'find_related', to: 'polishes#find_related'
   get 'search', to: 'application#search'
-  get 'reorder', to: 'polishes#reorder'
   get 'lab_search', to: 'application#lab_search'
+  get 'reorder', to: 'polishes#reorder'
   get 'autocomplete', to: 'application#autocomplete'
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
 

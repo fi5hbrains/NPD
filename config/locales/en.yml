@@ -76,6 +76,8 @@ en:
   search:
     brand: 'Brand'
     polish: 'Polish'
+    lab_brand: 'Brand'
+    lab_polish: 'Polish'
     colour: 'Colour'
     find: 'Find'
     

@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   def search brand = nil, colour = nil, spread = nil, sort = nil
     colour ||= params[:colour]
     spread ||= params[:spread]
+    brand = Brand.find(params[:brand_id]) if params[:brand_id]
     @brand ||= brand
     @polish = Polish.find(params[:polish_id]) if params[:polish_id]
     polish_id = (@polish.try(:id) || 0)
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
       @brand = @brands.first if @brands.count == 1
     end
     if !params[:polish].blank? || @brand || colour
-      if params[:polish]
+      if params[:polish] 
         polish_ids = Synonym.
           where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
           pluck('word_id').compact.uniq
@@ -53,6 +54,28 @@ class ApplicationController < ActionController::Base
     end
     if @polishes && sort
       @polishes = @polishes.order(sort)
+    end
+  end
+  
+  def lab_search
+    @reset = false
+    if params[:brand]
+      brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
+        pluck('word_id').compact.uniq
+      @brands = Brand.
+        where(id: brand_ids).
+        where('id != ?', params[:brand_id] || 0).
+        sort_by_polishes_count.first(10)
+    elsif params[:polish]
+      polish_ids = Synonym.
+        where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
+        pluck('word_id').compact.uniq  
+      @polishes = Polish.
+        where(brand_id: params[:brand_id]).
+        where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR slug ilike ?", "#{params[:polish]}%").
+        where('id != ?', params[:polish_id] || 0)
+    else
+      @reset = true
     end
   end
   

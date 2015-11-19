@@ -1,13 +1,19 @@
 - setup ||= %w(brand polish colour)
 - css = ' ' + (css || '')
 - id ||= 'search'
+- remote ||= false
+- lab_search ||= false
+- css += ' labSearch' if lab_search
 
-= form_tag search_path, method: 'GET', class: 'searchWrapper formIndent' + css, id: id + 'Wrapper' do 
+= form_tag (lab_search ? lab_search_path : search_path), method: 'GET', class: 'searchWrapper formIndent' + css, id: id + 'Wrapper', remote: remote do 
   .search{id: id}
+    = hidden_field_tag :brand_id, @brand.id if @brand
+    = hidden_field_tag :polish_id, @polish.id if @polish
     - setup.each do |p|
       .cell
         = text_field_tag p, (params[p] || (@brand.name if p == 'brand' && @brand)),  placeholder: t("search.#{p}"), autocomplete: 'off', class: 'search' + p.capitalize, id: id + p.capitalize
-        :javascript
-          var #{id + p.capitalize} = new Awesomplete(document.getElementById('#{id + p.capitalize}'));
-          #{id + p.capitalize}.list = #{p == 'colour' ? Defaults::COLOURS[I18n.locale].keys.to_s.html_safe : []};
+        - if css =~ /completable/
+          :javascript
+            var #{id + p.capitalize} = new Awesomplete(document.getElementById('#{id + p.capitalize}'));
+            #{id + p.capitalize}.list = #{p == 'colour' ? Defaults::COLOURS[I18n.locale].keys.to_s.html_safe : []};
   = button_tag "<svg class='icon linkLike'><use xlink:href=#magnify /></svg>".html_safe, id: id + 'Button', class: 'inField', name: nil

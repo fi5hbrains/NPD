@@ -1,4 +1,4 @@
-1447779634
+1447932489
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -166,6 +166,7 @@ index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  d
 init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function init()
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 
+lab_search	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def lab_search
 layer_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def layer_tmp 
 layers_to_hash	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def layers_to_hash
 link_to_add_layer	/Users/fish/Dropbox/work/Interpol/app/helpers/polishes_helper.rb	  def link_to_add_layer(type, f)

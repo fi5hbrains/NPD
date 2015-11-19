@@ -1,7 +1,7 @@
 class BrandsController < ApplicationController
   def index
     Brand.new(name: 'Default', user_id: current_user.id).save if Brand.count == 0
-    @brands = Brand.all.sort_by_polishes_count.page(params[:page]).per(24)
+    @brands = Brand.all.sort_by_polishes_count.page(params[:page]).per(10)
   end
 
   def show

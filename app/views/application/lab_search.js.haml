@@ -1,0 +1,10 @@
+- if @reset
+  $('#results').show();
+  $('#searchResults').hide();
+- else
+  $('#results').hide();
+  $('#searchResults').show();
+  - if @brands
+    $('#searchResults').html('#{j(render @brands).html_safe}');
+  - if @polishes
+    $('#searchResults').html('#{j(render @polishes).html_safe}');
