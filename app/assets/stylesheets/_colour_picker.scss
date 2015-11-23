@@ -40,17 +40,9 @@
   border-radius:100%;
   box-sizing:border-box
 }
-div.cp-blank{
-  float:right;
-  width: 46px;
-  height: 46px;
-  margin:0 0 6px 6px;
-  border: 1px solid;
-  background: image-url("colour_picker.png")
-}
 .cp-z-slider{
   float:right;
-  height:164px;
+  height:218px;
   width:48px;
   background:linear-gradient(red 0,#f0f 17%,#00f 33%,#0ff 50%,#0f0 67%,#ff0 83%,red 100%)
 }
@@ -79,26 +71,23 @@ div.cp-blank{
 }
 .cp-xy-cursor, .cp-z-cursor, .cp-alpha-cursor{ transition: border-color 1s }
 .cp-disp {padding:10px; margin-bottom:6px; font-size:19px; height:20px; line-height:20px}
-
 .colourBack{
-  position:relative;
-  overflow:hidden;
-  height:48px;
-  width:48px;
-  background: -48px top image-url("colour_picker.png");
-  border-radius: $radiusMain;
-  margin-bottom:2px;
-  z-index: 0;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 4px;
 }
 input.colour{ 
   position:relative; 
   height:48px; 
   width: 0px; 
   padding-left:38px;
-  margin-bottom: 4px;
   z-index: 0;
 }
-input.colour.active { width: 290px }
+input.colour:focus { 
+  position:absolute;
+  width: 290px;
+  left:0;
+  z-index: 6;
+}
 input.colour.disabled{ background: image-url("colour_picker.png") #eee !important }
-.colourBack.active, .colour.active{ z-index: 6 }
 

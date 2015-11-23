@@ -51,10 +51,10 @@
           .arrayItem>
             = f.radio_button :gloss_type, g, class: 'hidden', checked: (g == @polish.gloss_type || g == 'glass')
             .spotable= f.label "gloss_type_#{g}" , '&nbsp;'.html_safe, class: 'gloss img'
-            = t('lab.section.' + g)
+            = f.label 'gloss_type_' + g, t('lab.section.' + g)
         .arrayItem>
-          = f.text_field :gloss_colour, class: 'colour noAlpha', value: @polish.gloss_colour || '#dadada'
-          = t('lab.section.highlight_colour')
+          .colourBack= f.text_field :gloss_colour, class: 'colour noAlpha', value: @polish.gloss_colour || '#dadada'
+          = f.label :gloss_colour, t('lab.section.highlight_colour')
       
       %h3= t('lab.section.add_layers')
       - %w(shimmer flake glitter sand).each do |type|

@@ -20,11 +20,10 @@
 		_round = Math.round,
 		_animate = window.requestAnimationFrame ||
 			window.webkitRequestAnimationFrame || function(cb){cb()},
-		_html = '<div class="cp-color-picker"><div class="cp-z-slider"><div c' +
+		_html = '<div class="cp-color-picker colourPicker"><div class="cp-z-slider"><div c' +
 			'lass="cp-z-cursor"></div></div><div class="cp-xy-slider"><div cl' +
 			'ass="cp-white"></div><div class="cp-xy-cursor"></div></div><div ' +
 			'class="cp-alpha"><div class="cp-alpha-cursor"></div></div></div>',
-			// 'grunt-contrib-uglify' puts all this back to one single string...
 		_css = '',
 
 		ColorPicker = function(options) {
@@ -256,7 +255,18 @@
 			doRender: true,
 			customBG: '#FFF',
 			opacity: true,
-			renderCallback: noop,
+			renderCallback: function($elm, toggled) {
+        if (toggled) {
+          this.$UI.find('.cp-alpha').toggle(!$elm.hasClass('noAlpha'));
+          $elm.removeClass('disabled');
+        } else if (toggled !== undefined) {
+          if ($elm.val() == '') {
+            if ($elm.hasClass('disableable')) {
+              $elm.addClass('disabled');
+            }
+          }
+        }
+      },
 			buildCallback: noop,
 			body: document.body,
 			scrollResize: true,

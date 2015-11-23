@@ -19,17 +19,17 @@
 
   .array.colours
     .arrayItem>
-      = l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
+      .colourBack= l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
       = t 'lab.section.colour1'
     .arrayItem>
-      = l_f.text_field :c_duo  ,  class: 'colour noAlpha disabled disableable'
+      .colourBack= l_f.text_field :c_duo  ,  class: 'colour noAlpha disabled disableable', value: ''
       = t 'lab.section.colour2'
     .arrayItem>
-      = l_f.text_field :c_multi,  class: 'colour noAlpha disabled disableable'
+      .colourBack= l_f.text_field :c_multi,  class: 'colour noAlpha disabled disableable', value: ''
       = t 'lab.section.colour3'
     - if l.layer_type == 'base'
       .arrayItem>
-        = l_f.text_field :c_cold, class: 'colour noAlpha disabled disableable'
+        .colourBack= l_f.text_field :c_cold, class: 'colour noAlpha disabled disableable', value: ''
         = t 'lab.section.cold'
       .arrayItem>
     .arrayItem>
