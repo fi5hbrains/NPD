@@ -18,10 +18,10 @@ $(document).on 'ready page:load', ->
   $('input:radio.uncheckable').uncheckableRadio()
   $('label.uncheckable').uncheckableRadioLabel()
 
-  icons = new XMLHttpRequest
-  icons.open 'GET', '/icons_common.xml', true
-  icons.send()
-  icons.onload = (e) -> $('#defs').html( icons.responseText )
+  # icons = new XMLHttpRequest
+  # icons.open 'GET', '/icons_common.xml', true
+  # icons.send()
+  # icons.onload = (e) -> $('#defs').html( icons.responseText )
   
   $('.labSearch').find('input[name=polish], input[name=brand]').doneTyping ->
     $(this).closest('form').submit()

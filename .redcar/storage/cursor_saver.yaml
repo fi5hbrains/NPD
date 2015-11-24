@@ -504,9 +504,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/assamblage.scss
     :cursor_offset: 178
     :timestamp: 2015-11-04 21:14:18 +03:00
-  - :path: public/icons_common.xml
-    :cursor_offset: 27343
-    :timestamp: 2015-11-12 21:41:26 +03:00
   - :path: app/assets/stylesheets/_variables.scss
     :cursor_offset: 62
     :timestamp: 2015-11-12 22:20:26 +03:00
@@ -693,4 +690,10 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 345
     :timestamp: 2015-11-22 10:36:37 +03:00
+  - :path: public/icons_common.xml
+    :cursor_offset: 28000
+    :timestamp: 2015-11-12 21:41:26 +03:00
+  - :path: public/assets/icons.svg
+    :cursor_offset: 36989
+    :timestamp: 2015-11-24 10:55:47 +03:00
 files_to_retain: 0
