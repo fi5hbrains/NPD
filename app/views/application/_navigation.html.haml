@@ -6,14 +6,14 @@
     - %w(home diary catalogue personal settings lab other).each do |li|
       %li{class: set[li][:class]}= link_to_if set[li][:if], "<span id='i_#{li}'></span>".html_safe + t('navigation.' + li), set[li][:path]
     <svg id='dropMenuButton' class='icon switch' data-activate='#dropMenu'><use xlink:href=#down /></svg>
-  
-  - icons.keys.each do |key|
-    = render_nav_icon(icons, key).html_safe
-  
   - if current_user
     .right.noWrap
       = link_to image_tag(current_user.avatar.thumb.url, class: 'avatar'), current_user
       - if true
         .notifyWrapper
-          .notify 53
+          .notify 53  
+  - icons.keys.each do |key|
+    = render_nav_icon(icons, key).html_safe
+  
+
     
