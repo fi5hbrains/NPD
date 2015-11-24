@@ -4,7 +4,7 @@
   = link_to '', root_path, id: 'logo'
   %ul#dropMenu.menu.furlable
     - %w(home diary catalogue personal settings lab other).each do |li|
-      %li{class: set[li][:class]}= link_to_if set[li][:if], "<svg class='icon iNav' viewBox='0 0 36 36' id='i_#{li}'></svg>".html_safe + t('navigation.' + li), set[li][:path]
+      %li{class: set[li][:class]}= link_to_if set[li][:if], "<span id='i_#{li}'></span>".html_safe + t('navigation.' + li), set[li][:path]
     <svg id='dropMenuButton' class='icon switch' data-activate='#dropMenu'><use xlink:href=#down /></svg>
   
   - icons.keys.each do |key|
