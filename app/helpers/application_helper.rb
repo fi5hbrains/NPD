@@ -90,7 +90,7 @@ module ApplicationHelper
   end
   
   def render_nav_icon icons, key
-    svg_class = 'icon iNav option'
+    svg_class = ''
     options = icons[key]
     if options.class.name == 'Array'
       link = options[0]
@@ -103,9 +103,8 @@ module ApplicationHelper
     svg_class += ' inactive' if icons[key] == nil
     svg_class += ' active' if is_active
     
-    icon = content_tag :svg, class: svg_class do
-      tag :use, 'xlink:href' => "##{key}"
-    end
+    icon = tag :span, id: 'i_' + key, class: svg_class 
+
     if link.blank?
       icon
     else

@@ -1,4 +1,4 @@
-1448389502
+1448398652
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -117,7 +117,6 @@ destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def destroy
-do	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	    icon = content_tag :svg, class: svg_class do
 down	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.down
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def edit
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def edit

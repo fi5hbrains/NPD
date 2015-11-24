@@ -418,9 +418,6 @@ cursor_positions:
   - :path: app/models/defaults.rb
     :cursor_offset: 989
     :timestamp: 2015-11-04 10:39:40 +03:00
-  - :path: app/assets/javascripts/application.js
-    :cursor_offset: 726
-    :timestamp: 2015-10-21 04:08:06 +04:00
   - :path: app/models/user.rb
     :cursor_offset: 1619
     :timestamp: 2015-09-25 19:37:58 +04:00
@@ -545,9 +542,6 @@ cursor_positions:
   - :path: Gemfile
     :cursor_offset: 341
     :timestamp: 2015-11-15 12:39:59 +03:00
-  - :path: app/views/application/_navigation.html.haml
-    :cursor_offset: 465
-    :timestamp: 2015-11-16 22:13:45 +03:00
   - :path: app/assets/stylesheets/_icons.scss
     :cursor_offset: 1745
     :timestamp: 2015-11-15 09:32:57 +03:00
@@ -687,13 +681,23 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 345
     :timestamp: 2015-11-22 10:36:37 +03:00
-  - :path: public/icons_common.xml
-    :cursor_offset: 28000
-    :timestamp: 2015-11-12 21:41:26 +03:00
   - :path: public/assets/icons.svg
     :cursor_offset: 100
     :timestamp: 2015-11-24 13:25:02 +03:00
+  - :path: app/views/application/_navigation.html.haml
+    :cursor_offset: 519
+    :timestamp: 2015-11-24 21:22:36 +03:00
   - :path: app/helpers/application_helper.rb
-    :cursor_offset: 3629
-    :timestamp: 2015-11-14 17:54:57 +03:00
+    :cursor_offset: 3046
+    :timestamp: 2015-11-24 22:44:02 +03:00
+  - :path: public/icons_common.xml
+    :cursor_offset: 4619
+    :timestamp: 2015-11-24 13:19:10 +03:00
+    :selection_offset: 4364
+    :block_selection_mode: false
+  - :path: app/assets/javascripts/application.js
+    :cursor_offset: 745
+    :timestamp: 2015-11-24 23:52:04 +03:00
+    :selection_offset: 727
+    :block_selection_mode: false
 files_to_retain: 0
