@@ -525,9 +525,6 @@ cursor_positions:
   - :path: app/views/polishes/reorder.js.haml
     :cursor_offset: 189
     :timestamp: 2015-11-14 18:13:36 +03:00
-  - :path: app/helpers/application_helper.rb
-    :cursor_offset: 3629
-    :timestamp: 2015-11-14 17:54:57 +03:00
   - :path: bin/rails
     :cursor_offset: 0
     :timestamp: 2015-11-15 12:40:35 +03:00
@@ -694,6 +691,9 @@ cursor_positions:
     :cursor_offset: 28000
     :timestamp: 2015-11-12 21:41:26 +03:00
   - :path: public/assets/icons.svg
-    :cursor_offset: 36989
-    :timestamp: 2015-11-24 10:55:47 +03:00
+    :cursor_offset: 100
+    :timestamp: 2015-11-24 13:25:02 +03:00
+  - :path: app/helpers/application_helper.rb
+    :cursor_offset: 3629
+    :timestamp: 2015-11-14 17:54:57 +03:00
 files_to_retain: 0

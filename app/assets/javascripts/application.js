@@ -17,4 +17,5 @@
 //= require slider
 //= require awesomplete
 //= require smart_poll
+//= require icons
 //= require local
