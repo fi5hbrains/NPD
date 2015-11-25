@@ -100,8 +100,8 @@ module ApplicationHelper
       link = options
       is_active = (options == true)
     end
-    svg_class += ' inactive' if icons[key] == nil
-    svg_class += ' active' if is_active
+    svg_class = 'inactive' if icons[key] == nil
+    svg_class = 'active' if is_active
     
     icon = tag :span, id: 'i_' + key, class: svg_class 
 

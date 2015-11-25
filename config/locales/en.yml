@@ -89,6 +89,8 @@ en:
       collection: 'Collection'
       wishlist: 'Wishlist'
       giveaway: 'Giveaway'
+    import: 'Import'
+    export: 'Download'
 
   catalogue: 
     titles:

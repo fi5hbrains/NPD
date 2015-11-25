@@ -305,7 +305,8 @@ pre.resizable{ min-height: 48px; max-height: 200px; overflow: hidden; visibility
     font-size: $fontSizeBase*1.2;
     font-family: $fontMain;
   }
-  textarea:not(:focus){
+  textarea:not(:focus), textarea:not(:focus) + pre{
+    font-size: $fontSizeBase;
     background:none;
     font-family: cursive;
     font-style: italic;

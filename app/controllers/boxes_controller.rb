@@ -15,6 +15,11 @@ class BoxesController < ApplicationController
     render :show
   end
   
+  def import
+    @box = current_user.boxes.find_by_slug(params[:id])
+    @box.import(params[:spreadsheet])
+  end
+  
   def update
     @box = Box.find(params[:id])
     @box.name = params[:box][:name]

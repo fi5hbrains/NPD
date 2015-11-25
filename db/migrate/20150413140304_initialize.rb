@@ -81,7 +81,6 @@ class Initialize < ActiveRecord::Migration
       t.string   :slug
       t.text     :import_result
       t.integer  :box_items_count, default: 0
-      t.string   :spreadsheet
       t.timestamps
     end
     add_index :boxes, :user_id

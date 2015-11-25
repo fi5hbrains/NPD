@@ -156,7 +156,6 @@
 #gather { 
   top: 42px;
 }
-#loadReference { }
 .option{
   vertical-align: top;
   padding: 6px;
@@ -164,7 +163,7 @@
   cursor: pointer;
   border-radius: $radiusMain;
 }
-.option.active, .option:not(.inactive):hover{
+.active > .option, span:not(.inactive):hover > .option{
   background-color: rgba(255,255,255,.4);
   fill: white;
 }

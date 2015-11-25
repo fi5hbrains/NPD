@@ -49,7 +49,6 @@ Rails.application.routes.draw do
     end
     resources :users, path: '', only: [] do
       resources :boxes, except: [:index, :edit], path: '' do
-        get :import, on: :member
         post :import, on: :member
         get :gather, on: :member
         get :edit, on: :member, to: 'boxes#show', edit: true

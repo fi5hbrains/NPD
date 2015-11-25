@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413140304) do
+ActiveRecord::Schema.define(version: 20151125171031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20150413140304) do
     t.string   "slug"
     t.text     "import_result"
     t.integer  "box_items_count", default: 0
-    t.string   "spreadsheet"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

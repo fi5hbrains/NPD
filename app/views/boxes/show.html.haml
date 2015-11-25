@@ -2,13 +2,17 @@
   = text_field_tag 'box[name]', @box.name, placeholder: 'List Name', id:'boxNameField',style: ('display:none' if !params[:edit] || %(collection wishlist giveaway).include?(@box.slug) ), class: 'formIndent bigMargin smallMargin', 'data-id' => @box.id
   %h1.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}
     = @box.adapt_name
-    = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), remote: true do
+    = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit] || !current_user || current_user != @user), remote: true do
       <svg class='icon button roundButton'><use xlink:href=#plus /></svg>  
   #controls.controls
-    %span= link_to 'Upload' 
-    %span= link_to 'Download' 
-    %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to 'Done', user_box_path(@user, @box, done_editing: true), remote: true
-    %span#goEdit{style: ('display:none' if params[:edit])}= link_to 'Edit', edit_user_box_path(@user, @box), remote: true
+    %span= link_to t('user.import')
+    %span= link_to t('user.export') 
+    %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
+    %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
+    
+  = form_tag import_user_box_path(@user, @box), multipart: true, remote: true do
+    = file_field_tag :spreadsheet
+    = submit_tag
   #secondarySearchResults<
     = render @polishes, big_polish: true
     
