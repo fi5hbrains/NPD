@@ -10,9 +10,10 @@
     %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
     %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
     
-  = form_tag import_user_box_path(@user, @box), multipart: true, remote: true do
-    = file_field_tag :spreadsheet
-    = submit_tag
+  = form_tag import_user_box_path(@user, @box), multipart: true do
+    = label_tag :spreadsheet, t('form.choose_file'), class: 'button'
+    = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
+    = submit_tag 'import', class: 'hidden', name: 'preview'
   #secondarySearchResults<
     = render @polishes, big_polish: true
     

@@ -7,9 +7,10 @@
     –
     = link_to '2012', '#'
   = bottle_or_spinner @polish.bottle_url, @polish.bottling_status, {class: 'left biggestBottle'}
-  #coatsWrapper.left
-    = image_tag @polish.preview_url
-    = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
+  - unless @polish.draft
+    #coatsWrapper.left
+      = image_tag @polish.preview_url
+      = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
   %p.clearFix.smallMargin
     - if @synonyms.size > 0
       %strong Synonyms:

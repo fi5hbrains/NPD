@@ -45,9 +45,10 @@ class ApplicationController < ActionController::Base
       @polishes = polishes.
         where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
         "slug ilike ?", "#{params[:polish] || ''}%").
+        where(draft: false).
         where('id != ?', polish_id)
     elsif params[:polish].blank?
-      @polishes = Polish.where  nil
+      @polishes = Polish.where(draft: false)
     end
     if @polishes && colour
       @polishes = @polishes.coloured( colour, spread )
@@ -71,9 +72,10 @@ class ApplicationController < ActionController::Base
         where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
         pluck('word_id').compact.uniq  
       @polishes = Polish.
-        where(brand_id: params[:brand_id]).
+        where(brand_id: (params[:brand_id] || params[:id])).
         where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR slug ilike ?", "#{params[:polish]}%").
-        where('id != ?', params[:polish_id] || 0)
+        where('id != ?', params[:polish_id] || 0).
+        order('created_at desc')
     else
       @reset = true
     end

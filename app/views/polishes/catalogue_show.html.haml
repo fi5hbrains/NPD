@@ -13,9 +13,10 @@
       = link_to colour, catalogue_path(colour: colour)
   .block.left{'data-id' => @polish.id}>
     = bottle_or_spinner @polish.bottle_url, @polish.bottling_status, {class: 'left biggestBottle'}
-    #coatsWrapper.left
-      = image_tag @polish.preview_url
-      = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
+    - unless @polish.draft
+      #coatsWrapper.left
+        = image_tag @polish.preview_url
+        = image_tag @polish.gloss_preview_url, class: 'absolute screen' 
   .block.left
     .idBlock.polishStats.bottomUp<
       .pic.relative>
@@ -38,6 +39,7 @@
     - unless params[:edit_id] || params[:reply_id]
       = render 'comments/form', comment: Comment.new, commentable: @polish
     #comments= render @comments
+  - if @related  
   %section
     %h2
       = t 'catalogue.titles.similar'

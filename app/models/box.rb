@@ -26,12 +26,17 @@ class Box < ActiveRecord::Base
         logger.info "..." + ids.inspect
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = row['polish'].to_s.gsub(/\.0+$/, '')
-          number = row['number'].to_s.gsub(/\.0+$/, '')
-          polish = brand.polishes.find_by_name_or_number((name unless name.empty?), number, brand.id) || Polish.new({draft: true, brand_id: brand.id, brand_name: brand.name, name: name, number: number})
+          name = row['polish'].to_s.gsub(/\.0+$/, '').strip
+          number = (row['number'].to_s.gsub(/\.0+$/, '').strip unless row['number'] == 'N/A')
+          polish = Polish.where(brand_id: brand.id, slug: (name || number).mb_chars.downcase).first || Polish.new
           if polish.new_record?
+            polish.draft = true
+            polish.name = name if name
+            polish.number = number if number
+            polish.brand_id = brand.id
+            polish.brand_name = brand.name
+            polish.brand_slug = brand.slug
             polish.user_id = self.user_id
-            polish.synonyms.new(name: polish.name).save unless (!polish.name || polish.name.empty?)
             polish.save
             stats[:new] += 1
             brands << brand
@@ -46,7 +51,7 @@ class Box < ActiveRecord::Base
         end
       end
     end
-    puts import_result = ('Successfully imported ' + stats[:added].to_s + ' item'.pluralize(stats[:added]) +
+    self.import_result = ('Successfully imported ' + stats[:added].to_s + ' item'.pluralize(stats[:added]) +
       ' (' + stats[:new].to_s + ' new).' + ( 
         if stats[:unknown].size > 0
           ' Failed ' + stats[:failed].to_s + ' times, because ' +
@@ -64,7 +69,8 @@ class Box < ActiveRecord::Base
     end
     return stats
   end
-  handle_asynchronously :import
+  # handle_asynchronously :import
+  
   def rename_header_columns(header)
     brand = false
     polish = false

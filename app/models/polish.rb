@@ -80,12 +80,14 @@ class Polish < ActiveRecord::Base
   end
   
   def set_colour
-    base = self.layers.detect{|l| l.ordering == 0}
-    hsl  = colour_to_hsl(base.c_base)
-    hsl2 = colour_to_hsl(base.c_multi || base.c_duo)
-    self.h = hsl[0]; self.s = hsl[1]; self.l = hsl[2]
-    if hsl2
-      self.h2 = hsl2[0]; self.s2 = hsl2[1]; self.l2 = hsl2[2]
+    unless self.draft
+      base = self.layers.detect{|l| l.ordering == 0}
+      hsl  = colour_to_hsl(base.c_base)
+      hsl2 = colour_to_hsl(base.c_multi || base.c_duo)
+      self.h = hsl[0]; self.s = hsl[1]; self.l = hsl[2]
+      if hsl2
+        self.h2 = hsl2[0]; self.s2 = hsl2[1]; self.l2 = hsl2[2]
+      end
     end
   end
   

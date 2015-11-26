@@ -15,7 +15,7 @@
     @synonyms.shift
     @comments = @polish.comments
     set_users @comments
-    if !in_lab?
+    if !in_lab? && !@polish.draft
       find_related @polish
       render 'catalogue_show'
     else
