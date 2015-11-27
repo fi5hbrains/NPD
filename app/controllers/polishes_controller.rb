@@ -115,7 +115,7 @@
         format.js {render 'preview'}
       end
     elsif @polish.valid?
-      @polish.update_attributes bottling_status: false
+      @polish.update_attributes bottling_status: false, draft: false
       if params[:redress]
         @polish.save
         rename_polish_files old_slug if old_slug != @polish.slug
@@ -236,7 +236,7 @@
     (polish.layers.count > 1 ? polish.coats_count : 1).
       times{|c| FileUtils.mv( path + polish.coat_url(c, old_slug), path + polish.coat_url(c))}
     [nil, 'thumb', 'big'].each do |option| 
-      FileUtils.mv( path + polish.bottle_url(option,old_slug), path + polish.bottle_url(option) ) end
+      FileUtils.mv( path + polish.bottle_url(option, true, old_slug), path + polish.bottle_url(option, true) ) end
   end
   
   def generate_preview changed_layers = {}
@@ -419,9 +419,9 @@
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
     stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
-    stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 -write #{path + @polish.bottle_url('thumb')} +delete \\) "
-    stack += " \\( +clone -resize 128x139^ -gravity center -extent 128x139 -write #{path + @polish.bottle_url('big')} +delete \\) "
-    Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url   
+    stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
+    stack += " \\( +clone -resize 128x139^ -gravity center -extent 128x139 -write #{path + @polish.bottle_url('big', true)} +delete \\) "
+    Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
     @polish.delay(queue: current_user.id).update_attributes bottling_status: true
   end
   

@@ -492,9 +492,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_icons.scss
     :cursor_offset: 1745
     :timestamp: 2015-11-15 09:32:57 +03:00
-  - :path: app/views/polishes/_polish.html.haml
-    :cursor_offset: 940
-    :timestamp: 2015-11-16 20:48:20 +03:00
   - :path: app/views/users/show.html.haml
     :cursor_offset: 961
     :timestamp: 2015-11-10 10:42:04 +03:00
@@ -534,9 +531,6 @@ cursor_positions:
   - :path: app/views/kaminari/_prev_page.html.haml
     :cursor_offset: 0
     :timestamp: 2015-11-18 08:20:21 +03:00
-  - :path: app/views/brands/show.html.haml
-    :cursor_offset: 95
-    :timestamp: 2015-11-16 10:09:18 +03:00
   - :path: app/views/polishes/index.html.haml
     :cursor_offset: 82
     :timestamp: 2015-11-18 18:50:53 +03:00
@@ -650,9 +644,6 @@ cursor_positions:
   - :path: app/controllers/comments_controller.rb
     :cursor_offset: 127
     :timestamp: 2015-09-12 13:53:20 +04:00
-  - :path: app/controllers/brands_controller.rb
-    :cursor_offset: 214
-    :timestamp: 2015-11-18 08:30:06 +03:00
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 48
     :timestamp: 2015-10-15 19:39:23 +04:00
@@ -665,30 +656,9 @@ cursor_positions:
   - :path: app/views/polishes/reorder.js.haml
     :cursor_offset: 189
     :timestamp: 2015-11-14 18:13:36 +03:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 2414
-    :timestamp: 2015-11-19 13:59:33 +03:00
-  - :path: app/views/polishes/show.html.haml
-    :cursor_offset: 372
-    :timestamp: 2015-11-26 16:13:31 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 442
-    :timestamp: 2015-11-26 16:10:06 +03:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 562
-    :timestamp: 2015-11-26 16:13:48 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 3406
-    :timestamp: 2015-11-26 15:57:55 +03:00
-  - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 452
-    :timestamp: 2015-11-26 12:59:28 +03:00
   - :path: app/views/boxes/import.js.haml
     :cursor_offset: 11
     :timestamp: 2015-11-26 15:54:15 +03:00
-  - :path: app/models/box.rb
-    :cursor_offset: 1471
-    :timestamp: 2015-11-26 15:09:53 +03:00
   - :path: app/models/box_item.rb
     :cursor_offset: 35
     :timestamp: 2015-09-05 21:50:35 +04:00
@@ -703,10 +673,44 @@ cursor_positions:
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 3324
     :timestamp: 2015-11-25 02:15:36 +03:00
-  - :path: app/helpers/polishes_helper.rb
-    :cursor_offset: 184
-    :timestamp: 2015-10-21 22:03:48 +04:00
   - :path: db/migrate/20150413140304_initialize.rb
     :cursor_offset: 2701
     :timestamp: 2015-11-25 20:09:43 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 3196
+    :timestamp: 2015-11-27 12:44:58 +03:00
+  - :path: app/views/polishes/show.html.haml
+    :cursor_offset: 462
+    :timestamp: 2015-11-27 00:15:45 +03:00
+  - :path: app/helpers/polishes_helper.rb
+    :cursor_offset: 264
+    :timestamp: 2015-11-26 23:59:05 +03:00
+    :selection_offset: 247
+    :block_selection_mode: false
+  - :path: app/controllers/brands_controller.rb
+    :cursor_offset: 330
+    :timestamp: 2015-11-26 16:52:10 +03:00
+  - :path: app/views/brands/show.html.haml
+    :cursor_offset: 95
+    :timestamp: 2015-11-16 10:09:18 +03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 3206
+    :timestamp: 2015-11-26 16:25:56 +03:00
+    :selection_offset: 3230
+    :block_selection_mode: false
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 1769
+    :timestamp: 2015-11-27 00:41:56 +03:00
+  - :path: app/views/polishes/_polish.html.haml
+    :cursor_offset: 549
+    :timestamp: 2015-11-27 00:37:41 +03:00
+  - :path: app/models/box.rb
+    :cursor_offset: 2615
+    :timestamp: 2015-11-27 12:24:19 +03:00
+  - :path: app/controllers/boxes_controller.rb
+    :cursor_offset: 452
+    :timestamp: 2015-11-26 12:59:28 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 3314
+    :timestamp: 2015-11-27 12:50:13 +03:00
 files_to_retain: 0

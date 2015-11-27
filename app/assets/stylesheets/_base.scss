@@ -150,13 +150,16 @@ a:hover{ color: $colourLinkHover }
 
 .controls{
   font-size: $fontSizeBase*1.4;
-  mardin-top: 20px;
+  margin-top: 20px;
   margin-bottom: 20px;
   span{
     display: inline-block;
     padding: 4px .5em 1px;
-    border-radius: $radiusMain;    
+    border-radius: $radiusMain;
+    cursor: pointer;
+    color: $colourLink;
   }
+  span:hover { color: lighten($colourLink, $lightenOnHover) }
   a { text-decoration: none }
   .selected {
     background: $colourHeader;
@@ -453,6 +456,7 @@ form .table{ margin-bottom: 6px }
   width:300px;
   margin-right: -10px;
 }
+#boxName.smallMargin { margin-bottom: 25px }
 .banners li{
   vertical-align: top;
   display: inline-block;

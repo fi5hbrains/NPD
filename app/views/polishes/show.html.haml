@@ -6,7 +6,7 @@
     = link_to 'Collection Name', '#'
     –
     = link_to '2012', '#'
-  = bottle_or_spinner @polish.bottle_url, @polish.bottling_status, {class: 'left biggestBottle'}
+  = image_tag @polish.bottle_url, class: 'left biggestBottle'
   - unless @polish.draft
     #coatsWrapper.left
       = image_tag @polish.preview_url

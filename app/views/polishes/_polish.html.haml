@@ -11,11 +11,11 @@
     .bigPolish{'data-id' => polish.id}>
       - if add && @box
         = link_to collect_path(polish.id, box: @box.slug, from_catalogue: true), method: :post, remote: true do
-          = bottle_or_spinner polish.bottle_url('big'), polish.bottling_status
+          = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
           <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
       - else
         = link_to (remove ? collect_path(polish.id, box: @box.slug, from_catalogue: true) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), method: (remove ? 'post' : 'get'), remote: remove do
-          = bottle_or_spinner polish.bottle_url('big'), polish.bottling_status
+          = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
           <svg class='icon button roundButton important' style='#{('display:none' unless remove)}'><use xlink:href=#trash /></svg>    
       .info
         %p.truncatable= link_to truncate(polish.name_or_number, length: 30, ), catalogue_brand_polish_path(polish.brand_slug, polish.slug)
@@ -24,7 +24,7 @@
             = render 'stars', polish: polish
   - else
     .idBlock.polish.noFlow.bottomUp{'data-id' => polish.id}<
-      = link_to bottle_or_spinner( polish.bottle_url('thumb'), polish.bottling_status), (in_lab? ? brand_polish_path(polish.brand_slug, polish.slug) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), class: 'pic'
+      = link_to image_tag( polish.bottle_url('thumb'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)), (in_lab? ? brand_polish_path(polish.brand_slug, polish.slug) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), class: 'pic'
       .info
         - unless no_brand
           %p= link_to truncate(polish.brand_name, length: 50, omission: '…', separator: / |-|_/), (in_lab? ? brand_path(polish.brand_slug) : catalogue_path(polish.brand_slug))

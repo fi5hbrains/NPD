@@ -69,7 +69,7 @@ class Box < ActiveRecord::Base
     end
     return stats
   end
-  # handle_asynchronously :import
+  handle_asynchronously :import
   
   def rename_header_columns(header)
     brand = false
