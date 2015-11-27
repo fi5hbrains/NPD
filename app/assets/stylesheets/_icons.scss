@@ -87,11 +87,9 @@
 .icon.logo{
   width: 94px;
   margin-left: -6px;
-  margin-right: 16px;
+  margin-right: 10px;
 }
-.icon.logo.option:hover { background: none }
 a:not(:first-child) .icon.withText{margin-left: 5px }
-
 a { 
   .icon:not(.iNav) { fill: $colourButton } 
   .icon.button, .roundButton { fill: white }

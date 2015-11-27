@@ -1,4 +1,4 @@
-    class PolishesController < ApplicationController
+class PolishesController < ApplicationController
   include Slugify, ColourMethods, MagickMethods
 
   def index

@@ -103,13 +103,16 @@ module ApplicationHelper
     svg_class = 'inactive' if icons[key] == nil
     svg_class = 'active' if is_active
     
-    icon = tag :span, id: 'i_' + key, class: svg_class 
+    icon = content_tag :span, id: 'i_' + key, class: svg_class  do
+      ''
+    end
 
     if link.blank?
       icon
     else
       content_tag :a, icon, href: link, 'data-method' => :post, 'data-remote' => true, rel: "nofollow", class: 'navOption'
     end
+    
   end
   
   def get_colour_names c

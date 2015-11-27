@@ -18,7 +18,7 @@
         = form_tag collect_path(@polish.id), class: 'menuForms', remote: true do
           .table.wide100
             .cell.wide100
-              = text_field_tag :box, nil,  autocomplete: 'off', placeholder: t('placeholder.new_list'), class: 'wide100 inline'
+              = text_field_tag :box, nil,  autocomplete: 'off', placeholder: t('placeholder.add_to_new_list'), class: 'wide100 inline'
             .cell
               = button_tag class: 'inline noWrap' do
                 <svg class='icon '><use xlink:href='#plus' /></svg>

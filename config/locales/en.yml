@@ -40,6 +40,7 @@ en:
       edit: 'Update'
       update: 'Update'
       redress: 'Update'
+      create: 'Create'
   controls:
     edit: 'Edit'
     clone: 'Clone'
@@ -61,7 +62,8 @@ en:
     bottle_name: 'Name'
     blur: 'Blur Level'
     add_images: 'Add Layer Images'
-    new_list: 'Add to new list'
+    add_to_new_list: 'Add to new list'
+    list_name: 'List name'
     http: 'or paste in a URL'
 
   navigation:
@@ -85,6 +87,10 @@ en:
     header: 'Comments'
     
   user:
+    headers:
+      other_lists: 'Other Lists'
+      quests: 'Quests'
+      invites: 'Invitation Pass-phrases'
     list:
       collection: 'Collection'
       wishlist: 'Wishlist'

@@ -1,37 +1,38 @@
-#notice= raw(notice)
--if current_user
-  = link_to current_user.name, current_user
-  = link_to 'Log out', user_session_path, method: :delete
-%h2.centeredText= t('welcome.hi')
+.blockx2
+  #notice= raw(notice)
+  -if current_user
+    = link_to current_user.name, current_user
+    = link_to 'Log out', user_session_path, method: :delete
+  %h2.centeredText= t('welcome.hi')
 
-#loginForm.block.center.animated
-  = form_for @user, url: '/', remote: true do |f|
-    #idName.table.wide100
-      .cell#avatar
-        = image_tag ( @suspect ? @suspect.avatar : 'defaults/avatars/0.png'), class: 'avatar'
-      .cell.wide100
-        = f.text_field :name, placeholder: t('placeholder.name'), class: 'wide100 inline', autofocus: @focus == 'user_name'
-    #idPwd.table.wide100
-      .cell.wide100
-        %input{type: (@suspect ? 'password' : 'text'), name: 'user[password]', id: 'user_password', class: 'wide100 inline', autocomplete: 'off', placeholder: t('placeholder.password')}
-      .cell
-        = button_tag class: 'inline noWrap', name: (@button_name), id: 'user_submit' do
-          = @submit_text
-  
-    #phrase.table.wide100.hidden
-      .cell.wide100
-        = f.text_field :invite_phrase, autocomplete: 'off', placeholder: t('placeholder.invite_phrase'), autofocus: @focus == 'user_invite_phrase', class: 'wide100 inline'
-      .cell
-        = button_tag class: 'inline noWrap', name: (@button_name) do
-          = t('form.signup')
-          
-- if polish = Polish.last
-  %p
-    = render polish
-    = render polish, big_polish: true
-    = render polish, add: true
-    = render polish, remove: true
+  #loginForm.block.center.animated
+    = form_for @user, url: '/', remote: true do |f|
+      #idName.table.wide100
+        .cell#avatar
+          = image_tag ( @suspect ? @suspect.avatar : 'defaults/avatars/0.png'), class: 'avatar'
+        .cell.wide100
+          = f.text_field :name, placeholder: t('placeholder.name'), class: 'wide100 inline', autofocus: @focus == 'user_name'
+      #idPwd.table.wide100
+        .cell.wide100
+          %input{type: (@suspect ? 'password' : 'text'), name: 'user[password]', id: 'user_password', class: 'wide100 inline', autocomplete: 'off', placeholder: t('placeholder.password')}
+        .cell
+          = button_tag class: 'inline noWrap', name: (@button_name), id: 'user_submit' do
+            = @submit_text
     
-  
-%p
-  = render 'signature', name: true, avatar: true, date: true, stats: true, tags: true, signable: Comment.last
+      #phrase.table.wide100.hidden
+        .cell.wide100
+          = f.text_field :invite_phrase, autocomplete: 'off', placeholder: t('placeholder.invite_phrase'), autofocus: @focus == 'user_invite_phrase', class: 'wide100 inline'
+        .cell
+          = button_tag class: 'inline noWrap', name: (@button_name) do
+            = t('form.signup')
+            
+  - if polish = Polish.last
+    %p
+      = render polish
+      = render polish, big_polish: true
+      = render polish, add: true
+      = render polish, remove: true
+      
+    
+  %p
+    = render 'signature', name: true, avatar: true, date: true, stats: true, tags: true, signable: Comment.last

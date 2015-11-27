@@ -1,4 +1,5 @@
 class BoxesController < ApplicationController
+  include Slugify
   before_action :set_user
   
   def show
@@ -20,6 +21,13 @@ class BoxesController < ApplicationController
     @box.import(params[:spreadsheet])
   end
   
+  def create
+    if current_user && !params[:box].blank?
+      box = Box.where(user_id: current_user.id, slug: slugify(params[:box])).first
+      (@box = current_user.boxes.new(name: params[:box])).save unless box
+    end
+  end
+
   def update
     @box = Box.find(params[:id])
     @box.name = params[:box][:name]

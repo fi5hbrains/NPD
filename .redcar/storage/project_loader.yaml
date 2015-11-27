@@ -1,7 +1,13 @@
 --- 
 open_files: 
-  - app/assets/stylesheets/assamblage.scss
+  - app/views/boxes/show.html.haml
   - app/assets/stylesheets/_icons.scss
-  - Capfile
-  - config/deploy/production.rb
-  - config/deploy.rb
+  - app/views/users/show.html.haml
+  - app/views/application/_lists.html.haml
+  - config/locales/en.yml
+  - app/views/polishes/_collections.html.haml
+  - app/views/application/_navigation.html.haml
+  - app/assets/stylesheets/_navigation.scss
+  - app/views/polishes/index.html.haml
+  - app/views/page/index.html.haml
+  - app/helpers/application_helper.rb

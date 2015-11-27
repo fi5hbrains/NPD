@@ -1,0 +1,4 @@
+- user ||= current_user
+= link_to user_box_path(user, box.slug), class: 'noDecor' do
+  %span.linkLike= box.adapt_name
+  %span.textLike.inactive= "(#{box.box_items.count})"

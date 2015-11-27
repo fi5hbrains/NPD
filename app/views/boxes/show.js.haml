@@ -16,10 +16,11 @@
     $('h1').find('a').hide();
   - else 
     $('h1').hide();
-    $('#boxNameField').show();
+    $('#boxNameField').show().focus();
   history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}/edit');
 - else
-  $('#secondarySearchResults').html('#{j(render(@polishes, big_polish: true).html_safe)}');
+  - if @polishes.size > 0
+    $('#secondarySearchResults').html('#{j(render(@polishes, big_polish: true).html_safe)}');
   $('#goEdit').show();
   $('#doneEditing').hide();
   $('#gather').removeClass('active');

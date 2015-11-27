@@ -54,7 +54,10 @@ $(document).on 'ready page:load', ->
         
   $('.switch[data-activate]').click (e) -> 
     e.preventDefault()
-    $($(this).attr('data-activate')).toggleClass('active')
+    target = $($(this).attr('data-activate'))
+    if !target.hasClass('active')
+      target.find('input[type=text]').focus()
+    target.toggleClass('active')
     
   $('.switch[data-activate]').hover (->
     $($(this).attr('data-activate')).addClass 'hover'

@@ -1,0 +1,4 @@
+$('#listForm').removeClass('active')
+$('#box').val('');
+- if @box
+  $('#listForm').after('<li>#{j(render @box).html_safe}</li>');

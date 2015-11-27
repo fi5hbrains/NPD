@@ -51,17 +51,7 @@ class Box < ActiveRecord::Base
         end
       end
     end
-    self.import_result = ('Successfully imported ' + stats[:added].to_s + ' item'.pluralize(stats[:added]) +
-      ' (' + stats[:new].to_s + ' new).' + ( 
-        if stats[:unknown].size > 0
-          ' Failed ' + stats[:failed].to_s + ' times, because ' +
-          stats[:unknown].to_a.join(', ') +
-          ' brand'.pluralize(stats[:unknown].length) + ' had been missing.'
-        else
-          ''
-        end
-        )        
-      )
+    self.import_result = "#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown].to_a.join(', ')}"
     self.save
     for b in brands
       b.drafts_count = b.polishes.where(draft: true).count
@@ -69,7 +59,7 @@ class Box < ActiveRecord::Base
     end
     return stats
   end
-  handle_asynchronously :import
+  # handle_asynchronously :import
   
   def rename_header_columns(header)
     brand = false

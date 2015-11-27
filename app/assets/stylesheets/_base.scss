@@ -450,13 +450,18 @@ form .table{ margin-bottom: 6px }
 #boxNameField{ 
   font-family: $fontHead;
   font-size: $fontSizeHead*1.8;
+  height: 48px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
+#listForm { display: none }
+#listForm.active { display: block }
 #note { margin-bottom: -42px }
 .banners{
   width:300px;
   margin-right: -10px;
 }
-#boxName.smallMargin { margin-bottom: 25px }
+#boxName.smallMargin { margin-bottom: 20px }
 .banners li{
   vertical-align: top;
   display: inline-block;

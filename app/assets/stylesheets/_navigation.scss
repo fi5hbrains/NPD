@@ -98,7 +98,7 @@
     width: calc(100% - 12px);
     margin: 0 auto;
     height: 0;
-    padding:0;
+    padding: 1px;
     .icon{padding: 0; vertical-align: middle;}
   }
   table { margin: 0 }
@@ -130,7 +130,7 @@
 #dropMenu.menu{
   visibility: visible;
   position: relative;
-  width: 166px;
+  width: 160px;
   .switch { fill: $colourStatsIcon; padding: 16px 6px; }
   .switch:hover { fill: white; background: none }
   .current { background-color: rgba($colourMain,.6) }
@@ -159,7 +159,7 @@
 .option{
   vertical-align: top;
   padding: 6px;
-  margin-left: 16px;
+  margin-left: 15px;
   cursor: pointer;
   border-radius: $radiusMain;
 }
@@ -167,6 +167,7 @@
   background-color: rgba(255,255,255,.4);
   fill: white;
 }
+span:hover > .option.logo { background: none }
 .notifyWrapper{   
   display: inline-block;
   position: absolute;

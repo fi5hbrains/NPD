@@ -29,7 +29,8 @@
         = render @addable, add: true
   
 %section#Catalogue.block.left
-  = render 'search', setup: ['polish'], css: 'bigMargin wide100', id: 'secondarySearch'
+  .formIndent
+    = render 'search', setup: ['polish'], css: 'bigMargin wide100', id: 'secondarySearch'
   
   %h3 Sort by
   #sort.controls
@@ -43,12 +44,5 @@
     - @brands.each do |brand|
       = link_to brand.name
     
-  %h3 Other Lists
-  %ul
-    - @user.boxes.each do |box|
-      - unless box.slug == @box.slug
-        %li
-          = link_to user_box_path(@user, box.slug), class: 'noDecor' do
-            %span.linkLike= box.adapt_name
-            %span.textLike= "(#{box.box_items.count})"
+  = render 'lists'
 
