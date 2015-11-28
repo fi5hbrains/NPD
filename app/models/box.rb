@@ -26,12 +26,12 @@ class Box < ActiveRecord::Base
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
           name = row['polish'].to_s
-          number = (row['number'] unless row['number'].to_s.squeeze.strip.mb_chars.downcase == 'n/a')
+          number = row['number'].to_s.squeeze.strip
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
-            polish.name = name if !name.blank?
-            polish.number = number if !number.blank?
+            polish.name = name unless name.blank?
+            polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug

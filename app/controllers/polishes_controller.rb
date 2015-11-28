@@ -247,14 +247,14 @@ class PolishesController < ApplicationController
     c_duo = "#{parts}colour_duo.png"
     c_multi = "#{parts}colour_multi.png"
     c_cold = "#{parts}colour_cold.png"
-    opacity_mask = "#{parts}opacity_#{((@polish.opacity / 10).round * 10).to_s}.png"
+    opacity_mask = "#{parts}opacity_#{(((@polish.opacity || 100) / 10).round * 10).to_s}.png"
     magnet = "#{tmp_folder}/magnet.png"
     holo = "#{parts}holo_default.png"
     mask = @polish.opacity_mask
         
     @polish.magnet ||= 'blank'
     old_coats_count = @polish.coats_count
-    @polish.coats_count = (1 + 6 * (100 - @polish.opacity) / 100).round
+    @polish.coats_count = (1 + 6 * (100 - (@polish.opacity || 100)) / 100).round
     noise_size = (@layers.size > 1 ? 10 : 0)
     noise_density = 0
     small_noise_density = 0
