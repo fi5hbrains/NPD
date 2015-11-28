@@ -22,16 +22,16 @@ class Box < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unless !row['brand'] || row['brand'].empty?
-        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand']}%").pluck('word_id')
+        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand'].to_s.squeeze.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = row['polish'].to_s.gsub(/\.0+$/, '').strip
-          number = (row['number'].to_s.gsub(/\.0+$/, '').strip unless row['number'] == 'N/A')
+          name = row['polish'].to_s
+          number = (row['number'] unless row['number'].to_s.squeeze.strip.mb_chars.downcase == 'n/a')
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
-            polish.name = name if name
-            polish.number = number if number
+            polish.name = name if !name.blank?
+            polish.number = number if !number.blank?
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
@@ -68,13 +68,13 @@ class Box < ActiveRecord::Base
     polishes = ['color name', 'colour name','color','colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     numbers = ['number', 'номер']
     header.each_with_index do |col, i|
-      if col && !brand && brands.include?(col.mb_chars.downcase.to_s) 
+      if col && !brand && brands.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
         header[i] = 'brand'
         brand = true
-      elsif col && !polish && polishes.include?(col.mb_chars.downcase.to_s) 
+      elsif col && !polish && polishes.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
         header[i] = 'polish'
         polish = true
-      elsif col && !number && numbers.include?(col.mb_chars.downcase.to_s) 
+      elsif col && !number && numbers.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
         header[i] = 'number'
         number = true
       end
