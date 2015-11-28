@@ -1,4 +1,4 @@
-1448665911
+1448696617
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
 ApplicationHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	module ApplicationHelper
@@ -156,8 +156,8 @@ gloss_preview_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def g
 gloss_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_tmp;
 gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url;
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;
-import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 import	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def import
+import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 in_box?	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def in_box? 
 in_brands	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def self.in_brands(brands); where("brand_id IN (?)", brands.pluck(:id)) 
 in_lab?	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def in_lab?;

@@ -23,12 +23,11 @@ class Box < ActiveRecord::Base
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unless !row['brand'] || row['brand'].empty?
         ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand']}%").pluck('word_id')
-        logger.info "..." + ids.inspect
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
           name = row['polish'].to_s.gsub(/\.0+$/, '').strip
           number = (row['number'].to_s.gsub(/\.0+$/, '').strip unless row['number'] == 'N/A')
-          polish = Polish.where(brand_id: brand.id, slug: (name || number).mb_chars.downcase).first || Polish.new
+          polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
             polish.name = name if name
@@ -45,7 +44,7 @@ class Box < ActiveRecord::Base
           stats[:failed] += 1
           stats[:unknown] << row['brand']
         end
-        if polish
+        if polish && polish.id
           item = items.find_by_polish_id(polish.id) || self.box_items.new(polish_id: polish.id).save
           stats[:added] += 1
         end
