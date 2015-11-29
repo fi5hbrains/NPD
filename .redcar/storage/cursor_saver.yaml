@@ -530,9 +530,6 @@ cursor_positions:
     :timestamp: 2015-11-13 10:04:15 +03:00
     :selection_offset: 15
     :block_selection_mode: false
-  - :path: lib/colour_methods.rb
-    :cursor_offset: 345
-    :timestamp: 2015-11-22 10:36:37 +03:00
   - :path: public/assets/icons.svg
     :cursor_offset: 100
     :timestamp: 2015-11-24 13:25:02 +03:00
@@ -724,4 +721,7 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 1540
     :timestamp: 2015-11-27 23:26:32 +03:00
+  - :path: lib/colour_methods.rb
+    :cursor_offset: 252
+    :timestamp: 2015-11-29 10:44:52 +03:00
 files_to_retain: 0
