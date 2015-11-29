@@ -601,9 +601,6 @@ cursor_positions:
   - :path: db/migrate/20150413140304_initialize.rb
     :cursor_offset: 2701
     :timestamp: 2015-11-25 20:09:43 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 3196
-    :timestamp: 2015-11-27 12:44:58 +03:00
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 462
     :timestamp: 2015-11-27 00:15:45 +03:00
@@ -724,4 +721,7 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 252
     :timestamp: 2015-11-29 10:44:52 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 3032
+    :timestamp: 2015-11-29 17:45:15 +03:00
 files_to_retain: 0
