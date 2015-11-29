@@ -65,17 +65,7 @@ class Polish < ActiveRecord::Base
   def gloss_url; self.polish_folder + '/reflection.png' end
   def gloss_preview_url; self.polish_folder + '/reflection_preview.jpg' end
   def bottle_url option = nil, from_magick = false, name_slug = self.slug
-    if from_magick
       self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
-    else
-      if self.draft
-        'draft.png'
-      elsif self.bottling_status
-        self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
-      else
-        'spin.svg'
-      end
-    end
   end
   def preview_url; self.polish_folder + '/preview.png' end
   
