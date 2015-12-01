@@ -36,7 +36,8 @@ class PolishesController < ApplicationController
     set_polish
     set_bottles
     @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
-    @layers = @polish.layers
+    @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
+    @layers = @polish.layers.map(&:dup).sort{|a,b| a.ordering <=> b.ordering}
     generate_preview
   end
   
@@ -122,7 +123,7 @@ class PolishesController < ApplicationController
         generate_bottle if old_bottle_id != @polish.bottle_id
         redirect_to @brand, notice: 'Polish was successfully updated.' 
       else
-        @polish.layers.each{|l| l.destroy unless l.new_record?}
+        @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id)}
         generate_preview params[:changes]
         @polish.save
         flatten_layers

@@ -93,7 +93,7 @@ class Polish < ActiveRecord::Base
   
   def set_colour
     unless self.draft
-      base = self.layers.detect{|l| l.ordering == 0}
+      base = self.layers.detect{|l| l.layer_type == 'base'}
       hsl  = colour_to_hsl(base.c_base)
       hsl2 = colour_to_hsl(base.c_multi || base.c_duo)
       self.h = hsl[0]; self.s = hsl[1]; self.l = hsl[2]

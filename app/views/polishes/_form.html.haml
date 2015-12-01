@@ -74,10 +74,15 @@
             <svg class='icon iSlider'><use xlink:href='#s#{o.capitalize}' /></svg>
             = t 'lab.section.' + o
       = f.hidden_field :opacity, value: @polish.opacity || 87.5, id: 'baseOpacity'
-      
-  .block#preview.left
-    #previewWrapper.bigMargin
-      = render'polish_preview'
-    .inlineWrapper<
-      = f.submit t('form.preview'), name: 'preview'
-      = f.submit t('form.action.' + params[:action]), name: params[:action]
+    - if simple_form
+      .inlineWrapper<
+        = f.submit t('form.preview'), name: 'preview'
+        = f.submit t('form.action.' + params[:action]), name: params[:action]    
+  
+  - unless simple_form 
+    .block#preview.left
+      #previewWrapper.bigMargin
+        = render'polish_preview'
+      .inlineWrapper<
+        = f.submit t('form.preview'), name: 'preview'
+        = f.submit t('form.action.' + params[:action]), name: params[:action]
