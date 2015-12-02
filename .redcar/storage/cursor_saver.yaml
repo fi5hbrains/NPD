@@ -474,9 +474,6 @@ cursor_positions:
   - :path: app/uploaders/lalala_uploader.rb
     :cursor_offset: 1306
     :timestamp: 2015-05-21 11:48:18 +04:00
-  - :path: app/uploaders/reference_uploader.rb
-    :cursor_offset: 300
-    :timestamp: 2015-11-16 10:47:10 +03:00
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 486
     :timestamp: 2015-11-14 20:50:19 +03:00
@@ -489,9 +486,6 @@ cursor_positions:
   - :path: app/assets/javascripts/smart_poll.js
     :cursor_offset: 210
     :timestamp: 2015-10-21 08:26:45 +04:00
-  - :path: app/views/polishes/preview.js.haml
-    :cursor_offset: 452
-    :timestamp: 2015-11-17 13:34:46 +03:00
   - :path: app/views/kaminari/_paginator.html.haml
     :cursor_offset: 652
     :timestamp: 2015-11-18 08:28:44 +03:00
@@ -689,9 +683,6 @@ cursor_positions:
   - :path: app/views/page/index.html.haml
     :cursor_offset: 1485
     :timestamp: 2015-12-01 19:56:54 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 18231
-    :timestamp: 2015-12-02 13:51:39 +03:00
   - :path: app/models/defaults.rb
     :cursor_offset: 1014
     :timestamp: 2015-12-01 21:14:27 +03:00
@@ -710,16 +701,25 @@ cursor_positions:
   - :path: .gitignore
     :cursor_offset: 1190
     :timestamp: 2015-12-02 12:36:46 +03:00
-  - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 3140
-    :timestamp: 2015-12-02 13:48:56 +03:00
-  - :path: app/views/polishes/_layer_fields.html.haml
-    :cursor_offset: 1661
-    :timestamp: 2015-12-02 13:43:23 +03:00
   - :path: db/schema.rb
     :cursor_offset: 9160
     :timestamp: 2015-11-25 20:14:18 +03:00
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 48
     :timestamp: 2015-10-15 19:39:23 +04:00
+  - :path: app/views/polishes/_layer_fields.html.haml
+    :cursor_offset: 1289
+    :timestamp: 2015-12-02 19:10:06 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 1208
+    :timestamp: 2015-12-02 16:10:25 +03:00
+  - :path: app/views/polishes/preview.js.haml
+    :cursor_offset: 405
+    :timestamp: 2015-12-02 15:58:07 +03:00
+  - :path: app/uploaders/reference_uploader.rb
+    :cursor_offset: 181
+    :timestamp: 2015-11-16 10:47:10 +03:00
+  - :path: app/views/polishes/_form.html.haml
+    :cursor_offset: 1179
+    :timestamp: 2015-12-02 16:06:40 +03:00
 files_to_retain: 0

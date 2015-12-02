@@ -22,14 +22,14 @@
       .colourBack= l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
       = t 'lab.section.colour1'
     .arrayItem>
-      .colourBack= l_f.text_field :c_duo  ,  class: 'colour noAlpha disabled disableable', value: ''
+      .colourBack= l_f.text_field :c_duo  ,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_duo || ''
       = t 'lab.section.colour2'
     .arrayItem>
-      .colourBack= l_f.text_field :c_multi,  class: 'colour noAlpha disabled disableable', value: ''
+      .colourBack= l_f.text_field :c_multi,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_multi || ''
       = t 'lab.section.colour3'
     - if l.layer_type == 'base'
       .arrayItem>
-        .colourBack= l_f.text_field :c_cold, class: 'colour noAlpha disabled disableable', value: ''
+        .colourBack= l_f.text_field :c_cold, class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_cold || ''
         = t 'lab.section.cold'
       .arrayItem>
     .arrayItem>
