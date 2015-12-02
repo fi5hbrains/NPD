@@ -4,5 +4,6 @@ $('#changes').children().val('');
 $('#loadReference').removeClass('active');
 - if @polish.reference?
   $('#polish_remote_reference_url').val('');
+  $('#polish_reference_cache').val('#{j(@polish.reference_cache).html_safe}');
   $('#polish_reference').val('');
   $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');
