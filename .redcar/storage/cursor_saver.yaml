@@ -383,9 +383,6 @@ cursor_positions:
   - :path: database.yml
     :cursor_offset: 167
     :timestamp: 2015-11-04 19:42:18 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 989
-    :timestamp: 2015-11-04 10:39:40 +03:00
   - :path: app/models/user.rb
     :cursor_offset: 1619
     :timestamp: 2015-09-25 19:37:58 +04:00
@@ -655,9 +652,6 @@ cursor_positions:
     :timestamp: 2015-10-15 19:37:08 +04:00
     :selection_offset: 1414
     :block_selection_mode: false
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 1173
-    :timestamp: 2015-11-28 01:21:13 +03:00
   - :path: app/controllers/brands_controller.rb
     :cursor_offset: 330
     :timestamp: 2015-11-26 16:52:10 +03:00
@@ -718,10 +712,16 @@ cursor_positions:
     :timestamp: 2015-11-27 20:36:47 +03:00
     :selection_offset: 160
     :block_selection_mode: false
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 591
-    :timestamp: 2015-11-27 20:37:59 +03:00
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 3433
     :timestamp: 2015-11-27 23:20:39 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 989
+    :timestamp: 2015-11-04 10:39:40 +03:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 1485
+    :timestamp: 2015-12-01 19:56:54 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 17553
+    :timestamp: 2015-12-02 09:41:07 +03:00
 files_to_retain: 0

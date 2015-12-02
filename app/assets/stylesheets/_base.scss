@@ -406,18 +406,19 @@ form .table{ margin-bottom: 6px }
 
 // ------------------------------ Polish ------------------------------ //
 #coatsWrapper{
-  position:relative;
-  width:125px;
-  height:250px;
-  overflow:hidden;
+  position: relative;
+  width: 125px;
+  height: 250px;
+  overflow: hidden;
   img{ 
+    position: absolute;
     left: -2px; 
     height: 100%; 
   }
 }
 #previewWrapper {
   overflow: hidden;
-  position:relative;
+  position: relative;
   width: 290px;
   height: 512px;
   border-radius: $radiusMain;

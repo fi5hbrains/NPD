@@ -63,7 +63,8 @@ class Polish < ActiveRecord::Base
     self.polish_folder + '/' + name_slug + "_coat#{coat_index == 0 ? '' : "_x#{coat_index + 1}"}.png" 
   end
   def gloss_url; self.polish_folder + '/reflection.png' end
-  def gloss_preview_url; self.polish_folder + '/reflection_preview.jpg' end
+  def gloss_preview_url; self.tmp_folder + '/reflection_preview.jpg' end
+  def preview_url; self.polish_folder + '/preview.png' end
   def bottle_url option = nil, from_magick = false, name_slug = self.slug
     if from_magick
       self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
@@ -77,7 +78,6 @@ class Polish < ActiveRecord::Base
       end
     end
   end
-  def preview_url; self.polish_folder + '/preview.png' end
   
   def calculate_rating
     self.rating = self.votes.to_a.sum{|v| v.rating}.to_f / self.votes_count

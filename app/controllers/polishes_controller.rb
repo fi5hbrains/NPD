@@ -397,7 +397,7 @@ class PolishesController < ApplicationController
   def flatten_layers
     FileUtils.mkdir_p(path + @polish.polish_folder) unless File.directory?(path + @polish.polish_folder)
     File.rename path + @polish.gloss_tmp, path + @polish.gloss_url
-    Magick.convert @polish.gloss_url, '-resize 128x139 -gravity center', @polish.gloss_preview_url
+    Magick.convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c*2}.join('x') + ' -gravity center', @polish.gloss_preview_url
     (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
       stack = ''
       @layers.each do |layer|
@@ -412,16 +412,17 @@ class PolishesController < ApplicationController
     bottle = Bottle.find(@polish.bottle_id)
     return true unless bottle    
     blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
+    usm = '-unsharp 0x3+1.5+0.0196'
     
     stack = path + @polish.coat_url   
     (@polish.coats_count - 1).times{|c| stack += " #{path + @polish.coat_url( c + 1)} -composite "}       
-    stack += " \\( +clone -resize 128x139 -gravity center -write #{path + @polish.preview_url} +delete \\) "
-    stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport 256x277-67-130 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{blur} "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity center #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
+    stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport 256x277-67-130 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
     stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
-    stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
-    stack += " \\( +clone -resize 128x139^ -gravity center -extent 128x139 -write #{path + @polish.bottle_url('big', true)} +delete \\) "
+    stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 #{usm} -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} #{usm} -write #{path + @polish.bottle_url('big', true)} +delete \\) "
     Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
     @polish.delay(queue: current_user.id).update_attributes bottling_status: true
   end
