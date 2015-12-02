@@ -29,6 +29,7 @@ class PolishesController < ApplicationController
     @polish = Polish.new
     @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
     @polish.layers.new(layer_type: 'base')
+    all_layers_bottom_up
     @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
   end
 
@@ -38,6 +39,7 @@ class PolishesController < ApplicationController
     @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
     @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
     @layers = @polish.layers.map(&:dup).sort{|a,b| a.ordering <=> b.ordering}
+    all_layers_bottom_up
     generate_preview
   end
   
