@@ -2,15 +2,17 @@
   = text_field_tag 'box[name]', @box.name, placeholder: 'List Name', id:'boxNameField',style: ('display:none' if !params[:edit] || %(collection wishlist giveaway).include?(@box.slug) ), class: 'formIndent bigMargin smallMargin', 'data-id' => @box.id
   %h1#boxName.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}
     = @box.adapt_name
-    = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit] || !current_user || current_user != @user), remote: true do
-      <svg class='icon button roundButton'><use xlink:href=#plus /></svg>  
-  = form_tag import_user_box_path(@user, @box), id: 'controls', class: 'controls', multipart: true do
-    = label_tag :spreadsheet, content_tag( :span, t('user.import'))
-    = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
-    = submit_tag 'import', class: 'hidden', name: 'preview'  
-    %span= link_to t('user.export') 
-    %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
-    %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
+    - if is_owner
+      = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), remote: true do
+        <svg class='icon button roundButton'><use xlink:href=#plus /></svg>  
+  - if is_owner
+    = form_tag import_user_box_path(@user, @box), id: 'controls', class: 'controls', multipart: true do
+      = label_tag :spreadsheet, content_tag( :span, t('user.import'))
+      = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
+      = submit_tag 'import', class: 'hidden', name: 'preview'  
+      %span= link_to t('user.export') 
+      %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
+      %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
   
   #secondarySearchResults<
     = render @polishes, big_polish: true

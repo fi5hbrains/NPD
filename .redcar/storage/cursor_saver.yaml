@@ -115,9 +115,6 @@ cursor_positions:
     :timestamp: 2015-05-20 13:32:49 +04:00
     :selection_offset: 41
     :block_selection_mode: false
-  - :path: app/views/users/new.html.haml
-    :cursor_offset: 15
-    :timestamp: 2015-04-15 08:31:53 +04:00
   - :path: app/assets/javascripts/colorPicker.js
     :cursor_offset: 10814
     :timestamp: 2015-05-22 07:11:11 +04:00
@@ -139,9 +136,6 @@ cursor_positions:
   - :path: app/assets/javascripts/colour picker tmp.js
     :cursor_offset: 16229
     :timestamp: 2015-05-24 07:41:19 +04:00
-  - :path: app/views/users/_edit_form.html.haml
-    :cursor_offset: 302
-    :timestamp: 2015-05-16 18:15:51 +04:00
   - :path: config/boot.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -159,9 +153,6 @@ cursor_positions:
   - :path: app/assets/javascripts/jcrop.js
     :cursor_offset: 0
     :timestamp: 2015-05-19 17:05:29 +04:00
-  - :path: app/views/users/edit.html.haml
-    :cursor_offset: 115
-    :timestamp: 2015-05-22 07:35:13 +04:00
   - :path: app/views/bottles/_upload_preview.html.haml
     :cursor_offset: 71
     :timestamp: 2015-05-18 07:48:31 +04:00
@@ -182,9 +173,6 @@ cursor_positions:
   - :path: app/views/users/update.html.haml
     :cursor_offset: 0
     :timestamp: 2015-05-04 17:39:59 +04:00
-  - :path: app/views/users/_form.html.haml
-    :cursor_offset: 339
-    :timestamp: 2015-04-30 18:03:37 +04:00
   - :path: app/views/brands/show_catalogue.html.haml
     :cursor_offset: 39
     :timestamp: 2015-09-05 21:03:12 +04:00
@@ -231,9 +219,6 @@ cursor_positions:
     :timestamp: 2015-09-19 08:21:23 +04:00
     :selection_offset: 830
     :block_selection_mode: false
-  - :path: app/assets/javascripts/edit_avatar.coffee
-    :cursor_offset: 0
-    :timestamp: 2015-06-14 09:52:03 +04:00
   - :path: app/views/bottles/_form.html.haml
     :cursor_offset: 405
     :timestamp: 2015-09-20 10:20:05 +04:00
@@ -262,11 +247,6 @@ cursor_positions:
   - :path: app/views/polishes/new.js.haml
     :cursor_offset: 18
     :timestamp: 2015-10-10 17:32:02 +04:00
-  - :path: app/views/polishes/_polish_preview.haml
-    :cursor_offset: 30
-    :timestamp: 2015-10-10 17:31:17 +04:00
-    :selection_offset: 277
-    :block_selection_mode: false
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 25
     :timestamp: 2015-05-23 06:53:13 +04:00
@@ -304,9 +284,6 @@ cursor_positions:
   - :path: app/models/bottle.rb
     :cursor_offset: 630
     :timestamp: 2015-08-31 12:11:05 +04:00
-  - :path: app/views/comments/_form.html.haml
-    :cursor_offset: 393
-    :timestamp: 2015-10-17 15:50:16 +04:00
   - :path: app/views/application/_signature.html.haml
     :cursor_offset: 1844
     :timestamp: 2015-10-17 20:53:34 +04:00
@@ -346,9 +323,6 @@ cursor_positions:
   - :path: app/views/polishes/_controls.html.haml
     :cursor_offset: 227
     :timestamp: 2015-10-22 09:50:23 +04:00
-  - :path: app/views/comments/_comment.html.haml
-    :cursor_offset: 635
-    :timestamp: 2015-10-17 20:01:47 +04:00
   - :path: lib/magick_methods.rb
     :cursor_offset: 0
     :timestamp: 2015-10-03 15:42:43 +04:00
@@ -356,11 +330,6 @@ cursor_positions:
     :cursor_offset: 36
     :timestamp: 2015-09-25 19:47:08 +04:00
     :selection_offset: 40
-    :block_selection_mode: false
-  - :path: app/uploaders/avatar_uploader.rb
-    :cursor_offset: 116
-    :timestamp: 2015-10-15 19:40:54 +04:00
-    :selection_offset: 129
     :block_selection_mode: false
   - :path: app/models/comment.rb
     :cursor_offset: 111
@@ -389,12 +358,6 @@ cursor_positions:
   - :path: app/models/user_vote.rb
     :cursor_offset: 128
     :timestamp: 2015-09-02 21:08:53 +04:00
-  - :path: config/initializers/assets.rb
-    :cursor_offset: 491
-    :timestamp: 2015-05-23 20:11:10 +04:00
-  - :path: config/environments/production.rb
-    :cursor_offset: 2101
-    :timestamp: 2015-04-09 20:56:52 +04:00
   - :path: config/environments/development.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -480,9 +443,6 @@ cursor_positions:
   - :path: app/views/polishes/_reference.html.haml
     :cursor_offset: 716
     :timestamp: 2015-11-17 14:11:23 +03:00
-  - :path: app/assets/javascripts/profile.js
-    :cursor_offset: 41
-    :timestamp: 2015-05-22 07:31:22 +04:00
   - :path: app/assets/javascripts/smart_poll.js
     :cursor_offset: 210
     :timestamp: 2015-10-21 08:26:45 +04:00
@@ -529,17 +489,6 @@ cursor_positions:
   - :path: app/assets/javascripts/colour_picker.js
     :cursor_offset: 13032
     :timestamp: 2015-11-23 18:59:00 +03:00
-  - :path: app/views/layouts/application.html.haml
-    :cursor_offset: 6603
-    :timestamp: 2015-11-24 22:31:37 +03:00
-  - :path: app/assets/javascripts/icons.js
-    :cursor_offset: 1866
-    :timestamp: 2015-11-24 23:57:32 +03:00
-  - :path: public/icons_common.xml
-    :cursor_offset: 4616
-    :timestamp: 2015-11-24 13:19:10 +03:00
-    :selection_offset: 4364
-    :block_selection_mode: false
   - :path: app/views/polishes/collect.js.haml
     :cursor_offset: 144
     :timestamp: 2015-09-22 13:48:47 +04:00
@@ -591,18 +540,6 @@ cursor_positions:
   - :path: app/views/polishes/_polish.html.haml
     :cursor_offset: 549
     :timestamp: 2015-11-27 00:37:41 +03:00
-  - :path: app/models/box.rb
-    :cursor_offset: 2115
-    :timestamp: 2015-11-27 16:59:17 +03:00
-  - :path: app/views/boxes/import.js.haml
-    :cursor_offset: 30
-    :timestamp: 2015-11-27 16:55:54 +03:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 62
-    :timestamp: 2015-11-12 22:20:26 +03:00
-  - :path: app/assets/stylesheets/_options.scss
-    :cursor_offset: 566
-    :timestamp: 2015-11-27 14:32:17 +03:00
   - :path: app/assets/stylesheets/_jcrop.scss
     :cursor_offset: 195
     :timestamp: 2015-11-08 21:23:13 +03:00
@@ -615,9 +552,6 @@ cursor_positions:
   - :path: app/controllers/user_sessions_controller.rb
     :cursor_offset: 753
     :timestamp: 2015-11-13 20:35:07 +03:00
-  - :path: app/controllers/users_controller.rb
-    :cursor_offset: 0
-    :timestamp: 2015-09-25 19:47:32 +04:00
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 1424
     :timestamp: 2015-10-15 19:37:08 +04:00
@@ -632,11 +566,6 @@ cursor_positions:
   - :path: app/views/boxes/show.js.haml
     :cursor_offset: 793
     :timestamp: 2015-11-28 00:35:21 +03:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 1923
-    :timestamp: 2015-11-28 01:38:12 +03:00
-    :selection_offset: 1927
-    :block_selection_mode: false
   - :path: app/views/boxes/create.js.haml
     :cursor_offset: 45
     :timestamp: 2015-11-28 01:27:42 +03:00
@@ -646,21 +575,9 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 252
     :timestamp: 2015-11-29 10:44:52 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 2038
-    :timestamp: 2015-11-28 00:43:36 +03:00
   - :path: app/assets/stylesheets/_icons.scss
     :cursor_offset: 1713
     :timestamp: 2015-11-27 20:35:45 +03:00
-  - :path: app/views/users/show.html.haml
-    :cursor_offset: 42
-    :timestamp: 2015-12-01 09:47:07 +03:00
-  - :path: app/views/application/_lists.html.haml
-    :cursor_offset: 0
-    :timestamp: 2015-11-29 15:03:40 +03:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 1540
-    :timestamp: 2015-11-27 23:26:32 +03:00
   - :path: app/views/polishes/_collections.html.haml
     :cursor_offset: 262
     :timestamp: 2015-11-27 23:25:52 +03:00
@@ -677,39 +594,18 @@ cursor_positions:
     :timestamp: 2015-11-27 20:36:47 +03:00
     :selection_offset: 160
     :block_selection_mode: false
-  - :path: app/helpers/application_helper.rb
-    :cursor_offset: 3433
-    :timestamp: 2015-11-27 23:20:39 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 1485
-    :timestamp: 2015-12-01 19:56:54 +03:00
   - :path: app/models/defaults.rb
     :cursor_offset: 1014
     :timestamp: 2015-12-01 21:14:27 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 2869
-    :timestamp: 2015-12-02 09:51:18 +03:00
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 384
     :timestamp: 2015-12-02 10:19:59 +03:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 708
-    :timestamp: 2015-12-02 10:20:20 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 10539
-    :timestamp: 2015-12-02 11:51:14 +03:00
   - :path: .gitignore
     :cursor_offset: 1190
     :timestamp: 2015-12-02 12:36:46 +03:00
-  - :path: db/schema.rb
-    :cursor_offset: 9160
-    :timestamp: 2015-11-25 20:14:18 +03:00
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 48
     :timestamp: 2015-10-15 19:39:23 +04:00
-  - :path: app/views/polishes/_layer_fields.html.haml
-    :cursor_offset: 1289
-    :timestamp: 2015-12-02 19:10:06 +03:00
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 1208
     :timestamp: 2015-12-02 16:10:25 +03:00
@@ -719,7 +615,114 @@ cursor_positions:
   - :path: app/uploaders/reference_uploader.rb
     :cursor_offset: 181
     :timestamp: 2015-11-16 10:47:10 +03:00
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 515
+    :timestamp: 2015-12-03 03:20:42 +03:00
+  - :path: app/views/users/show.html.haml
+    :cursor_offset: 164
+    :timestamp: 2015-12-02 21:59:54 +03:00
+  - :path: app/views/application/_lists.html.haml
+    :cursor_offset: 702
+    :timestamp: 2015-12-02 21:57:47 +03:00
+  - :path: app/helpers/application_helper.rb
+    :cursor_offset: 108
+    :timestamp: 2015-12-02 21:55:58 +03:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 646
+    :timestamp: 2015-12-02 21:56:18 +03:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 351
+    :timestamp: 2015-12-02 21:19:53 +03:00
+  - :path: app/views/polishes/_polish_preview.haml
+    :cursor_offset: 33
+    :timestamp: 2015-12-02 19:53:12 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 3967
+    :timestamp: 2015-12-02 19:58:43 +03:00
+  - :path: app/views/users/new.html.haml
+    :cursor_offset: 15
+    :timestamp: 2015-04-15 08:31:53 +04:00
+  - :path: app/views/users/_form.html.haml
+    :cursor_offset: 837
+    :timestamp: 2015-04-30 18:03:37 +04:00
+  - :path: app/views/users/_edit_form.html.haml
+    :cursor_offset: 0
+    :timestamp: 2015-12-03 04:40:38 +03:00
+    :selection_offset: 330
+    :block_selection_mode: false
+  - :path: app/uploaders/avatar_uploader.rb
+    :cursor_offset: 760
+    :timestamp: 2015-12-03 17:34:13 +03:00
+    :selection_offset: 764
+    :block_selection_mode: false
+  - :path: app/assets/javascripts/profile.js
+    :cursor_offset: 41
+    :timestamp: 2015-05-22 07:31:22 +04:00
+  - :path: app/views/layouts/application.html.haml
+    :cursor_offset: 578
+    :timestamp: 2015-12-03 15:56:47 +03:00
+  - :path: config/initializers/assets.rb
+    :cursor_offset: 504
+    :timestamp: 2015-12-03 15:53:39 +03:00
+  - :path: config/environments/production.rb
+    :cursor_offset: 2101
+    :timestamp: 2015-04-09 20:56:52 +04:00
+  - :path: app/assets/javascripts/icons.js
+    :cursor_offset: 8909
+    :timestamp: 2015-12-03 15:13:11 +03:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 0
+    :timestamp: 2015-11-29 17:45:25 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 5936
+    :timestamp: 2015-12-03 19:36:36 +03:00
+  - :path: app/assets/stylesheets/_options.scss
+    :cursor_offset: 558
+    :timestamp: 2015-11-27 14:32:17 +03:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 62
+    :timestamp: 2015-11-12 22:20:26 +03:00
+  - :path: app/views/comments/_form.html.haml
+    :cursor_offset: 563
+    :timestamp: 2015-10-17 15:50:16 +04:00
+    :selection_offset: 376
+    :block_selection_mode: false
+  - :path: app/views/comments/_comment.html.haml
+    :cursor_offset: 635
+    :timestamp: 2015-10-17 20:01:47 +04:00
+  - :path: db/schema.rb
+    :cursor_offset: 12872
+    :timestamp: 2015-11-25 20:14:18 +03:00
+  - :path: app/controllers/users_controller.rb
+    :cursor_offset: 0
+    :timestamp: 2015-12-03 17:35:25 +03:00
+  - :path: app/assets/javascripts/lab_icons.js
+    :cursor_offset: 189
+    :timestamp: 2015-12-03 21:12:29 +03:00
+  - :path: public/icons_common.xml
+    :cursor_offset: 32036
+    :timestamp: 2015-12-03 21:06:12 +03:00
+    :selection_offset: 32401
+    :block_selection_mode: false
+  - :path: app/views/polishes/_layer_fields.html.haml
+    :cursor_offset: 2006
+    :timestamp: 2015-12-02 19:10:06 +03:00
   - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 1179
-    :timestamp: 2015-12-02 16:06:40 +03:00
+    :cursor_offset: 3369
+    :timestamp: 2015-12-03 21:11:58 +03:00
+  - :path: app/views/users/edit.html.haml
+    :cursor_offset: 701
+    :timestamp: 2015-12-03 21:50:13 +03:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 2418
+    :timestamp: 2015-12-04 13:50:24 +03:00
+  - :path: app/assets/javascripts/edit_avatar.coffee
+    :cursor_offset: 191
+    :timestamp: 2015-12-03 21:37:51 +03:00
+  - :path: app/models/box.rb
+    :cursor_offset: 2115
+    :timestamp: 2015-12-04 10:15:14 +03:00
+  - :path: app/views/boxes/import.js.haml
+    :cursor_offset: 38
+    :timestamp: 2015-12-04 10:06:46 +03:00
 files_to_retain: 0

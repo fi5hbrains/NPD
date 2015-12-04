@@ -3,7 +3,7 @@
     = image_tag @user.avatar.url('big_thumb'), class: 'left avatar big'
     .info
       %h1= @user.name
-      -if current_user == @user
+      -if is_owner
         .iconArray
           = link_to 'Log out', user_session_path, method: :delete
           = link_to 'Edit', edit_user_path(@user)
@@ -22,23 +22,24 @@
       %h4.textLike.smallMargin Following
       %p.notable 24
 %section.block.left
-  #quests   
-    %h3= t 'user.headers.quests'
-  %h3
-    = t 'user.headers.invites'
-    = link_to get_invite_path, method: 'post', remote: true do
-      <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
-  %ul#invites
-    - (invites = @user.invites).each do |invite|
-      %li
-        - if invite.used_by
-          - user = User.find(invite.used_by)
-          %span.inactive= invite.word
-          = link_to user do
-            = image_tag user.avatar.url('thumb'), class: 'avatar tiny'
-            = user.name
-        -else
-          %span.selectable= invite.word
+  - if is_owner
+    #quests   
+      %h3= t 'user.headers.quests'
+    %h3
+      = t 'user.headers.invites'
+      = link_to get_invite_path, method: 'post', remote: true do
+        <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
+    %ul#invites
+      - (invites = @user.invites).each do |invite|
+        %li
+          - if invite.used_by
+            - user = User.find(invite.used_by)
+            %span.inactive= invite.word
+            = link_to user do
+              = image_tag user.avatar.url('thumb'), class: 'avatar tiny'
+              = user.name
+          -else
+            %span.selectable= invite.word
 %section.block.left
   #lists
     = render 'lists'

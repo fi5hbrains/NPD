@@ -1,7 +1,25 @@
-%h1= @user.name
-.avatar
-  -# = image_tag @user.avatar.thumb
-  = image_tag @user.avatar.url, id: 'avatar'
-
-#editForm
-  = render 'edit_form'  
+.blockx2
+  %h1= t('settings.headers.profile')
+= form_for @user, html: { id: 'editForm', multipart: true, method: :put } do |f|
+  .block.left
+    %h3= @user.name
+    = @user.locale
+    = f.text_field :email, placeholder: 'placeholder.email', class: 'smallMargin'
+    .table.wide100
+      .cell.wide100
+        .resizable.relative
+          = f.text_area :about, class: 'resizable', rows: nil, cols: nil, placeholder: t('placeholder.bio')
+          %pre.resizable <span></span>
+    = f.submit t('settings.form.submit_update')
+    = f.submit t('form.preview'), name: 'preview', class: 'hidden'
+  .block.left
+    %h3= t('user.headers.avatar')
+    = f.label :avatar do
+      .avatar.big
+        = image_tag @user.avatar.url, id: 'avatar', class: 'avatar big'
+    = @user.avatar.present?
+    - if params[:crop]
+      = image_tag @user.avatar.url, id: 'jcrop'
+      = f.file_field :avatar, 'data-updatable' => true
+      = f.hidden_field :crop_coords, id: 'cropCoords'
+    = f.hidden_field :avatar_cache

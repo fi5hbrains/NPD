@@ -1,15 +1,17 @@
 %h3 
   = t 'user.headers.other_lists'
-  <svg class='icon button roundButton switch' data-show='#listForm'><use xlink:href=#plus /></svg>
+  - if is_owner
+    <svg class='icon button roundButton switch' data-show='#listForm'><use xlink:href=#plus /></svg>
 
 %ul#otherLists
-  %li.formLi#listForm
-    = form_tag user_boxes_path(@user), class: 'menuForms formIndent', method: 'POST', remote: true do
-      .table.wide100
-        .cell.wide100
-          = text_field_tag :box, nil,  autocomplete: 'off', placeholder: t('placeholder.list_name'), class: 'inline'
-        .cell
-          = button_tag t('form.action.create'), class: 'inline noWrap'
+  - if is_owner
+    %li.formLi#listForm
+      = form_tag user_boxes_path(@user), class: 'menuForms formIndent', method: 'POST', remote: true do
+        .table.wide100
+          .cell.wide100
+            = text_field_tag :box, nil,  autocomplete: 'off', placeholder: t('placeholder.list_name'), class: 'inline'
+          .cell
+            = button_tag t('form.action.create'), class: 'inline noWrap'
   - @user.boxes.each do |box|
     - unless box.slug == (@box ? @box.slug : 'collection')
       %li

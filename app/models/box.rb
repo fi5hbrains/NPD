@@ -17,7 +17,7 @@ class Box < ActiveRecord::Base
     spreadsheet = open_spreadsheet(file)
     header = self.rename_header_columns(spreadsheet.row(1))
     items = self.box_items
-    stats = {added: 0, new: 0, failed: 0, unknown: Set.new}
+    stats = {total: 0, added: 0, new: 0, failed: 0, unknown: Set.new}
     brands = Set.new
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -45,12 +45,16 @@ class Box < ActiveRecord::Base
           stats[:unknown] << row['brand']
         end
         if polish && polish.id
-          item = items.find_by_polish_id(polish.id) || self.box_items.new(polish_id: polish.id).save
-          stats[:added] += 1
+          unless items.find_by_polish_id(polish.id)
+            self.box_items.new(polish_id: polish.id).save
+            stats[:added] += 1
+          end
+          stats[:total] += 1
         end
       end
     end
-    self.import_result = "#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown].to_a.join(', ')}"
+    stats[:unknown] = stats[:unknown].to_a[0..-1].join(', ') + ' and ' + stats[:unknown].to_a.last if stats[:unknown].size >= 2
+    self.import_result = "#{stats[:total]};#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown]}"
     self.save
     for b in brands
       b.drafts_count = b.polishes.where(draft: true).count

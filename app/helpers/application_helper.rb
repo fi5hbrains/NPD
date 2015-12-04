@@ -1,6 +1,10 @@
 module ApplicationHelper
   include ColourMethods
   
+  def is_owner
+    current_user && current_user == @user
+  end
+  
   def set_section
     condition = false
     {

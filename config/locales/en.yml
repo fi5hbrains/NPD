@@ -51,6 +51,7 @@ en:
   placeholder:
     name: 'Name'
     password: 'Password'
+    email: 'Email'
     invite_phrase: 'Invite Phrase'
     brand_name: 'Brand Name'
     polish_name: 'Polish Name'
@@ -65,6 +66,7 @@ en:
     add_to_new_list: 'Add to new list'
     list_name: 'List name'
     http: 'or paste in a URL'
+    bio: 'Anything'
 
   navigation:
     home: 'Home'
@@ -91,11 +93,38 @@ en:
       other_lists: 'Other Lists'
       quests: 'Quests'
       invites: 'Invitation Pass-phrases'
+      avatar: 'Profile Photo'
     list:
       collection: 'Collection'
       wishlist: 'Wishlist'
       giveaway: 'Giveaway'
     import: 'Import'
+    import_msg: 
+      total: {
+        zero: 'Nothing found.',
+        one: 'Found one item.',
+        other: "Found %{count} polishes."
+        }
+      added: {
+        zero: 'Nothing new.',
+        one: "Added one polish to collection.",
+        other: "Added %{count} polishes to collection."
+        }
+      new: {
+        zero: '',
+        one: "One new.",
+        other: "%{count} new."
+        }
+      failed: {
+        zero: "All is fine.",
+        one: "Couldn't import one item, ",
+        other: "Failed to add %{count} items, "
+        }
+      unknown: {
+        zero: '',
+        one: "because there was no %{brands} in the DB",
+        other: "because %{brands} are missing."
+        }
     export: 'Download'
 
   catalogue: 
@@ -142,6 +171,12 @@ en:
       syrup: 'Syrup'
       jelly: 'Jelly'
       cream: 'Cream'
+      
+  settings:
+    headers: 
+      profile: 'Profile Settings'
+    form:
+      submit_update: 'Update Profile'
     
 
     

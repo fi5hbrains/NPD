@@ -248,6 +248,7 @@ button::-moz-focus-inner { border: 0; padding: 0 }
   width: 100%;
 }
 form img { vertical-align: middle }
+form .table{ margin-bottom: 10px }
 .columnForm{ input, .button, .previewButton { margin-bottom: 5px } }
 input, textarea, button, .button, .roundButton{ 
   &:focus{
@@ -376,7 +377,6 @@ h1, h2 { .icon.roundButton { margin-bottom: -5px }}
 .gloss[for=polish_gloss_type_mirror]{ background-position: -185px -2px}
 input:checked + .spotable > .gloss{ background-position-y: -55px}
 
-form .table{ margin-bottom: 6px }
 // ----------------------------- Comment ------------------------------ //
 .comment{
   position: relative;

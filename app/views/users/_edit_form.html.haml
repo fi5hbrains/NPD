@@ -1,7 +1,0 @@
-= form_for @user, html: { multipart: true, method: :put } do |f|
-  = image_tag @user.avatar.url, id: 'jcrop'
-  = f.file_field :avatar, 'data-updatable' => true
-  = f.text_field :crop_coords, id: 'cropCoords'
-  = f.hidden_field :avatar_cache
-  = f.submit
-  = f.submit t('form.preview'), name: 'preview'

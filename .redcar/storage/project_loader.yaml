@@ -1,13 +1,7 @@
 --- 
 open_files: 
-  - app/views/boxes/show.html.haml
-  - app/assets/stylesheets/_icons.scss
-  - app/views/users/show.html.haml
-  - app/views/application/_lists.html.haml
+  - app/views/users/edit.html.haml
   - config/locales/en.yml
-  - app/views/polishes/_collections.html.haml
-  - app/views/application/_navigation.html.haml
-  - app/assets/stylesheets/_navigation.scss
-  - app/views/polishes/index.html.haml
-  - app/views/page/index.html.haml
-  - app/helpers/application_helper.rb
+  - app/assets/javascripts/edit_avatar.coffee
+  - app/models/box.rb
+  - app/views/boxes/import.js.haml

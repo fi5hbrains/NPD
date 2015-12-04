@@ -1,1 +1,7 @@
-alert('#{j(@box.import_result).html_safe}');
+- result = @box.import_result.split(';')
+- total = result[0]
+- added = result[1]
+- new = result[2]
+- failed = result[3]
+- missing_brands = result[4]
+alert('#{t('user.import_msg.total', count: total) + t('user.import_msg.added', count: added) + t('user.import_msg.failed', count: failed) + t('user.import_msg.unknown', count: missing_brands.size, brands: missing_brands)}');
