@@ -37,20 +37,22 @@ $(document).on 'ready page:load', ->
 
   $('input[data-updatable=true]').on 'change', -> $(this).closest('form').find('[name=preview]').click()
    
-  $('[name=preview]').click (e) ->
-    if $(this).attr('name') == 'preview'
-      e.preventDefault()
-      f = $(this).closest('form')
-      formData = new FormData(f[0])
-      formData.append("preview", "true")
-      $.ajax 
-        url: f.attr('action')
-        data: formData
-        type: 'POST'
-        cache: false
-        contentType: false
-        processData: false
-        dataType: "script"
+  $('[name=preview],[name=cancel]').click (e) ->
+    e.preventDefault()
+    f = $(this).closest('form')
+    formData = new FormData(f[0])
+    if $(this).attr('name') == 'preview' 
+      formData.append("preview", "true") 
+    else
+      formData.append("cancel", "true") 
+    $.ajax 
+      url: f.attr('action')
+      data: formData
+      type: 'POST'
+      cache: false
+      contentType: false
+      processData: false
+      dataType: "script"
         
   $('.switch[data-activate]').click (e) -> 
     e.preventDefault()

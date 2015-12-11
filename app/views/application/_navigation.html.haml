@@ -13,9 +13,10 @@
       = render_nav_icon(icons, key).html_safe
     
     - if current_user
-      .right.noWrap
-        = link_to image_tag(current_user.avatar.thumb.url, class: 'avatar'), current_user
+      .right.noWrap.avatar
         - if true
           .notifyWrapper
-            .notify 53   
+            .notify 53 
+        = link_to image_tag(current_user.avatar.thumb.url, id: 'currentUser', class: 'avatar'), current_user
+  
       

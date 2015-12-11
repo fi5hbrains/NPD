@@ -33,9 +33,12 @@ class UsersController < ApplicationController
     if params[:preview]
       @user.assign_attributes(user_params)
       render :edit
+    elsif params[:cancel]
+      @user.assign_attributes(user_params.except(:avatar, :avatar_cache))
+      render :edit
     else
-      if @user.update(user_params)
-        if params[:user][:crop_coords]
+      if @user.update(user_params) 
+        unless params[:user][:avatar_cache].blank? && params[:user][:avatar].blank?
           @user.avatar.big_thumb.crop_and_resize(params[:user][:crop_coords])
           @user.avatar.thumb.resize(@user.avatar.big_thumb)
         end
@@ -85,6 +88,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :password, :invite_phrase, :avatar, :crop_coords, :remove_avatar, :remote_avatar_url, :avatar_cache, :email, :role, :locale )
+      params.require(:user).permit(:name, :password, :invite_phrase, :about, :avatar, :crop_coords, :remove_avatar, :remote_avatar_url, :avatar_cache, :email, :role, :locale )
     end
 end

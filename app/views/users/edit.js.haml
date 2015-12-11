@@ -1,6 +1,15 @@
-$('#avatar').attr('src','#{@user.avatar.url}');
-JcropAPI = $('#jcrop').data('Jcrop');
-JcropAPI.destroy();
-$('#jcrop').attr('src',"#{escape_javascript(@user.avatar.url + '?' + Time.now.to_s)}").width('').height('');
+$('#currentUser').attr('src','#{@user.avatar.url}').width('48px').height('48px');
+- if params[:cancel]
+  $('#user_avatar, #user_avatar_cache').val('');
+  $('#cropMenu').removeClass('active');
+- else
+  $('#user_avatar').val('');
+  $('#user_avatar_cache').val('#{j @user.avatar_cache}');
+  JcropAPI = $('#jcrop').data('Jcrop');
+  JcropAPI.destroy();
+  $('#jcrop').attr('src',"#{j(@user.avatar.url + '?' + Time.now.to_s)}").width('').height('');
+  $('#cropMenu').addClass('active');
+
+
 
 

@@ -40,7 +40,8 @@ en:
       edit: 'Update'
       update: 'Update'
       redress: 'Update'
-      create: 'Create'
+      crop: 'Crop'
+      cancel: 'Cancel'
   controls:
     edit: 'Edit'
     clone: 'Clone'
@@ -66,7 +67,7 @@ en:
     add_to_new_list: 'Add to new list'
     list_name: 'List name'
     http: 'or paste in a URL'
-    bio: 'Anything'
+    bio: '... anything'
 
   navigation:
     home: 'Home'

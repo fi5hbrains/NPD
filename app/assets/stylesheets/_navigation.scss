@@ -30,7 +30,7 @@
   display: inline-block;
   margin: -3px;
   padding: 48px 0 0;
-  border: 3px solid $colourMain;
+  border: 3px solid $colourBack;
   z-index: 5;
   width: 100%;
   overflow: hidden;
@@ -127,9 +127,43 @@
   .formLi { height: 50px; margin: 12px auto }
   .formLi.smallMargin { margin-top: 0; margin-bottom: 4px }
 }
+.menuSpacer{
+  height:20px;
+  margin-top: 26px;
+  margin-bottom:10px;
+}
+#localeMenu{
+  visibility: visible;
+  width: 64px;
+  .current{
+    background-color: rgba($colourMain,.6) ;
+    line-height: 42px;
+    padding-left: 10px;
+  }
+  .switch{
+    right:0;
+    padding: 16px 6px;
+    fill: $colourStatsIcon;
+  }
+}
+#localeMenu.hover, #localeMenu.active{
+  .current { color:white } 
+  .switch {
+    right: 3px;
+    top: 3px;
+    fill: white;
+  }
+}
+#cropMenu{
+  top: 0;
+  width: auto;
+  max-width: 100%;
+  padding-top: 3px;
+}
 #dropMenu.menu{
   visibility: visible;
   position: relative;
+  border-color: $colourMain;
   width: 160px;
   .switch { fill: $colourStatsIcon; padding: 16px 6px; }
   .switch:hover { fill: white; background: none }
@@ -173,7 +207,7 @@ span:hover > .option.logo { background: none }
   position: absolute;
   text-align: center;
   margin-top: -7px;
-  margin-left: -27px;
+  margin-left: 27px;
   width: 45px;
 }
 .notify{

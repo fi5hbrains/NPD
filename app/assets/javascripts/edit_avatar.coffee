@@ -4,14 +4,13 @@ showCoords = (c) ->
   
 updatePreview = (c) ->
   f = c.w / 48
-  $('#avatar').css
+  $('#currentUser').css
     width: Math.round(parseInt($('#jcrop').width()) / f)
+    height: Math.round(parseInt($('#jcrop').height()) / f)
     marginLeft: '-' + Math.round(c.x / f) + 'px'
     marginTop: '-' + Math.round(c.y / f) + 'px'
     
 $(document).on 'ready page:load', ->
-  console.log 'user.js loaded'
-
   img = $('#jcrop')
   img.load ->  
     aspect = img.width()/img.height()
@@ -25,7 +24,7 @@ $(document).on 'ready page:load', ->
       aspectRatio: 1
       minSize:     [48, 48]
       setSelect:   select
-      boxWidth:    400
+      boxWidth:    290
       boxHeight:   400
       onSelect:    showCoords
       onChange:    showCoords
