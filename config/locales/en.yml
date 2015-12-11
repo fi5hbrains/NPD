@@ -40,7 +40,7 @@ en:
       edit: 'Update'
       update: 'Update'
       redress: 'Update'
-      crop: 'Crop'
+      crop: 'Apply'
       cancel: 'Cancel'
   controls:
     edit: 'Edit'

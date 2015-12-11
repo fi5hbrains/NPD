@@ -584,9 +584,6 @@ cursor_positions:
   - :path: app/views/polishes/_polish_preview.haml
     :cursor_offset: 33
     :timestamp: 2015-12-02 19:53:12 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 3967
-    :timestamp: 2015-12-02 19:58:43 +03:00
   - :path: app/views/users/new.html.haml
     :cursor_offset: 15
     :timestamp: 2015-04-15 08:31:53 +04:00
@@ -641,9 +638,6 @@ cursor_positions:
   - :path: app/views/polishes/_layer_fields.html.haml
     :cursor_offset: 2006
     :timestamp: 2015-12-02 19:10:06 +03:00
-  - :path: app/assets/javascripts/edit_avatar.coffee
-    :cursor_offset: 191
-    :timestamp: 2015-12-03 21:37:51 +03:00
   - :path: app/models/box.rb
     :cursor_offset: 2155
     :timestamp: 2015-12-04 16:44:13 +03:00
@@ -731,4 +725,10 @@ cursor_positions:
   - :path: app/views/users/edit.html.haml
     :cursor_offset: 1281
     :timestamp: 2015-12-11 15:33:39 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 3853
+    :timestamp: 2015-12-11 16:51:12 +03:00
+  - :path: app/assets/javascripts/edit_avatar.coffee
+    :cursor_offset: 191
+    :timestamp: 2015-12-06 23:07:34 +03:00
 files_to_retain: 0

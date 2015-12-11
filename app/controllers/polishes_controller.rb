@@ -348,10 +348,10 @@ class PolishesController < ApplicationController
                 Magick.convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
                 Magick.convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
               else
-                Magick.delay( queue: current_user.id ).convert fill('black'), mask_stack[c], mask                
-                Magick.delay( queue: current_user.id ).convert fill('black'), shadow_stack[c], particles_shadow
-                Magick.delay( queue: current_user.id ).convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
-                Magick.delay( queue: current_user.id ).convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
+                Magick.convert fill('black'), mask_stack[c], mask                
+                Magick.convert fill('black'), shadow_stack[c], particles_shadow
+                Magick.convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
+                Magick.convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
               end
             end
             
@@ -374,10 +374,10 @@ class PolishesController < ApplicationController
                 Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png')
               end
             else
-              Magick.delay( queue: current_user.id ).convert(fill(layer.c_base), convert_list , coat(base, c))
+              Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
               if layer.magnet_intensity > 0
                 Defaults::MAGNETS.each do |magnet|
-                  Magick.delay( queue: current_user.id ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
+                  Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
                 end
               end
             end
@@ -403,7 +403,7 @@ class PolishesController < ApplicationController
       @layers.each do |layer|
         stack += path + coat("#{@polish.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless layer.layer_type == 'base'
       end
-      Magick.delay( queue: current_user.id ).convert "#{@polish.tmp_folder}/layer_0.png", stack, @polish.coat_url(c)
+      Magick.convert "#{@polish.tmp_folder}/layer_0.png", stack, @polish.coat_url(c)
     end
     generate_bottle
   end
@@ -423,8 +423,8 @@ class PolishesController < ApplicationController
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
     stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 #{usm} -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
     stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} #{usm} -write #{path + @polish.bottle_url('big', true)} +delete \\) "
-    Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
-    @polish.delay(queue: current_user.id).update_attributes bottling_status: true
+    Magick.convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
+    @polish.update_attributes bottling_status: true
   end
   
   def all_layers_bottom_up
