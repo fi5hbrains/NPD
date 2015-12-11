@@ -14,7 +14,7 @@
           = c.hidden_field l.ordering, value: 0
     .table
       .row
-        .cell= f.text_field :synonym_list, placeholder: t('placeholder.synonym'), class: 'wide100', autofocus: 'autofocus'
+        .cell= f.text_field :synonym_list, placeholder: t('placeholder.synonym'), value: (@polish.synonym_list.blank? ? @polish.name : @polish.synonym_list), class: 'wide100', autofocus: 'autofocus'
         .cell.wide25= f.text_field :number, placeholder: t('placeholder.number')
       .row
         .cell= f.text_field :collection, placeholder: t('placeholder.collection')
