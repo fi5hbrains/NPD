@@ -1,7 +1,5 @@
 --- 
 open_files: 
-  - app/views/users/edit.html.haml
-  - config/locales/en.yml
-  - app/assets/javascripts/edit_avatar.coffee
-  - app/models/box.rb
-  - app/views/boxes/import.js.haml
+  - app/views/users/_form.html.haml
+  - app/views/polishes/_form.html.haml
+  - app/controllers/polishes_controller.rb

@@ -560,9 +560,6 @@ cursor_positions:
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 48
     :timestamp: 2015-10-15 19:39:23 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 1208
-    :timestamp: 2015-12-02 16:10:25 +03:00
   - :path: app/uploaders/reference_uploader.rb
     :cursor_offset: 181
     :timestamp: 2015-11-16 10:47:10 +03:00
@@ -587,9 +584,6 @@ cursor_positions:
   - :path: app/views/users/new.html.haml
     :cursor_offset: 15
     :timestamp: 2015-04-15 08:31:53 +04:00
-  - :path: app/views/users/_form.html.haml
-    :cursor_offset: 837
-    :timestamp: 2015-04-30 18:03:37 +04:00
   - :path: app/views/users/_edit_form.html.haml
     :cursor_offset: 0
     :timestamp: 2015-12-03 04:40:38 +03:00
@@ -672,9 +666,6 @@ cursor_positions:
   - :path: app/assets/javascripts/polish.coffee
     :cursor_offset: 1032
     :timestamp: 2015-11-23 18:15:21 +03:00
-  - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 3718
-    :timestamp: 2015-12-04 22:13:07 +03:00
   - :path: app/views/application/_navigation.html.haml
     :cursor_offset: 761
     :timestamp: 2015-12-08 23:20:08 +03:00
@@ -696,9 +687,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_jcrop.scss
     :cursor_offset: 46
     :timestamp: 2015-12-11 15:39:55 +03:00
-  - :path: app/models/magick.rb
-    :cursor_offset: 596
-    :timestamp: 2015-11-08 20:38:25 +03:00
   - :path: app/models/user.rb
     :cursor_offset: 849
     :timestamp: 2015-12-11 11:02:06 +03:00
@@ -716,9 +704,6 @@ cursor_positions:
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 971
     :timestamp: 2015-12-11 14:44:08 +03:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 1080
-    :timestamp: 2015-12-09 10:44:11 +03:00
   - :path: app/assets/stylesheets/_navigation.scss
     :cursor_offset: 3282
     :timestamp: 2015-12-11 15:32:16 +03:00
@@ -731,4 +716,19 @@ cursor_positions:
   - :path: app/assets/javascripts/edit_avatar.coffee
     :cursor_offset: 191
     :timestamp: 2015-12-06 23:07:34 +03:00
+  - :path: app/models/magick.rb
+    :cursor_offset: 596
+    :timestamp: 2015-11-08 20:38:25 +03:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 1058
+    :timestamp: 2015-12-11 21:43:26 +03:00
+  - :path: app/views/users/_form.html.haml
+    :cursor_offset: 837
+    :timestamp: 2015-04-30 18:03:37 +04:00
+  - :path: app/views/polishes/_form.html.haml
+    :cursor_offset: 2440
+    :timestamp: 2015-12-11 22:40:20 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 18270
+    :timestamp: 2015-12-12 08:46:43 +03:00
 files_to_retain: 0

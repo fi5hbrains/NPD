@@ -49,7 +49,7 @@
       .array<
         - %w(matte wax glass mirror).each do |g|
           .arrayItem>
-            = f.radio_button :gloss_type, g, class: 'hidden', checked: (g == @polish.gloss_type || g == 'glass')
+            = f.radio_button :gloss_type, g, class: 'hidden', checked: g == (@polish.gloss_type || 'glass')
             .spotable= f.label "gloss_type_#{g}" , '&nbsp;'.html_safe, class: 'gloss img'
             = f.label 'gloss_type_' + g, t('lab.section.' + g)
         .arrayItem>
