@@ -3,7 +3,10 @@ $(document).on 'ready page:load', ->
     $('#changes_' + $(this).parentsUntil('#layers','.layer').find('.orderingField').val()).val('1') 
   $('#sliderBaseOpacity, #labelsBaseOpacity').click ->
     $('#changes_0').val('1')
-    
+
+  $('.removeLayer').click ->
+    $(this).initRemove()
+      
   baseSlider = document.getElementById('sliderBaseOpacity')
   if baseSlider
     baseInput = document.getElementById('baseOpacity')
@@ -51,17 +54,7 @@ $(document).on 'ready page:load', ->
       $(this).initVSlider()
     currentLayer.slideDown(500)
     currentLayer.find('.removeLayer').click ->
-      $(this).next('input').val('1')
-      $('#changes_' + currentLayer.find('.orderingField').val()).remove()
-      $iSwap = undefined
-      if currentLayer.next('.iSwap').size() == 0
-        $iSwap = currentLayer.prev('.iSwap')
-      else
-        $iSwap = currentLayer.next('.iSwap')
-      $iSwap.slideUp 100, ->
-        $iSwap.remove()        
-      currentLayer.slideUp 500, ->
-        $('#layers').after(currentLayer)
+      $(this).initRemove()
       
   $('#layers').on 'click', '.iSwap', ->
     ordering = $(this).data('ordering')
@@ -81,7 +74,22 @@ $(document).on 'ready page:load', ->
     prevImage.attr('id', 'layer_' + (ordering - 1))
     nextImage.attr('id', 'layer_' + ordering)
     nextImage.before prevImage
-
+(($) ->  
+  $.fn.initRemove = ->
+    currentLayer = $(this).closest('.layer')
+    $(this).next('input').val('1')
+    $('#changes_' + currentLayer.find('.orderingField').val()).remove()
+    $iSwap = undefined
+    if currentLayer.next('.iSwap').size() == 0
+      $iSwap = currentLayer.prev('.iSwap')
+    else
+      $iSwap = currentLayer.next('.iSwap')
+    $iSwap.slideUp 100, ->
+      $iSwap.remove()        
+    currentLayer.slideUp 500, ->
+      $('#layers').after(currentLayer)
+  return
+) jQuery
 (($) ->  
   $.fn.initVSlider = ->
     slider = this[0]

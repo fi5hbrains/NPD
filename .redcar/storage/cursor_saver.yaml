@@ -540,9 +540,6 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 252
     :timestamp: 2015-11-29 10:44:52 +03:00
-  - :path: app/assets/stylesheets/_icons.scss
-    :cursor_offset: 1713
-    :timestamp: 2015-11-27 20:35:45 +03:00
   - :path: app/views/polishes/index.html.haml
     :cursor_offset: 9
     :timestamp: 2015-11-27 20:36:47 +03:00
@@ -607,9 +604,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_base.scss
     :cursor_offset: 5936
     :timestamp: 2015-12-03 19:36:36 +03:00
-  - :path: app/assets/stylesheets/_options.scss
-    :cursor_offset: 558
-    :timestamp: 2015-11-27 14:32:17 +03:00
   - :path: app/views/comments/_form.html.haml
     :cursor_offset: 563
     :timestamp: 2015-10-17 15:50:16 +04:00
@@ -731,4 +725,12 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 18270
     :timestamp: 2015-12-12 08:46:43 +03:00
+  - :path: app/assets/stylesheets/_options.scss
+    :cursor_offset: 1579
+    :timestamp: 2015-12-13 09:26:28 +03:00
+  - :path: app/assets/stylesheets/_icons.scss
+    :cursor_offset: 2124
+    :timestamp: 2015-11-27 20:35:45 +03:00
+    :selection_offset: 2087
+    :block_selection_mode: false
 files_to_retain: 0

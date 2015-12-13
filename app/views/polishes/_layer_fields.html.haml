@@ -5,7 +5,7 @@
     - unless l.layer_type == 'base'
       .cell.noWrap.vMiddle
         = link_to "<svg class='icon hoverBack'><use xlink:href='#dolly' /></svg>".html_safe, '#'
-        %span.removeLayer  <svg class='icon iRed hoverBack'><use xlink:href='#trash' /></svg>
+        %span.removeLayer  <svg class='icon iRed linkLike hoverBack'><use xlink:href='#trash' /></svg>
         = l_f.hidden_field :_destroy, class: 'removeLayerField'
   = l_f.hidden_field :layer_type, value: l.layer_type
   = l_f.hidden_field :ordering, value: l.ordering, id: nil, class: 'orderingField'

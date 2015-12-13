@@ -36,6 +36,7 @@ a:hover .textLike{ color: $colourLinkHover }
 a:hover .linkLike, .linkLike:hover { color: $colourLinkHover }
 .truncatable {  word-wrap: break-word }
 a:hover .hoverBack, .linkLike.hoverBack:hover { background-color: $colourHighlight; border-radius: $radiusMain }
+a:hover .hoverBack.iRed, .linkLike.hoverBack.iRed:hover { fill:  lighten($colourBad, $lightenOnHover) }
 .lightBack{ background-color: $colourHighlight; border-radius: $radiusMain }
 .greenBack{ background-color: $colourMain; border-radius: $radiusMain }
 
