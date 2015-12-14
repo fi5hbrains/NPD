@@ -1,3 +1,6 @@
+- if current_user.name == 'bobin'
+  - Polish.where(draft: true).each do |p|
+    - Synonym.where(word_type: 'Polish', word_id: p.id, name: p.name.squeeze.strip).first_or_create! if p.name
 .blockx2
   #notice= raw(notice)
   -if current_user

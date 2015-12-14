@@ -8,4 +8,4 @@
   - if @brands
     $('#searchResults').html('#{j(render @brands).html_safe}');
   - if @polishes
-    $('#searchResults').html('#{j(render @polishes, no_vote: true).html_safe}');
+    $('#searchResults').html('#{j(render @polishes).html_safe}');

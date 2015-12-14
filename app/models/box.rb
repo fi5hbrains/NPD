@@ -31,6 +31,7 @@ class Box < ActiveRecord::Base
           if polish.new_record?
             polish.draft = true
             polish.name = name unless name.blank?
+            polish.synonym_list = polish.name if polish.name
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.brand_id = brand.id
             polish.brand_name = brand.name
