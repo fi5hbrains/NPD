@@ -1,6 +1,6 @@
 %section#listing.block.left
   %h2= @brand.name
-  = render 'search', setup: %w(polish), css: 'wide100'      
+  = render 'search', setup: %w(polish), css: 'wide100', lab_search: true, remote: true     
   #controls.controls.bigMargin
     %span.selected= 'All'
     %span= link_to 'Not Bottled'
@@ -10,4 +10,5 @@
     -#    <svg class='icon button inline roundButton'><use xlink:href=#plus /></svg>
 
   #searchResults.wide100
+  #results.wide100
     = render @polishes, no_vote: true
