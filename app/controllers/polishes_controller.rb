@@ -27,7 +27,7 @@ class PolishesController < ApplicationController
     set_brand
     set_bottles
     @polish = Polish.new
-    @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
+    @polish.bottle_id = @polish.bottle_id || Brand.find_by_slug('default').bottles.first.id
     @polish.layers.new(layer_type: 'base')
     all_layers_bottom_up
     @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
@@ -36,6 +36,7 @@ class PolishesController < ApplicationController
   def edit
     set_polish
     set_bottles
+    @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
     @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
     @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
     @layers = @polish.layers.map(&:dup).reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
@@ -217,7 +218,7 @@ class PolishesController < ApplicationController
   end
   def polish_params
     params.require(:polish).permit(
-      :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
+      :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
       :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
       {layers_attributes: [ 
         :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 

@@ -12,6 +12,7 @@
       = fields_for 'changes' do |c|
         - @polish.layers.each do |l|
           = c.hidden_field l.ordering, value: 0
+    = f.text_field :prefix, placeholder: t('placeholder.prefix'), class: 'wide100 tinyMargin'
     .table
       .row
         .cell= f.text_field :synonym_list, placeholder: t('placeholder.synonym'), value: (@polish.synonym_list.blank? ? @polish.name : @polish.synonym_list), class: 'wide100', autofocus: 'autofocus'

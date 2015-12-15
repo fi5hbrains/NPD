@@ -51,6 +51,7 @@ en:
     unlock: 'Unlock'
   placeholder:
     name: 'Name'
+    prefix: 'Serie or Line Name'
     password: 'Password'
     email: 'Email'
     invite_phrase: 'Invite Phrase'

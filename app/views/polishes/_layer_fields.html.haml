@@ -36,7 +36,7 @@
       .colourBack= l_f.text_field :highlight_colour, class: 'colour alpha', value: l.highlight_colour || 'rgba(255,255,255,.2)'
       = t 'lab.section.light'
     .arrayItem>
-      .colourBack= l_f.text_field :shadow_colour   , class: 'colour alpha', value: l.shadow_colour || 'rgba(0,0,0,.2)'
+      .colourBack= l_f.text_field :shadow_colour   , class: 'colour alpha', value: l.shadow_colour || 'rgba(0,0,0,.4)'
       = t 'lab.section.shadow'
 
   - unless l.layer_type == 'base'    

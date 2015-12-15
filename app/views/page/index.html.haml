@@ -1,6 +1,3 @@
-- if current_user.name == 'bobin'
-  - Polish.where(draft: true).each do |p|
-    - Synonym.where(word_type: 'Polish', word_id: p.id, name: p.name.squeeze.strip).first_or_create! if p.name
 .blockx2
   #notice= raw(notice)
   -if current_user
@@ -11,7 +8,7 @@
   #loginForm.block.center.animated
     = form_for @user, url: '/', remote: true do |f|
       = f.hidden_field :locale, value: session[:locale] || I18n.locale
-      #idName.table.wide100
+      #idName.table.wide100.tinyMargin
         .cell#avatar
           = image_tag ( @suspect ? @suspect.avatar : 'defaults/avatars/0.png'), class: 'avatar'
         .cell.wide100
@@ -24,7 +21,7 @@
             = @submit_text
     
       #phrase.table.wide100.hidden
-        .cell.wide100
+        .cell.wide100.tinyMargin
           = f.text_field :invite_phrase, autocomplete: 'off', placeholder: t('placeholder.invite_phrase'), autofocus: @focus == 'user_invite_phrase', class: 'wide100 inline'
         .cell
           = button_tag class: 'inline noWrap', name: (@button_name) do

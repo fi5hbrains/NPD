@@ -4,8 +4,9 @@ class Polish < ActiveRecord::Base
   before_validation :name_or_number_to_slug
   before_save :set_colour
   
-  validates :name, uniqueness: {scope: :brand_slug, message: 'already exists for this brand', :case_sensitive => false }, :allow_blank => true
+  validates :slug, uniqueness: {scope: :brand_slug, message: 'already exists for this brand', :case_sensitive => false }, :allow_blank => true
   validates :brand_slug, presence: true
+  validates :bottle_id, presence: true
   validate :name_or_number?
   
   belongs_to :collection
@@ -42,10 +43,11 @@ class Polish < ActiveRecord::Base
   def name_or_number; self.name || self.number end
   
   def name_or_number_to_slug
+    self.prefix.squish! if self.prefix
     self.name.squish! if self.name
     self.number.squish! if self.number
     if self.name || self.number
-      self.slug = slugify(self.name || self.number)
+      self.slug = slugify((self.prefix.blank? ? '' : self.prefix + '-') + (self.name || self.number))
     end
   end  
   
