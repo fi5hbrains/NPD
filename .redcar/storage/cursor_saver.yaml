@@ -590,9 +590,6 @@ cursor_positions:
   - :path: config/application.rb
     :cursor_offset: 0
     :timestamp: 2015-10-03 11:27:25 +04:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 62
-    :timestamp: 2015-11-12 22:20:26 +03:00
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
@@ -650,9 +647,6 @@ cursor_positions:
   - :path: app/views/users/edit.html.haml
     :cursor_offset: 1281
     :timestamp: 2015-12-11 15:33:39 +03:00
-  - :path: app/assets/javascripts/edit_avatar.coffee
-    :cursor_offset: 191
-    :timestamp: 2015-12-06 23:07:34 +03:00
   - :path: app/models/magick.rb
     :cursor_offset: 596
     :timestamp: 2015-11-08 20:38:25 +03:00
@@ -679,9 +673,6 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 1276
     :timestamp: 2015-12-15 13:52:03 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 5902
-    :timestamp: 2015-12-15 14:04:51 +03:00
   - :path: app/assets/stylesheets/_options.scss
     :cursor_offset: 596
     :timestamp: 2015-12-15 14:01:10 +03:00
@@ -744,4 +735,13 @@ cursor_positions:
     :timestamp: 2015-11-19 14:25:31 +03:00
     :selection_offset: 264
     :block_selection_mode: false
+  - :path: app/assets/javascripts/edit_avatar.coffee
+    :cursor_offset: 191
+    :timestamp: 2015-12-06 23:07:34 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 11790
+    :timestamp: 2015-12-16 06:35:24 +03:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 510
+    :timestamp: 2015-11-12 22:20:26 +03:00
 files_to_retain: 0

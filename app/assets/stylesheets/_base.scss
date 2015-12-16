@@ -478,6 +478,12 @@ input:checked + .spotable > .gloss{ background-position-y: -55px}
 li.w140{
   width: 140px;
 }
+.layer:not(.lBase){
+  background: $colourShadow;
+  border-radius: $radiusMain;
+  padding:6px;
+  margin: -6px;
+}
 #reference{
   position:fixed;
   width: 300px;

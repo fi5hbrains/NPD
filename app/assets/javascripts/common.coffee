@@ -173,43 +173,39 @@ skipBlanks = (element) ->
   return
 ) jQuery
 
-(($) ->
-  $.fn.uncheckableRadio = ->
-    @each ->
-      radio = this
-      $(radio).mousedown ->
-        $(radio).data 'wasChecked', radio.checked
-        return
-      $(radio).click ->
-        if $(radio).data('wasChecked')
-          radio.checked = false
-        $(radio).ifExternal()
-        return
+$.fn.uncheckableRadio = ->
+  @each ->
+    radio = this
+    $(radio).mousedown ->
+      $(radio).data 'wasChecked', radio.checked
       return
-  return
-) jQuery
-(($) ->  
-  $.fn.uncheckableRadioLabel = ->
-    @each ->
-      label = this
-      radio = $('#' + $(label).attr('for'))[0]
-      $(label).mousedown ->
-        $(radio).data 'wasChecked', radio.checked
-        return
-      $(label).click ->
-        if $(radio).data('wasChecked')
-          radio.checked = false
-        return
+    $(radio).click ->
+      if $(radio).data('wasChecked')
+        radio.checked = false
+      $(radio).ifExternal()
       return
+    return
   return
-) jQuery
-(($) ->  
-  $.fn.ifExternal = ->
-    if this.hasClass('external')
-      this.add(this.siblings('input[type=radio]')).each ->
-        if this.checked
-          $('label[for=' + this.id + ']').addClass('active')
-        else
-          $('label[for=' + this.id + ']').removeClass('active')
+
+$.fn.uncheckableRadioLabel = ->
+  @each ->
+    label = this
+    radio = $('#' + $(label).attr('for'))[0]
+    $(label).mousedown ->
+      $(radio).data 'wasChecked', radio.checked
+      return
+    $(label).click ->
+      if $(radio).data('wasChecked')
+        radio.checked = false
+      return
+    return
   return
-) jQuery
+  
+$.fn.ifExternal = ->
+  if this.hasClass('external')
+    this.add(this.siblings('input[type=radio]')).each ->
+      if this.checked
+        $('label[for=' + this.id + ']').addClass('active')
+      else
+        $('label[for=' + this.id + ']').removeClass('active')
+  return

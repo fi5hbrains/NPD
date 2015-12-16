@@ -269,8 +269,8 @@ class PolishesController < ApplicationController
       noise_density += layer.particle_density if %w(glitter flake).include?(layer.layer_type)
       small_noise_density += layer.particle_density if layer.layer_type == 'shimmer' && layer.particle_size > 50
       top_layer = layer.layer_type
-      
-      if !layer.frozen? && (changed_layers[layer.ordering.to_s].blank? || changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
+
+      if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
         base = "#{tmp_folder}/layer_#{layer.ordering}.png"    
         layer.opacity ||= 100
 
