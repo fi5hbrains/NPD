@@ -256,7 +256,7 @@ class PolishesController < ApplicationController
         
     @polish.magnet ||= 'blank'
     old_coats_count = @polish.coats_count
-    @polish.coats_count = (1 + 6 * (100 - (@polish.opacity || 100)) / 100).round
+    @polish.coats_count = (1 + 10 * (100 - (@polish.opacity || 100)) / 100).round
     noise_size = (@layers.size > 1 ? 10 : 0)
     noise_density = 0
     small_noise_density = 0
@@ -267,7 +267,7 @@ class PolishesController < ApplicationController
     @layers.each do |layer|
       noise_size = layer.particle_size if %w(glitter flake).include?(layer.layer_type) && layer.particle_size  > noise_size
       noise_density += layer.particle_density if %w(glitter flake).include?(layer.layer_type)
-      small_noise_density += layer.particle_density if layer.layer_type == 'shimmer' && layer.particle_size > 50
+      small_noise_density += layer.particle_density if layer.layer_type == 'shimmer' && layer.particle_size > 10
       top_layer = layer.layer_type
 
       if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
@@ -389,8 +389,8 @@ class PolishesController < ApplicationController
   
     noise_density = small_noise_density if noise_density == 0 && small_noise_density > 0
     ref_type = @polish.gloss_type
-    ref_density = (noise_density <= 33 ? nil : noise_density <= 66 ? 'some' : noise_density <= 66 ? 'many' : 'extra')
-    ref_size = ((noise_size == 0 || !ref_density) ? 'default' : top_layer == 'flake' ? 'foil' : noise_size <= 10 ? 'tiny' : noise_size <= 50 ? 'medium' : 'big' )
+    ref_density = (noise_density <= 33 ? (top_layer == 'shimmer' ? 'few' : nil) : noise_density <= 66 ? 'some' : noise_density <= 85 ? 'many' : 'extra')
+    ref_size = ((noise_size <= 5 || !ref_density) ? 'default' : top_layer == 'flake' ? 'foil' : noise_size <= 10 ? 'tiny' : noise_size <= 30 ? 'small' : noise_size <= 50 ? 'medium' : 'big' )
     ref_source = "reflection_#{[ref_type, ref_size, ref_density].compact.join('_')}.png"
     Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'", reflection   
   end
