@@ -1,4 +1,4 @@
-1450511559
+1450724861
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
 ApplicationController	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	class ApplicationController 
@@ -22,6 +22,7 @@ Comment	/Users/fish/Dropbox/work/Interpol/app/models/comment.rb	class Comment
 CommentsController	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	class CommentsController 
 CreateDelayedJobs	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	class CreateDelayedJobs 
 Defaults	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	class Defaults 
+Delayed	/Users/fish/Dropbox/work/Interpol/app/models/delayed_job.rb	module Delayed
 EntriesController	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	class EntriesController 
 EntriesControllerTest	/Users/fish/Dropbox/work/Interpol/test/controllers/entries_controller_test.rb	class EntriesControllerTest 
 EntriesHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/entries_helper.rb	module EntriesHelper
@@ -31,6 +32,7 @@ GLITTERS	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  GLITTERS =
 Initialize	/Users/fish/Dropbox/work/Interpol/db/migrate/20150413140304_initialize.rb	class Initialize 
 Interpol	/Users/fish/Dropbox/work/Interpol/config/application.rb	module Interpol
 Invite	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	class Invite 
+Job	/Users/fish/Dropbox/work/Interpol/app/models/delayed_job.rb	  class Job 
 LAYER	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  LAYER =
 LalalaUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/lalala_uploader.rb	class LalalaUploader 
 LayerUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	class LayerUploader 

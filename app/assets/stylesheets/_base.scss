@@ -36,6 +36,12 @@ h3{
   line-height: 20px;
 }
 h3.bigMargin { margin-top: 42px }
+h1 a, h2 a, h3 a {
+  text-decoration: none;
+  color: $colourHeader;
+  &:visited { color: $colourHeader }
+  &:hover { text-decoration: underline }
+}
 h4{
   font-size: $fontSizeHead*0.9;
   font-weight: normal;

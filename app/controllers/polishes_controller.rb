@@ -186,7 +186,7 @@ class PolishesController < ApplicationController
   
   def find_related polish = nil, spread = nil
     cookies[:spread] = params[:spread].to_i if params[:spread]
-    @polish = polish || Polish.find(params[:polish_id]) if params[:polish_id]
+    @polish = polish || (Polish.find(params[:polish_id]) if params[:polish_id])
     spread = spread || cookies[:spread] || 20
     @related = Polish.
       coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], spread)
@@ -265,6 +265,7 @@ class PolishesController < ApplicationController
     FileUtils.mkdir_p(path + tmp_folder)  
     
     @layers.each do |layer|
+      Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
       noise_size = layer.particle_size if %w(glitter flake).include?(layer.layer_type) && layer.particle_size  > noise_size
       noise_density += layer.particle_density if %w(glitter flake).include?(layer.layer_type)
       small_noise_density += layer.particle_density if layer.layer_type == 'shimmer' && layer.particle_size > 10
@@ -349,10 +350,10 @@ class PolishesController < ApplicationController
                 Magick.convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
                 Magick.convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
               else
-                Magick.delay( queue: current_user.id ).convert fill('black'), mask_stack[c], mask                
-                Magick.delay( queue: current_user.id ).convert fill('black'), shadow_stack[c], particles_shadow
-                Magick.delay( queue: current_user.id ).convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
-                Magick.delay( queue: current_user.id ).convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
+                Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('black'), mask_stack[c], mask                
+                Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('black'), shadow_stack[c], particles_shadow
+                Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
+                Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
               end
             end
             
@@ -375,10 +376,10 @@ class PolishesController < ApplicationController
                 Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png')
               end
             else
-              Magick.delay( queue: current_user.id ).convert(fill(layer.c_base), convert_list , coat(base, c))
+              Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
               if layer.magnet_intensity > 0
                 Defaults::MAGNETS.each do |magnet|
-                  Magick.delay( queue: current_user.id ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
+                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
                 end
               end
             end

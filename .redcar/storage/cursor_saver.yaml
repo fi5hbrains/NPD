@@ -278,9 +278,6 @@ cursor_positions:
   - :path: app/views/comments/create.js.haml
     :cursor_offset: 89
     :timestamp: 2015-10-17 19:36:36 +04:00
-  - :path: db/migrate/20150303072156_create_delayed_jobs.rb
-    :cursor_offset: 0
-    :timestamp: 2015-10-03 11:23:43 +04:00
   - :path: app/assets/images/spinnersample.svg
     :cursor_offset: 6228
     :timestamp: 2015-10-20 22:32:36 +04:00
@@ -522,9 +519,6 @@ cursor_positions:
   - :path: app/uploaders/reference_uploader.rb
     :cursor_offset: 181
     :timestamp: 2015-11-16 10:47:10 +03:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 515
-    :timestamp: 2015-12-03 03:20:42 +03:00
   - :path: app/views/users/show.html.haml
     :cursor_offset: 164
     :timestamp: 2015-12-02 21:59:54 +03:00
@@ -545,9 +539,6 @@ cursor_positions:
     :timestamp: 2015-12-03 04:40:38 +03:00
     :selection_offset: 330
     :block_selection_mode: false
-  - :path: app/assets/javascripts/profile.js
-    :cursor_offset: 41
-    :timestamp: 2015-05-22 07:31:22 +04:00
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 578
     :timestamp: 2015-12-03 15:56:47 +03:00
@@ -645,9 +636,6 @@ cursor_positions:
   - :path: app/models/bottle.rb
     :cursor_offset: 630
     :timestamp: 2015-08-31 12:11:05 +04:00
-  - :path: db/schema.rb
-    :cursor_offset: 8548
-    :timestamp: 2015-11-25 20:14:18 +03:00
   - :path: db/migrate/20150413140304_initialize.rb
     :cursor_offset: 2701
     :timestamp: 2015-11-25 20:09:43 +03:00
@@ -680,9 +668,6 @@ cursor_positions:
   - :path: app/views/application/lab_search.js.haml
     :cursor_offset: 334
     :timestamp: 2015-12-14 12:45:16 +03:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 830
-    :timestamp: 2015-12-14 13:09:04 +03:00
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 536
     :timestamp: 2015-12-14 12:11:01 +03:00
@@ -722,17 +707,9 @@ cursor_positions:
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 5886
     :timestamp: 2015-12-15 21:52:11 +03:00
-  - :path: app/assets/javascripts/polish.coffee
-    :cursor_offset: 10972
-    :timestamp: 2015-12-16 08:04:53 +03:00
   - :path: app/assets/javascripts/lab_icons.js
     :cursor_offset: 47
     :timestamp: 2015-12-15 22:30:17 +03:00
-  - :path: public/icons_common.xml
-    :cursor_offset: 32711
-    :timestamp: 2015-12-03 21:06:12 +03:00
-    :selection_offset: 32789
-    :block_selection_mode: false
   - :path: app/views/polishes/_layer_fields.html.haml
     :cursor_offset: 2446
     :timestamp: 2015-12-16 06:55:47 +03:00
@@ -742,4 +719,30 @@ cursor_positions:
   - :path: app/views/polishes/_form.html.haml
     :cursor_offset: 921
     :timestamp: 2015-12-15 18:40:38 +03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 459
+    :timestamp: 2015-12-14 13:09:04 +03:00
+    :selection_offset: 473
+    :block_selection_mode: false
+  - :path: app/assets/javascripts/polish.coffee
+    :cursor_offset: 2723
+    :timestamp: 2015-12-17 15:48:55 +03:00
+  - :path: app/assets/javascripts/profile.js
+    :cursor_offset: 41
+    :timestamp: 2015-05-22 07:31:22 +04:00
+  - :path: public/icons_common.xml
+    :cursor_offset: 31670
+    :timestamp: 2015-12-03 21:06:12 +03:00
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 1855
+    :timestamp: 2015-12-19 15:24:38 +03:00
+  - :path: db/schema.rb
+    :cursor_offset: 3584
+    :timestamp: 2015-12-21 12:03:19 +03:00
+  - :path: db/migrate/20150303072156_create_delayed_jobs.rb
+    :cursor_offset: 398
+    :timestamp: 2015-10-03 11:23:43 +04:00
+  - :path: db/migrate/20151221090249_add_layer_ordering_to_delayed_jobs.rb
+    :cursor_offset: 0
+    :timestamp: 2015-12-21 12:02:49 +03:00
 files_to_retain: 0
