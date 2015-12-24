@@ -8,7 +8,11 @@
           = link_to 'Log out', user_session_path, method: :delete
           = link_to 'Edit', edit_user_path(@user)
       - else
-        .iconArray= link_to 'Follow', following_path(user_id: @user.id), method: :post
+        .iconArray
+          - if @user.followers.map(&:id).include?(current_user.id)
+            = link_to 'Unfollow', following_path(user_id: @user.id), method: :delete
+          - else
+            = link_to 'Follow', following_path(user_id: @user.id), method: :post
   %p#about.clearFix= @user.about
   #userStats<
     = link_to nil, class: 'wide25 inline noDecor' do
