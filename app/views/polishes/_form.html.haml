@@ -58,7 +58,7 @@
           = f.label :gloss_colour, t('lab.section.highlight_colour')
       
       %h3= t('lab.section.add_layers')
-      - %w(shimmer flake glitter sand).each do |type|
+      - %w(shimmer flake glitter sand glass).each do |type|
         = link_to_add_layer type, f
         
       - Defaults::MAGNETS.each do |m|

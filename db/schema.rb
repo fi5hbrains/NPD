@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221090249) do
+ActiveRecord::Schema.define(version: 20151223141253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -344,6 +344,8 @@ ActiveRecord::Schema.define(version: 20151221090249) do
     t.datetime "current_login_at"
     t.string   "last_login_ip"
     t.string   "current_login_ip"
+    t.integer  "follower_count",    default: 0
+    t.integer  "followee_count",    default: 0
   end
 
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree

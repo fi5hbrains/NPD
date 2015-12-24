@@ -28,6 +28,9 @@ $(document).on 'ready page:load', ->
 
   $('.removeLayer').click ->
     $(this).initRemove()
+    
+  $('.cloneLayer').click ->
+    $(this).initClone()
       
   baseSlider = document.getElementById('sliderBaseOpacity')
   if baseSlider
@@ -65,7 +68,8 @@ $(document).on 'ready page:load', ->
     if currentOrdering >= 2
       $layers.prepend("<svg class='iSwap' data-ordering='" + currentOrdering + "'><use xlink:href='#swap'/></svg>")
     $layers.prepend $(this).data('fields').replace(regexp, time)
-    
+    $('#changes').prepend('<input value="0" type="hidden" name="changes[' + currentOrdering + ']" id="changes_' + currentOrdering + '">')
+
     currentLayer = $layers.find('.layer').first()
     
     currentLayer.find('.orderingField').val(currentOrdering)
@@ -79,6 +83,8 @@ $(document).on 'ready page:load', ->
     currentLayer.slideDown(500)
     currentLayer.find('.removeLayer').click ->
       $(this).initRemove()
+    currentLayer.find('.cloneLayer').click ->
+      $(this).initClone()
       
   $('#layers').on 'click', '.iSwap', ->
     ordering = $(this).data('ordering')
@@ -98,6 +104,29 @@ $(document).on 'ready page:load', ->
     prevImage.attr('id', 'layer_' + (ordering - 1))
     nextImage.attr('id', 'layer_' + ordering)
     nextImage.before prevImage
+
+$.fn.initClone = ->
+  $layers = $('#layers')
+  time = new Date().getTime()
+  cloneOrdering = $layers.find('.layer').size()
+  $layers.prepend("<svg class='iSwap' data-ordering='" + cloneOrdering + "'><use xlink:href='#swap'/></svg>")
+  currentLayer = $(this).closest('.layer')
+  regexp = new RegExp(currentLayer.data('id'), 'g')
+  $layers.prepend($('<div>').append(currentLayer.clone()).html().replace(regexp, time))
+  $('#changes').prepend('<input value="0" type="hidden" name="changes[' + cloneOrdering + ']" id="changes_' + cloneOrdering + '">')
+  clone = $layers.find('.layer').first()
+  clone.find('.orderingField').val(cloneOrdering)
+  clone.find('.colour').each ->
+    if $(this).hasClass('disabled')
+      $(this).val($(this).css('background-color'))
+  clone.find('.sliderV').each ->
+    $(this).empty().initVSlider()
+  clone.slideDown(500)
+  clone.find('.removeLayer').click ->
+    $(this).initRemove()
+  clone.find('.cloneLayer').click ->
+    $(this).initClone()
+  clone.find('label.uncheckable').uncheckableRadioLabel()
 
 $.fn.initRemove = ->
   currentLayer = $(this).closest('.layer')

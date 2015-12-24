@@ -19,9 +19,14 @@ class User < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :votes, class_name: 'UserVote', dependent: :destroy
   has_many :comments
+  has_many :followings, foreign_key: 'followee_id', dependent: :destroy
+  has_many :followers, through: :followings
+  has_many :followeeings, foreign_key: 'follower_id', class_name: 'Following', dependent: :destroy
+  has_many :followees, through: :followeeings
 
   validate :excluded_name?
   validate :valid_invite?, on: :create
+  
   
  mount_uploader :avatar, AvatarUploader  
 

@@ -1,11 +1,11 @@
-%div{class: "layer animated l" + l.layer_type.capitalize}
+%div{class: "layer animated l" + l.layer_type.capitalize, 'data-id' => l_f.index}
   .table
     .cell.wide100.vMiddle
       %h3= l.layer_type.capitalize
     - unless l.layer_type == 'base'
       .cell.noWrap.vMiddle
-        = link_to "<svg class='icon hoverBack'><use xlink:href='#dolly' /></svg>".html_safe, '#'
-        %span.removeLayer  <svg class='icon iRed linkLike hoverBack'><use xlink:href='#trash' /></svg>
+        <svg class='icon linkLike hoverBack cloneLayer'><use xlink:href='#dolly' /></svg>
+        <svg class='icon iRed linkLike hoverBack removeLayer'><use xlink:href='#trash' /></svg>
         = l_f.hidden_field :_destroy, class: 'removeLayerField'
   = l_f.hidden_field :layer_type, value: l.layer_type
   = l_f.hidden_field :ordering, value: l.ordering, id: nil, class: 'orderingField'

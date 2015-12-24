@@ -51,7 +51,7 @@ class Polish < ActiveRecord::Base
     end
   end  
   
-  def tmp_folder; "/assets/#{self.user_id ? 'polish_tmp' : 'defaults'}/#{self.user_id}" end
+  def tmp_folder; "/assets/polish_tmp/#{self.user_id || 0}" end
   def opacity_mask
     "/assets/polish_parts/opacity_#{self.opacity.blank? ? '90' : ((self.opacity / 10.0).round * 10)}.png" 
   end

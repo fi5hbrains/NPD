@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   end
 
   resource :user_session, only: [:create, :destroy]
+  resource :following, only: [:create, :destroy]
   
   constraints(id: /[^\/]+/) do
     resources :users, param: 'user_id', except: [:index, :create, :new], path: '' do

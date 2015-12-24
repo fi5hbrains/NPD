@@ -24,7 +24,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
     Magick.convert model.avatar.to_s, "-crop #{c} +repage -resize #{w}x#{w}", self.to_s
   end  
   
-  def resize(source = self, width = 96)
+  def resize(source = nil, width = 96)
+    source ||= self
     Magick.convert source.to_s, "-resize #{w = width.to_s}x#{w}", self.to_s
   end
 

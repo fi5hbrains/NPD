@@ -28,7 +28,9 @@ class PolishesController < ApplicationController
     set_bottles
     @polish = Polish.new
     @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
+    @polish.user_id = current_user.id
     @polish.layers.new(layer_type: 'base')
+    clear_tmp_folder
     all_layers_bottom_up
     @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
   end
@@ -37,9 +39,11 @@ class PolishesController < ApplicationController
     set_polish
     set_bottles
     @polish.bottle_id ||= Brand.find_by_slug('default').bottles.first.id
+    @polish.user_id = current_user.id
     @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
     @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
     @layers = @polish.layers.map(&:dup).reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
+    clear_tmp_folder
     generate_preview
   end
   
@@ -434,4 +438,7 @@ class PolishesController < ApplicationController
     @layers = @polish.layers.reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
   end
   
+  def clear_tmp_folder
+    FileUtils.rm Dir.glob(path + @polish.tmp_folder + '/*')
+  end
 end
