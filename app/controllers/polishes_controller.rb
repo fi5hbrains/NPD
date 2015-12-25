@@ -403,7 +403,7 @@ class PolishesController < ApplicationController
   def flatten_layers
     FileUtils.mkdir_p(path + @polish.polish_folder) unless File.directory?(path + @polish.polish_folder)
     File.rename path + @polish.gloss_tmp, path + @polish.gloss_url
-    Magick.convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c*2}.join('x') + ' -gravity center', @polish.gloss_preview_url
+    # Magick.convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', @polish.gloss_preview_url
     (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
       stack = ''
       @layers.each do |layer|
@@ -418,7 +418,7 @@ class PolishesController < ApplicationController
     bottle = Bottle.find(@polish.bottle_id)
     return true unless bottle    
     blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
-    usm = '-unsharp 0x.35'
+    usm = '-unsharp 0x.3'
     # usm = '-unsharp 0x3+1.5+0.0196'
     
     stack = path + @polish.coat_url   

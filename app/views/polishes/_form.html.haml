@@ -58,8 +58,9 @@
           = f.label :gloss_colour, t('lab.section.highlight_colour')
       
       %h3= t('lab.section.add_layers')
-      - %w(shimmer flake glitter sand glass).each do |type|
+      - %w(shimmer flake glitter).each do |type|
         = link_to_add_layer type, f
+      glass sand
         
       - Defaults::MAGNETS.each do |m|
         = f.radio_button :magnet, m, class: 'hidden external uncheckable'

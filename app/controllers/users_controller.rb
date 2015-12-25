@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include Slugify
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -84,7 +85,7 @@ class UsersController < ApplicationController
   
   private
     def set_user
-      @user = User.find_by_slug(params[:user_id])
+      @user = User.find_by_slug(slugify(params[:user_id]))
     end
 
     def user_params
