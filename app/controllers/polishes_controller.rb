@@ -403,7 +403,8 @@ class PolishesController < ApplicationController
   def flatten_layers
     FileUtils.mkdir_p(path + @polish.polish_folder) unless File.directory?(path + @polish.polish_folder)
     File.rename path + @polish.gloss_tmp, path + @polish.gloss_url
-    # Magick.convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', @polish.gloss_preview_url
+    logger.info @polish.gloss_url + '#####' + '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center' + '#####' + @polish.gloss_preview_url
+    Magick.delay( queue: current_user.id ).convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', @polish.gloss_preview_url
     (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
       stack = ''
       @layers.each do |layer|
