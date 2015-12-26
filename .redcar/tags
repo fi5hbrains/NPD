@@ -1,4 +1,4 @@
-1451064091
+1451152791
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -159,6 +159,7 @@ getSize	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	funct
 getTags	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function getTags( offset, source, values )
 get_alpha	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def get_alpha 
 get_bottling_status	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def get_bottling_status
+get_colour	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def get_colour
 get_colour_names	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def get_colour_names 
 get_invite	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def get_invite 
 ghost	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def self.ghost
@@ -264,8 +265,8 @@ synonym_list=	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def synon
 tmp_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def tmp_folder;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def to_param;
-to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def to_param;
+to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
 toggle	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function toggle(event)
 unique	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function unique(array)
 up	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.up

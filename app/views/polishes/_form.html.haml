@@ -66,8 +66,9 @@
         = f.radio_button :magnet, m, class: 'hidden external uncheckable'
     
       #layers
-        = f.fields_for :layers, @layers.sort{ |a,b| b.ordering <=> a.ordering} do |ff|
-          = render 'layer_fields', l: ff.object, l_f: ff, f: f
+        - @layers.sort{ |a,b| b.ordering <=> a.ordering}.each do |l|
+          = f.fields_for :layers, l, child_index: l.object_id do |ff|
+            = render 'layer_fields', l: ff.object, l_f: ff, f: f, object_id: l.object_id
           
       #sliderBaseOpacity 
       .array#labelsBaseOpacity

@@ -1,7 +1,10 @@
 $(document).on 'ready page:load', ->  
   $('.layer').each ->
     initIcons($(this))
-  
+  $('.disableable').each ->
+    if $(this).val() == '' 
+      $(this).addClass('disabled')
+      
   getRef = document.getElementById('getRef')
   water = document.getElementById('water')
   juice = document.getElementById('juice')
@@ -116,8 +119,8 @@ $.fn.initClone = ->
   $('#changes').prepend('<input value="0" type="hidden" name="changes[' + cloneOrdering + ']" id="changes_' + cloneOrdering + '">')
   clone = $layers.find('.layer').first()
   clone.find('.orderingField').val(cloneOrdering)
-  clone.find('.colour').each ->
-    if $(this).hasClass('disabled')
+  clone.find('.disableable').each ->
+    unless $(this).hasClass('disabled')
       $(this).val($(this).css('background-color'))
   clone.find('.sliderV').each ->
     $(this).empty().initVSlider()

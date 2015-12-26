@@ -105,6 +105,11 @@ class Polish < ActiveRecord::Base
     end
   end
   
+  def get_colour
+    c = (self.h2 ? [self.h2, self.s2, self.l2] : [self.h, self.s, self.l])
+    "hsl(#{c.join(',')})"
+  end
+  
   def self.in_brands(brands); where("brand_id IN (?)", brands.pluck(:id)) end 
   def self.by_hue(hue); order( "ABS(h - #{hue}) ASC") end
   def self.coloured colour = nil, spread = nil

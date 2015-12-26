@@ -38,12 +38,12 @@ class PolishesController < ApplicationController
   def edit
     set_polish
     set_bottles
+    clear_tmp_folder
     @polish.bottle_id ||= Brand.find_by_slug('default').bottles.first.id
     @polish.user_id = current_user.id
     @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
     @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
     @layers = @polish.layers.map(&:dup).reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
-    clear_tmp_folder
     generate_preview
   end
   
@@ -260,7 +260,7 @@ class PolishesController < ApplicationController
         
     @polish.magnet ||= 'blank'
     old_coats_count = @polish.coats_count
-    @polish.coats_count = (1 + 10 * (100 - (@polish.opacity || 100)) / 100).round
+    @polish.coats_count = (1 + 8 * (100 - (@polish.opacity || 100)) / 100).round
     noise_size = (@layers.size > 1 ? 10 : 0)
     noise_density = 0
     small_noise_density = 0
@@ -403,7 +403,6 @@ class PolishesController < ApplicationController
   def flatten_layers
     FileUtils.mkdir_p(path + @polish.polish_folder) unless File.directory?(path + @polish.polish_folder)
     File.rename path + @polish.gloss_tmp, path + @polish.gloss_url
-    logger.info @polish.gloss_url + '#####' + '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center' + '#####' + @polish.gloss_preview_url
     Magick.delay( queue: current_user.id ).convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', @polish.gloss_preview_url
     (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
       stack = ''

@@ -19,40 +19,4 @@
     = @polish.votes_count
     = 'vote'.pluralize(@polish.votes_count)
   = render 'polishes/controls', polish: @polish, with_text: true
-%aside#ads.block.left
-  %h3.bigMargin.inactive 
-    Advertisment
-    %span.right.textMain= link_to 'Advertize with us'
-  %ul.banners<
-    %li>
-      = link_to '' do
-        = image_tag 'ads/adsense.gif'
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/hypnotic.jpg'
-        %span Hypnotic Polish
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/picture.jpg'
-        %span piCture pOlish
-    %li.w140.left>
-      = link_to '' do
-        = image_tag 'ads/prime-cuticle.png'
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/nuffnang.png'
-        %span Blog Advertizing Community
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/silly.jpg'
-    %li>
-      = link_to '' do
-        = image_tag 'ads/crows.jpg'
-        %span Shop Now
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/spell.jpg'
-    %li.w140>
-      = link_to '' do
-        = image_tag 'ads/pretty.jpg'
-
+= render 'ads'
