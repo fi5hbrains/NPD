@@ -3,7 +3,7 @@ class Brand < ActiveRecord::Base
   
   before_validation :name_to_slug
 
-  validates :name, uniqueness: true, presence: true
+  validates :slug, uniqueness: true, presence: true
   
   has_many :collections,         dependent: :destroy
   has_many :polishes,            dependent: :destroy

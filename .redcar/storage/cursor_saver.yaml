@@ -424,9 +424,6 @@ cursor_positions:
   - :path: db/migrate/20151125171031_remove_spreadsheet_from_boxes.rb
     :cursor_offset: 110
     :timestamp: 2015-11-25 20:14:06 +03:00
-  - :path: app/models/brand.rb
-    :cursor_offset: 749
-    :timestamp: 2015-09-30 21:10:53 +04:00
   - :path: lib/slugify.rb
     :cursor_offset: 470
     :timestamp: 2015-05-28 13:05:30 +04:00
@@ -757,9 +754,10 @@ cursor_positions:
     :timestamp: 2015-12-23 23:45:05 +03:00
     :selection_offset: 486
     :block_selection_mode: false
+  - :path: app/models/brand.rb
+    :cursor_offset: 106
+    :timestamp: 2015-12-29 00:47:25 +03:00
   - :path: app/controllers/application_controller.rb
-    :cursor_offset: 4163
+    :cursor_offset: 4189
     :timestamp: 2015-12-14 13:09:04 +03:00
-    :selection_offset: 4169
-    :block_selection_mode: false
 files_to_retain: 0

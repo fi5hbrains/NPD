@@ -1,4 +1,4 @@
-1451336346
+1451339296
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -194,9 +194,9 @@ middle	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def middle
 name_or_number	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number;
 name_or_number?	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number?
 name_or_number_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number_to_slug
-name_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def name_to_slug
 name_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def name_to_slug
 name_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def name_to_slug
+name_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def name_to_slug
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def new
@@ -258,15 +258,15 @@ store_dir	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  de
 store_dir	/Users/fish/Dropbox/work/Interpol/app/uploaders/reference_uploader.rb	  def store_dir;
 store_dir	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def store_dir
 switch	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def switch
-synonym_list	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def synonym_list;
 synonym_list	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def synonym_list;
-synonym_list=	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def synonym_list=(names) 
+synonym_list	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def synonym_list;
 synonym_list=	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def synonym_list=(names)
+synonym_list=	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def synonym_list=(names) 
 tmp_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def tmp_folder;
-to_param	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
+to_param	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def to_param;
 toggle	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function toggle(event)
 unique	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function unique(array)
 up	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.up
