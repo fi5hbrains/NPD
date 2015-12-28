@@ -710,9 +710,6 @@ cursor_positions:
     :timestamp: 2015-12-05 10:47:21 +03:00
     :selection_offset: 13149
     :block_selection_mode: false
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 459
-    :timestamp: 2015-12-14 13:09:04 +03:00
   - :path: lib/magick_methods.rb
     :cursor_offset: 0
     :timestamp: 2015-10-03 15:42:43 +04:00
@@ -759,5 +756,10 @@ cursor_positions:
     :cursor_offset: 482
     :timestamp: 2015-12-23 23:45:05 +03:00
     :selection_offset: 486
+    :block_selection_mode: false
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 4163
+    :timestamp: 2015-12-14 13:09:04 +03:00
+    :selection_offset: 4169
     :block_selection_mode: false
 files_to_retain: 0

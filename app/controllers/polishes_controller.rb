@@ -197,7 +197,8 @@ class PolishesController < ApplicationController
   end
   
   def reorder
-    (params[:polish] || params[:brand] || params[:colour]) ? search : @polishes = Polish.all
+    params[:lab] = false
+    search
     @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(48)
   end
   
