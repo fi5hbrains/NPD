@@ -275,9 +275,6 @@ cursor_positions:
     :timestamp: 2015-10-17 20:53:34 +04:00
     :selection_offset: 1836
     :block_selection_mode: false
-  - :path: app/views/comments/create.js.haml
-    :cursor_offset: 89
-    :timestamp: 2015-10-17 19:36:36 +04:00
   - :path: app/assets/images/spinnersample.svg
     :cursor_offset: 6228
     :timestamp: 2015-10-20 22:32:36 +04:00
@@ -438,9 +435,6 @@ cursor_positions:
   - :path: app/controllers/entries_controller.rb
     :cursor_offset: 1613
     :timestamp: 2015-04-15 08:39:09 +04:00
-  - :path: app/controllers/comments_controller.rb
-    :cursor_offset: 127
-    :timestamp: 2015-09-12 13:53:20 +04:00
   - :path: Gemfile
     :cursor_offset: 367
     :timestamp: 2015-11-25 09:44:08 +03:00
@@ -467,9 +461,6 @@ cursor_positions:
     :timestamp: 2015-11-27 20:36:47 +03:00
     :selection_offset: 160
     :block_selection_mode: false
-  - :path: app/views/polishes/show.html.haml
-    :cursor_offset: 384
-    :timestamp: 2015-12-02 10:19:59 +03:00
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 48
     :timestamp: 2015-10-15 19:39:23 +04:00
@@ -487,23 +478,14 @@ cursor_positions:
     :timestamp: 2015-12-03 04:40:38 +03:00
     :selection_offset: 330
     :block_selection_mode: false
-  - :path: app/views/layouts/application.html.haml
-    :cursor_offset: 578
-    :timestamp: 2015-12-03 15:56:47 +03:00
   - :path: config/environments/production.rb
     :cursor_offset: 2101
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: app/assets/javascripts/icons.js
-    :cursor_offset: 8909
-    :timestamp: 2015-12-03 15:13:11 +03:00
   - :path: app/views/comments/_form.html.haml
     :cursor_offset: 563
     :timestamp: 2015-10-17 15:50:16 +04:00
     :selection_offset: 376
     :block_selection_mode: false
-  - :path: app/views/comments/_comment.html.haml
-    :cursor_offset: 635
-    :timestamp: 2015-10-17 20:01:47 +04:00
   - :path: app/views/boxes/import.js.haml
     :cursor_offset: 147
     :timestamp: 2015-12-04 15:49:15 +03:00
@@ -656,9 +638,6 @@ cursor_positions:
   - :path: config/secrets.yml
     :cursor_offset: 657
     :timestamp: 2015-11-04 19:46:18 +03:00
-  - :path: config/environment.rb
-    :cursor_offset: 170
-    :timestamp: 2015-08-10 10:13:39 +04:00
   - :path: config/application.rb
     :cursor_offset: 1161
     :timestamp: 2015-10-03 11:27:25 +04:00
@@ -702,9 +681,6 @@ cursor_positions:
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 2519
     :timestamp: 2015-12-25 00:16:42 +03:00
-  - :path: config/routes.rb
-    :cursor_offset: 1900
-    :timestamp: 2015-12-23 23:45:05 +03:00
   - :path: app/views/users/show.html.haml
     :cursor_offset: 393
     :timestamp: 2015-12-25 00:02:40 +03:00
@@ -752,7 +728,36 @@ cursor_positions:
   - :path: app/models/polish.rb
     :cursor_offset: 4355
     :timestamp: 2015-12-26 10:57:30 +03:00
+  - :path: app/views/layouts/application.html.haml
+    :cursor_offset: 6747
+    :timestamp: 2015-12-28 20:09:14 +03:00
+  - :path: app/assets/javascripts/icons.js
+    :cursor_offset: 7552
+    :timestamp: 2015-12-03 15:13:11 +03:00
+  - :path: app/controllers/comments_controller.rb
+    :cursor_offset: 62
+    :timestamp: 2015-12-28 11:04:44 +03:00
+  - :path: app/views/comments/_comment.html.haml
+    :cursor_offset: 870
+    :timestamp: 2015-12-28 11:05:37 +03:00
+  - :path: app/views/comments/create.js.haml
+    :cursor_offset: 89
+    :timestamp: 2015-10-17 19:36:36 +04:00
+  - :path: app/views/application/_ads.html.haml
+    :cursor_offset: 120
+    :timestamp: 2015-12-26 20:59:28 +03:00
+  - :path: app/views/polishes/show.html.haml
+    :cursor_offset: 747
+    :timestamp: 2015-12-26 20:57:57 +03:00
   - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 0
-    :timestamp: 2015-12-26 19:52:43 +03:00
+    :cursor_offset: 18830
+    :timestamp: 2015-12-28 09:22:32 +03:00
+  - :path: config/environment.rb
+    :cursor_offset: 170
+    :timestamp: 2015-08-10 10:13:39 +04:00
+  - :path: config/routes.rb
+    :cursor_offset: 482
+    :timestamp: 2015-12-23 23:45:05 +03:00
+    :selection_offset: 486
+    :block_selection_mode: false
 files_to_retain: 0

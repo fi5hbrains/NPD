@@ -7,14 +7,7 @@ $(document).on('ready page:load', function() {
   var settings = document.getElementById("i_settings");
   var catalogue = document.getElementById("i_catalogue");
   
-  var aZ = document.getElementById("i_aZ");
-  var zA = document.getElementById("i_zA");
-  var stars = document.getElementById("i_stars");
-  var starsR = document.getElementById("i_starsR");
-  var bubbles = document.getElementById("i_bubbles");
-  var bubblesR = document.getElementById("i_bubblesR");
-  var bottles = document.getElementById("i_bottles");
-  var bottlesR = document.getElementById("i_bottlesR");
+  initCatalogueIcons();
   var wrench = document.getElementById("i_wrench");
   var brush = document.getElementById("i_brush");
   var frame = document.getElementById("i_frame");
@@ -50,14 +43,6 @@ $(document).on('ready page:load', function() {
   settings.innerHTML  = '<svg class="icon iNav" viewBox="0 0 36 36"><path d="m18 13.5c2.5 0 4.5 2 4.5 4.5 0 2.5-2 4.5-4.5 4.5-2.5 0-4.5-2-4.5-4.5 0-2.5 2-4.5 4.5-4.5zm-10 4.5c0.1 5.5 4.6 10 10 10 5.5 0 10-4.6 10-10 0-5.4-4.5-10-10-10-5.4 0-10 4.6-10 10zm7.5-16c-1.1 0.2-0.5 3.2-1.5 3.5-1 0.3-2.3-2.5-3.3-2-1 0.5 0.5 3.2-0.4 3.9-0.9 0.6-3-1.6-3.7-0.9-0.8 0.8 1.5 2.9 0.9 3.7-0.6 0.9-3.3-0.6-3.8 0.4-0.5 1 2.3 2.3 2 3.3-0.3 1-3.4 0.5-3.5 1.5-0.2 1.1 3 1.5 3 2.6 0 1.1-3.1 1.5-3 2.5 0.2 1.1 3.2 0.5 3.5 1.5 0.3 1-2.5 2.3-2 3.3 0.5 1 3.2-0.5 3.9 0.4 0.6 0.9-1.6 3-0.8 3.8 0.8 0.8 2.9-1.5 3.7-0.8 0.9 0.6-0.6 3.3 0.4 3.8 0.9 0.5 2.3-2.3 3.3-2 1 0.3 0.5 3.4 1.5 3.5 1.1 0.2 1.4-3 2.5-3 1.1 0 1.5 3.2 2.6 3 1.1-0.2 0.5-3.2 1.5-3.5 1-0.3 2.3 2.5 3.3 2 1-0.5-0.5-3.2 0.4-3.8 0.9-0.6 3 1.6 3.8 0.9s-1.5-2.9-0.9-3.7 3.4 0.6 3.8-0.4c0.5-0.9-2.3-2.3-2-3.3 0.3-1 3.4-0.4 3.5-1.5 0.3-1-3-1.4-3-2.5 0-1.1 3.3-1.5 3.1-2.6-0.2-1.1-3.2-0.5-3.5-1.5-0.3-1 2.5-2.3 2-3.3-0.5-0.9-3.2 0.5-3.8-0.4-0.6-0.9 1.6-3 0.9-3.7-0.8-0.8-2.9 1.5-3.8 0.9-0.9-0.6 0.6-3.4-0.4-3.8-1-0.5-2.3 2.3-3.3 2-1-0.3-0.4-3.4-1.5-3.5-1.1-0.3-1.5 2.9-2.6 2.9-1.1 0-1.4-3.2-2.5-3zm2.5 5c6.2 0 11 4.9 11 11 0.1 6.1-4.8 10.9-11 11-6.1 0-11-4.9-11-11 0-6.1 4.9-10.9 11-11z"/></svg>';
   catalogue.innerHTML = '<svg class="icon iNav" viewBox="0 0 36 36"><path d="m4.5 4v7h-2.5v23h32v-23h-2.5v-7zm1.5 1.5h24v5.5h-1c-2 0-3 1-3 3v2c0 2-1 3-3 3h-10c-2 0-3-1-3-3v-2c0-2-1-3-3-3h-1z"/></svg>';
   
-  if (aZ) { aZ.innerHTML               = '<svg class="icon iNav option"><path d="m13 2h-3.5l-7.5 32h4l1.5-7h7.5l1.5 7h17.5v-3.5h-10l10-25v-3.5h-13.5v3.5h9.5l-10 25h-0.5zm-1.5 7 3 14.5h-6.5l3-14.5z"/></svg>';}
-  if (zA) { zA.innerHTML               = '<svg class="icon iNav option"><path d="m2.5 2v3.5h9.5l-10 25v3.5h18l1.5-7h7.5l1.5 7h4l-7.5-32h-3.5l-6.5 28.5h-11l10-25v-3.5zm23 7.05 2.9 14h-6.4l3-14h0.5z"/></svg>';}
-  if (stars) { stars.innerHTML         = '<svg class="icon iNav option"><use xlink:href="#stars"/></svg>';}
-  if (starsR) { starsR.innerHTML       = '<svg class="icon iNav option"><use xlink:href="#stars" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
-  if (bubbles) { bubbles.innerHTML     = '<svg class="icon iNav option"><use xlink:href="#bubbles"/></svg>';}
-  if (bubblesR) { bubblesR.innerHTML   = '<svg class="icon iNav option"><use xlink:href="#bubbles" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
-  if (bottles) { bottles.innerHTML     = '<svg class="icon iNav option"><use xlink:href="#bottles"/></svg>';}
-  if (bottlesR) { bottlesR.innerHTML   = '<svg class="icon iNav option"><use xlink:href="#bottles" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
   if (wrench) { wrench.innerHTML       = '<svg class="icon iNav option"><path d="m18 5c-2 2-2 5-1 7l-14 14c-2 2-1 4 0 5l2 2c1 1 3 2 5 0l14-14c2 1 5 1 7-1s4-5 2-8l-3.5 3.5-5.5-1.5-1.5-5.5 3.5-3.5c-3-2-6 0-8 2zm-10.5 21.5c1.2 0 2 0.9 2 2s-0.8 2-2 2c-1.2 0-2-0.8-2-2s0.8-2 2-2z"/></svg>';}
   if (brush) { brush.innerHTML         = '<svg class="icon iNav option"><path d="m14.5 13.5c0 2.5-0.5 2.5-5.5 2.5-2 0-2 1-2 3v8c0 3 0 5-2 7h23c2-2 2-4 2-7v-8c0-2 0-3-2-3-4.5 0-5.5-0.3-5.5-2.5 0-2.5 0.5-4.5 0.5-7.5 0-2.5-1.5-4-4.5-4s-4.5 1.5-4.5 4c0 3 0.5 5 0.5 7.5zm4-8.5c1.2 0 2 0.8 2 2 0 1.2-0.8 2-2 2s-2-0.8-2-2c0-1.2 0.8-2 2-2zm10.5 15v3h-21v-3zm0 4v2h-21v-2z"/></svg>';}
   if (frame) { frame.innerHTML         = '<svg class="icon iNav option"><path d="m9 9v18h18v-18zm2 2h14v14h-14zm-9-9 0 31.9h32.2l-0.2-31.9zm4.2 4 23.8 0v24h-24z"/></svg>';}
@@ -85,3 +70,23 @@ $(document).on('ready page:load', function() {
   if (scro) { scro.innerHTML = '<svg class="icon iPolish linkLike switch hoverBack"><path d="m5.5 19h12v1.5c0 0.6 0.2 1.1 0.4 1.5h-10.8c-0.9 0-1.5-0.8-1.5-1.5zm21-13.5v1.5h-3.5v-1.5c0-1 0.7-1.5 1.7-1.5 1 0 1.8 0.5 1.8 1.5zm-15.6-3.1c-1.7 0-3 1.5-3 3.1v12h-2.5-1.5v3.1c0 1.6 1.3 2.9 3 2.9h13.5c1.6 0 2.4-1.3 2.5-3v-12h5v-3c0-1.6-1.3-3.1-3.2-3.1z"/></svg>';}
   
 });
+
+var initCatalogueIcons = function(element) {
+  var aZ = document.getElementById("i_aZ");
+  var zA = document.getElementById("i_zA");
+  var stars = document.getElementById("i_stars");
+  var starsR = document.getElementById("i_starsR");
+  var bubbles = document.getElementById("i_bubbles");
+  var bubblesR = document.getElementById("i_bubblesR");
+  var bottles = document.getElementById("i_bottles");
+  var bottlesR = document.getElementById("i_bottlesR");
+  if (aZ) { aZ.innerHTML             = '<svg class="icon iNav option"><path d="m13 2h-3.5l-7.5 32h4l1.5-7h7.5l1.5 7h17.5v-3.5h-10l10-25v-3.5h-13.5v3.5h9.5l-10 25h-0.5zm-1.5 7 3 14.5h-6.5l3-14.5z"/></svg>';}
+  if (zA) { zA.innerHTML             = '<svg class="icon iNav option"><path d="m2.5 2v3.5h9.5l-10 25v3.5h18l1.5-7h7.5l1.5 7h4l-7.5-32h-3.5l-6.5 28.5h-11l10-25v-3.5zm23 7.05 2.9 14h-6.4l3-14h0.5z"/></svg>';}
+  if (stars) { stars.innerHTML       = '<svg class="icon iNav option"><use xlink:href="#stars"/></svg>';}
+  if (starsR) { starsR.innerHTML     = '<svg class="icon iNav option"><use xlink:href="#stars" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
+  if (bubbles) { bubbles.innerHTML   = '<svg class="icon iNav option"><use xlink:href="#bubbles"/></svg>';}
+  if (bubblesR) { bubblesR.innerHTML = '<svg class="icon iNav option"><use xlink:href="#bubbles" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
+  if (bottles) { bottles.innerHTML   = '<svg class="icon iNav option"><use xlink:href="#bottles"/></svg>';}
+  if (bottlesR) { bottlesR.innerHTML = '<svg class="icon iNav option"><use xlink:href="#bottles" transform="matrix(-1 0 0 1 36 0)"/></svg>';}
+
+};

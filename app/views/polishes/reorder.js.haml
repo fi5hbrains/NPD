@@ -3,3 +3,4 @@
   $($('.navOption')[#{i}]).replaceWith('#{j(render_nav_icon(icons, key)).html_safe}');
 - if @polishes
   $('#polishes').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');
+initCatalogueIcons();
