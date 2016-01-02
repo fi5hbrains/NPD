@@ -4,7 +4,10 @@ module ApplicationHelper
   def is_owner
     current_user && current_user == @user
   end
-  
+  def to_link link
+    link = 'http://' + link unless !link || link.blank? || link[/^http?:\/\//] || link[/^https?:\/\//]
+    link_to link.sub('http://','').sub('https://','').split('/')[0], link
+  end
   def set_section
     condition = false
     {

@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
         pluck('word_id').compact.uniq  
       @polishes = Polish.
         where(brand_id: (params[:brand_id] || params[:id])).
-        where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "#{params[:polish]}%").
+        where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
         order('created_at desc')
     else
@@ -82,6 +82,39 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def collection_search
+    @reset = false
+    if !params[:polish].blank?
+      @box = Box.find(params[:box_id])
+      box_polish_ids = @box.polishes.map(&:id)
+      unless box_polish_ids.blank?
+        polish_ids = Synonym.
+          where("word_type = 'Polish' AND word_id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')})").
+          where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
+          pluck('word_id').compact.uniq  
+        @polishes = if polish_ids.blank?
+          Polish.
+            where("(id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
+        else
+          Polish.
+            where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR (id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
+        end.first(24)
+      end
+    else
+      @reset = true
+    end
+  end
+  def collect_search
+    @reset = false
+    if !(params[:polish].blank? && params[:brand].blank?) 
+      @box = Box.find(params[:box_id])
+      box_polish_ids = @box.polishes.map(&:id)
+      search
+      @polishes = @polishes.where('id NOT IN (?)', box_polish_ids)
+    else
+      @reset = true
+    end
+  end
   def autocomplete
     @id = params[:id]
     if !params[:brand].blank?

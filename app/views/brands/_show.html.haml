@@ -1,6 +1,6 @@
 %section#listing.block.left
   %h2= link_to_if (params[:controller] != 'brands' || params[:action] != 'show'),  @brand.name, @brand
-  = render 'search', setup: %w(polish), css: 'wide100', lab_search: true, remote: true     
+  = render 'search', setup: %w(polish), css: 'wide100 autoupdatable', lab_search: true, remote: true     
   #controls.controls.bigMargin
     %span.selected= 'All'
     %span= link_to 'Not Bottled'

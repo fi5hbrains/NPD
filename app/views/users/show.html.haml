@@ -7,9 +7,9 @@
         .iconArray
           = link_to 'Log out', user_session_path, method: :delete
           = link_to 'Edit', edit_user_path(@user)
-      - else
+      - elsif current_user
         .iconArray
-          - if @user.followers.map(&:id).include?(current_user.id)
+          - if current_user && @user.followers.map(&:id).include?(current_user.id)
             = link_to 'Unfollow', following_path(user_id: @user.id), method: :delete
           - else
             = link_to 'Follow', following_path(user_id: @user.id), method: :post

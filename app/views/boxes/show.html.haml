@@ -15,24 +15,26 @@
       %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
   
   #secondarySearchResults<
+  #secondaryResults<
     = render @polishes, big_polish: true
-    
-  #gather{class: (params[:action] == 'gather' ? 'menu active' : 'menu' )}
-    .current
-      %span.header
-        - if %(collection wishlist giveaway).include?(@box.slug)
-          = t('user.lists.' + @box.slug)
-        - else
-          = @box.name
-    = link_to "<svg class='icon' data-activate='#boxesList'><use xlink:href='#x'/></svg>".html_safe, user_box_path(@user,@box.slug), class: 'switch wideAuto', remote: true
-    .formLi.smallMargin= render 'search', setup: %w(brand polish), css: 'wide100'
-    #searchResults<
-      - if params[:action] == 'gather'
-        = render @addable, add: true
+  - if is_owner    
+    #gather{class: (params[:action] == 'gather' ? 'menu active' : 'menu' )}
+      .current
+        %span.header
+          - if %(collection wishlist giveaway).include?(@box.slug)
+            = t('user.lists.' + @box.slug)
+          - else
+            = @box.name
+      = link_to "<svg class='icon' data-activate='#boxesList'><use xlink:href='#x'/></svg>".html_safe, user_box_path(@user,@box.slug), class: 'switch wideAuto', remote: true
+      .formLi.smallMargin= render 'search', setup: %w(brand polish), collect_search: true, css: 'wide100 autoupdatable', remote: true
+      #searchResults<
+      #results<
+        - if params[:action] == 'gather'
+          = render @addable, add: true
   
 %section#Catalogue.block.left
   .formIndent
-    = render 'search', setup: ['polish'], css: 'bigMargin wide100', id: 'secondarySearch'
+    = render 'search', setup: ['polish'], css: 'bigMargin wide100 autoupdatable', collection_search: true, id: 'secondarySearch', remote: true
   
   %h3 Sort by
   #sort.controls
@@ -43,8 +45,10 @@
     
   %h3 Brands
   .tags
+    - b = []
     - @brands.each do |brand|
-      = link_to brand.name
+      - b << link_to( brand.name)
+    = b.join(', ').html_safe
     
   = render 'lists'
 

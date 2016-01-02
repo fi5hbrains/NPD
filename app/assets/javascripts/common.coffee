@@ -23,7 +23,7 @@ $(document).on 'ready page:load', ->
   # icons.send()
   # icons.onload = (e) -> $('#defs').html( icons.responseText )
   
-  $('.labSearch').find('input[name=polish], input[name=brand]').doneTyping ->
+  $('.autoupdatable').find('input[name=polish], input[name=brand]').doneTyping ->
     $(this).closest('form').submit()
   $('.completable').find('input[name=polish], input[name=brand]').doneTyping ->
     $.ajax 

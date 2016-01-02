@@ -1,0 +1,9 @@
+- if @reset
+  $('#secondaryResults').show();
+  $('#secondarySearchResults').hide();
+  $('#secondarySearch').find('input').removeAttr('disabled').focus();
+- else
+  $('#secondaryResults').hide();
+  $('#secondarySearchResults').show();
+  - if @polishes
+    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true).html_safe}');

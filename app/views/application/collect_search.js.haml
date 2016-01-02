@@ -1,0 +1,10 @@
+$('#search').find('input').removeAttr('disabled')
+- if @reset
+  $('#results').show();
+  $('#searchResults').hide();
+  $('#searchBrand').find('input').focus();
+- else
+  $('#results').hide();
+  $('#searchResults').show();
+  - if @polishes
+    $('#searchResults').html('#{j(render @polishes, add: true).html_safe}');

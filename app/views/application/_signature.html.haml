@@ -36,12 +36,7 @@
             7        
           - elsif i ==3
             %svg{class: 'icon iStats'} <use xlink:href='#tag' />
-            = link_to 'lalala', '#'
-            = link_to 'глиттер', '#'
-            = link_to 'мимими', '#'
-            = link_to 'lalala', '#'
-            = link_to 'глиттер', '#'
-            = link_to 'мимими', '#'
+            = [link_to( 'do tags', '#'), link_to( 'ASAP', '#')].join(', ').html_safe
             = link_to '#' do
               %svg{class: 'icon hoverBack withText'}> <use xlink:href='#pencil' />
               Править

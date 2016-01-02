@@ -3,10 +3,15 @@
 - id ||= 'search'
 - remote ||= false
 - lab_search ||= false
-- css += ' labSearch' if lab_search
+- collection_search ||= false
+- collect_search ||= false
+- # css += ' labSearch' if lab_search
+- path = lab_search ? lab_search_path : collection_search ? collection_search_path : collect_search ? collect_search_path : search_path
 
-= form_tag (lab_search ? lab_search_path : search_path), method: 'GET', class: 'searchWrapper formIndent' + css, id: id + 'Wrapper', remote: remote do 
+= form_tag path, method: 'GET', class: 'searchWrapper formIndent' + css, id: id + 'Wrapper', remote: remote do 
   .search{id: id}
+    - if collection_search || collect_search
+      = hidden_field_tag :box_id, @box.id
     = hidden_field_tag :brand_id, @brand.id if @brand
     = hidden_field_tag :polish_id, @polish.id if @polish
     - setup.each do |p|
