@@ -180,6 +180,12 @@ en:
       profile: 'Profile Settings'
     form:
       submit_update: 'Update Profile'
+  sheet:
+    brand: 'Brand'
+    name: 'Name'
+    number: 'Number'
+    colour: 'Colour'
+    notes: 'Notes'
     
 
     

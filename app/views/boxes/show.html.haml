@@ -10,7 +10,7 @@
       = label_tag :spreadsheet, content_tag( :span, t('user.import'))
       = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
       = submit_tag 'import', class: 'hidden', name: 'preview'  
-      %span= link_to t('user.export') 
+      %span= link_to t('user.export'), download_box_path(@user, @box, @box.slug, format: :csv)
       %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
       %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
   

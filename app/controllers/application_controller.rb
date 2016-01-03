@@ -112,7 +112,6 @@ class ApplicationController < ActionController::Base
       if !params[:brand].blank?
         brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
           pluck('word_id').compact.uniq
-        @brands = Brand.where(id: brand_ids)   
       end
       polish_ids = if !params[:polish].blank?
         Synonym.

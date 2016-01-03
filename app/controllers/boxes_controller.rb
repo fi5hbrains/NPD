@@ -8,11 +8,11 @@ class BoxesController < ApplicationController
   
   def gather
     set_box
-    if @polishes.count > 0
-      @addable = Polish.where('id NOT IN (?)', @polishes.map( &:id)).page(params[:page_b]).per(12)
+    @addable = if @polishes.size > 0
+      Polish.where('id NOT IN (?)', @box.polishes.pluck(:id))
     else
-      @addable = Polish.page(params[:page_b]).per(12)
-    end
+      Polish.where(nil)
+    end.page(params[:page_b]).per(12)
     render :show
   end
   
@@ -20,6 +20,13 @@ class BoxesController < ApplicationController
     @box = current_user.boxes.find_by_slug(params[:id])
     @box.import(params[:spreadsheet])
     @polishes = @box.polishes
+  end
+  
+  def export
+    set_box
+    respond_to do |format|
+      format.csv { send_data @box.export }
+    end    
   end
   
   def create

@@ -13,6 +13,7 @@ class Box < ActiveRecord::Base
   def open_spreadsheet(file)
     Roo::Spreadsheet.open(file.path, extension: File.extname(file.path))
   end
+  
   def import(file)
     spreadsheet = open_spreadsheet(file)
     header = self.rename_header_columns(spreadsheet.row(1))
@@ -66,7 +67,16 @@ class Box < ActiveRecord::Base
     end
     return stats
   end
-  # handle_asynchronously :import
+  
+  def export
+    CSV.generate do |csv|
+      headers = %w(brand name number colour notes).map{|h| I18n.t('sheet.' + h)}
+      csv << headers
+      self.polishes.each do |p|
+        csv << [p.brand_name, p.name, p.number, ("hsl(#{p.h},#{p.s},#{p.l})" if p.h)]
+      end
+    end
+  end
   
   def rename_header_columns(header)
     brand = false
