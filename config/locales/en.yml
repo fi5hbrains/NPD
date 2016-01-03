@@ -86,6 +86,7 @@ en:
     lab_polish: 'Polish'
     colour: 'Colour'
     find: 'Find'
+    nothing: 'Found nothing :('
     
   comments:
     header: 'Comments'

@@ -7,4 +7,7 @@ $('#search').find('input').removeAttr('disabled')
   $('#results').hide();
   $('#searchResults').show();
   - if @polishes
-    $('#searchResults').html('#{j(render @polishes, add: true).html_safe}');
+    - if @polishes.size > 0
+      $('#searchResults').html('#{j(render @polishes, add: true).html_safe}');
+    - else
+      $('#searchResults').html('#{content_tag :p, t('search.nothing'), class: 'centeredText'}');

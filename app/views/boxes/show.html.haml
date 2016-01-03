@@ -22,7 +22,7 @@
       .current
         %span.header
           - if %(collection wishlist giveaway).include?(@box.slug)
-            = t('user.lists.' + @box.slug)
+            = t('user.list.' + @box.slug)
           - else
             = @box.name
       = link_to "<svg class='icon' data-activate='#boxesList'><use xlink:href='#x'/></svg>".html_safe, user_box_path(@user,@box.slug), class: 'switch wideAuto', remote: true

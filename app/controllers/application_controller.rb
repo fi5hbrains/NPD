@@ -109,8 +109,27 @@ class ApplicationController < ActionController::Base
     if !(params[:polish].blank? && params[:brand].blank?) 
       @box = Box.find(params[:box_id])
       box_polish_ids = @box.polishes.map(&:id)
-      search
-      @polishes = @polishes.where('id NOT IN (?)', box_polish_ids)
+      if !params[:brand].blank?
+        brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
+          pluck('word_id').compact.uniq
+        @brands = Brand.where(id: brand_ids)   
+      end
+      polish_ids = if !params[:polish].blank?
+        Synonym.
+          where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
+          pluck('word_id').compact.uniq
+      else
+        []
+      end
+      @polishes = Polish.
+        where(brand_ids.blank? ? nil : {brand_id: brand_ids}).
+        where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
+        "slug ilike ?", "#{params[:polish] || ''}%").        
+        where('id NOT IN (?)', box_polish_ids)
+      if @polishes.size > 12
+        @next_item = @polishes[12]
+        @polishes = @polishes[0..11]
+      end  
     else
       @reset = true
     end

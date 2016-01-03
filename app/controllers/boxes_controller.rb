@@ -19,6 +19,7 @@ class BoxesController < ApplicationController
   def import
     @box = current_user.boxes.find_by_slug(params[:id])
     @box.import(params[:spreadsheet])
+    @polishes = @box.polishes
   end
   
   def create

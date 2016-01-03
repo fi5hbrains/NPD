@@ -70,6 +70,7 @@ class PolishesController < ApplicationController
       if @is_in 
         @polishes = Polish.where('id NOT IN (?)', collection.map( &:polish_id)).page(params[:page_b]).per(12)
         @next_item = @polishes.last if @polishes.count >= 12
+        @added_item = Polish.find(@item.polish_id)
       else
         @polishes = @box.polishes.page(params[:page_b])
         @next_item = @polishes.last if @polishes.count >= 24

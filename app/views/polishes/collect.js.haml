@@ -1,11 +1,13 @@
-- if params[:from_catalogue]
+- if params[:from_list]
   var polish = $('.bigPolish[data-id=#{params[:polish_id]}]');
   polish.remove();
-  - if @next_item
-    - if @is_in
+  - if @is_in
+    $('#secondaryResults').append('#{j(render(@added_item, big_polish: true).html_safe)}');    
+    - if @next_item
       $('#searchResults').append('#{j(render(@next_item, add: true).html_safe)}');    
-    - else
-      $('#secondarySearchResults').append('#{j(render(@next_item, remove: true).html_safe)}');    
+  - else
+    - if @next_item
+      $('#secondaryResults').append('#{j(render(@next_item, remove: true).html_safe)}');    
 -else
   - if %w(collection wishlist giveaway).include? @box.slug
     - if @is_in

@@ -25,18 +25,21 @@ class Box < ActiveRecord::Base
         ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand'].to_s.squeeze.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = row['polish'].to_s
+          name = row['polish'].to_s.squeeze.strip
           number = row['number'].to_s.squeeze.strip
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
-            polish.name = name unless name.blank?
-            polish.synonym_list = polish.name if polish.name
+            unless name.blank?
+              polish.name = name 
+              polish.synonyms.new(name: name)
+            end
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
             polish.user_id = self.user_id
+            puts polish.inspect
             polish.save
             stats[:new] += 1
             brands << brand

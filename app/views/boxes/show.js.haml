@@ -8,7 +8,7 @@
   collection.find('.roundButton').show();
   collection.each(function() {
   var id = $(this).data('id');
-  $(this).children('a').attr('href', '/collect/' + id + '?box=#{@box.slug}&from_catalogue=true').attr('data-method','post').attr('rel','nofollow').attr('data-remote','true')
+  $(this).children('a').attr('href', '/collect/' + id + '?box=#{@box.slug}&from_list=true').attr('data-method','post').attr('rel','nofollow').attr('data-remote','true')
   });
   $('#goEdit').hide();
   $('#doneEditing').show();
@@ -20,7 +20,12 @@
   history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}/edit');
 - else
   - if @polishes.size > 0
-    $('#secondarySearchResults').html('#{j(render(@polishes, big_polish: true).html_safe)}');
+    $('#secondaryResults').find('svg.roundButton').hide()
+    var collection = $('.bigPolish');
+    collection.each(function() {
+    var link = $(this).find('.info').find('a').attr('href')
+    $(this).children('a').attr('href', link).removeAttr('data-method').removeAttr('rel').removeAttr('data-remote')
+    });
   $('#goEdit').show();
   $('#doneEditing').hide();
   $('#gather').removeClass('active');

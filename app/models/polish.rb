@@ -6,7 +6,7 @@ class Polish < ActiveRecord::Base
   
   validates :slug, uniqueness: {scope: :brand_slug, message: 'already exists for this brand', :case_sensitive => false }, :allow_blank => true
   validates :brand_slug, presence: true
-  validates :bottle_id, presence: true
+  # validates :bottle_id, presence: true
   validate :name_or_number?
   
   belongs_to :collection

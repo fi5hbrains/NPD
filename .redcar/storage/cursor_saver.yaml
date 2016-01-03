@@ -407,9 +407,6 @@ cursor_positions:
     :timestamp: 2015-11-24 23:52:04 +03:00
     :selection_offset: 727
     :block_selection_mode: false
-  - :path: app/views/polishes/collect.js.haml
-    :cursor_offset: 144
-    :timestamp: 2015-09-22 13:48:47 +04:00
   - :path: db/migrate/20151125171031_remove_spreadsheet_from_boxes.rb
     :cursor_offset: 110
     :timestamp: 2015-11-25 20:14:06 +03:00
@@ -542,14 +539,6 @@ cursor_positions:
   - :path: app/controllers/boxes_controller.rb
     :cursor_offset: 628
     :timestamp: 2015-11-28 01:25:13 +03:00
-  - :path: app/views/polishes/_polish.html.haml
-    :cursor_offset: 1591
-    :timestamp: 2015-11-27 00:37:41 +03:00
-    :selection_offset: 1594
-    :block_selection_mode: false
-  - :path: app/views/application/lab_search.js.haml
-    :cursor_offset: 334
-    :timestamp: 2015-12-14 12:45:16 +03:00
   - :path: app/views/application/search.html.haml
     :cursor_offset: 169
     :timestamp: 2015-10-10 22:10:24 +04:00
@@ -564,9 +553,6 @@ cursor_positions:
     :timestamp: 2015-09-28 18:04:14 +04:00
     :selection_offset: 29092
     :block_selection_mode: false
-  - :path: app/assets/javascripts/local.coffee
-    :cursor_offset: 1795
-    :timestamp: 2015-11-13 12:20:08 +03:00
   - :path: app/assets/javascripts/lab_icons.js
     :cursor_offset: 47
     :timestamp: 2015-12-15 22:30:17 +03:00
@@ -672,12 +658,6 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 252
     :timestamp: 2015-11-29 10:44:52 +03:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 4229
-    :timestamp: 2015-12-15 21:52:11 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 4355
-    :timestamp: 2015-12-26 10:57:30 +03:00
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 6747
     :timestamp: 2015-12-28 20:09:14 +03:00
@@ -708,9 +688,6 @@ cursor_positions:
   - :path: app/views/users/show.html.haml
     :cursor_offset: 327
     :timestamp: 2015-12-29 21:45:09 +03:00
-  - :path: app/assets/javascripts/polish.coffee
-    :cursor_offset: 9939
-    :timestamp: 2015-12-26 10:24:13 +03:00
   - :path: app/assets/javascripts/icons.js
     :cursor_offset: 434
     :timestamp: 2015-12-28 21:44:31 +03:00
@@ -728,33 +705,64 @@ cursor_positions:
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 122
     :timestamp: 2015-12-30 11:10:30 +03:00
-  - :path: app/views/brands/index.html.haml
-    :cursor_offset: 264
-    :timestamp: 2015-11-19 14:25:31 +03:00
-    :selection_offset: 250
-    :block_selection_mode: false
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 6018
     :timestamp: 2015-12-28 23:59:06 +03:00
-  - :path: app/views/application/_search.html.haml
-    :cursor_offset: 526
-    :timestamp: 2016-01-01 12:56:20 +03:00
   - :path: config/routes.rb
     :cursor_offset: 857
     :timestamp: 2016-01-01 12:54:34 +03:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 4601
-    :timestamp: 2016-01-01 14:05:30 +03:00
-  - :path: app/views/application/collect_search.js.haml
-    :cursor_offset: 16
-    :timestamp: 2016-01-01 12:54:07 +03:00
-  - :path: app/views/brands/_show.html.haml
-    :cursor_offset: 130
-    :timestamp: 2015-12-19 22:10:23 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 1361
-    :timestamp: 2016-01-01 16:36:05 +03:00
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 25
     :timestamp: 2015-05-23 06:53:13 +04:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 2103
+    :timestamp: 2016-01-02 11:16:46 +03:00
+  - :path: app/views/application/collect_search.js.haml
+    :cursor_offset: 150
+    :timestamp: 2016-01-02 11:07:00 +03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 4349
+    :timestamp: 2016-01-02 03:03:23 +03:00
+  - :path: app/views/application/lab_search.js.haml
+    :cursor_offset: 350
+    :timestamp: 2015-12-14 12:45:16 +03:00
+  - :path: app/views/brands/_show.html.haml
+    :cursor_offset: 198
+    :timestamp: 2016-01-02 11:02:14 +03:00
+  - :path: app/assets/javascripts/local.coffee
+    :cursor_offset: 1795
+    :timestamp: 2015-11-13 12:20:08 +03:00
+  - :path: app/assets/javascripts/polish.coffee
+    :cursor_offset: 9939
+    :timestamp: 2015-12-26 10:24:13 +03:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 851
+    :timestamp: 2016-01-02 11:14:57 +03:00
+  - :path: app/views/application/_search.html.haml
+    :cursor_offset: 183
+    :timestamp: 2016-01-02 03:13:29 +03:00
+  - :path: app/views/brands/index.html.haml
+    :cursor_offset: 245
+    :timestamp: 2016-01-02 11:02:34 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 1569
+    :timestamp: 2015-12-26 10:57:30 +03:00
+    :selection_offset: 1556
+    :block_selection_mode: false
+  - :path: app/views/application/collection_search.js.haml
+    :cursor_offset: 343
+    :timestamp: 2016-01-01 22:52:07 +03:00
+    :selection_offset: 233
+    :block_selection_mode: false
+  - :path: app/views/boxes/update.js.haml
+    :cursor_offset: 0
+    :timestamp: 2015-09-26 12:15:14 +04:00
+  - :path: app/views/polishes/_polish.html.haml
+    :cursor_offset: 736
+    :timestamp: 2016-01-03 19:25:35 +03:00
+    :selection_offset: 733
+    :block_selection_mode: false
+  - :path: app/views/polishes/collect.js.haml
+    :cursor_offset: 561
+    :timestamp: 2016-01-03 19:26:45 +03:00
 files_to_retain: 0
