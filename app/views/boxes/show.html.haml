@@ -38,16 +38,15 @@
   
   %h3 Sort by
   #sort.controls
-    %span Name 
-    %span Stars 
-    %span Color 
-    %span Time
+    - cookies[:box_sort] ||= 'time'
+    - %w(slug rating colour created_at).each do |c|
+      %span{class: ('active' if cookies[:box_sort] == c)}= link_to t('controls.by_' + c), switch_path('box_sort', c), method: :post
     
   %h3 Brands
   .tags
     - b = []
     - @brands.each do |brand|
-      - b << link_to( brand.name)
+      - b << brand_to_tag(brand)
     = b.join(', ').html_safe
     
   = render 'lists'

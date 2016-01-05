@@ -28,6 +28,6 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    redirect_to root_path, notice: 'logge out'
+    redirect_to root_path, notice: 'logged out'
   end
 end  

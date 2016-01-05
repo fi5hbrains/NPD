@@ -47,7 +47,7 @@ class BoxesController < ApplicationController
   def set_box
     @box = @user.boxes.find_by_slug(params[:id])
     @polishes = @box.polishes.page(params[:page])
-    @brands = Brand.find @polishes.pluck(:brand_id).uniq
+    @brands = @polishes.pluck(:brand_slug, :brand_name).uniq
     @lists = @user.boxes    
   end
   

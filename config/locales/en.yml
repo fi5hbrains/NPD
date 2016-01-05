@@ -49,6 +49,10 @@ en:
     delete: 'Delete'
     lock: 'Lock'
     unlock: 'Unlock'
+    by_rating: 'Stars'
+    by_slug: 'Name'
+    by_colour: 'Colour'
+    by_created_at: 'Time'
   placeholder:
     name: 'Name'
     prefix: 'Serie or Line Name'
