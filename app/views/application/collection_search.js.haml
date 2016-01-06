@@ -1,3 +1,8 @@
+$('#filterPolish').val($('#secondarySearchPolish').val());
+- if params[:filter_brand]
+  - check_boxes = ''
+  - params[:filter_brand].each{|b| check_boxes += (check_box_tag('filter_brand[' + b[0] + ']', nil, true, id: nil))}
+  $('#filterBrand').html('#{j(check_boxes).html_safe}');
 - if @reset
   $('#secondaryResults').show();
   $('#secondarySearchResults').hide();

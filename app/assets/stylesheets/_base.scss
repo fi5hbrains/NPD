@@ -171,10 +171,22 @@ a:hover{ color: $colourLinkHover }
     background: $colourHeader;
     color: white;
   }
-  .active { background: $colourButton }
+  .active { background: $colourHeader }
   .active a { color: white }
 }
-
+.tag{
+  position:relative;
+  z-index: 1;
+  color: $colourLink;
+  text-decoration: none;
+  display: inline-block;
+  padding: 4px .2em 1px;
+  margin: -4px .2em -1px 0;
+  border-radius: $radiusMain;
+  cursor: pointer;
+}
+.tags input[type='checkbox'] { display: none }
+input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader;}
 // ------------------------------ ID Blocks ------------------------------ //
 .avatar{
   height: 48px;

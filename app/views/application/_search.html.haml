@@ -12,6 +12,8 @@
   .search{id: id}
     - if collection_search || collect_search
       = hidden_field_tag :box_id, @box.id
+      - if collection_search
+        #filterBrand.hidden
     = hidden_field_tag :brand_id, @brand.id if @brand
     = hidden_field_tag :polish_id, @polish.id if @polish
     - setup.each do |p|

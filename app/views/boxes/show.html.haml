@@ -44,10 +44,11 @@
     
   %h3 Brands
   .tags
-    - b = []
-    - @brands.each do |brand|
-      - b << brand_to_tag(brand)
-    = b.join(', ').html_safe
+    = form_tag collection_search_path(box_id: @box.id), remote: true do
+      = hidden_field_tag :polish, params[:polish], id: 'filterPolish'
+      - @brands.each do |brand|
+        = brand_to_tag(brand)
+      = submit_tag nil, name: 'preview', class: 'hidden'
     
   = render 'lists'
 

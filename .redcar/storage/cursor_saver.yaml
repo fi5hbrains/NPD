@@ -69,15 +69,9 @@ cursor_positions:
   - :path: app/views/brands/_form.html.haml
     :cursor_offset: 29
     :timestamp: 2015-05-13 22:01:04 +04:00
-  - :path: app/helpers/users_helper.rb
-    :cursor_offset: 0
-    :timestamp: 2015-04-15 08:17:34 +04:00
   - :path: app/helpers/page_helper.rb
     :cursor_offset: 0
     :timestamp: 2015-04-14 20:46:10 +04:00
-  - :path: app/helpers/entries_helper.rb
-    :cursor_offset: 0
-    :timestamp: 2015-04-15 08:39:09 +04:00
   - :path: app/helpers/bottle_helper.rb
     :cursor_offset: 0
     :timestamp: 2015-05-15 20:16:19 +04:00
@@ -207,9 +201,6 @@ cursor_positions:
     :timestamp: 2015-09-19 08:21:23 +04:00
     :selection_offset: 830
     :block_selection_mode: false
-  - :path: app/views/bottles/_form.html.haml
-    :cursor_offset: 405
-    :timestamp: 2015-09-20 10:20:05 +04:00
   - :path: app/views/polishes/destroy.js.haml
     :cursor_offset: 38
     :timestamp: 2015-09-13 23:03:46 +04:00
@@ -726,11 +717,6 @@ cursor_positions:
     :timestamp: 2015-12-15 14:01:10 +03:00
     :selection_offset: 207
     :block_selection_mode: false
-  - :path: app/views/application/collect_search.js.haml
-    :cursor_offset: 389
-    :timestamp: 2016-01-02 23:15:57 +03:00
-    :selection_offset: 405
-    :block_selection_mode: false
   - :path: app/views/users/show.html.haml
     :cursor_offset: 327
     :timestamp: 2015-12-29 21:45:09 +03:00
@@ -752,12 +738,6 @@ cursor_positions:
   - :path: config/application.rb
     :cursor_offset: 385
     :timestamp: 2016-01-03 22:51:23 +03:00
-  - :path: config/routes.rb
-    :cursor_offset: 634
-    :timestamp: 2016-01-03 23:53:09 +03:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 4287
-    :timestamp: 2016-01-04 00:13:35 +03:00
   - :path: app/models/polish.rb
     :cursor_offset: 461
     :timestamp: 2016-01-03 18:02:26 +03:00
@@ -767,10 +747,28 @@ cursor_positions:
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 82
     :timestamp: 2016-01-05 20:51:57 +03:00
-  - :path: app/helpers/brands_helper.rb
-    :cursor_offset: 0
-    :timestamp: 2015-05-11 12:34:16 +04:00
   - :path: app/helpers/boxes_helper.rb
     :cursor_offset: 0
     :timestamp: 2015-04-14 20:46:10 +04:00
+  - :path: app/helpers/brands_helper.rb
+    :cursor_offset: 0
+    :timestamp: 2015-05-11 12:34:16 +04:00
+  - :path: app/helpers/entries_helper.rb
+    :cursor_offset: 0
+    :timestamp: 2015-04-15 08:39:09 +04:00
+  - :path: app/helpers/users_helper.rb
+    :cursor_offset: 0
+    :timestamp: 2015-04-15 08:17:34 +04:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 1297
+    :timestamp: 2016-01-05 09:43:53 +03:00
+  - :path: config/routes.rb
+    :cursor_offset: 634
+    :timestamp: 2016-01-03 23:53:09 +03:00
+  - :path: app/views/bottles/_form.html.haml
+    :cursor_offset: 561
+    :timestamp: 2016-01-05 22:47:09 +03:00
+  - :path: app/views/application/collect_search.js.haml
+    :cursor_offset: 51
+    :timestamp: 2016-01-05 23:50:17 +03:00
 files_to_retain: 0
