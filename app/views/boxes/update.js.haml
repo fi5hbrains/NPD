@@ -1,3 +1,8 @@
 $('#doneEditing').children('a').attr('href','/#{current_user.slug}/#{@box.slug}');
-$('h1').text('#{@box.name}');
+var goGather = $('#boxName').find('a');
 $('#goEdit').children('a').attr('href','/#{current_user.slug}/#{@box.slug}/edit');
+$('h1').html('#{@box.name}').append(goGather.attr('href','/#{current_user.slug}/#{@box.slug}/gather'));
+- unless %(collection wishlist giveaway).include?(@box.slug)
+  $('#gather').find('.header').text('#{@box.name}');
+$('#gather').find('.switch').attr('href','/#{current_user.slug}/#{@box.slug}');
+$('.bigPolish').each(function() {$(this).find('a').attr('href','/collect/' + $(this).data('id') + '?box=#{@box.slug}&from_list=true');});

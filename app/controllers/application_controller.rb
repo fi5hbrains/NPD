@@ -84,6 +84,13 @@ class ApplicationController < ActionController::Base
   
   def collection_search
     @reset = false
+    @box ||= Box.find(params[:box_id])
+    set_user_votes
+    sort = case cookies[:box_sort]
+    when 'slug'; 'slug ASC'
+    when 'rating'; 'rating DESC'
+    when 'colour'; 'slug ASC'
+    when 'created_at'; 'created_at ASC' end
     if !params[:polish].blank?
       @box = Box.find(params[:box_id])
       box_polish_ids = @box.polishes.map(&:id)
@@ -98,7 +105,7 @@ class ApplicationController < ActionController::Base
         else
           Polish.
             where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR (id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
-        end.first(24)
+        end.order(sort).first(2)
       end
     else
       @reset = true

@@ -1,12 +1,15 @@
 class BoxesController < ApplicationController
   include Slugify
-  before_action :set_user
   
   def show
+    set_user
+    cookies[:box_sort] ||= 'slug'
     set_box
+    set_user_votes
   end
   
   def gather
+    set_user
     set_box
     @addable = if @polishes.size > 0
       Polish.where('id NOT IN (?)', @box.polishes.pluck(:id))
@@ -53,6 +56,5 @@ class BoxesController < ApplicationController
   
   def set_user
     @user = User.find_by_slug(params[:user_id])
-    set_user_votes if @user == current_user
   end
 end
