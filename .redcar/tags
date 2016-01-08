@@ -1,4 +1,4 @@
-1452166934
+1452236424
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -243,6 +243,7 @@ set_name	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	
 set_name	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def set_name
 set_nav_icons	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def set_nav_icons 
 set_polish	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def set_polish
+set_polish_sort	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def set_polish_sort
 set_section	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def set_section
 set_user	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	    def set_user
 set_user	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def set_user

@@ -86,11 +86,6 @@ class ApplicationController < ActionController::Base
     @reset = false
     @box ||= Box.find(params[:box_id])
     set_user_votes
-    sort = case cookies[:box_sort]
-    when 'slug'; 'slug ASC'
-    when 'rating'; 'rating DESC'
-    when 'colour'; 'slug ASC'
-    when 'created_at'; 'created_at ASC' end
     if !params[:polish].blank?
       @box = Box.find(params[:box_id])
       box_polish_ids = @box.polishes.map(&:id)
@@ -105,7 +100,7 @@ class ApplicationController < ActionController::Base
         else
           Polish.
             where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR (id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
-        end.order(sort).first(2)
+        end.order(set).first(2)
       end
     else
       @reset = true
@@ -163,7 +158,13 @@ class ApplicationController < ActionController::Base
   def path; Rails.root.join('public').to_s end
   def in_lab?; params[:lab] end
   def in_box? box, polish; (box || []).detect{|item| item.polish_id == polish.id} end 
-  
+  def set_polish_sort
+    case cookies[:box_sort]
+    when 'slug'; 'slug ASC'
+    when 'rating'; 'rating DESC'
+    when 'colour'; 'h ASC'
+    when 'created_at'; 'box_items.created_at ASC' end
+  end
   private
   
   def current_user_session
