@@ -1,2 +1,14 @@
-$('#{j(render(@comment).html_safe)}').prependTo('#comments');
+- if @comment.commentable_type == 'Comment'
+  var $parent = $('#comment_#{@comment.commentable_id}')
+  $parent.after('#{j(render(@comment).html_safe)}');
+  if ($parent.hasClass('secondary') || $parent.hasClass('tertiary')){
+  $('#comment_#{@comment.id}').addClass('tertiary');
+  }else{
+  $('#comment_#{@comment.id}').addClass('secondary');
+  }
+  $('#new_comment').insertBefore($('#comments'));
+  $('.comment.reply').remove();
+  history.pushState({}, '', '#{request.referrer.split('?')[0]}');
+- else
+  $('#{j(render(@comment).html_safe)}').prependTo('#comments');
 $('#commentInput').val('').trigger('keyup');
