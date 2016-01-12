@@ -36,7 +36,7 @@
     %h2.clearFix= t 'comments.header'
     - unless params[:edit_id] || params[:reply_id]
       = render 'comments/form', comment: Comment.new, commentable: @polish
-    #comments= render @comments
+    #comments{'data-url' => request.original_url.split('?')[0]}= render @comments
   - if @related  
     %section
       %h2

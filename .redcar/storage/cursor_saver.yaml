@@ -485,9 +485,6 @@ cursor_positions:
   - :path: db/migrate/20151215100605_add_prefix_to_polish.rb
     :cursor_offset: 96
     :timestamp: 2015-12-15 13:09:24 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 1096
-    :timestamp: 2015-12-15 14:03:29 +03:00
   - :path: app/views/application/search.html.haml
     :cursor_offset: 169
     :timestamp: 2015-10-10 22:10:24 +04:00
@@ -773,4 +770,9 @@ cursor_positions:
   - :path: app/controllers/user_sessions_controller.rb
     :cursor_offset: 464
     :timestamp: 2016-01-05 08:45:15 +03:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 103
+    :timestamp: 2016-01-12 20:16:57 +03:00
+    :selection_offset: 110
+    :block_selection_mode: false
 files_to_retain: 0

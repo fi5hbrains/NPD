@@ -11,10 +11,10 @@
     .body
       = comment.body.gsub(/\n/, '<br/>').html_safe
       .iconArray.withText<
-        = link_to anchor: "comment_#{comment.id}", reply_id: comment.id do
+        = link_to({anchor: "comment_#{comment.id}", reply_id: comment.id}, class: 'cReply') do
           <svg class='icon hoverBack withText'><use xlink:href='#undo' /></svg>Reply
         - if comment.user_id == current_user.try(:id)
-          = link_to anchor: "comment_#{comment.id}", edit_id: comment.id do
+          = link_to({anchor: "comment_#{comment.id}", edit_id: comment.id}, class: 'cEdit') do
             <svg class='icon hoverBack withText'><use xlink:href='#pencil' /></svg>Edit
           = link_to comment, method: :delete, remote: true do
             <svg class='icon hoverBack withText'><use xlink:href='#trash' /></svg>Delete

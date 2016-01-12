@@ -1,6 +1,8 @@
 - if @comment.commentable_type == 'Comment'
   var $parent = $('#comment_#{@comment.commentable_id}')
-  $parent.after('#{j(render(@comment).html_safe)}');
+  var $current = $parent.after('#{j(render(@comment).html_safe)}').next();
+  $current.find('.cReply').attr('href',$('#comments').data('url') + '?reply_id=' + $current.data('id') + '#comment_' + $current.data('id'));
+  $current.find('.cEdit').attr('href',$('#comments').data('url') + '?edit_id=' + $current.data('id') + '#comment_' + $current.data('id'));
   if ($parent.hasClass('secondary') || $parent.hasClass('tertiary')){
   $('#comment_#{@comment.id}').addClass('tertiary');
   }else{
