@@ -133,6 +133,12 @@ $(document).on 'ready page:load', ->
           retry()
         return
       return
+
+  $('#commentInput').keydown (event) ->
+    if event.keyCode == 13 && !event.shiftKey
+      $(@form).submit()
+      return false
+    return
       
 skipBlanks = (element) ->
   element.find(':input[type="text"]').each (->

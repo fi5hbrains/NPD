@@ -16,7 +16,7 @@
         - if comment.user_id == current_user.try(:id)
           = link_to anchor: "comment_#{comment.id}", edit_id: comment.id do
             <svg class='icon hoverBack withText'><use xlink:href='#pencil' /></svg>Edit
-          = link_to comment, method: :delete do
+          = link_to comment, method: :delete, remote: true do
             <svg class='icon hoverBack withText'><use xlink:href='#trash' /></svg>Delete
     .voteCounter<
       %span.vote{class: comment.rating > 0 ? 'positive' : comment.rating < 0 ? 'negative' : ''}= comment.rating > 0 ? "+#{comment.rating}" : comment.rating

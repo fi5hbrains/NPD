@@ -170,12 +170,6 @@ cursor_positions:
   - :path: app/views/polishes/note.js.haml
     :cursor_offset: 0
     :timestamp: 2015-09-03 11:14:26 +04:00
-  - :path: app/views/comments/update.js.haml
-    :cursor_offset: 0
-    :timestamp: 2015-09-12 08:59:25 +04:00
-  - :path: app/views/comments/destroy.js.haml
-    :cursor_offset: 0
-    :timestamp: 2015-09-12 08:59:36 +04:00
   - :path: lib/magick.rb
     :cursor_offset: 774
     :timestamp: 2015-09-16 11:03:55 +04:00
@@ -462,9 +456,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_colour_picker.scss
     :cursor_offset: 265
     :timestamp: 2015-12-05 07:04:28 +03:00
-  - :path: app/controllers/user_sessions_controller.rb
-    :cursor_offset: 753
-    :timestamp: 2015-11-13 20:35:07 +03:00
   - :path: app/assets/stylesheets/_jcrop.scss
     :cursor_offset: 46
     :timestamp: 2015-12-11 15:39:55 +03:00
@@ -610,9 +601,6 @@ cursor_positions:
   - :path: app/controllers/comments_controller.rb
     :cursor_offset: 62
     :timestamp: 2015-12-28 11:04:44 +03:00
-  - :path: app/views/comments/_comment.html.haml
-    :cursor_offset: 870
-    :timestamp: 2015-12-28 11:05:37 +03:00
   - :path: app/views/comments/create.js.haml
     :cursor_offset: 89
     :timestamp: 2015-10-17 19:36:36 +04:00
@@ -744,9 +732,6 @@ cursor_positions:
   - :path: app/views/application/_lists.html.haml
     :cursor_offset: 402
     :timestamp: 2015-12-02 21:57:47 +03:00
-  - :path: app/helpers/boxes_helper.rb
-    :cursor_offset: 209
-    :timestamp: 2016-01-06 22:10:21 +03:00
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 2095
     :timestamp: 2015-12-30 11:10:30 +03:00
@@ -764,15 +749,30 @@ cursor_positions:
   - :path: app/views/boxes/show.js.haml
     :cursor_offset: 67
     :timestamp: 2016-01-07 14:13:19 +03:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 3461
-    :timestamp: 2016-01-07 09:46:11 +03:00
+  - :path: app/views/comments/update.js.haml
+    :cursor_offset: 0
+    :timestamp: 2015-09-12 08:59:25 +04:00
+  - :path: app/views/comments/_comment.html.haml
+    :cursor_offset: 1072
+    :timestamp: 2016-01-12 13:42:19 +03:00
   - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 190
-    :timestamp: 2016-01-07 13:45:32 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 1657
-    :timestamp: 2016-01-07 00:17:41 +03:00
-    :selection_offset: 1606
+    :cursor_offset: 971
+    :timestamp: 2016-01-08 09:40:39 +03:00
+  - :path: app/controllers/user_sessions_controller.rb
+    :cursor_offset: 850
+    :timestamp: 2016-01-05 08:45:15 +03:00
+    :selection_offset: 849
     :block_selection_mode: false
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 4294
+    :timestamp: 2016-01-09 02:38:57 +03:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 1484
+    :timestamp: 2016-01-07 00:17:41 +03:00
+  - :path: app/helpers/boxes_helper.rb
+    :cursor_offset: 150
+    :timestamp: 2016-01-08 00:55:27 +03:00
+  - :path: app/views/comments/destroy.js.haml
+    :cursor_offset: 0
+    :timestamp: 2015-09-12 08:59:36 +04:00
 files_to_retain: 0
