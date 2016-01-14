@@ -1,10 +1,10 @@
 .blockx2
+  #status= @status
   #notice= raw(notice)
   -if current_user
     = link_to current_user.name, current_user
     = link_to 'Log out', user_session_path, method: :delete
-  %h2.centeredText Ce ne sont pas une blague, Votre Majesté! You are the 100,000th visitor! FÉLICITATIONS À VOUS!
-  -# %h2.centeredText= t('welcome.hi')
+  %h2.centeredText= t('welcome.hi')
 
   #loginForm.block.center.animated
     = form_for @user, url: '/', remote: true do |f|

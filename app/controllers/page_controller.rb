@@ -1,5 +1,6 @@
 class PageController < ApplicationController
   def index
+    @status = 'stare'
     @user = params[:user] ? User.new(params.require(:user).permit(:name, :password, :invite_phrase, :avatar)) : User.new
     @focus = 'user_name'
     @submit_text = t('form.enter')
@@ -21,8 +22,10 @@ class PageController < ApplicationController
     if params[:preview]
       @user.valid?
       if @shake = (@user.errors[:name].present? || @user.errors[:password].present?)
+        @status = 'explain error'
         @focus = (@user.errors[:password].present? ? 'user_password' : 'user_name')
       else
+        @status = 'say important'
         @focus = 'user_invite_phrase'
         @button_name = 'submit'
       end
@@ -32,6 +35,7 @@ class PageController < ApplicationController
         if @user_session.save
           render js: "window.location.href = '#{user_path(@suspect)}'"
         else
+          @status = 'explain error'
           @shake = true
         end
       else
@@ -39,6 +43,7 @@ class PageController < ApplicationController
           # render js: "window.location.href = '#{edit_user_path(@user)}'"
           render js: "window.location.href = '#{user_path(@user)}'"
         else
+          @status = 'explain error'
           @shake = true
         end
       end

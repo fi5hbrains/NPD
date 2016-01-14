@@ -6,6 +6,13 @@ $(document).on 'ready page:load', ->
       data: field.serialize() + '&active=' + document.activeElement.getAttribute('id')
       type: 'POST'
       dataType: "script"
+      
+  $('#user_password').on 'focus', ->
+    $('#status').text('close eyes')
+  $('#user_password').focusout ->
+    $('#status').text('stare')
+  $('#user_name').on 'focus', ->
+    $('#status').text('smile')
 
   $('textarea.resizable').each ->
     textareaResize this

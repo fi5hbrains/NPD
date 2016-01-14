@@ -1,5 +1,5 @@
 $('#user_submit').html("#{@submit_text}").attr('name',"#{@button_name}");
-
+$('#status').text('#{@status}');
 - if @suspect
   $('#avatar img').attr('src', "#{escape_javascript(@suspect.avatar.thumb.url)}");
   $('#user_password').attr('type','password');
