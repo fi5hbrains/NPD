@@ -127,7 +127,8 @@ class ApplicationController < ActionController::Base
           where(brand_ids ? {brand_id: brand_ids} : nil).
           where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
           "slug ilike ?", "#{params[:polish] || ''}%").        
-          where(box_polish_ids.empty? ? nil : ['id NOT IN (?)', box_polish_ids])
+          where(box_polish_ids.empty? ? nil : ['id NOT IN (?)', box_polish_ids]).
+          order('created_at ASC')
         if @polishes.size > 12
           @next_item = @polishes[12]
           @polishes = @polishes[0..11]
