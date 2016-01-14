@@ -15,7 +15,7 @@ class BoxesController < ApplicationController
       Polish.where('id NOT IN (?)', @box.polishes.pluck(:id))
     else
       Polish.where(nil)
-    end.page(params[:page_b]).per(12)
+    end.order('created_at ASC').page(params[:page_b]).per(12)
     render :show
   end
   
