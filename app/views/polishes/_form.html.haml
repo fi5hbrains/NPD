@@ -57,7 +57,7 @@
           .colourBack= f.text_field :gloss_colour, class: 'colour noAlpha', value: @polish.gloss_colour || '#dadada'
           = f.label :gloss_colour, t('lab.section.highlight_colour')
       
-      %h3= t('lab.section.add_layers')
+      %h3= t('lab.section.add_layer')
       - %w(shimmer flake glitter).each do |type|
         = link_to_add_layer type, f
       glass sand
