@@ -1,7 +1,7 @@
 .iconArray.relative<
   - %w(collection wishlist giveaway).each do |name|
     =link_to collect_path(@polish.id, box: name), method: :post, remote: true do
-      %span{id: name + 'List'}
+      %span{id: name + 'List'}>
       <svg class='icon isOk button roundButton check' #{"style='display:none'" unless current_user.boxes.find_by(slug: name).box_items.detect{|item| item.polish_id == @polish.id} }><use xlink:href='#check' /></svg>
   .switchWrapper.inline
     %ul#boxesList.menu.furlable

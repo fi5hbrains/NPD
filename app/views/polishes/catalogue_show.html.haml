@@ -25,7 +25,7 @@
           = render 'stars', polish: @polish
         %p
           %span#votesCount= @polish.votes_count
-          = 'vote'.pluralize @polish.votes_count
+          = 'vote'.pluralize( @polish.votes_count)
     - if current_user
       = render 'collections'  
       #note.resizable.relative{'data-polish_id' => @polish.id}
