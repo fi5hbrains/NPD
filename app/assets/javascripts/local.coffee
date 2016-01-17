@@ -8,11 +8,13 @@ $(document).on 'ready page:load', ->
       dataType: "script"
       
   $('#user_password').on 'focus', ->
-    $('#status').text('close eyes')
+    unless $('#status').text() == 'explain error'
+      $('#status').text('look away')
   $('#user_password').focusout ->
     $('#status').text('stare')
   $('#user_name').on 'focus', ->
-    $('#status').text('smile')
+    unless $('#status').text() == 'explain error'
+      $('#status').text('smile')
 
   $('textarea.resizable').each ->
     textareaResize this

@@ -1,9 +1,12 @@
 .iconArray.relative<
   - %w(collection wishlist giveaway).each do |name|
-    =link_to collect_path(@polish.id, box: name), method: :post, remote: true do
+    =link_to collect_path(@polish.id, box: name), method: :post, remote: true, class: 'tipped' do
+      .tooltip
+        .tip
+        = t 'tooltip.' + name
       %span{id: name + 'List'}>
       <svg class='icon isOk button roundButton check' #{"style='display:none'" unless current_user.boxes.find_by(slug: name).box_items.detect{|item| item.polish_id == @polish.id} }><use xlink:href='#check' /></svg>
-  .switchWrapper.inline
+  .switchWrapper.inline.tipped
     %ul#boxesList.menu.furlable
       %li.current= t('catalogue.titles.lists')
       - current_user.boxes.each do |box|
@@ -23,4 +26,8 @@
               = button_tag class: 'inline noWrap' do
                 <svg class='icon '><use xlink:href='#plus' /></svg>
       <svg class='icon linkLike switch' data-activate='#boxesList'><use xlink:href='#x'/></svg>        
+    .tooltip
+      .tip
+      = t 'tooltip.list'
     %span#i_scroll.switch{'data-activate' => '#boxesList'}
+

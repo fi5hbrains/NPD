@@ -25,7 +25,7 @@ class PageController < ApplicationController
         @status = 'explain error'
         @focus = (@user.errors[:password].present? ? 'user_password' : 'user_name')
       else
-        @status = 'say important'
+        @status = 'say invites only'
         @focus = 'user_invite_phrase'
         @button_name = 'submit'
       end
@@ -43,7 +43,7 @@ class PageController < ApplicationController
           # render js: "window.location.href = '#{edit_user_path(@user)}'"
           render js: "window.location.href = '#{user_path(@user)}'"
         else
-          @status = 'explain error'
+          @status = 'wrong passphrase'
           @shake = true
         end
       end

@@ -393,6 +393,38 @@ h1, h2 { .icon.roundButton { margin-bottom: -5px }}
 .gloss[for=polish_gloss_type_glass]{ background-position:  -126px -2px}
 .gloss[for=polish_gloss_type_mirror]{ background-position: -185px -2px}
 input:checked + .spotable > .gloss{ background-position-y: -55px}
+.tooltip{
+  display: none;
+  opacity: 0;
+  max-width: 200px;
+  text-decoration: none;
+  color: $colourFont;
+  bottom: -10px;
+  position: absolute;
+  padding: 5px 10px;
+  z-index: 2;
+  background-color: $colourNotepaper;
+  border-radius: $radiusMain;
+  .tip{
+    border-left: solid transparent 10px;
+    border-right: solid transparent 10px;
+    border-bottom: solid $colourNotepaper 10px;
+    top: -10px;
+    height: 0;
+    left: 10px;
+    position: absolute;
+    width: 0;  }
+}
+.voteBox .tooltip { bottom: -26px }
+.tipped:hover .tooltip{ 
+  display: inline-block;
+  animation-duration: .4s;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+  animation-name: tippedDown
+}
+
+@keyframes tippedDown { 100% { transform: translateY(10px);  opacity: 1 } }
 
 // ----------------------------- Comment ------------------------------ //
 .comment{

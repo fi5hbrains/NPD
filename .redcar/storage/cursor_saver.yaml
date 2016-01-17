@@ -671,9 +671,6 @@ cursor_positions:
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 52
     :timestamp: 2016-01-05 23:30:28 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 4241
-    :timestamp: 2016-01-07 00:16:12 +03:00
   - :path: app/views/application/_search.html.haml
     :cursor_offset: 528
     :timestamp: 2016-01-06 10:26:12 +03:00
@@ -768,6 +765,9 @@ cursor_positions:
   - :path: app/views/polishes/_form.html.haml
     :cursor_offset: 2966
     :timestamp: 2016-01-15 07:50:22 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 10363
+    :timestamp: 2016-01-16 16:50:13 +03:00
   - :path: app/views/application/_stars.html.haml
     :cursor_offset: 419
     :timestamp: 2015-09-05 13:58:51 +04:00

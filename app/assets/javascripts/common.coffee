@@ -97,18 +97,35 @@ $(document).on 'ready page:load', ->
   range = undefined
   rangeWidth = undefined
   $(document).on 'mouseenter', '.voteBox', (->
+    tooltip = $(this).find('.tooltip')
     containerWidth = $(this).width()
     offset = $(this).offset().left
     w = undefined
     rating = undefined
+    oldRating = undefined
     range = $(this).find('.stars.absolute')
     rangeWidth = range.width()
     range.attr 'class', (index, classNames) ->
       classNames + ' active'
     $(this).mousemove (e) ->
       rating = Math.round((e.pageX - offset) * 5 / containerWidth + 0.5)
-      w = rating * 20 + '%'
-      range.width(w)
+      if oldRating != rating
+        w = rating * 20 + '%'
+        range.width(w)
+        newTooltip = tooltip.clone(true)
+        tooltip.before(newTooltip)
+        tooltip.remove()
+        tooltip = newTooltip
+        tooltip.find('span').text(tooltip.data('s_' + rating))
+        if rating < 4
+          tooltip.removeAttr('style')
+          tooltip.css('left', (rating * 20 - 20) + '%')
+          tooltip.find('.tip').removeAttr('style')
+        else
+          tooltip.css('left', 'auto').css('right',((5 - rating) * 20) + '%')
+          tooltip.find('.tip').css('left','auto').css('right','10px')
+        oldRating = rating
+
     $(this).on 'click', -> 
       rangeWidth = w
       range.attr 'class', (index, classNames) ->

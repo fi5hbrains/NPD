@@ -83,6 +83,17 @@ en:
     lab: 'Laboratory'
     other: 'Nowhere'
     
+  tooltip:
+    collection: 'My Collection'
+    wishlist: 'Wish List'
+    giveaway: 'Giveaway List'
+    list: 'Custom Lists'
+    one: 'Should have never existed'
+    two: "Don't like it"
+    three: "OK"
+    four: 'Like it'
+    five: 'A must-have for everyone'
+    
   search:
     brand: 'Brand'
     polish: 'Polish'

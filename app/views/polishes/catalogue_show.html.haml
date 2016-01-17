@@ -21,7 +21,10 @@
         <svg class='star'> <use xlink:href='#star'/></svg>
         #rating= @polish.rating.round(1)
       .info>
-        #voteBox.voteBox
+        #voteBox.voteBox.tipped
+          .tooltip{'data-s_1' => t('tooltip.one'),'data-s_2' => t('tooltip.two'),'data-s_3' => t('tooltip.three'),'data-s_4' => t('tooltip.four'),'data-s_5' => t('tooltip.five')}
+            .tip
+            %span OK
           = render 'stars', polish: @polish
         %p
           %span#votesCount= @polish.votes_count
