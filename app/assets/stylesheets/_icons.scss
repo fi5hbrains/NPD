@@ -98,8 +98,8 @@ a:hover {
   .icon:not(.option) { fill: lighten($colourButton, $lightenOnHover) } 
   .icon.button,.roundButton { fill: white }
 }
-a[data-method=delete] .icon{ fill: $colourBad }
-a[data-method=delete]:hover .icon{ fill: lighten($colourBad, $lightenOnHover) }
+a[data-method=delete] .icon:not(.roundButton){ fill: $colourBad }
+a[data-method=delete]:hover .icon:not(.roundButton){ fill: lighten($colourBad, $lightenOnHover) }
 .linkLike { fill:$colourButton }
 .linkLike:hover { fill: lighten($colourButton, $lightenOnHover) }
 .icon.check { fill: $colourMain }

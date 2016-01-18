@@ -33,8 +33,12 @@
       %h3= t 'user.headers.quests'
     %h3
       = t 'user.headers.invites'
-      = link_to get_invite_path, method: 'post', remote: true do
-        <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
+      = link_to get_invite_path, class: 'relative tipped', method: 'post', remote: true do
+        .tooltip.tippedR.noWrap
+          .tip
+          %span= t 'tooltip.add_invite'
+        %svg.icon.button.inline.roundButton.previewButton
+          <use xlink:href=#plus />
     %ul#invites
       - (invites = @user.invites).each do |invite|
         %li

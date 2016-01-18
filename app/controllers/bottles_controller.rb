@@ -1,7 +1,7 @@
 class BottlesController < ApplicationController
   
   before_action :set_bottle, only: [:show, :edit, :update, :destroy]
-  before_action :set_brand, except: [:destroy, :update]
+  before_action :set_brand
   
   def new
     @bottle = @brand.bottles.new
@@ -27,7 +27,6 @@ class BottlesController < ApplicationController
   end
 
   def update
-    @brand = find_brand
     if @bottle.update_attributes(bottle_params)
       Magick.convert "\"#{bottle_parts_path + @bottle.base_url.split('/').last}\"","-resize '50x64^'", "\"#{Rails.root.to_s}/public#{@bottle.base_thumb_url}\""      
       redirect_to brand_path(params[:brand_id]), notice: @bottle.name + ' bottle was successfully updated.' 
@@ -37,15 +36,18 @@ class BottlesController < ApplicationController
   end
 
   def destroy
-    brand = @bottle.brand_name
-    FileUtils.rm_rf ("\"#{bottle_parts_path}\"")
+    FileUtils.rm_rf( path + @bottle.bottle_folder )
+    @bottle_id = @bottle.id
     @bottle.destroy
-    redirect_to brand_url(brand)
+    respond_to do |format|
+      format.html { redirect_to edit_brand_path(@brand), method: :get, notice: 'Polish was successfully cloned.' }
+      format.js
+    end
   end
   private
   def bottle_params
     params.require(:bottle).permit(:name, :blur)
   end
   def set_brand; @brand = Brand.find_by_slug(params[:brand_id]) end
-  def find_bottle; @bottle = Bottle.find(params[:id]) end
+  def set_bottle; @bottle = Bottle.find(params[:id]) end
 end

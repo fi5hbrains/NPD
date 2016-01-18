@@ -18,6 +18,7 @@ class BrandsController < ApplicationController
 
   def edit
     set_brand
+    set_bottles
   end
 
   def create

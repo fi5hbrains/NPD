@@ -3,8 +3,13 @@
 %section#action.left.block
   %h3.bigMargin
     = t('lab.new_polish_bottles')
-    = link_to new_brand_bottle_path(@brand) do
-      <svg class='icon button inline roundButton previewButton'><use xlink:href=#plus /></svg>
+    = link_to new_brand_bottle_path(@brand), class: 'tipped relative' do
+      .tooltip.tippedR.noWrap
+        .tip
+        %span= t 'tooltip.add_bottle'
+      %svg.icon.button.inline.roundButton.previewButton
+        <use xlink:href=#plus />
+
   .array
     - @bottles.each do |bottle|
       .arrayItem>

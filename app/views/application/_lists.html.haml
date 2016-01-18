@@ -1,7 +1,12 @@
 %h3 
   = t 'user.headers.other_lists'
   - if is_owner
-    <svg class='icon button roundButton switch' data-show='#listForm'><use xlink:href=#plus /></svg>
+    .inline.relative.tipped
+      .tooltip.tippedR.noWrap
+        .tip
+        %span= t 'tooltip.add_list'
+      %svg.icon.button.switch.roundButton.previewButton{'data-show' => '#listForm'}
+        <use xlink:href=#plus />
 
 %ul#otherLists
   - if is_owner

@@ -1,8 +1,21 @@
-%section#listing.block
+%section#listing.left.block
   %h2= t('lab.edit') + ' ' + @brand.name
-
   = render 'form'
 
-  = link_to 'Back', brands_path
-  
+  = link_to 'Back', @brand
+%section#action.left.block
+  %h3.bigMargin
+    = t('lab.new_polish_bottles')
+  .array
+    - @bottles.each do |bottle|
+      .arrayItem{'data-bottle' => bottle.id}>
+        - if bottle.brand_slug == 'default'
+          .bottleThumbWrapper>= image_tag( bottle.base_thumb_url, class: 'bottleThumb img')
+        - else
+          .spotable.bottleThumbWrapper>
+            = link_to brand_bottle_path(@brand, bottle), method: :delete, remote: true do
+              =image_tag bottle.base_thumb_url, class: 'bottleThumb img'
+              %svg.icon.button.roundButton.important
+                <use xlink:href=#trash />
+        = bottle.name
 

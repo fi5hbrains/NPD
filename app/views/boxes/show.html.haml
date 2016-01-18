@@ -3,8 +3,12 @@
   %h1#boxName.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}
     = @box.adapt_name
     - if is_owner
-      = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), remote: true do
-        <svg class='icon button roundButton'><use xlink:href=#plus /></svg>  
+      = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), class: 'relative tipped', remote: true do
+        .tooltip.tippedR.noWrap
+          .tip
+          %span= t 'tooltip.add_polish'
+        %svg.icon.button.inline.roundButton.previewButton
+          <use xlink:href=#plus />
   - if is_owner
     = form_tag import_user_box_path(@user, @box), id: 'controls', class: 'controls', multipart: true do
       = label_tag :spreadsheet, content_tag( :span, t('user.import'))

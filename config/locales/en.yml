@@ -88,6 +88,10 @@ en:
     wishlist: 'Wish List'
     giveaway: 'Giveaway List'
     list: 'Custom Lists'
+    add_bottle: 'Add bottle'
+    add_brand: 'Add brand'
+    add_polish: 'Add polishes'
+    add_list: 'Add list'
     one: 'Should have never existed'
     two: "Don't like it"
     three: "OK"

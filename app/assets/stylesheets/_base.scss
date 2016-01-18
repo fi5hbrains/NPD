@@ -35,7 +35,7 @@ h3{
   font-size: $fontSizeHead;
   line-height: 20px;
 }
-h3.bigMargin { margin-top: 42px }
+h3.bigMargin { margin-top: 53px }
 h1 a, h2 a, h3 a {
   text-decoration: none;
   color: $colourHeader;
@@ -224,7 +224,7 @@ input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader;
 .idBlock.polish > .pic > img { width: 64px; height: 69px }
 .idBlock.user {min-height: 96px }
 .idBlock.signature > .pic { margin-top: 3px }
-
+.info { position:relative; z-index: 1;}
 .noFlow + .body, .noFlow > .info { margin-left: 53px }
 .bottomUp{
   & > .pic{
@@ -356,6 +356,7 @@ button.inField:focus .icon{ fill: white }
   border-radius: 50%;
   padding: 7px 6px;
   margin-bottom: -7px;
+  margin-top: -8px;
   margin-left: 10px;
   fill: white;
   &:hover { fill: white }
@@ -398,8 +399,12 @@ input:checked + .spotable > .gloss{ background-position-y: -55px}
   opacity: 0;
   max-width: 200px;
   text-decoration: none;
-  color: $colourFont;
-  bottom: -10px;
+  font-size: $fontSizeBase; 
+  line-height: 20px;
+  font-family: $fontMain; 
+  font-weight: 300;
+  color: $colourFont;  
+  bottom: -15px;
   position: absolute;
   padding: 5px 10px;
   z-index: 2;
@@ -413,9 +418,17 @@ input:checked + .spotable > .gloss{ background-position-y: -55px}
     height: 0;
     left: 10px;
     position: absolute;
-    width: 0;  }
+    width: 0;
+  }
 }
-.voteBox .tooltip { bottom: -26px }
+.tooltip.tippedR{
+  right: -3px;
+  .tip { left: auto; right: 10px }
+}
+h1 .tooltip { bottom: -20px }
+h2 .tooltip { bottom: -23px }
+h3 .tooltip { bottom: -30px }
+.voteBox .tooltip { bottom: -28px }
 .tipped:hover .tooltip{ 
   display: inline-block;
   animation-duration: .4s;
@@ -494,8 +507,15 @@ input:checked + .spotable > .gloss{ background-position-y: -55px}
   height: 69px;
   margin: 3px 5px;
 }
-.spotable.bottleThumbWrapper{ margin:-10px -13px 0;}
-
+.bottleThumbWrapper{ 
+  position:relative;
+  margin:-10px -13px 0;
+}
+.bottleThumbWrapper .roundButton{
+  position:absolute;
+  top:39px;
+  left:11px;
+}
 // ------------------------------ Local ------------------------------ //
 #boxNameField{ 
   font-family: $fontHead;
