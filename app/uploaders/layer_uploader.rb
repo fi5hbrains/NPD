@@ -4,14 +4,14 @@ class LayerUploader < CarrierWave::Uploader::Base
   storage :file
   
   def store_dir
-    "assets/brands/#{model.brand_slug}/bottles/#{model.id}"
+    model.bottle_folder
   end
 
   version :thumb, if: :is_base? do
     process :resize
   end
   
-  def resize(source = self, width = 64, height = 69)
+  def resize(source = self, width = Defaults::BOTTLE[0], height = Defaults::BOTTLE[1])
     Magick.convert source.to_s, "-resize #{w = width}x#{h = height}^ -gravity center -extent #{w}x#{h}", self.to_s
   end
 

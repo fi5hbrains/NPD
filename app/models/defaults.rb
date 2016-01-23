@@ -11,7 +11,7 @@ class Defaults < ActiveRecord::Base
     lab_polishes: 12
   }
   CANVAS = [305,572]
-  BOTTLE = [128,139]
+  BOTTLE = [128,186]
   COLOURS = {
     en: {
       'red'            => {h: 0..10, s: 50..100, l: 30..78, h2: 331..360},

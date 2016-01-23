@@ -34,7 +34,10 @@
             .cell= f.label :reference, t('form.choose_file'), class: 'button'
             .cell= f.text_field :remote_reference_url, placeholder: t('placeholder.http')
         <svg class='icon linkLike switch' data-activate='#loadReference'><use xlink:href='#x'/></svg>
-      #span#getRef.icon.i64.centered.linkLike.switch{'data-activate' => '#loadReference'}
+      %span#getRef.icon.i64.centered.linkLike.switch.tipped.relative{'data-activate' => '#loadReference'}
+        .tooltip.noWrap
+          .tip
+          %span= t('tooltip.upload_ref')
 
     
     %h3= t('lab.section.bottle')
@@ -58,9 +61,9 @@
           = f.label :gloss_colour, t('lab.section.highlight_colour')
       
       %h3= t('lab.section.add_layer')
-      - %w(shimmer flake glitter).each do |type|
+      - %w(shimmer flake glitter sand).each do |type|
         = link_to_add_layer type, f
-      glass sand
+      todo: glass flecks
         
       - Defaults::MAGNETS.each do |m|
         = f.radio_button :magnet, m, class: 'hidden external uncheckable'

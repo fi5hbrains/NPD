@@ -9,7 +9,7 @@
   .array
     - @bottles.each do |bottle|
       .arrayItem{'data-bottle' => bottle.id}>
-        - if bottle.brand_slug == 'default'
+        - if bottle.brand_slug != @brand.slug
           .bottleThumbWrapper>= image_tag( bottle.base_thumb_url, class: 'bottleThumb img')
         - else
           .spotable.bottleThumbWrapper>

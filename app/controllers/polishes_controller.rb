@@ -263,18 +263,19 @@ class PolishesController < ApplicationController
     @polish.magnet ||= 'blank'
     old_coats_count = @polish.coats_count
     @polish.coats_count = (1 + 8 * (100 - (@polish.opacity || 100)) / 100).round
-    noise_size = (@layers.size > 1 ? 10 : 0)
-    noise_density = 0
-    small_noise_density = 0
+    
+    noise_density = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
+    noise_size = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
     top_layer = 'base'
 
     FileUtils.mkdir_p(path + tmp_folder)  
     
     @layers.each do |layer|
       Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
-      noise_size = layer.particle_size if %w(glitter flake).include?(layer.layer_type) && layer.particle_size  > noise_size
-      noise_density += layer.particle_density if %w(glitter flake).include?(layer.layer_type)
-      small_noise_density += layer.particle_density if layer.layer_type == 'shimmer' && layer.particle_size > 10
+      unless layer.layer_type == 'base'
+        noise_density[layer.layer_type] += layer.particle_density
+        noise_size[layer.layer_type] = [noise_size[layer.layer_type], layer.particle_size].max
+      end
       top_layer = layer.layer_type
 
       if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
@@ -394,10 +395,27 @@ class PolishesController < ApplicationController
       end
     end
   
-    noise_density = small_noise_density if noise_density == 0 && small_noise_density > 0
+    # ref_density = (noise_density <= 33 ? (top_layer == 'shimmer' ? 'few' : nil) : noise_density <= 66 ? 'some' : noise_density <= 85 ? 'many' : 'extra')
+    # ref_size = ((noise_size <= 5 || !ref_density) ? 'default' : top_layer == 'flake' ? 'foil' : noise_size <= 10 ? 'tiny' : noise_size <= 30 ? 'small' : noise_size <= 50 ? 'medium' : 'big' )
     ref_type = @polish.gloss_type
-    ref_density = (noise_density <= 33 ? (top_layer == 'shimmer' ? 'few' : nil) : noise_density <= 66 ? 'some' : noise_density <= 85 ? 'many' : 'extra')
-    ref_size = ((noise_size <= 5 || !ref_density) ? 'default' : top_layer == 'flake' ? 'foil' : noise_size <= 10 ? 'tiny' : noise_size <= 30 ? 'small' : noise_size <= 50 ? 'medium' : 'big' )
+    noisiest = noise_density.sort_by{|k,v| v}[2]
+    logger.debug noisiest.inspect
+    ref_density = 'default'
+    if noisiest[1] > 10
+      case noisiest[0]
+      when 'shimmer'
+        ref_size = (noise_size[noisiest[0]] <= 33 ? '0' : noise_size[noisiest[0]] <= 66 ? '25' : '50')
+        ref_density = (noisiest[1] <= 33 ? 'few' : noisiest[1] <= 66 ? 'some' : noisiest[1] <= 95 ? 'many' : 'extra')
+      when 'flake'
+        if noisiest[1] >= 20 
+          ref_size = 'foil'
+          ref_density = (noisiest[1] <= 50 ? 'some' : noisiest[1] <= 95 ? 'many' : 'extra')
+        end
+      when 'glitter'
+        ref_size = (noise_size[noisiest[0]] <= 20 ? '50' : noise_size[noisiest[0]] <= 50 ? '45' : '100')
+        ref_density = (noisiest[1] <= 45 ? 'few' : noisiest[1] <= 90 ? 'some' : noisiest[1] <= 125 ? 'many' : 'extra')
+      end
+    end
     ref_source = "reflection_#{[ref_type, ref_size, ref_density].compact.join('_')}.png"
     Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'", reflection   
   end
@@ -425,12 +443,12 @@ class PolishesController < ApplicationController
     
     stack = path + @polish.coat_url   
     (@polish.coats_count - 1).times{|c| stack += " #{path + @polish.coat_url( c + 1)} -composite "}       
-    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity center #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
-    stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport 256x277-67-130 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
+    stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-68-130 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
     stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
-    stack += " \\( +clone -resize 64x69^ -gravity center -extent 64x69 -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c/2}.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.map{|c| c/2}.join('x')} -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
     stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} -write #{path + @polish.bottle_url('big', true)} +delete \\) "
     Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
     @polish.delay(queue: current_user.id).update_attributes bottling_status: true

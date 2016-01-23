@@ -1,7 +1,7 @@
 %div{class: "layer animated l" + l.layer_type.capitalize, 'data-id' => object_id}
   .table
     .cell.wide100.vMiddle
-      %h3= l.layer_type.capitalize
+      %h3= t 'lab.particles.' + l.layer_type
     - unless l.layer_type == 'base'
       .cell.noWrap.vMiddle
         <svg class='icon linkLike hoverBack cloneLayer'><use xlink:href='#dolly' /></svg>
@@ -16,35 +16,41 @@
         .arrayItem>
           = l_f.radio_button :particle_type, p, class: 'hidden', checked: p == 'hexagon'
           = l_f.label "particle_type_#{p}", nil, class: "p#{p.capitalize}"
-
-  .array.colours
-    .arrayItem>
-      .colourBack= l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
-      = t 'lab.section.colour1'
-    .arrayItem>
-      .colourBack= l_f.text_field :c_duo  ,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_duo || ''
-      = t 'lab.section.colour2'
-    .arrayItem>
-      .colourBack= l_f.text_field :c_multi,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_multi || ''
-      = t 'lab.section.colour3'
-    - if l.layer_type == 'base'
+  - unless l.layer_type == 'sand'
+    .array.colours
       .arrayItem>
-        .colourBack= l_f.text_field :c_cold, class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_cold || ''
-        = t 'lab.section.cold'
+        .colourBack= l_f.text_field :c_base ,  class: 'colour noAlpha', value: l.c_base || '#F00'
+        = t 'lab.section.colour1'
       .arrayItem>
-    .arrayItem>
-      .colourBack= l_f.text_field :highlight_colour, class: 'colour alpha', value: l.highlight_colour || 'rgba(255,255,255,.2)'
-      = t 'lab.section.light'
-    .arrayItem>
-      .colourBack= l_f.text_field :shadow_colour   , class: 'colour alpha', value: l.shadow_colour || 'rgba(0,0,0,.4)'
-      = t 'lab.section.shadow'
+        .colourBack= l_f.text_field :c_duo  ,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_duo || ''
+        = t 'lab.section.colour2'
+      .arrayItem>
+        .colourBack= l_f.text_field :c_multi,  class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_multi || ''
+        = t 'lab.section.colour3'
+      - if l.layer_type == 'base'
+        .arrayItem>
+          .colourBack= l_f.text_field :c_cold, class: 'colour noAlpha disableable' + (' disabled' if !l.c_duo).to_s, value: l.c_cold || ''
+          = t 'lab.section.cold'
+        .arrayItem>
+      .arrayItem>
+        .colourBack= l_f.text_field :highlight_colour, class: 'colour alpha', value: l.highlight_colour || 'rgba(255,255,255,.2)'
+        = t 'lab.section.light'
+      .arrayItem>
+        .colourBack= l_f.text_field :shadow_colour   , class: 'colour alpha', value: l.shadow_colour || 'rgba(0,0,0,.4)'
+        = t 'lab.section.shadow'
 
   - unless l.layer_type == 'base'    
     .array
       - %w(Particle_size Particle_density Opacity Holo_intensity Magnet_intensity).each do |p|
-        - if (p != 'Magnet_intensity' || l.layer_type == 'shimmer') && (p != 'Holo_intensity' || l.layer_type != 'sand')
+        - if (p != 'Magnet_intensity' || l.layer_type == 'shimmer') && (p != 'Holo_intensity' || l.layer_type != 'sand') && (p != 'Opacity' || l.layer_type != 'sand')
+          - if %w(shimmer flake sand).include? l.layer_type
+            - if p == 'Particle_size'
+              - step = 50
+            - elsif p == 'Particle_density'
+              - step = (l.layer_type == 'sand' ? 100 : 10)
+
           .arrayItem>
-            %div{class: "sliderV p#{p}"}
+            %div{class: "sliderV p#{p}", 'data-step' => step}
             = l_f.hidden_field p.downcase, value: (l.send(p.downcase) || Defaults::LAYER[p.downcase.to_sym])
             %svg{class: "icon iSlider s#{p}"}
             = t "lab.section.#{p.downcase}"

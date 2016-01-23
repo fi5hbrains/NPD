@@ -12,7 +12,7 @@ $(document).on 'ready page:load', ->
   jelly = document.getElementById('jelly')
   cream = document.getElementById('cream')
   if getRef
-    getRef.innerHTML = '<svg height="64" width="64"><rect class="strokeMed strokeActive noFill" stroke-width="4" stroke-dasharray="13.5,6" stroke-dashoffset="7" rx="4" height="61" width="61" y="2" x="2" stroke-width="4" fill="none"/><path opacity="0.3" d="m12,23c5,2,7,1,8-2l3-8c2-5-1-7-4-8-2-1-6.2-1.98-8,3l-3,8c-1,2-1,5,4,7zm32,34c2,4,4,4,6,3l7-4c4-2,3-6,2-8s-4-4-8-2l-7,4c-2,1-2,3,0,7zm-2-19c3,3,6,3,8,1l6-6c3-3,2-7,0-9s-6-3-9,0l-6,6c-2,2-2,5,1,8zm-10-16c4,2,7,2,8,0l5-9c2-3-1-7-3-8-3-2-7-1-9,3l-4.38,7.94c-1.6,2.1-0.6,4.1,3.4,6.1zm-4,41-26-18,0-39,3,13c1,5,8,8,12,7s5.98-7.6,8-14c-1,5,1,8,3,10,4,4,9,5,12,3-3,4-4.6,7.3-2,11,5.16,7.6,8,7,12,6-5,3-8,4-9,8-1,6,2,12,10,13z" /><path class="strokeMed strokeActive" stroke-width="4" d="m25,34,14,0" /><path class="strokeMed strokeActive" stroke-width="4" d="M32,41,32,27" /></svg>'
+    $(getRef).prepend('<svg height="64" width="64"><rect class="strokeMed strokeActive noFill" stroke-width="4" stroke-dasharray="13.5,6" stroke-dashoffset="7" rx="4" height="61" width="61" y="2" x="2" stroke-width="4" fill="none"/><path opacity="0.3" d="m12,23c5,2,7,1,8-2l3-8c2-5-1-7-4-8-2-1-6.2-1.98-8,3l-3,8c-1,2-1,5,4,7zm32,34c2,4,4,4,6,3l7-4c4-2,3-6,2-8s-4-4-8-2l-7,4c-2,1-2,3,0,7zm-2-19c3,3,6,3,8,1l6-6c3-3,2-7,0-9s-6-3-9,0l-6,6c-2,2-2,5,1,8zm-10-16c4,2,7,2,8,0l5-9c2-3-1-7-3-8-3-2-7-1-9,3l-4.38,7.94c-1.6,2.1-0.6,4.1,3.4,6.1zm-4,41-26-18,0-39,3,13c1,5,8,8,12,7s5.98-7.6,8-14c-1,5,1,8,3,10,4,4,9,5,12,3-3,4-4.6,7.3-2,11,5.16,7.6,8,7,12,6-5,3-8,4-9,8-1,6,2,12,10,13z" /><path class="strokeMed strokeActive" stroke-width="4" d="m25,34,14,0" /><path class="strokeMed strokeActive" stroke-width="4" d="M32,41,32,27" /></svg>')
   if water
     water.innerHTML = '<svg class="icon iSlider"><path stroke-opacity=".1" fill-opacity=".04" class="strokeActive" d="m20.7,7c0.2,0.3,0.3,0.8,0.3,1.5,0,3.5-1,1.5-1,3.5s1-1,1,5v1c0,4-1,4-2,4s-1-1-3-1-2,1-3,1-2,0-2-4v-1c0-6,1-3,1-5s-1,0-1-3.5c0-0.8,0.14-1.3,0.4-1.6z"/><path class="noFill strokeBase" d="m18,3v2c1.5,1.5,3,1,3,3.5,0,3.5-1,1.5-1,3.5s1-1,1,5v1c0,4-1,4-2,4s-1-1-3-1-2,1-3,1-2,0-2-4v-1c0-6,1-3,1-5s-1,0-1-3.5c0-2.5,1.5-2,3-3.5v-2"/><path class="strokeActive strokeMed" d="m13.5,2h5"/></svg>'
   if juice
@@ -152,7 +152,7 @@ $.fn.initVSlider = ->
   noUiSlider.create slider,
     start: link.value
     connect: 'lower'
-    step: 1
+    step: $(slider).data('step') || 1
     orientation: 'vertical'
     direction: 'rtl'
     range:

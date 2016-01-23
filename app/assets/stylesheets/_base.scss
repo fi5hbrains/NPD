@@ -215,13 +215,14 @@ input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader;
   display: block;
   float: left;
   margin-right: 5px;
+  overflow: hidden;
 }
 .bigPolish img{ 
-  height: 139px;
+  height: 186px;
   width: 128px;
-  margin: 0 -14px 4px -14px;
+  margin: -47px -14px 4px;
 }
-.idBlock.polish > .pic > img { width: 64px; height: 69px }
+.idBlock.polish > .pic > img { width: 64px; height: 93px; margin-top: -28px; }
 .idBlock.user {min-height: 96px }
 .idBlock.signature > .pic { margin-top: 3px }
 .info { position:relative; z-index: 1;}
@@ -481,13 +482,13 @@ h3 .tooltip { bottom: -30px }
 #previewWrapper {
   overflow: hidden;
   position: relative;
-  width: 290px;
+  width: 238px;
   height: 512px;
-  border-radius: $radiusMain;
+  border-radius: 50% 50% 45% 45%/32px 32px 128px 128px;
   img { 
     width: 305px;
     height: 572px;
-    margin: -36px -7px;
+    margin: -56px -32px;
   }
 }
 #rating{
@@ -499,13 +500,13 @@ h3 .tooltip { bottom: -30px }
 }
 .biggestBottle{
   width: 200px;
-  height: 216px;
-  margin: 36px -18px 20px -18px;
+  height: 290px;
+  margin: -38px -18px 20px -18px;
 }
 .bottleThumb{
   width: 64px;
-  height: 69px;
-  margin: 3px 5px;
+  height: 93px;
+  margin: -21px 5px 3px;
 }
 .bottleThumbWrapper{ 
   position:relative;

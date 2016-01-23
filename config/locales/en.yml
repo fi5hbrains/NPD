@@ -97,6 +97,7 @@ en:
     three: "OK"
     four: 'Like it'
     five: 'A must-have for everyone'
+    upload_ref: 'Upload reference image'
     
   search:
     brand: 'Brand'
@@ -159,6 +160,13 @@ en:
     new_polish_bottles: 'Bottles for New Polish'
     edit_brand: 'Edit'
     brands: 'Brands'
+    particles:
+      base: 'Base'
+      shimmer: 'Shimmer'
+      flake: 'Flake'
+      glitter: 'Glitter'
+      sand: 'Sand'
+      glass: 'Glass flecks'
     titles:
       polish_new: New Polish
       polish_update: Update Polish

@@ -15,6 +15,8 @@ class Brand < ActiveRecord::Base
     self.synonyms = names.split(';').map{|n| Synonym.where(word_type: 'Brand', word_id: self.id, name: n.strip).first_or_create!} 
   end 
   
+  def folder; "/assets/brands/#{self.slug}" end
+  
   scope :sort_by_polishes_count, -> { order(polishes_count: :DESC) }
 
   def to_param; slug end

@@ -36,7 +36,7 @@ class BottlesController < ApplicationController
   end
 
   def destroy
-    FileUtils.rm_rf( path + @bottle.bottle_folder )
+    FileUtils.rm_rf(path + '/' + @bottle.bottle_folder)
     @bottle_id = @bottle.id
     @bottle.destroy
     respond_to do |format|

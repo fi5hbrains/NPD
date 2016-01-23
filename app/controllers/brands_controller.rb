@@ -53,6 +53,7 @@ class BrandsController < ApplicationController
 
   def destroy
     set_brand
+    FileUtils.rm_rf(path + @brand.folder)
     @brand.destroy
     respond_to do |format|
       format.html { redirect_to brands_url, notice: 'Brand was successfully destroyed.' }
