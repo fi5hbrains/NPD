@@ -1,0 +1,6 @@
+- if params[:brand] || params[:polish] || params[:colour]
+  #results{style: 'display:none'}
+  #searchResults= render @polishes, big_polish: true, no_vote: true
+- else
+  #results= render @polishes, big_polish: true, no_vote: true
+  #searchResults{style: 'display:none'}

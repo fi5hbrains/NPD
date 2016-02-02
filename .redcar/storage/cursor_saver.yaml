@@ -780,4 +780,7 @@ cursor_positions:
     :timestamp: 2015-12-28 21:44:31 +03:00
     :selection_offset: 484
     :block_selection_mode: false
+  - :path: app/views/polishes/_catalogue_search.html.haml
+    :cursor_offset: 268
+    :timestamp: 2016-02-02 08:13:24 +03:00
 files_to_retain: 0

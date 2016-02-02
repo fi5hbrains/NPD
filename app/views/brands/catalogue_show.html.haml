@@ -3,4 +3,4 @@
   = render 'search', css: 'wide50 bigMargin completable', setup: %w(polish colour), remote: true
   - if @brand.link
     %h4= to_link @brand.link
-  #polishes= render @brand.polishes, big_polish: true, no_vote: true
+  = render 'polishes/catalogue_search'

@@ -1,9 +1,5 @@
 .blockx2
   %h1.wide50.inline> Catalogue
   = render 'search', css: 'wide50 bigMargin completable', remote: true
-  - if params[:brand] || params[:polish] || params[:colour]
-    #results{style: 'display:none'}
-    #searchResults= render @polishes, big_polish: true, no_vote: true
-  - else
-    #results= render @polishes, big_polish: true, no_vote: true
-    #searchResults{style: 'display:none'}
+  = render 'polishes/catalogue_search'
+
