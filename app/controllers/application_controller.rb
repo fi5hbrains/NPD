@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  def search brand = nil, colour = nil, spread = nil, sort = nil
+  def search brand = nil, colour = nil, spread = nil, sort = nil, page = nil, per = nil
+    @reset = false
     colour ||= params[:colour]
     spread ||= params[:spread]
     brand = Brand.find(params[:brand_id]) if params[:brand_id]
@@ -26,6 +27,9 @@ class ApplicationController < ActionController::Base
     @polish = Polish.find(params[:polish_id]) if params[:polish_id]
     polish_id = (@polish.try(:id) || 0)
     colour ||= [@polish.h, @polish.s, @polish.l] if @polish && spread
+    sort ||= cookies[:polish_sort]
+    page ||= params[:page]
+    per ||= 48
     
     if !params[:brand].blank?
       brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
@@ -48,13 +52,25 @@ class ApplicationController < ActionController::Base
         where(draft: false).
         where('id != ?', polish_id)
     elsif params[:polish].blank?
-      @polishes = Polish.where(draft: false)
+      if params[:action] == 'search'
+        @reset = true
+      else
+        @polishes = Polish.where(draft: false)
+      end
+    else
+      @reset = true
     end
-    if @polishes && colour
-      @polishes = @polishes.coloured( colour, spread )
-    end
-    if @polishes && sort
-      @polishes = @polishes.order(sort)
+    if @reset && params[:action] == 'search'
+      render js: "window.location.href = '#{env["HTTP_REFERER"].split('?')[0].to_s }'"
+    elsif params[:action] == 'search' && @brands && @brands.size == 1 && slugify(params[:brand]) == @brands.first.slug
+      render js: "window.location.href = '/catalogue/#{@brands.first.slug}'"
+    else
+      if @polishes && colour
+        @polishes = @polishes.coloured( colour, spread )
+      end
+      if @polishes
+        @polishes = @polishes.order(sort).page(page).per(per)
+      end
     end
   end
   
@@ -146,16 +162,16 @@ class ApplicationController < ActionController::Base
       @brands = Synonym.where(word_type: 'Brand').where("name ilike ?", "%#{params[:brand] || ''}%")
       @brand_names = @brands.pluck(:name)
     end
-    if !params[:polish].blank?
-      @polishes = Polish.where(@brands ? {brand_id: @brands.pluck(:word_id)} : nil).coloured(params[:colour]) 
-      polish_ids = @polishes.pluck(:id)
-      @polish_names = (
-        @polishes.where("number ilike ?","%#{params[:polish] || ''}%").
-        pluck(:number) + 
-        Synonym.where(word_type: 'Polish', word_id: polish_ids).
-        where("name ilike ?","%#{params[:polish] || ''}%").
-        pluck(:name)).compact.uniq
-    end
+    # if !params[:polish].blank?
+    #   @polishes = Polish.where(@brands ? {brand_id: @brands.pluck(:word_id)} : nil).coloured(params[:colour]) 
+    #   polish_ids = @polishes.pluck(:id)
+    #   @polish_names = (
+    #     @polishes.where("number ilike ?","%#{params[:polish] || ''}%").
+    #     pluck(:number) + 
+    #     Synonym.where(word_type: 'Polish', word_id: polish_ids).
+    #     where("name ilike ?","%#{params[:polish] || ''}%").
+    #     pluck(:name)).compact.uniq
+    # end
     @brand_names ||= []
     @polish_names ||= []
   end

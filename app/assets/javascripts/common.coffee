@@ -25,15 +25,19 @@ $(document).on 'ready page:load', ->
   
   $('.autoupdatable').find('input[name=polish], input[name=brand]').doneTyping ->
     $(this).closest('form').submit()
-  $('.completable').find('input[name=polish], input[name=brand]').doneTyping ->
+  $('.completable').find('input[name=brand]').doneTyping ->
     $.ajax 
       url: '/autocomplete'
       data: $(this).closest('.searchWrapper').serialize() + '&id=' + $(this).closest('.search').attr('id')
       type: 'GET'
       dataType: "script"
-
+  $('.completable').find('input[name=polish]').doneTyping ->
+    $(this).closest('form').submit()
   $('.searchWrapper').submit (event) ->
     skipBlanks $(this)
+  $('.completable').on "awesomplete-selectcomplete", (e) ->
+    e.preventDefault()
+    $(this).submit()
 
   $('input[data-updatable=true]').on 'change', -> $(this).closest('form').find('[name=preview]').click()
    

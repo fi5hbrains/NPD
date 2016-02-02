@@ -14,7 +14,7 @@
           = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
           <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
       - else
-        = link_to (remove ? collect_path(polish.id, box: @box.slug, from_list: true) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), method: (remove ? 'post' : 'get'), remote: remove do
+        = link_to (remove ? collect_path(polish.id, box: @box.slug, from_list: true) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), method: (remove ? 'post' : false), remote: remove do
           = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
           <svg class='icon button roundButton important' style='#{('display:none' unless remove)}'><use xlink:href=#trash /></svg>    
       .info

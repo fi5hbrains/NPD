@@ -1,2 +1,11 @@
-- if @polishes
-  $('#searchResults').html('#{j(render @polishes).html_safe}');
+$('#search').find('input').removeAttr('disabled');
+- if @reset
+  $('#results').show();
+  $('#searchResults').hide();
+  history.pushState({}, '', 'catalogue'
+- else
+  - if @polishes
+    $('#searchResults').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');
+    $('#results').hide();
+    $('#searchResults').show();
+  history.pushState({}, '', '/catalogue?#{[('brand=' + params[:brand] if params[:brand]),('polish=' + params[:polish] if params[:polish]),('colour=' + params[:colour] if params[:colour])].compact.join('&')}');

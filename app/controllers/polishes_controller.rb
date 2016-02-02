@@ -4,7 +4,6 @@ class PolishesController < ApplicationController
   def index
     set_brand
     search
-    @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(48)
   end
 
   def show
@@ -200,7 +199,6 @@ class PolishesController < ApplicationController
   def reorder
     params[:lab] = false
     search
-    @polishes = @polishes.order(cookies[:polish_sort]).page(params[:page]).per(48)
   end
   
   def note

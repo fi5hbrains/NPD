@@ -19,7 +19,7 @@
     - setup.each do |p|
       .cell
         = text_field_tag p, (params[p] || (@brand.name if p == 'brand' && @brand)),  placeholder: t("search.#{p}"), autocomplete: 'off', class: 'search' + p.capitalize, id: id + p.capitalize
-        - if css =~ /completable/
+        - if p != 'polish' && css =~ /completable/
           :javascript
             var #{id + p.capitalize} = new Awesomplete(document.getElementById('#{id + p.capitalize}'));
             #{id + p.capitalize}.list = #{p == 'colour' ? Defaults::COLOURS[I18n.locale].keys.to_s.html_safe : []};

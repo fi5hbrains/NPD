@@ -12,57 +12,54 @@ module ColourMethods
   end
   
   def colour_to_hsl colour, spread = nil
-    if colour
-      if colour.class.name == 'Array'
-        colour
-      elsif Defaults::COLOURS.values.map(&:keys).sum.include?( colour.mb_chars.downcase.to_s )
-        colours = {}
-        Defaults::COLOURS.values.each{|c| colours.merge!(c)}
-        colour = colours[colour.mb_chars.downcase.to_s]
-        if spread
-          h = colour[:h2] ? colour[:h].max - (colour[:h].max + 360 - colour[:h2].min) / 2 : middle(colour[:h])
-          h = 360 + h if h < 0
-          [h, middle( colour[:s]), middle( colour[:l]) ]
-        else
-          colour
-        end
-      elsif colour =~ /(\d{1,3}), *(\d{1,3}), *(\d{1,3})/
-        rgbdec_to_hsl colour
-      elsif colour =~ /[0-9a-fA-F]{3}/
-        rgbhex_to_hsl colour
-      end
-    else 
-      false
+    if colour.class.name == 'Array'
+      colour
+    elsif Defaults::COLOURS.values.map(&:keys).sum.include?( colour.mb_chars.downcase.to_s )
+      colours = {}
+      Defaults::COLOURS.values.each{|c| colours.merge!(c)}
+      colour = colours[colour.mb_chars.downcase.to_s]
+      h = colour[:h2] ? colour[:h].max - (colour[:h].max + 360 - colour[:h2].min) / 2 : middle(colour[:h])
+      h = 360 + h if h < 0
+      [h, middle( colour[:s]), middle( colour[:l]) ]
+    elsif colour =~ /(\d{1,3}), *(\d{1,3}), *(\d{1,3})/
+      rgbdec_to_hsl colour
+    elsif colour =~ /[0-9a-fA-F]{3}/
+      rgbhex_to_hsl colour
     end
   end
   
   def colour_to_hsl_range colour, spread = nil
-    if hsl = colour_to_hsl( colour, spread )
+    if colour.class.name == 'String' && Defaults::COLOURS.values.map(&:keys).sum.include?( colour.mb_chars.downcase.to_s ) && !spread
+      colours = {}
+      Defaults::COLOURS.values.each{|c| colours.merge!(c)}
+      hsl = colours[colour.mb_chars.downcase.to_s]
+      h = hsl[:h]
+      h2 = hsl[:h2]
+      s = hsl[:s]
+      l = hsl[:l]
+      o = 0..100
+    else
       spread ||= 10
       spread = spread.to_i
-      if hsl.class.name == 'Hash'
-        h = hsl[:h]
-        h2 = hsl[:h2]
-        s = hsl[:s]
-        l = hsl[:l]
-        o = (hsl[:o] || 1) * 100.0
-      elsif hsl[0] - spread < 0
-        h = 0 .. hsl[0] + spread
-        h2 = 360 + hsl[0] - spread .. 360
-      elsif hsl[0] + spread > 360
-        h = hsl[0] - spread .. 360
-        h2 = 0 .. spread - 360 + hsl[0]
+      if hsl = colour_to_hsl( colour, spread )
+        if hsl[0] - spread < 0
+          h = 0 .. hsl[0] + spread
+          h2 = 360 + hsl[0] - spread .. 360
+        elsif hsl[0] + spread > 360
+          h = hsl[0] - spread .. 360
+          h2 = 0 .. spread - 360 + hsl[0]
+        else
+          h = hsl[0] - spread .. hsl[0] + spread
+          h2 = nil
+        end
+        s = hsl[1] - spread .. hsl[1] + spread
+        l = hsl[2] - spread .. hsl[2] + spread
+        opacity = hsl[3].blank? ? 100 : hsl[3].class.name == 'Float' ? hsl[3] * 100 : hsl[3]
+        o = opacity - spread * 2 .. opacity + spread * 2
       else
-        h = hsl[0] - spread .. hsl[0] + spread
-        h2 = nil
-      end
-      s = hsl[1] - spread .. hsl[1] + spread
-      l = hsl[2] - spread .. hsl[2] + spread
-      opacity = hsl[3].blank? ? 100 : hsl[3].class.name == 'Float' ? hsl[3] * 100 : hsl[3]
-      o = opacity - spread * 2 .. opacity + spread * 2
-    else
-      h = h2 = s = l = o = nil      
-    end  
+        h = h2 = s = l = o = nil      
+      end  
+    end
     return {h: h, h2: h2, s: s, l: l, o: o}
   end
   
