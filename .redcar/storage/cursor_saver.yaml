@@ -663,9 +663,6 @@ cursor_positions:
     :timestamp: 2015-05-17 12:13:41 +04:00
     :selection_offset: 26
     :block_selection_mode: false
-  - :path: app/controllers/brands_controller.rb
-    :cursor_offset: 1499
-    :timestamp: 2016-01-22 13:55:46 +03:00
   - :path: app/uploaders/layer_uploader.rb
     :cursor_offset: 134
     :timestamp: 2016-01-22 13:23:22 +03:00
@@ -726,9 +723,6 @@ cursor_positions:
     :timestamp: 2015-10-11 19:04:20 +04:00
     :selection_offset: 2923
     :block_selection_mode: false
-  - :path: app/models/defaults.rb
-    :cursor_offset: 968
-    :timestamp: 2016-01-22 12:56:44 +03:00
   - :path: lib/colour_methods.rb
     :cursor_offset: 1112
     :timestamp: 2016-01-31 18:24:53 +03:00
@@ -775,12 +769,16 @@ cursor_positions:
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
-  - :path: app/assets/javascripts/icons.js
-    :cursor_offset: 449
-    :timestamp: 2015-12-28 21:44:31 +03:00
-    :selection_offset: 484
-    :block_selection_mode: false
+  - :path: app/controllers/brands_controller.rb
+    :cursor_offset: 1499
+    :timestamp: 2016-01-22 13:55:46 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 1486
+    :timestamp: 2016-02-02 09:14:33 +03:00
   - :path: app/views/polishes/_catalogue_search.html.haml
     :cursor_offset: 268
     :timestamp: 2016-02-02 08:13:24 +03:00
+  - :path: app/assets/javascripts/icons.js
+    :cursor_offset: 1187
+    :timestamp: 2015-12-28 21:44:31 +03:00
 files_to_retain: 0

@@ -159,7 +159,7 @@ class ApplicationController < ActionController::Base
   def autocomplete
     @id = params[:id]
     if !params[:brand].blank?
-      brand_ids = Synonym.where(word_type: 'Brand').where("name ilike ?", "%#{params[:brand] || ''}%").pluck(:word_id).uniq
+      brand_ids = Synonym.where(word_type: 'Brand').where("name ilike ?", "%#{params[:brand] || ''}%").pluck(:word_id).uniqe
       @brands = Brand.where(id: brand_ids)
       @brand_names = @brands.pluck(:name)
     end

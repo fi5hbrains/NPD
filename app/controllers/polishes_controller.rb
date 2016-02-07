@@ -264,15 +264,23 @@ class PolishesController < ApplicationController
     
     noise_density = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
     noise_size = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
+    sand_ordering = 0
+    sand_size = 0
+    sand_density = 0
     top_layer = 'base'
 
     FileUtils.mkdir_p(path + tmp_folder)  
     
     @layers.each do |layer|
       Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
-      unless layer.layer_type == 'base'
+      unless %w(base sand).include? layer.layer_type
         noise_density[layer.layer_type] += layer.particle_density
         noise_size[layer.layer_type] = [noise_size[layer.layer_type], layer.particle_size].max
+      end
+      if layer.layer_type == 'sand'
+        sand_ordering = layer.ordering
+        sand_size = [layer.particle_size, sand_size].max
+        sand_density += layer.particle_density
       end
       top_layer = layer.layer_type
 
@@ -362,7 +370,8 @@ class PolishesController < ApplicationController
               end
             end
             
-            convert_list = "\
+            unless layer.layer_type == 'sand'
+              convert_list = "\
 #{"\\( #{path + c_duo} -background '#{layer.c_duo}' -alpha shape \\) -composite " unless layer.c_duo.blank?} \
 #{"\\( #{path + c_multi} -background '#{layer.c_multi}' -alpha shape \\) -composite " unless layer.c_multi.blank?} \
 #{"\\( #{path + c_cold} -background '#{layer.c_cold}' -alpha shape \\) -composite " unless layer.c_cold.blank?} \
@@ -373,18 +382,19 @@ class PolishesController < ApplicationController
 #{"\\( #{path + mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite "} \
 #{"\\( #{path + particles_shadow} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'glitter'} \
 #{"\\( #{path + particles_hl} -alpha off -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " if layer.layer_type == 'glitter'} \
-            "
-            if c == 0
-              Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
-              if layer.magnet_intensity > 0
-                magnet = @polish.magnet
-                Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png')
-              end
-            else
-              Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
-              if layer.magnet_intensity > 0
-                Defaults::MAGNETS.each do |magnet|
-                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
+              "
+              if c == 0
+                Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
+                if layer.magnet_intensity > 0
+                  magnet = @polish.magnet
+                  Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png')
+                end
+              else
+                Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
+                if layer.magnet_intensity > 0
+                  Defaults::MAGNETS.each do |magnet|
+                    Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
+                  end
                 end
               end
             end
@@ -393,11 +403,8 @@ class PolishesController < ApplicationController
       end
     end
   
-    # ref_density = (noise_density <= 33 ? (top_layer == 'shimmer' ? 'few' : nil) : noise_density <= 66 ? 'some' : noise_density <= 85 ? 'many' : 'extra')
-    # ref_size = ((noise_size <= 5 || !ref_density) ? 'default' : top_layer == 'flake' ? 'foil' : noise_size <= 10 ? 'tiny' : noise_size <= 30 ? 'small' : noise_size <= 50 ? 'medium' : 'big' )
     ref_type = @polish.gloss_type
     noisiest = noise_density.sort_by{|k,v| v}[2]
-    logger.debug noisiest.inspect
     ref_density = 'default'
     if noisiest[1] > 10
       case noisiest[0]
@@ -415,7 +422,19 @@ class PolishesController < ApplicationController
       end
     end
     ref_source = "reflection_#{[ref_type, ref_size, ref_density].compact.join('_')}.png"
-    Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'", reflection   
+    
+    if sand_ordering > 0
+      sand_ref = "reflection_#{ref_type}_sand_#{sand_size}_#{sand_density < 60 ? 'few' : 'many'}.png" 
+      logger.debug '-------------- ' + sand_ref
+      if sand_ordering < (@layers.size - 1)
+        # todo generate upper layers mask > combine sand_ref & ref_source > generate reflection
+      end
+
+      Magick.convert parts + sand_ref, "+level-colors ,'#{@polish.gloss_colour}'", reflection  
+
+    else
+      Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'", reflection   
+    end
   end
 
   def flatten_layers
@@ -425,7 +444,7 @@ class PolishesController < ApplicationController
     (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
       stack = ''
       @layers.each do |layer|
-        stack += path + coat("#{@polish.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless layer.layer_type == 'base'
+        stack += path + coat("#{@polish.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless %w(base sand).include?(layer.layer_type)
       end
       Magick.delay( queue: current_user.id ).convert "#{@polish.tmp_folder}/layer_0.png", stack, @polish.coat_url(c)
     end
