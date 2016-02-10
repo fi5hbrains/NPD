@@ -45,9 +45,7 @@
           - if invite.used_by
             - user = User.find(invite.used_by)
             %span.inactive= invite.word
-            = link_to user do
-              = image_tag user.avatar.url('thumb'), class: 'avatar tiny'
-              = user.name
+            = link_to (image_tag user.avatar.url('thumb'), class: 'avatar tiny') + user.name, user
           -else
             %span.selectable= invite.word
 %section.block.left

@@ -66,7 +66,7 @@ class Polish < ActiveRecord::Base
   end
   def gloss_url; self.polish_folder + '/reflection.png' end
   def gloss_preview_url; self.tmp_folder + '/reflection_preview.jpg' end
-  def preview_url; self.polish_folder + '/preview.png' end
+  def preview_url version = ''; self.polish_folder + "/preview#{version}.png" end
   def bottle_url option = nil, from_magick = false, name_slug = self.slug
     if from_magick
       self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
@@ -86,13 +86,6 @@ class Polish < ActiveRecord::Base
     self.save
   end
   
-  def layers_to_hash
-    mergee = {}
-    mergee['layers_attributes'] = {}
-    self.layers.each{|l| mergee['layers_attributes'][l.ordering] = l.attributes.except!('id','created_at','updated_at')}
-    return mergee
-  end
-  
   def set_colour
     unless self.draft
       base = self.layers.detect{|l| l.layer_type == 'base'}
@@ -103,6 +96,39 @@ class Polish < ActiveRecord::Base
         self.h2 = hsl2[0]; self.s2 = hsl2[1]; self.l2 = hsl2[2]
       end
     end
+  end
+  
+  def hash
+    mergee = {}
+    mergee['layers_attributes'] = {}
+    self.layers.each do |l|
+      mergee['layers_attributes'][l.ordering] = l.attributes.except('id','polish_id','created_at','updated_at')
+    end
+    attributes = self.attributes.except('id','slug','collection_id','brand_id','brand_name','brand_slug','coats_count','layers_count','draft','bottling_status','h','s','l','h2','s2','s2','opacity','magnet','reference','user_id', 'created_at', 'updated_at','lock', 'votes_count', 'usages_count', 'comments_count', 'rating')
+    mergee['layers_attributes'].size > 0 ? attributes.merge( mergee) : attributes
+  end 
+
+  def save_version action
+    self.save_version_images
+    tmp_hash = self.hash
+    unless self.versions.first.try(:polish) == tmp_hash
+      version = self.versions.new
+      version.polish = tmp_hash
+      user = self.added_by
+      version.version = self.versions.count
+      version.event = action
+      version.user_id = self.user_id
+      version.user_name = user.name
+      version.user_avatar_url = user.avatar_url('thumb')
+      version.save
+    end
+  end
+  
+  def save_version_images index_old='', index_new=nil
+    index_new ||= self.versions.count
+    copy ||= self
+    path = Rails.root.join('public').to_s
+    FileUtils::cp path + self.preview_url(index_old), path + copy.preview_url(index_new) if File.exists? path + self.preview_url(index_old)
   end
   
   def get_colour

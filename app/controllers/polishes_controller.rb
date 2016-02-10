@@ -94,7 +94,7 @@ class PolishesController < ApplicationController
         format.js {render 'preview'}
       end
     elsif @polish.valid?
-      @polish.update_attributes bottling_status: false
+      @polish.bottling_status = false
       generate_preview params[:changes]
       @polish.save
       flatten_layers
@@ -121,7 +121,9 @@ class PolishesController < ApplicationController
         format.js {render 'preview'}
       end
     elsif @polish.valid?
-      @polish.update_attributes bottling_status: false, draft: false
+      @polish.bottling_status = false
+      @polish.draft = false
+      @polish.save_version( params[:redress] ? 'redress' : 'update')
       if params[:redress]
         @polish.save
         rename_polish_files old_slug if old_slug != @polish.slug
@@ -230,7 +232,7 @@ class PolishesController < ApplicationController
         :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
       ]})
   end
-  
+    
   def rename_polish_files old_slug, polish = nil
     copy = polish.present?
     polish ||= @polish
@@ -244,7 +246,7 @@ class PolishesController < ApplicationController
     [nil, 'thumb', 'big'].each do |option| 
       FileUtils.mv( path + polish.bottle_url(option, true, old_slug), path + polish.bottle_url(option, true) ) end
   end
-  
+
   def generate_preview changed_layers = {}
     tmp_folder = @polish.tmp_folder
     reflection = @polish.gloss_tmp

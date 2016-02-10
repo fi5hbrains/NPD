@@ -8,7 +8,8 @@
     = link_to '2012', '#'
   = image_tag @polish.bottle_url, class: 'left biggestBottle'
   - unless @polish.draft
-    #coatsWrapper.left= image_tag @polish.preview_url
+    #coatsWrapper.left
+      .previewWrapper.medium= image_tag @polish.preview_url
   %p.clearFix.smallMargin
     - if @synonyms.size > 0
       %strong Synonyms:
@@ -19,4 +20,18 @@
     = @polish.votes_count
     = 'vote'.pluralize(@polish.votes_count)
   = render 'polishes/controls', polish: @polish, with_text: true
+  - if @polish.versions.count > 0
+    %h3= 'History'
+    %table.wide100
+      - @polish.versions.each_with_index do |v,i|
+        %tr.noWrap
+          %td
+            .previewWrapper.tiny= image_tag(@polish.preview_url(v.version), class: 'thumb')
+          %td= v.event
+          %td
+            by
+            = link_to v.user_name, user_path(v.user_name) if v.user_name
+          %td= v.updated_at.strftime("%d %m %Y %H:%M")
+  %h3= 'Params'
+  %span.selectable= @polish.hash.to_s
 = render 'ads'

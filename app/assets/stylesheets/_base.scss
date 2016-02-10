@@ -195,7 +195,7 @@ input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader;
   overflow: hidden;
 }
 .avatar.big { width: 96px; height: 96px; margin-right: 10px }
-.avatar.tiny { width:24px; height: 24px }
+.avatar.tiny { width:24px; height: 24px; margin: 0 5px; }
 .bigPolish, .idBlock{
   vertical-align: top;
   font-size: $fontSizeBase*0.93;
@@ -473,23 +473,50 @@ h3 .tooltip { bottom: -30px }
   width: 125px;
   height: 250px;
   overflow: hidden;
-  img{ 
-    position: absolute;
-    left: -2px; 
-    height: 100%; 
-  }
+  background-image: image-url('preview_shadow.png');
 }
-#previewWrapper {
+.previewWrapper {
   overflow: hidden;
   position: relative;
   width: 238px;
   height: 512px;
-  border-radius: 50% 50% 45% 45%/32px 32px 128px 128px;
+  border-radius: 40%/9.5%;
   margin-left:28px;
   img { 
     width: 305px;
     height: 572px;
     margin: -56px -32px;
+  }
+}
+.previewWrapper.medium{
+  width:98px;
+  height:243px;
+  margin-left:14px;
+  margin-top: 4px;
+  img{
+    width:125px;
+    height: 250px;
+    margin: -4px 0 0 -14px;
+  }
+}
+.previewWrapper.tiny{
+  width:32px;
+  height:32px;
+  border-radius: $radiusMain;
+  margin:0;
+  img {
+    width: 32px;
+    height: auto;
+    margin: -8px -4px 0 0;
+  }
+}
+.previewWrapper.tiny:hover{
+  position: relative;
+  overflow: visible;
+  img{
+    position: absolute;
+    width:64px;
+    bottom:0;
   }
 }
 #rating{
