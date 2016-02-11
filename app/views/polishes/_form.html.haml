@@ -80,6 +80,7 @@
             %span{id: o}
             = t 'lab.section.' + o
       = f.hidden_field :opacity, value: @polish.opacity || 87.5, id: 'baseOpacity'
+      = text_area_tag :hash
     - if simple_form
       .inlineWrapper<
         = f.submit t('form.preview'), name: 'preview'

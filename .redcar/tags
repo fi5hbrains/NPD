@@ -1,4 +1,4 @@
-1455138537
+1455215889
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -171,7 +171,6 @@ give_to	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.give_t
 gloss_preview_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_preview_url;
 gloss_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_tmp;
 gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url;
-hash	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def hash
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;
 import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 import	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def import
@@ -275,6 +274,7 @@ to_param	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
+to_yaml	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_yaml
 toggle	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function toggle(event)
 unique	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function unique(array)
 up	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.up

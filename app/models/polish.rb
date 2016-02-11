@@ -98,19 +98,19 @@ class Polish < ActiveRecord::Base
     end
   end
   
-  def hash
+  def to_yaml
     mergee = {}
     mergee['layers_attributes'] = {}
     self.layers.each do |l|
-      mergee['layers_attributes'][l.ordering] = l.attributes.except('id','polish_id','created_at','updated_at')
+      mergee['layers_attributes'][l.ordering] = l.attributes.except('id','polish_id','created_at','updated_at').reject{|k,v| v.blank?}
     end
-    attributes = self.attributes.except('id','slug','collection_id','brand_id','brand_name','brand_slug','coats_count','layers_count','draft','bottling_status','h','s','l','h2','s2','s2','opacity','magnet','reference','user_id', 'created_at', 'updated_at','lock', 'votes_count', 'usages_count', 'comments_count', 'rating')
-    mergee['layers_attributes'].size > 0 ? attributes.merge( mergee) : attributes
+    attributes = self.attributes.except('id','slug','collection_id','brand_id','brand_name','brand_slug','coats_count','layers_count','draft','bottling_status','h','s','l','h2','s2','s2','opacity','magnet','reference','user_id', 'created_at', 'updated_at','lock', 'votes_count', 'usages_count', 'comments_count', 'rating').reject{|k,v| v.blank?}
+    (mergee['layers_attributes'].size > 0 ? attributes.merge( mergee) : attributes).to_yaml
   end 
 
   def save_version action
     self.save_version_images
-    tmp_hash = self.hash
+    tmp_hash = self.to_yaml
     unless self.versions.first.try(:polish) == tmp_hash
       version = self.versions.new
       version.polish = tmp_hash

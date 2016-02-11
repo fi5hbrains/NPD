@@ -223,14 +223,23 @@ class PolishesController < ApplicationController
     @polish.name = params[:polish][:synonym_list].split(';')[0].try(:strip)
   end
   def polish_params
-    params.require(:polish).permit(
-      :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
-      :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
-      {layers_attributes: [ 
-        :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
-        :highlight_colour, :shadow_colour, :opacity, :particle_type, :particle_size, 
-        :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
-      ]})
+    if params[:hash].blank?
+      params.require(:polish).permit(
+        :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
+        :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
+        {layers_attributes: [ 
+          :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
+          :highlight_colour, :shadow_colour, :opacity, :particle_type, :particle_size, 
+          :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
+        ]})
+      else
+        polish_hash = YAML.load(params[:hash])
+        polish_hash = polish_hash.select {|k,v| %w(prefix name synonym_list number release_year collection bottle_id gloss_type gloss_colour opacity layers_attributes).include?(k)}
+        polish_hash['layers_attributes'].each do |key,val|
+          polish_hash['layers_attributes'][key] = val.select {|k,v| %W(layer_type ordering c_base c_duo c_multi c_cold  highlight_colour shadow_colour opacity particle_type particle_size particle_density holo_intensity thickness magnet_intensity).include?(k)}
+        end
+        return polish_hash
+      end
   end
     
   def rename_polish_files old_slug, polish = nil

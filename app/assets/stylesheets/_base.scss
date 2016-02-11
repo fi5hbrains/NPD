@@ -290,6 +290,11 @@ input, button, textarea, pre, .button, .previewButton, .roundButton{
   padding: 2px 10px;
   box-sizing: border-box;
 }
+#pre{
+  background:none;
+  line-height: 20px;
+  padding:0;
+}
 input[type=submit], button, .button, .previewButton, .roundButton{
   text-align: center;
   user-select: none;

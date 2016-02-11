@@ -33,5 +33,5 @@
             = link_to v.user_name, user_path(v.user_name) if v.user_name
           %td= v.updated_at.strftime("%d %m %Y %H:%M")
   %h3= 'Params'
-  %span.selectable= @polish.hash.to_s
+  %pre#pre.selectable= @polish.to_yaml.gsub('---', '')
 = render 'ads'
