@@ -1,9 +1,16 @@
-$('#previewWrapper').html('#{j(render('polish_preview').html_safe)}');
-$('.removeLayerField').filter(function() {return $( this ).val( ) === "1";}).parent().parent().parent().remove();
-$('#changes').children().val('');
-$('#loadReference').removeClass('active');
-- if @polish.reference?
-  $('#polish_remote_reference_url').val('');
-  $('#polish_reference_cache').val('#{j(@polish.reference_cache).html_safe}');
-  $('#polish_reference').val('');
-  $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');
+alert('#{params[:yaml].blank?}');
+- if params[:yaml].blank?
+  $('#previewWrapper').html('#{j(render('polish_preview').html_safe)}');
+  $('.removeLayerField').filter(function() {return $( this ).val( ) === "1";}).parent().parent().parent().remove();
+  $('#changes').children().val('');
+  $('#loadReference').removeClass('active');
+  - if @polish.reference?
+    $('#polish_remote_reference_url').val('');
+    $('#polish_reference_cache').val('#{j(@polish.reference_cache).html_safe}');
+    $('#polish_reference').val('');
+    $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');
+- else
+  $('#polishForm').remove();
+  $('#listing').after('#{j(render('form')).html_safe});
+  $('#hash').val('');
+  console.log('lalala');

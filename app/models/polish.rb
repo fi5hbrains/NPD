@@ -104,7 +104,7 @@ class Polish < ActiveRecord::Base
     self.layers.each do |l|
       mergee['layers_attributes'][l.ordering] = l.attributes.except('id','polish_id','created_at','updated_at').reject{|k,v| v.blank?}
     end
-    attributes = self.attributes.except('id','slug','collection_id','brand_id','brand_name','brand_slug','coats_count','layers_count','draft','bottling_status','h','s','l','h2','s2','s2','opacity','magnet','reference','user_id', 'created_at', 'updated_at','lock', 'votes_count', 'usages_count', 'comments_count', 'rating').reject{|k,v| v.blank?}
+    attributes = self.attributes.except('id', 'bottle_id','slug','collection_id','brand_id','brand_name','brand_slug','coats_count','layers_count','draft','bottling_status','h','s','l','h2','s2','s2','magnet','reference','user_id', 'created_at', 'updated_at','lock', 'votes_count', 'usages_count', 'comments_count', 'rating').reject{|k,v| v.blank?}
     (mergee['layers_attributes'].size > 0 ? attributes.merge( mergee) : attributes).to_yaml
   end 
 

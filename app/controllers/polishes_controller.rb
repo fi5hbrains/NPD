@@ -223,7 +223,7 @@ class PolishesController < ApplicationController
     @polish.name = params[:polish][:synonym_list].split(';')[0].try(:strip)
   end
   def polish_params
-    if params[:hash].blank?
+    if params[:yaml].blank?
       params.require(:polish).permit(
         :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
         :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
@@ -233,7 +233,7 @@ class PolishesController < ApplicationController
           :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
         ]})
       else
-        polish_hash = YAML.load(params[:hash])
+        polish_hash = YAML.load(params[:yaml])
         polish_hash = polish_hash.select {|k,v| %w(prefix name synonym_list number release_year collection bottle_id gloss_type gloss_colour opacity layers_attributes).include?(k)}
         polish_hash['layers_attributes'].each do |key,val|
           polish_hash['layers_attributes'][key] = val.select {|k,v| %W(layer_type ordering c_base c_duo c_multi c_cold  highlight_colour shadow_colour opacity particle_type particle_size particle_density holo_intensity thickness magnet_intensity).include?(k)}
@@ -428,7 +428,7 @@ class PolishesController < ApplicationController
           ref_density = (noisiest[1] <= 50 ? 'some' : noisiest[1] <= 95 ? 'many' : 'extra')
         end
       when 'glitter'
-        ref_size = (noise_size[noisiest[0]] <= 20 ? '50' : noise_size[noisiest[0]] <= 50 ? '45' : '100')
+        ref_size = (noise_size[noisiest[0]] <= 20 ? '50' : noise_size[noisiest[0]] <= 50 ? '75' : '100')
         ref_density = (noisiest[1] <= 45 ? 'few' : noisiest[1] <= 90 ? 'some' : noisiest[1] <= 125 ? 'many' : 'extra')
       end
     end
@@ -436,7 +436,6 @@ class PolishesController < ApplicationController
     
     if sand_ordering > 0
       sand_ref = "reflection_#{ref_type}_sand_#{sand_size}_#{sand_density < 60 ? 'few' : 'many'}.png" 
-      logger.debug '-------------- ' + sand_ref
       if sand_ordering < (@layers.size - 1)
         # todo generate upper layers mask > combine sand_ref & ref_source > generate reflection
       end
@@ -463,7 +462,7 @@ class PolishesController < ApplicationController
   end
 
   def generate_bottle
-    bottle = Bottle.find(@polish.bottle_id)
+    bottle = Bottle.find_by_id(@polish.bottle_id)
     return true unless bottle    
     blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
     usm = '-unsharp 0x.4'

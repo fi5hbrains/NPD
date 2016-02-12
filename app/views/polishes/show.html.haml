@@ -1,7 +1,7 @@
 = render 'brands/show'
 
 %section#polish.block.left{'data-id' => @polish.id}>
-  %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number) + @polish.name.to_s), length: 50, separator: /_|-| /
+  %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number).to_s + @polish.name.to_s), length: 50, separator: /_|-| /
   %h4
     = link_to 'Collection Name', '#'
     –

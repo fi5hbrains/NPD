@@ -201,6 +201,7 @@ en:
       syrup: 'Syrup'
       jelly: 'Jelly'
       cream: 'Cream'
+      text_input: 'Text Input (optional)'
       
   settings:
     headers: 
