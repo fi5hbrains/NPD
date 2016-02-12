@@ -371,11 +371,6 @@ cursor_positions:
   - :path: config/environments/production.rb
     :cursor_offset: 2101
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: app/views/comments/_form.html.haml
-    :cursor_offset: 563
-    :timestamp: 2015-10-17 15:50:16 +04:00
-    :selection_offset: 376
-    :block_selection_mode: false
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
@@ -387,9 +382,6 @@ cursor_positions:
   - :path: app/views/application/_navigation_icons.html.haml
     :cursor_offset: 0
     :timestamp: 2015-11-14 17:42:13 +03:00
-  - :path: app/views/polishes/preview.js.haml
-    :cursor_offset: 405
-    :timestamp: 2015-12-02 15:58:07 +03:00
   - :path: app/assets/stylesheets/_colour_picker.scss
     :cursor_offset: 265
     :timestamp: 2015-12-05 07:04:28 +03:00
@@ -545,9 +537,6 @@ cursor_positions:
   - :path: app/views/comments/create.js.haml
     :cursor_offset: 390
     :timestamp: 2016-01-12 23:31:04 +03:00
-  - :path: app/views/comments/_comment.html.haml
-    :cursor_offset: 889
-    :timestamp: 2016-01-12 22:33:02 +03:00
   - :path: app/views/boxes/update.js.haml
     :cursor_offset: 500
     :timestamp: 2016-01-07 14:41:35 +03:00
@@ -730,18 +719,9 @@ cursor_positions:
   - :path: app/views/application/_search.html.haml
     :cursor_offset: 627
     :timestamp: 2016-01-31 21:29:00 +03:00
-  - :path: app/models/polish_version.rb
-    :cursor_offset: 186
-    :timestamp: 2015-11-06 17:40:50 +03:00
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 906
     :timestamp: 2016-02-09 19:51:03 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 688
-    :timestamp: 2016-02-09 17:04:58 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 12456
-    :timestamp: 2016-02-09 23:20:10 +03:00
   - :path: app/views/polishes/_polish_preview.haml
     :cursor_offset: 114
     :timestamp: 2016-02-06 16:26:19 +03:00
@@ -751,23 +731,9 @@ cursor_positions:
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 1380
     :timestamp: 2016-02-01 20:38:31 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 2834
-    :timestamp: 2016-02-09 17:23:11 +03:00
   - :path: db/schema.rb
     :cursor_offset: 7299
     :timestamp: 2015-12-24 23:26:45 +03:00
-  - :path: app/views/users/show.html.haml
-    :cursor_offset: 1927
-    :timestamp: 2016-02-09 23:27:36 +03:00
-  - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 13
-    :timestamp: 2016-02-09 23:10:36 +03:00
-    :selection_offset: 18
-    :block_selection_mode: false
-  - :path: app/assets/javascripts/local.coffee
-    :cursor_offset: 1846
-    :timestamp: 2016-02-10 17:09:43 +03:00
   - :path: app/assets/javascripts/application.js
     :cursor_offset: 761
     :timestamp: 2015-11-24 23:52:04 +03:00
@@ -777,4 +743,36 @@ cursor_positions:
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 2555
     :timestamp: 2016-01-05 23:30:28 +03:00
+  - :path: app/views/polishes/preview.js.haml
+    :cursor_offset: 0
+    :timestamp: 2016-02-12 13:58:22 +03:00
+  - :path: app/views/comments/_form.html.haml
+    :cursor_offset: 411
+    :timestamp: 2015-10-17 15:50:16 +04:00
+    :selection_offset: 563
+    :block_selection_mode: false
+  - :path: app/views/comments/_comment.html.haml
+    :cursor_offset: 889
+    :timestamp: 2016-01-12 22:33:02 +03:00
+  - :path: app/models/polish_version.rb
+    :cursor_offset: 176
+    :timestamp: 2016-02-12 11:35:06 +03:00
+  - :path: app/views/polishes/_form.html.haml
+    :cursor_offset: 3946
+    :timestamp: 2016-02-12 13:23:07 +03:00
+  - :path: app/assets/javascripts/local.coffee
+    :cursor_offset: 1774
+    :timestamp: 2016-02-10 17:12:12 +03:00
+  - :path: app/views/users/show.html.haml
+    :cursor_offset: 1740
+    :timestamp: 2016-02-09 23:27:36 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 7677
+    :timestamp: 2016-02-12 13:33:22 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 4339
+    :timestamp: 2016-02-12 13:32:48 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 7157
+    :timestamp: 2016-02-11 19:46:47 +03:00
 files_to_retain: 0

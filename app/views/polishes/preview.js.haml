@@ -1,4 +1,3 @@
-alert('#{params[:yaml].blank?}');
 - if params[:yaml].blank?
   $('#previewWrapper').html('#{j(render('polish_preview').html_safe)}');
   $('.removeLayerField').filter(function() {return $( this ).val( ) === "1";}).parent().parent().parent().remove();

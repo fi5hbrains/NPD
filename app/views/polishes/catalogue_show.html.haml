@@ -14,7 +14,8 @@
   .block.left{'data-id' => @polish.id}>
     = image_tag @polish.bottle_url, class: "left biggestBottle #{'getBottlingStatus' unless @polish.draft || @polish.bottling_status}"
     - unless @polish.draft
-      #coatsWrapper.left= image_tag @polish.preview_url
+      #coatsWrapper.left
+        .previewWrapper.medium= image_tag @polish.preview_url
   .block.left
     .idBlock.polishStats.bottomUp<
       .pic.relative>
