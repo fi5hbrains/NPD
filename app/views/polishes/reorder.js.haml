@@ -2,8 +2,5 @@
 - icons.keys.each_with_index do |key, i|
   $($('.navOption')[#{i}]).replaceWith('#{j(render_nav_icon(icons, key)).html_safe}');
 - if @polishes
-  - if true
-    $('#searchResults').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');
-  - else
-    $('#results').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');
+  $('#results').html('#{j(render @polishes, big_polish: true, no_vote: true).html_safe}');
 initCatalogueIcons();

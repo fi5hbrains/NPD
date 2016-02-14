@@ -117,6 +117,8 @@ en:
       quests: 'Quests'
       invites: 'Invitation Pass-phrases'
       avatar: 'Profile Photo'
+      brands: 'Brands'
+      sort: 'Sort by'
     list:
       collection: 'Collection'
       wishlist: 'Wishlist'
@@ -201,7 +203,7 @@ en:
       syrup: 'Syrup'
       jelly: 'Jelly'
       cream: 'Cream'
-      text_input: 'Text Input (optional)'
+      text_input: 'Import From Text'
       
   settings:
     headers: 

@@ -10,6 +10,7 @@
     $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');
 - else
   $('#polishForm').remove();
-  $('#listing').after('#{j(render('form')).html_safe});
-  $('#hash').val('');
-  console.log('lalala');
+  $('#listing').after('#{j(render('form')).html_safe}');
+  $('.colour').colorPicker();
+  initIcons($('#polishForm'));
+

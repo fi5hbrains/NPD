@@ -1,12 +1,26 @@
 $('#filterPolish').val($('#secondarySearchPolish').val());
+- if params[:box_sort]
+  var active = $('#sort').find('.active');
+  var input = active.next();
+  var replacee = $('#sort').find('label[for=#{params[:box_sort]}]');
+  active.after('<label for=' + input.attr('id') + '>' + active.html() + '</label>');
+  active.remove()
+  replacee.after('<span class="active">' + replacee.html() + '</span>');
+  replacee.remove()
 - if params[:filter_brand]
   - check_boxes = ''
-  - params[:filter_brand].each{|b| check_boxes += (check_box_tag('filter_brand[' + b[0] + ']', nil, true, id: nil))}
+  - @brand_ids.each{|b| check_boxes += (check_box_tag('filter_brand[' + b + ']', nil, true, id: nil))}
   $('#filterBrand').html('#{j(check_boxes).html_safe}');
+  - if @reset
+    $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
+  -else
+    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
 - if @reset
   $('#secondaryResults').show();
   $('#secondarySearchResults').hide();
   $('#secondarySearch').find('input').removeAttr('disabled').focus();
+  - if @polishes
+    $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');
 - else
   $('#secondaryResults').hide();
   $('#secondarySearchResults').show();

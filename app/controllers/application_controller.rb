@@ -101,6 +101,8 @@ class ApplicationController < ActionController::Base
   def collection_search
     @reset = false
     @box ||= Box.find(params[:box_id])
+    cookies[:box_sort] = params[:box_sort] unless params[:box_sort].blank?
+    @brand_ids = params[:filter_brand].class.name == 'String' ? params[:filter_brand].split('-') : params[:filter_brand].try(:keys)
     set_user_votes
     if !params[:polish].blank?
       @box = Box.find(params[:box_id])
@@ -109,17 +111,27 @@ class ApplicationController < ActionController::Base
         polish_ids = Synonym.
           where("word_type = 'Polish' AND word_id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')})").
           where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
-          pluck('word_id').compact.uniq  
+          pluck('word_id').compact.uniq
+        @polishes = if @brand_ids.blank?
+          Polish.where(nil)
+        else
+          Polish.where(brand_id: @brand_ids)
+        end
         @polishes = if polish_ids.blank?
-          Polish.
+          @polishes.
             where("(id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
         else
-          Polish.
+          @polishes.
             where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR (id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
         end.order(set_polish_sort).first(24)
       end
     else
       @reset = true
+      @polishes = if @brand_ids.blank?
+        @box.polishes
+      else
+        @box.polishes.where(brand_id: @brand_ids)
+      end.order(set_polish_sort).page(params[:page])
     end
   end
   def collect_search

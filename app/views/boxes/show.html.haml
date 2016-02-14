@@ -1,4 +1,4 @@
-%section#List.block.left.relative
+%section#List.block.left.relative<
   = text_field_tag 'box[name]', @box.name, placeholder: 'List Name', id:'boxNameField',style: ('display:none' if !params[:edit] || %(collection wishlist giveaway).include?(@box.slug) ), class: 'formIndent bigMargin smallMargin', 'data-id' => @box.id
   %h1#boxName.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}
     = @box.adapt_name
@@ -11,12 +11,12 @@
           <use xlink:href=#plus />
   - if is_owner
     = form_tag import_user_box_path(@user, @box), id: 'controls', class: 'controls', multipart: true do
-      = label_tag :spreadsheet, content_tag( :span, t('user.import'))
+      = label_tag :spreadsheet, t('user.import')
       = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
       = submit_tag 'import', class: 'hidden', name: 'preview'  
-      %span= link_to t('user.export'), download_box_path(@user, @box, @box.slug, format: :csv)
-      %span#doneEditing.active{style: ('display:none' unless params[:edit])}= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
-      %span#goEdit{style: ('display:none' if params[:edit])}= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
+      %span>= link_to t('user.export'), download_box_path(@user, @box, @box.slug, format: :csv)
+      %span#doneEditing.active{style: ('display:none' unless params[:edit])}>= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
+      %span#goEdit{style: ('display:none' if params[:edit])}>= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
   
   #secondarySearchResults<
   #secondaryResults<
@@ -39,17 +39,22 @@
 %section#Catalogue.block.left
   .formIndent
     = render 'search', setup: ['polish'], css: 'bigMargin wide100 autoupdatable', collection_search: true, id: 'secondarySearch', remote: true
-  
-  %h3 Sort by
-  #sort.controls
-    - cookies[:box_sort] ||= 'time'
-    - %w(slug rating colour created_at).each do |c|
-      %span{class: ('active' if cookies[:box_sort] == c)}= link_to t('controls.by_' + c), switch_path('box_sort', c), method: :post
-    
-  %h3 Brands
-  .tags
-    = form_tag collection_search_path(box_id: @box.id), remote: true do
-      = hidden_field_tag :polish, params[:polish], id: 'filterPolish'
+
+  = form_tag collection_search_path(box_id: @box.id), remote: true do
+    = hidden_field_tag :polish, params[:polish], id: 'filterPolish'
+
+    %h3= t 'user.headers.sort'
+    #sort.controls.bottomMargin<
+      - cookies[:box_sort] ||= 'time'
+      - %w(slug rating colour created_at).each do |c|
+        - if cookies[:box_sort] == c
+          %span.active= t('controls.by_' + c)
+        - else
+          = label_tag c, t('controls.by_' + c)
+        = submit_tag c, name: 'box_sort', id: c, class: 'hidden'
+      
+    %h3= t 'user.headers.brands'
+    .tags.bottomMargin<
       - @brands.each do |brand|
         = brand_to_tag(brand)
       = submit_tag nil, name: 'preview', class: 'hidden'

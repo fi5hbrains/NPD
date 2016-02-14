@@ -158,22 +158,24 @@ a:hover{ color: $colourLinkHover }
   font-size: $fontSizeBase*1.4;
   margin-top: 20px;
   margin-bottom: 20px;
-  span{
+  position:relative;
+  z-index: 1;
+  & > span, label{
     display: inline-block;
     padding: 4px .5em 1px;
     border-radius: $radiusMain;
     cursor: pointer;
     color: $colourLink;
   }
-  span:hover { color: lighten($colourLink, $lightenOnHover) }
   a { text-decoration: none }
   .selected {
     background: $colourHeader;
     color: white;
   }
-  .active { background: $colourHeader }
-  .active a { color: white }
+  .active:hover, .active { background: $colourHeader; cursor: default; color: white }
+  label.active, .active a { color: white }
 }
+.controls span:hover, .controls label:hover, .tag:hover { color: lighten($colourLink, $lightenOnHover) }
 .tag{
   position:relative;
   z-index: 1;
@@ -186,7 +188,7 @@ a:hover{ color: $colourLinkHover }
   cursor: pointer;
 }
 .tags input[type='checkbox'] { display: none }
-input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader;}
+input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader; }
 // ------------------------------ ID Blocks ------------------------------ //
 .avatar{
   height: 48px;
@@ -558,6 +560,7 @@ h3 .tooltip { bottom: -30px }
   padding-top: 0;
   padding-bottom: 0;
 }
+#otherLists { margin-top: 14px }
 #listForm { display: none }
 #listForm.active { display: block }
 #note { margin-bottom: -42px }

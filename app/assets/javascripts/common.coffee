@@ -105,11 +105,12 @@ $(document).on 'ready page:load', ->
     isTipped = $(this).hasClass('tipped')
     containerWidth = $(this).width()
     offset = $(this).offset().left
+    console.log(offset)
+    rating = $(this).data('vote')
     w = undefined
-    rating = undefined
     oldRating = undefined
     range = $(this).find('.stars.absolute')
-    rangeWidth = range.width()
+    rangeWidth = rating * 20 + '%'
     range.attr 'class', (index, classNames) ->
       classNames + ' active'
     $(this).mousemove (e) ->
@@ -131,6 +132,7 @@ $(document).on 'ready page:load', ->
 
     $(this).on 'click', -> 
       rangeWidth = w
+      range.attr 'data-vote', rating
       range.attr 'class', (index, classNames) ->
         classNames + ' voted'
       $.ajax 
@@ -141,8 +143,8 @@ $(document).on 'ready page:load', ->
   )
   $(document).on 'mouseleave', '.voteBox', ->  
     range.attr 'class', (index, classNames) ->
-      classNames.replace ' active', ''
-    range.width(rangeWidth)
+      classNames.replace(new RegExp(' active', 'g'), '')
+    range.width(Number(range.attr 'data-vote') * 20 + '%')
     $(this).unbind( 'click' )
   
   $('.getBottlingStatus').each ->
