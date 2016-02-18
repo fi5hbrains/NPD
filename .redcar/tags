@@ -1,4 +1,4 @@
-1455486318
+1455776968
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -116,8 +116,8 @@ create	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def create
-create	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def create
 create	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def create
+create	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def create
 crop_and_resize	/Users/fish/Dropbox/work/Interpol/app/uploaders/avatar_uploader.rb	  def crop_and_resize(c = '192x192+0+0', width = 192)
 crop_coords	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 current_user	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def current_user
@@ -129,8 +129,8 @@ destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def destroy
-destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def destroy
 destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def destroy
+destroy	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def destroy
 do	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	    icon = content_tag :span, id: 'i_' + key, class: svg_class  do
 down	/Users/fish/Dropbox/work/Interpol/db/migrate/20150303072156_create_delayed_jobs.rb	  def self.down
 edit	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  def edit
@@ -155,7 +155,7 @@ find_root	/Users/fish/Dropbox/work/Interpol/app/models/comment.rb	  def find_roo
 flatten_layers	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def flatten_layers
 folder	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def folder;
 gather	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def gather
-generate_bottle	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def generate_bottle
+generate_bottle	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def generate_bottle 
 generate_preview	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def generate_preview 
 generate_word	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.generate_word
 getSize	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function getSize( type )
@@ -203,8 +203,8 @@ new	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  de
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def new
-new	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def new
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/user_sessions_controller.rb	  def new
+new	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def new
 note	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def note
 opacity_mask	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def opacity_mask
 open_spreadsheet	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def open_spreadsheet(file)

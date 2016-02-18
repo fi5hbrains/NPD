@@ -67,6 +67,7 @@ class PolishesController < ApplicationController
         @is_in = true
       end
       if @is_in 
+        @user_votes = current_user.votes.where(votable_type: 'Polish', votable_id: params[:polish_id])
         @polishes = Polish.where('id NOT IN (?)', collection.map( &:polish_id)).page(params[:page_b]).per(12)
         @next_item = @polishes.last if @polishes.count >= 12
         @added_item = Polish.find(@item.polish_id)
@@ -127,7 +128,7 @@ class PolishesController < ApplicationController
       if params[:redress]
         @polish.save
         rename_polish_files old_slug if old_slug != @polish.slug
-        generate_bottle if old_bottle_id != @polish.bottle_id
+        generate_bottle(true) if old_bottle_id != @polish.bottle_id
         redirect_to @brand, notice: 'Polish was successfully updated.' 
       else
         @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id) || l.new_record?}
@@ -191,6 +192,7 @@ class PolishesController < ApplicationController
   end
   
   def find_related polish = nil, spread = nil
+    set_user_votes
     cookies[:spread] = params[:spread].to_i if params[:spread]
     @polish = polish || (Polish.find(params[:polish_id]) if params[:polish_id])
     spread = spread || cookies[:spread] || 20
@@ -461,7 +463,7 @@ class PolishesController < ApplicationController
     generate_bottle
   end
 
-  def generate_bottle
+  def generate_bottle redress = false
     bottle = Bottle.find_by_id(@polish.bottle_id)
     return true unless bottle    
     blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
@@ -469,8 +471,10 @@ class PolishesController < ApplicationController
     # usm = '-unsharp 0x3+1.5+0.0196'
     
     stack = path + @polish.coat_url   
-    (@polish.coats_count - 1).times{|c| stack += " #{path + @polish.coat_url( c + 1)} -composite "}       
-    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
+    (@polish.coats_count - 1).times{|c| stack += " #{path + @polish.coat_url( c + 1)} -composite "}  
+    unless redress
+      stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
+    end
     stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-68-130 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
     stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "

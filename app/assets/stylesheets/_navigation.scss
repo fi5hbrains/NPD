@@ -95,6 +95,8 @@
     .icon { fill: white }
   }
   .formLi{
+    position:relative;
+    z-index:1;
     width: calc(100% - 12px);
     margin: 0 auto;
     height: 0;

@@ -1,5 +1,7 @@
-.blockx2
-  %h1.smallMargin= truncate (@polish.brand_name + ' – ' + (@polish.number + ' ' if @polish.number) + @polish.name.to_s), length: 50, separator: /_|-| /
+.blockx2.left
+  %h1.smallMargin
+    = link_to @polish.brand_name, catalogue_brand_path( @polish.brand_slug)
+    = truncate (' – ' + (@polish.number + ' ' if @polish.number) + @polish.name.to_s), length: 50, separator: /_|-| /
   
   %h4
     - if @polish.collection
@@ -48,4 +50,5 @@
         #sliderSpread{'data-start' => (100 - (cookies[:spread] || 20).to_i), 'data-polish_id' => @polish.id }
       #searchResults
         = render @related, no_brand: false
-      
+= render 'ads'
+     
