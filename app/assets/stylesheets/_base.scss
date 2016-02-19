@@ -437,6 +437,7 @@ h1 .tooltip { bottom: -20px }
 h2 .tooltip { bottom: -23px }
 h3 .tooltip { bottom: -30px }
 .voteBox .tooltip { bottom: -28px }
+.voteBox svg { pointer-events: none } 
 .tipped:hover .tooltip{ 
   display: inline-block;
   animation-duration: .4s;

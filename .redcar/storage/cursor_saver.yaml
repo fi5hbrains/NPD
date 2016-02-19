@@ -716,11 +716,6 @@ cursor_positions:
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 4732
     :timestamp: 2016-02-12 22:18:20 +03:00
-  - :path: config/routes.rb
-    :cursor_offset: 1018
-    :timestamp: 2016-01-06 09:13:53 +03:00
-    :selection_offset: 1011
-    :block_selection_mode: false
   - :path: app/assets/stylesheets/_options.scss
     :cursor_offset: 600
     :timestamp: 2016-02-14 08:39:42 +03:00
@@ -775,4 +770,9 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 20341
     :timestamp: 2016-02-15 02:09:01 +03:00
+  - :path: config/routes.rb
+    :cursor_offset: 1018
+    :timestamp: 2016-01-06 09:13:53 +03:00
+    :selection_offset: 1011
+    :block_selection_mode: false
 files_to_retain: 0

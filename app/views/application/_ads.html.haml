@@ -7,6 +7,33 @@
       = link_to 'http://www.onenailtorulethemall.co.uk' do
         = image_tag 'ads/one_nail.jpg'
         %span Nail art, reviews, tutorials
+    %li.amazon>
+      - search_terms = [Time.now.year.to_s + ' collection']
+      - if @brand && @brand.polishes_count > 20
+        - search_terms << @brand.name
+        - if @polish
+          - search_terms << @polish.name
+      - if @polish
+        - search_terms += get_colour_names([@polish.h,@polish.s,@polish.l])
+      <script type="text/javascript">
+      amzn_assoc_placement = "adunit0";
+      amzn_assoc_search_bar = "false";
+      amzn_assoc_tracking_id = "inpd-20";
+      amzn_assoc_search_bar_position = "top";
+      amzn_assoc_ad_mode = "auto";
+      amzn_assoc_ad_type = "smart";
+      amzn_assoc_marketplace = "amazon";
+      amzn_assoc_region = "US";
+      amzn_assoc_title = '';
+      amzn_assoc_fallback_mode = {"type":"search","value":"#{search_terms[rand(search_terms.size)]}"};
+      amzn_assoc_emphasize_categories = "51569011,3760911";
+      amzn_assoc_default_category = "Beauty";
+      amzn_assoc_textlinks = "";
+      amzn_assoc_linkid = "169ad18a763423391c41f8fc7489b224";
+      amzn_assoc_rows = "1";
+      </script>
+      <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+
     %li.w200>
       = link_to 'http://kurebazaar.com' do
         = image_tag 'ads/kure.jpg'
@@ -17,4 +44,7 @@
       = link_to 'http://www.sayitwithpolish.com.au' do
         = image_tag 'ads/say_with_polish.jpg'
         %span Celebrate special moments, your way
+        
 
+        
+    

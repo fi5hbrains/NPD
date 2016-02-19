@@ -101,6 +101,7 @@ $(document).on 'ready page:load', ->
   range = undefined
   rangeWidth = undefined
   $(document).on 'mouseenter', '.voteBox', (->
+    $(this).css('border-color','red')
     tooltip = $(this).find('.tooltip')
     isTipped = $(this).hasClass('tipped')
     containerWidth = $(this).width()
@@ -141,7 +142,8 @@ $(document).on 'ready page:load', ->
         data: { vote: rating }
         dataType: "script"
   )
-  $(document).on 'mouseleave', '.voteBox', ->  
+  $(document).on 'mouseleave', '.voteBox', -> 
+    $(this).css('border-color','blue')
     range.attr 'class', (index, classNames) ->
       classNames.replace(new RegExp(' active', 'g'), '')
     range.width(Number(range.attr 'data-vote') * 20 + '%')
