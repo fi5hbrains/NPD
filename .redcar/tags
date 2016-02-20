@@ -1,4 +1,4 @@
-1455912366
+1455954356
 AddFollowerCountToUser	/Users/fish/Dropbox/work/Interpol/db/migrate/20151223141253_add_follower_count_to_user.rb	class AddFollowerCountToUser 
 AddPrefixToPolish	/Users/fish/Dropbox/work/Interpol/db/migrate/20151215100605_add_prefix_to_polish.rb	class AddPrefixToPolish 
 Application	/Users/fish/Dropbox/work/Interpol/config/application.rb	  class Application 
@@ -171,6 +171,7 @@ give_to	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.give_t
 gloss_preview_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_preview_url;
 gloss_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_tmp;
 gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url;
+h	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/amazon.js	function h(A, z)
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;
 import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 import	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def import
