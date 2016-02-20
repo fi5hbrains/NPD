@@ -15,22 +15,37 @@
           - search_terms << @polish.name
       - if @polish
         - search_terms += get_colour_names([@polish.h,@polish.s,@polish.l])
-      <script type="text/javascript">
-      amzn_assoc_placement = "adunit0";
-      amzn_assoc_search_bar = "false";
-      amzn_assoc_tracking_id = "inpd-20";
-      amzn_assoc_search_bar_position = "top";
-      amzn_assoc_ad_mode = "search";
-      amzn_assoc_ad_type = "smart";
-      amzn_assoc_marketplace = "amazon";
-      amzn_assoc_region = "US";
-      amzn_assoc_title = "";
-      amzn_assoc_default_search_phrase = "#{search_terms[rand(search_terms.size)]}";
-      amzn_assoc_default_category = '#{["Apparel","Beauty","Wireless","Jewelry","Shoes"][rand(5)]}';
-      amzn_assoc_textlinks = "";
-      amzn_assoc_linkid = "eb8d819467080281a0ff49f5532294a4";
-      </script>
-      = javascript_include_tag 'amazon.js?MarketPlace=US', 'data-turbolinks-track' => false
+      :javascript
+        amzn_assoc_placement = "adunit0";
+        amzn_assoc_search_bar = "false";
+        amzn_assoc_tracking_id = "inpd-20";
+        amzn_assoc_search_bar_position = "top";
+        amzn_assoc_ad_mode = "search";
+        amzn_assoc_ad_type = "smart";
+        amzn_assoc_marketplace = "amazon";
+        amzn_assoc_region = "US";
+        amzn_assoc_title = "";
+        amzn_assoc_default_search_phrase = "#{search_terms[rand(search_terms.size)]}";
+        amzn_assoc_default_category = '#{["Apparel","Beauty","Wireless","Jewelry","Shoes"][rand(5)]}';
+        amzn_assoc_textlinks = "";
+        amzn_assoc_rows = '5',
+        amzn_assoc_linkid = "eb8d819467080281a0ff49f5532294a4";
+        amzn_assoc_callbacks = {
+          "onload": function(data) {
+            var products = $('.amzn-native-product');
+            products.show();
+            var i = 0;
+            while (i + 2 < products.size()) {
+              $('.amzn-native-product')[ Math.floor( Math.random() * (products.size() - i)) ].remove();
+              i++;
+            };
+            $('.amzn-native-product').css('margin-left','10px').first().css('margin-left','0');
+          },
+          "onhide": function(data) {
+            console.log("ad hidden because: " + data.reason);
+          }
+        };
+      = javascript_include_tag 'amazon.js?MarketPlace="US"', 'data-turbolinks-track' => false
     %li.w200>
       = link_to 'http://kurebazaar.com' do
         = image_tag 'ads/kure.jpg'

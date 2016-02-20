@@ -143,15 +143,6 @@ if (typeof amzn_assoc_ad_banner === "undefined") {
             }
             return h;
         };
-        a.createIframe = function(f, b) {
-            var e = amzn_assoc_ad_banner.populateIframeForBanner(f);
-            var c = document.getElementById(a.bannerDivPreFix + b);
-            var d = slotCounter.getNextSlot();
-            c.innerHTML = '<iframe id="amzn_assoc_ad_' + d + '" style="' + e.style + '" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="' + e.url + '"></iframe>';
-        };
-        a.rewriteCurrentFrame = function(b) {
-            window.location.href = amzn_assoc_ad_banner.populateIframeForBanner(b).url;
-        };
         a.makeRemoteCall = function(f, c, b) {
             var e = f.width + "x" + f.height;
             window[c] = function(g) {
@@ -181,28 +172,6 @@ if (typeof amzn_assoc_ad_banner === "undefined") {
             var d = "http://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&MarketPlace=" + f.region + "&Operation=GetAdCreative&ID=OneJS&OneJS=1&" + amzn_assoc_utils.serialize(f, "&", false, true);
             amzn_assoc_utils.loadRemoteScript(d + "&jsonp=" + c, function() {});
         };
-        a.getDynamicBanner = function(i, d) {
-            if (i.isresponsive == "true") {
-                var h = "horizontal",
-                    g = amzn_assoc_ad_banner.getAvailableWidthInDiv(),
-                    b = g.width,
-                    c = g.count,
-                    f = amzn_assoc_ad_banner.getOptimalSize(b, h, d),
-                    e = "amzn_assoc_banner_jsonp_callback_" + c;
-                if (f != "") {
-                    i.lc_value = "w23";
-                    i.height = f.split("x")[1];
-                    i.width = f.split("x")[0];
-                    amzn_assoc_ad_banner.makeRemoteCall(i, e, c);
-                }
-            } else {
-                if (i.banner_type == "setandforget") {
-                    var c = a.getAvailableWidthInDiv().count;
-                    var e = "amzn_assoc_banner_jsonp_callback_" + c;
-                    amzn_assoc_ad_banner.makeRemoteCall(i, e, c);
-                }
-            }
-        };
         a.getAvailableWidthInDiv = function() {
             var c = a.globalBannerCreatedCount++;
             var e = a.bannerDivPreFix + c;
@@ -220,53 +189,11 @@ if (typeof amzn_assoc_ad_banner === "undefined") {
             f.count = c;
             return f;
         };
-        a.populateIframeForBanner = function(g) {
-            var c = {};
-            c.t = g.tracking_id;
-            c.o = 1;
-            c.l = amzn_assoc_ad_banner.linkcodes[g.banner_type][0];
-            c.lc = g.lc_value;
-            c.category = g.campaigns;
-            c.f = "ifr";
-            c.m = g.marketplace;
-            c.banner = g.banner_id;
-            c.p = g.p;
-            c.linkid = g.linkid;
-            var b = [];
-            for (var f in c) {
-                b.push(encodeURIComponent(f) + "=" + encodeURIComponent(c[f]));
-            }
-            var e = {};
-            e.url = location.protocol + "//rcm-na.amazon-adsystem.com/e/cm?" + b.join("&");
-            e.style = "border:none;display:inline-block;width:" + g.width + "px;height:" + g.height + "px";
-            a.makeForesterCall(g, "onload");
-            return e;
-        };
         a.globalBannerCreatedCount = 0;
         a.bannerDivPreFix = "assoc_amazon_ad_banner_div_";
         return a;
     }());
-    var amazon_assoc_banner_spec = function(a) {
-        if (a.banner_type == "") {
-            a.banner_type = "category";
-        }
-        a.lc_value = amzn_assoc_ad_banner.linkcodes[a.banner_type][1];
-        if (a.banner_type == "setandforget" || a.isresponsive == "true") {
-            amzn_assoc_ad_banner.getDynamicBanner(a, amzn_assoc_ad_banner.responsiveadsizelist);
-        } else {
-            return amzn_assoc_ad_banner.populateIframeForBanner(a);
-        }
-    };
-    var amzn_assoc_ad_pre_script_banner = function(a, b) {
-        var c = amazon_assoc_banner_spec(a);
-        if (typeof c === "undefined") {
-            b[a.ad_type].adContentUrl = "";
-        } else {
-            b[a.ad_type].iframeStyle = c.style;
-            b[a.ad_type].adContentUrl = c.url;
-        }
-        return b;
-    };
+
 }(function() {
     if (typeof window.performance !== "undefined" && typeof window.performance.timing !== "undefined") {
         amzn_assoc_cm.endScope("cm_", "onejs_load_evt", window.performance.timing.navigationStart);
@@ -348,7 +275,7 @@ var amzn_assoc_ad_spec_type = function(b) {
             emphasize_categories: true,
             show_on_hover: true,
             exclude_items: true,
-            link_style: true,
+            link_style: false,
             brand_position: true,
             slotNum: true,
             marketplace: true,
@@ -539,19 +466,7 @@ if (typeof amzn_assoc_ad === "undefined") {
                     f.elemName = m.createDiv(f.prefix, f.slotNum, f.inline);
                 }
             }
-            if (f.renderInIframe && !f.aaxMediated) {
-                c = f.iframeStyle;
-                if ((!c || c === "") && f.adOptions.width && f.adOptions.height) {
-                    c = "width:" + f.adOptions.width + "px;height:" + f.adOptions.height + "px;";
-                }(function() {
-                    var i = document.getElementById(f.elemName);
-                    if (!f.dontInject) {
-                        i.innerHTML = '<iframe id="amzn_assoc_ad_' + f.slotNum + '" style="' + c + '" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="' + f.url + '"></iframe>';
-                        m.execBodyScripts(i, f.slotNum);
-                    }
-                }());
-                return;
-            }
+
             a = "amzn_assoc_jsonp_callback_" + f.placement + "_" + f.slotNum;
             if (f.aaxMediated) {
                 d = d + "&jscb=" + a;
@@ -792,9 +707,6 @@ if (typeof amzn_assoc_ad === "undefined") {
                 astore: {},
                 search_hb: {},
                 auto_part_finder: {},
-                product_link: {
-                    iframeStyle: "width:120px;height:240px;"
-                },
                 shopnshare: {
                     iframeStyle: "width: 0px; height: 0px;",
                     aaxMediatedMarketPlaces: ["US"],
@@ -806,9 +718,6 @@ if (typeof amzn_assoc_ad === "undefined") {
                 },
                 wish_list: {},
                 pharos_v2: {},
-                banner: {
-                    iframeStyle: ""
-                },
                 mp3clips: {},
                 myfavourites: {},
                 recommended_product_links: {},
@@ -1059,13 +968,4 @@ if (typeof amzn_assoc_ad === "undefined") {
         };
     }());
 }
-if (amzn_assoc_ad_async_spec.numberOfWidgets > 0) {
-    (function() {
-        var a = 0;
-        for (a = 0; a < amzn_assoc_ad_async_spec.numberOfWidgets; a++) {
-            amzn_assoc_ad.render(amzn_assoc_ad_async_spec.widgets[a]);
-        }
-    }());
-} else {
-    amzn_assoc_ad.render(amzn_assoc_ad_spec);
-}
+amzn_assoc_ad.render(amzn_assoc_ad_spec);

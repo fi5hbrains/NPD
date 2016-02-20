@@ -586,7 +586,7 @@ h3 .tooltip { bottom: -30px }
 li.w200{
   width: 200px; float: left;
 }
-li.amazon { height: 261px }
+.banners li.amazon { min-height: 232px; max-height: 264px; }
 li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-product {
   background: $colourHighlight;
   img { mix-blend-mode: darken };
