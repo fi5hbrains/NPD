@@ -41,7 +41,7 @@
             };
             products = $('.amzn-native-product');
             products.css('margin-left','10px').first().css('margin-left','0');
-            products.height(products.first().height());
+            products.height($('.amzn-native-content').height());
           },
           "onhide": function(data) {
             $('.amazon').remove();

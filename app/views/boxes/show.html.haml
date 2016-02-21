@@ -1,7 +1,7 @@
 %section#List.block.left.relative<
   = text_field_tag 'box[name]', @box.name, placeholder: 'List Name', id:'boxNameField',style: ('display:none' if !params[:edit] || %(collection wishlist giveaway).include?(@box.slug) ), class: 'formIndent bigMargin smallMargin', 'data-id' => @box.id
   %h1#boxName.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}<
-    = @box.adapt_name
+    %span<= @box.adapt_name
     - if is_owner
       = link_to gather_user_box_path(@user, @box), style: ('display:none' if params[:edit]), class: 'relative tipped', remote: true do
         .tooltip.tippedR.noWrap
@@ -54,10 +54,10 @@
         = submit_tag c, name: 'box_sort', id: c, class: 'hidden'
       
     %h3= t 'user.headers.brands'
-    .tags.bottomMargin<
+    #tags.tags.bottomMargin<
       - @brands.each do |brand|
         = brand_to_tag(brand)
-      = submit_tag nil, name: 'preview', class: 'hidden'
+    = submit_tag nil, name: 'preview', class: 'hidden', id: 'submitFilterBrands'
     
   = render 'lists'
 

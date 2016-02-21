@@ -26,6 +26,22 @@
     var link = $(this).find('.info').find('a').attr('href')
     $(this).children('a').attr('href', link).removeAttr('data-method').removeAttr('rel').removeAttr('data-remote')
     });
+  if ( $('#tags').find('label').size() != #{@brands.size}) {
+  var activeBrands = 0;
+  $('#tags').html('');
+  - @brands.each do |brand|
+    $('#tags').append('#{j(brand_to_tag(brand)).html_safe}');
+    if ($('#filterBrand').find('input[name="filter_brand[#{brand[0]}]"]').size() > 0) {
+    $('#tags').find('input[name="filter_brand[#{brand[0]}]"]').prop('checked', true);
+    activeBrands += 1;
+    }    
+  $('#tags').find('input[data-updatable=true]').on('change', function() {
+  $('#submitFilterBrands').click();
+  });
+  if (activeBrands > 0 || $('#filterBrand').find('input').size() != activeBrands) {
+  $('#submitFilterBrands').click();
+  }
+  }
   $('#goEdit').show();
   $('#doneEditing').hide();
   $('#gather').removeClass('active');
@@ -33,3 +49,4 @@
   $('h1').find('a').show();
   $('#boxNameField').hide();
   history.pushState({}, '', '/#{params[:user_id]}/#{params[:id]}');
+

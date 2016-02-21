@@ -15,6 +15,9 @@ $('#filterPolish').val($('#secondarySearchPolish').val());
     $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
   -else
     $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
+- else  
+  $('#filterBrand').html('');
+
 - if @reset
   $('#secondaryResults').show();
   $('#secondarySearchResults').hide();
