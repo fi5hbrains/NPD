@@ -39,10 +39,12 @@
               $('.amzn-native-product')[ Math.floor( Math.random() * (products.size() - i)) ].remove();
               i++;
             };
-            $('.amzn-native-product').css('margin-left','10px').first().css('margin-left','0');
+            products = $('.amzn-native-product');
+            products.css('margin-left','10px').first().css('margin-left','0');
+            products.height(products.first().height());
           },
           "onhide": function(data) {
-            console.log("ad hidden because: " + data.reason);
+            $('.amazon').remove();
           }
         };
       = javascript_include_tag 'amazon.js?MarketPlace="US"', 'data-turbolinks-track' => false

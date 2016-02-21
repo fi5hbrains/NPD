@@ -365,9 +365,6 @@ cursor_positions:
     :timestamp: 2015-12-03 04:40:38 +03:00
     :selection_offset: 330
     :block_selection_mode: false
-  - :path: config/environments/production.rb
-    :cursor_offset: 2101
-    :timestamp: 2015-04-09 20:56:52 +04:00
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
@@ -438,9 +435,6 @@ cursor_positions:
   - :path: config/initializers/inflections.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: config/initializers/assets.rb
-    :cursor_offset: 276
-    :timestamp: 2015-12-03 15:53:39 +03:00
   - :path: config/environments/development.rb
     :cursor_offset: 966
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -504,9 +498,6 @@ cursor_positions:
     :timestamp: 2015-11-28 00:58:34 +03:00
     :selection_offset: 34
     :block_selection_mode: false
-  - :path: app/helpers/application_helper.rb
-    :cursor_offset: 2095
-    :timestamp: 2015-12-30 11:10:30 +03:00
   - :path: app/helpers/polishes_helper.rb
     :cursor_offset: 386
     :timestamp: 2015-12-26 10:33:48 +03:00
@@ -532,11 +523,6 @@ cursor_positions:
     :cursor_offset: 74
     :timestamp: 2016-01-13 00:58:19 +03:00
     :selection_offset: 92
-    :block_selection_mode: false
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 696
-    :timestamp: 2015-11-12 22:20:26 +03:00
-    :selection_offset: 712
     :block_selection_mode: false
   - :path: app/views/polishes/_collections.html.haml
     :cursor_offset: 1739
@@ -643,9 +629,6 @@ cursor_positions:
   - :path: app/controllers/brands_controller.rb
     :cursor_offset: 1499
     :timestamp: 2016-01-22 13:55:46 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 1486
-    :timestamp: 2016-02-02 09:14:33 +03:00
   - :path: app/views/polishes/_catalogue_search.html.haml
     :cursor_offset: 268
     :timestamp: 2016-02-02 08:13:24 +03:00
@@ -672,9 +655,6 @@ cursor_positions:
   - :path: app/assets/javascripts/profile.js
     :cursor_offset: 41
     :timestamp: 2015-05-22 07:31:22 +04:00
-  - :path: app/views/layouts/application.html.haml
-    :cursor_offset: 2555
-    :timestamp: 2016-01-05 23:30:28 +03:00
   - :path: app/views/comments/_form.html.haml
     :cursor_offset: 411
     :timestamp: 2015-10-17 15:50:16 +04:00
@@ -713,39 +693,21 @@ cursor_positions:
   - :path: app/views/application/_stars.html.haml
     :cursor_offset: 295
     :timestamp: 2016-02-12 21:14:34 +03:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 4732
-    :timestamp: 2016-02-12 22:18:20 +03:00
-  - :path: app/assets/stylesheets/_options.scss
-    :cursor_offset: 600
-    :timestamp: 2016-02-14 08:39:42 +03:00
   - :path: config/locales/en.yml
     :cursor_offset: 2840
     :timestamp: 2016-02-13 22:18:35 +03:00
   - :path: app/views/application/_lists.html.haml
     :cursor_offset: 13
     :timestamp: 2016-02-14 08:38:31 +03:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 128
-    :timestamp: 2016-02-16 16:53:21 +03:00
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 122
     :timestamp: 2016-02-16 09:49:17 +03:00
-  - :path: app/views/application/_ads.html.haml
-    :cursor_offset: 546
-    :timestamp: 2016-02-16 10:30:15 +03:00
   - :path: app/assets/stylesheets/_navigation.scss
     :cursor_offset: 2151
     :timestamp: 2016-02-15 01:01:50 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 13779
-    :timestamp: 2016-02-16 09:43:07 +03:00
   - :path: app/controllers/user_sessions_controller.rb
     :cursor_offset: 429
     :timestamp: 2016-02-14 22:21:23 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 765
-    :timestamp: 2016-02-15 01:03:39 +03:00
   - :path: app/views/polishes/reorder.js.haml
     :cursor_offset: 203
     :timestamp: 2016-02-13 21:35:43 +03:00
@@ -767,12 +729,51 @@ cursor_positions:
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 364
     :timestamp: 2016-01-02 11:02:14 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 20341
-    :timestamp: 2016-02-15 02:09:01 +03:00
   - :path: config/routes.rb
     :cursor_offset: 1018
     :timestamp: 2016-01-06 09:13:53 +03:00
     :selection_offset: 1011
     :block_selection_mode: false
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 765
+    :timestamp: 2016-02-15 01:03:39 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 3194
+    :timestamp: 2016-02-20 13:02:11 +03:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 36
+    :timestamp: 2016-02-21 00:10:35 +03:00
+  - :path: app/assets/stylesheets/_options.scss
+    :cursor_offset: 673
+    :timestamp: 2016-02-14 08:39:42 +03:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 572
+    :timestamp: 2015-11-12 22:20:26 +03:00
+  - :path: app/views/layouts/application.html.haml
+    :cursor_offset: 441
+    :timestamp: 2016-02-20 09:14:29 +03:00
+  - :path: config/initializers/assets.rb
+    :cursor_offset: 471
+    :timestamp: 2016-02-20 08:12:07 +03:00
+  - :path: config/environments/production.rb
+    :cursor_offset: 2101
+    :timestamp: 2015-04-09 20:56:52 +04:00
+  - :path: app/assets/javascripts/amazon.js
+    :cursor_offset: 37047
+    :timestamp: 2016-02-21 00:13:27 +03:00
+  - :path: app/helpers/application_helper.rb
+    :cursor_offset: 4130
+    :timestamp: 2016-02-19 14:27:54 +03:00
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 580
+    :timestamp: 2016-02-18 09:27:54 +03:00
+  - :path: app/views/application/_ads.html.haml
+    :cursor_offset: 1841
+    :timestamp: 2016-02-21 07:41:44 +03:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 14233
+    :timestamp: 2016-02-20 13:06:11 +03:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 0
+    :timestamp: 2016-02-18 09:29:28 +03:00
 files_to_retain: 0
