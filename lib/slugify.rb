@@ -14,9 +14,9 @@ module Slugify
         ['"', 'ˮ'],
         ['%', '％'],
         ['&', '＆'],
-        ['?', '？'],
-        ['!', '！'],
-        ['.', '﹒']
+        ['?', ''],
+        ['!', ''],
+        ['.', '']
       ]
       slug = name.squish
       replacements.each{ |p| slug.gsub!(p[0],p[1])}
