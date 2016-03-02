@@ -10,12 +10,8 @@ class Box < ActiveRecord::Base
   
   validates :slug, uniqueness: {scope: :user_id, message: 'already exists for this user', :case_sensitive => false }, :allow_blank => false
 
-  def open_spreadsheet(file)
-    Roo::Spreadsheet.open(file.path, extension: File.extname(file.path))
-  end
-  
   def import(file)
-    spreadsheet = open_spreadsheet(file)
+    spreadsheet = Roo::Spreadsheet.open(file.path, extension: File.extname(file.path))
     header = self.rename_header_columns(spreadsheet.row(1))
     items = self.box_items
     stats = {total: 0, added: 0, new: 0, failed: 0, unknown: Set.new}

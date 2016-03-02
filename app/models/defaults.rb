@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Defaults < ActiveRecord::Base
   SYSTEM_NAMES = %w(Gatekeeper Ghost)
-  RESERVED_NAMES = %w(vote autocomplete note get_invite admin administrator application assets bottles boxes brands catalogue comments delete destroy diary edit entries images index invites javascripts lab login logout moderator new notes polishes search session stylesheets tags update user_session users)
+  RESERVED_NAMES = %w(maintenance vote autocomplete note get_invite admin administrator application assets bottles boxes brands catalogue comments delete destroy diary edit entries images index invites javascripts lab login logout moderator new notes polishes search session stylesheets tags update user_session users)
   PASS_DESSERT = %w(apple-pie baklava brownie charlotte cheesecake cinnamon-roll cookie cream-puff croissant eclair fudge gelato ice-cream macaroon marzipan pavlova pretzel pudding scone shortbread sorbet souffle syllabub tart tiramisu torte)
   PASS_COLOUR = %w(azure biege blue brown crimson green indigo orange pink purple red scarlet taupe teal violet yellow)
   LAYER = { particle_size: 50, particle_density: 25, opacity: 95 }

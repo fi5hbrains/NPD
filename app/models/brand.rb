@@ -17,7 +17,7 @@ class Brand < ActiveRecord::Base
   
   def folder; "/assets/brands/#{self.slug}" end
   
-  scope :sort_by_polishes_count, -> { order(polishes_count: :DESC) }
+  scope :sort_by_polishes_count, -> { order(polishes_count: :DESC, name: :ASC) }
 
   def to_param; slug end
   

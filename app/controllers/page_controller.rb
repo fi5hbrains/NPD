@@ -50,6 +50,25 @@ class PageController < ApplicationController
     end
   end
   
-  private
-
+  def maintenance
+    @result = 'wrong user, sorry'
+    if current_user && current_user.name == 'bobin'
+      @result = 0
+      Brand.where(polishes_count: 0).each(&:destroy)
+      sheet = Roo::Spreadsheet.open(Rails.root.join('public').to_s + '/brands.xlsx')
+      (1..sheet.last_row).each do |i|
+        names = sheet.row(i)[0].to_s.gsub('.0','')
+        link = sheet.row(i)[1]
+        unless Brand.where(name: names.split(';')[0].squish.strip).count > 0
+          brand = Brand.new
+          brand.synonym_list = names
+          brand.link = link
+          brand.user_id = current_user.id
+          brand.name = names.split(';')[0].try(:strip)
+          brand.save
+          @result += 1
+        end
+      end
+    end
+  end
 end

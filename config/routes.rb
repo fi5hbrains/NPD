@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'reorder', to: 'polishes#reorder'
   get 'autocomplete', to: 'application#autocomplete'
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
+  get 'maintenance', to: 'page#maintenance'
 
   scope '/catalogue' do
     get '/', to: 'polishes#index', as: 'catalogue'

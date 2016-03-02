@@ -696,20 +696,9 @@ cursor_positions:
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 364
     :timestamp: 2016-01-02 11:02:14 +03:00
-  - :path: config/routes.rb
-    :cursor_offset: 1018
-    :timestamp: 2016-01-06 09:13:53 +03:00
-    :selection_offset: 1011
-    :block_selection_mode: false
   - :path: app/views/boxes/show.html.haml
     :cursor_offset: 765
     :timestamp: 2016-02-15 01:03:39 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 3194
-    :timestamp: 2016-02-20 13:02:11 +03:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 36
-    :timestamp: 2016-02-21 00:10:35 +03:00
   - :path: app/assets/stylesheets/_options.scss
     :cursor_offset: 673
     :timestamp: 2016-02-14 08:39:42 +03:00
@@ -737,9 +726,6 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 0
     :timestamp: 2016-02-18 09:29:28 +03:00
-  - :path: lib/slugify.rb
-    :cursor_offset: 476
-    :timestamp: 2015-05-28 13:05:30 +04:00
   - :path: app/models/box.rb
     :cursor_offset: 2795
     :timestamp: 2016-01-04 01:01:00 +03:00
@@ -770,10 +756,27 @@ cursor_positions:
     :timestamp: 2016-01-31 21:29:00 +03:00
     :selection_offset: 620
     :block_selection_mode: false
-  - :path: app/views/boxes/show.js.haml
-    :cursor_offset: 1416
-    :timestamp: 2016-02-21 21:10:25 +03:00
   - :path: app/views/application/collection_search.js.haml
     :cursor_offset: 842
     :timestamp: 2016-02-21 20:08:01 +03:00
+  - :path: lib/slugify.rb
+    :cursor_offset: 303
+    :timestamp: 2016-03-02 07:14:25 +03:00
+  - :path: "app/views/brands/\xD0\x9D\xD0\xBE\xD0\xB2\xD0\xB0\xD1\x8F \xD1\x82\xD0\xB0\xD0\xB1\xD0\xBB\xD0\xB8\xD1\x86\xD0\xB0 - \xD0\x9B\xD0\xB8\xD1\x81\xD1\x821.csv"
+    :cursor_offset: 48986
+    :timestamp: 2016-03-01 21:39:36 +03:00
+    :selection_offset: 48988
+    :block_selection_mode: false
+  - :path: app/models/defaults.rb
+    :cursor_offset: 125
+    :timestamp: 2016-03-02 09:19:22 +03:00
+  - :path: config/routes.rb
+    :cursor_offset: 1207
+    :timestamp: 2016-03-02 09:18:18 +03:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 4271
+    :timestamp: 2016-02-21 00:10:35 +03:00
+  - :path: app/views/boxes/show.js.haml
+    :cursor_offset: 1844
+    :timestamp: 2016-02-21 22:00:48 +03:00
 files_to_retain: 0
