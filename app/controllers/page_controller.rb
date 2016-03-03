@@ -54,27 +54,47 @@ class PageController < ApplicationController
     @result = 'wrong user, sorry'
     if current_user && current_user.name == 'bobin'
       @result = 0
-      brand = Brand.find_by_slug('chanel')
       agent = Mechanize.new
-      page = agent.get 'http://www.chanel.com/en_GB/fragrance-beauty/makeup/nails/nail-colour/le-vernis-nail-colour-p128000.html'
-      shades = page.at('.fnb_shades_container').search('.fnb_shade')
-      shades.each do |shade|
-        polish = brand.polishes.where(number: shade.attr('title').to_i).first_or_create
-        if polish && (polish.new_record? || polish.draft)
+      6.times do |i|
+        brand = Brand.find_by_slug('china-glaze')
+        page = agent.get 'http://chinaglaze.com/Colour/China-Glaze-Lacquer/pageNum_' + i.to_s + '.html'
+        shades = page.at('#color_dot').search('.bottle')
+        shades.each do |shade|
+          polish = brand.polishes.where(name: (name = shade.at('#color-name').text)).first_or_create
           if polish.new_record? 
-            polish.number = shade.attr('title').to_i
-            polish.name = (name = shade.attr('title').split(' - ')[1])[0] + name[1..-1].mb_chars.downcase
+            polish.name = name
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
           end
-          polish.remote_reference_url = shade.attr('data-shade')
-          layer = polish.layers.find_by_layer_type('base')
-          layer ||= polish.layers.new(layer_type: 'base')
-          layer.c_base = shade.attr('data-dcext-ch_sha')
           polish.user_id = current_user.id
+          polish.remote_reference_url = 'http://chinaglaze.com' + shade.at('img').attr('src')
+          polish.draft = true
           @result += 1 if polish.save
         end
       end
+      
+      # ----------------- CHANEL
+      # brand = Brand.find_by_slug('chanel')
+      # agent = Mechanize.new
+      # page = agent.get 'http://www.chanel.com/en_GB/fragrance-beauty/makeup/nails/nail-colour/le-vernis-nail-colour-p128000.html'
+      # shades = page.at('.fnb_shades_container').search('.fnb_shade')
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(number: shade.attr('title').to_i).first_or_create
+      #   if polish && (polish.new_record? || polish.draft)
+      #     if polish.new_record? 
+      #       polish.number = shade.attr('title').to_i
+      #       polish.name = (name = shade.attr('title').split(' - ')[1])[0] + name[1..-1].mb_chars.downcase
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #     end
+      #     polish.remote_reference_url = shade.attr('data-shade')
+      #     layer = polish.layers.find_by_layer_type('base')
+      #     layer ||= polish.layers.new(layer_type: 'base')
+      #     layer.c_base = shade.attr('data-dcext-ch_sha')
+      #     polish.user_id = current_user.id
+      #     @result += 1 if polish.save
+      #   end
+      # end
       
       # --------------- import brands
       # Brand.where(polishes_count: 0).each(&:destroy)
