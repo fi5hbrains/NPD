@@ -1,5 +1,12 @@
 %section#listing.block.left
-  %h2= link_to_if (params[:controller] != 'brands' || params[:action] != 'show'),  @brand.name, @brand
+  %h2
+    = link_to_if (params[:controller] != 'brands' || params[:action] != 'show'),  @brand.name, @brand
+    = link_to new_brand_polish_path(@brand), class: 'tipped relative' do
+      .tooltip.tippedR.noWrap
+        .tip
+        %span= t 'tooltip.new_polish'
+      %svg.icon.button.inline.roundButton.previewButton
+        <use xlink:href=#plus />
   = render 'search', setup: %w(polish), css: 'wide100 autoupdatable', lab_search: true, remote: true     
   #controls.controls.bigMargin
     %span.selected= 'All'

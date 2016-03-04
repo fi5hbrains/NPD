@@ -107,6 +107,22 @@ $(document).on 'ready page:load', ->
     prevImage.attr('id', 'layer_' + (ordering - 1))
     nextImage.attr('id', 'layer_' + ordering)
     nextImage.before prevImage
+    
+  $('#reference_image').load ->
+    $(this).mousemove (e) ->
+      if !@canvas
+        @canvas = $('<canvas />')[0]
+        @canvas.width = @width
+        @canvas.height = @height
+        @canvas.getContext('2d').drawImage this, 0, 0, @width, @height
+      pixelData = @canvas.getContext('2d').getImageData(event.offsetX, event.offsetY, 1, 1).data
+      rgb = 'rgb(' + pixelData[0] + ', ' + pixelData[1] + ', ' + pixelData[2] + ')'
+      $('#output').val(rgb).css('background', rgb).focus()
+      return
+    $(this).on 'click', ->
+      $('#output').select()
+      return
+    return
 
 $.fn.initClone = ->
   $layers = $('#layers')

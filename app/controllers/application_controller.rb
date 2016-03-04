@@ -22,8 +22,11 @@ class ApplicationController < ActionController::Base
     @reset = false
     colour ||= params[:colour]
     spread ||= params[:spread]
-    brand = Brand.find(params[:brand_id]) if params[:brand_id]
-    @brand ||= brand
+    if brand || params[:brand_id]
+      brand = Brand.find_by_slug(brand || params[:brand_id])
+    elsif @brand
+      brand = @brand
+    end
     @polish = Polish.find(params[:polish_id]) if params[:polish_id]
     polish_id = (@polish.try(:id) || 0)
     colour ||= [@polish.h, @polish.s, @polish.l] if @polish && spread
@@ -35,9 +38,9 @@ class ApplicationController < ActionController::Base
       brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
         pluck('word_id').compact.uniq
       @brands = Brand.where(id: brand_ids).sort_by_polishes_count
-      @brand = @brands.first if @brands.count == 1
+      brand = @brands.first if @brands.count == 1
     end
-    if !params[:polish].blank? || @brand || colour
+    if !params[:polish].blank? || brand || colour
       if params[:polish] 
         polish_ids = Synonym.
           where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
@@ -45,7 +48,7 @@ class ApplicationController < ActionController::Base
       else
         polish_ids = []
       end
-      polishes = @brands ? Polish.where(brand_id: @brands.pluck(:id)) : @brand ? @brand.polishes : Polish.where(nil)
+      polishes = @brands ? Polish.where(brand_id: @brands.pluck(:id)) : brand ? brand.polishes : Polish.where(nil)
       @polishes = polishes.
         where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
         "slug ilike ?", "#{params[:polish] || ''}%").
