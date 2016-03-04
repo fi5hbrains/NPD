@@ -271,11 +271,11 @@ button::-moz-focus-inner { border: 0; padding: 0 }
 form img { vertical-align: middle }
 .columnForm{ input, .button, .previewButton { margin-bottom: 5px } }
 input, textarea, button, .button, .roundButton{ 
+  z-index: 1;
   &:focus{
     position:relative; 
     outline: none; 
     box-shadow: 0 0 0 1px $colourMain; 
-    z-index: 1 
   }
   &:hover { background: $colourHighlight }
 }

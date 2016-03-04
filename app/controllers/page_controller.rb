@@ -55,23 +55,42 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      6.times do |i|
-        brand = Brand.find_by_slug('china-glaze')
-        page = agent.get 'http://chinaglaze.com/Colour/China-Glaze-Lacquer/pageNum_' + i.to_s + '.html'
-        shades = page.at('#color_dot').search('.bottle')
+      brand = Brand.find_by_slug('barry-m')
+      ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|
+        page = agent.get link
+        shades = page.at('.col-sm-8').search('li')
         shades.each do |shade|
-          polish = brand.polishes.where(name: (name = shade.at('#color-name').text)).first_or_create
+          polish = brand.polishes.where(name: shade.attr('data-rangename')).first_or_create
           if polish.new_record? 
-            polish.name = name
+            polish.synonym_list = shade.attr('data-rangename')
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
           end
           polish.user_id = current_user.id
-          polish.remote_reference_url = 'http://chinaglaze.com' + shade.at('img').attr('src')
+          polish.remote_reference_url = 'https://www.barrym.com' + shade.at('img').attr('src').gsub('small.jpg','zoom.jpg')
           polish.draft = true
           @result += 1 if polish.save
         end
       end
+      
+      # ----------------- china glaze
+      # 6.times do |i|
+      #   brand = Brand.find_by_slug('china-glaze')
+      #   page = agent.get 'http://chinaglaze.com/Colour/China-Glaze-Lacquer/pageNum_' + i.to_s + '.html'
+      #   shades = page.at('#color_dot').search('.bottle')
+      #   shades.each do |shade|
+      #     polish = brand.polishes.where(name: (name = shade.at('#color-name').text)).first_or_create
+      #     if polish.new_record? 
+      #       polish.name = name
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #     end
+      #     polish.user_id = current_user.id
+      #     polish.remote_reference_url = 'http://chinaglaze.com' + shade.at('img').attr('src')
+      #     polish.draft = true
+      #     @result += 1 if polish.save
+      #   end
+      # end
       
       # ----------------- CHANEL
       # brand = Brand.find_by_slug('chanel')

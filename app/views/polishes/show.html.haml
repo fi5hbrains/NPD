@@ -3,9 +3,12 @@
 %section#polish.block.left{'data-id' => @polish.id}>
   %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number).to_s + @polish.name.to_s), length: 50, separator: /_|-| /
   %h4
-    = link_to 'Collection Name', '#'
-    –
-    = link_to '2012', '#'
+    - if @polish.collection
+      = @polish.collection
+    - if @polish.collection
+      –
+    - if @polish.release_year
+      = @polish.release_year
   = image_tag @polish.bottle_url, class: 'left biggestBottle'
   - unless @polish.draft
     #coatsWrapper.left
