@@ -55,23 +55,26 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('barry-m')
-      ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|
-        page = agent.get link
-        shades = page.at('.col-sm-8').search('li')
-        shades.each do |shade|
-          polish = brand.polishes.where(name: shade.attr('data-rangename')).first_or_create
-          if polish.new_record? 
-            polish.synonym_list = shade.attr('data-rangename')
-            polish.brand_slug = brand.slug
-            polish.brand_name = brand.name
-          end
-          polish.user_id = current_user.id
-          polish.remote_reference_url = 'https://www.barrym.com' + shade.at('img').attr('src').gsub('small.jpg','zoom.jpg')
-          polish.draft = true
-          @result += 1 if polish.save
-        end
-      end
+      
+      Polish.where(brand_slug: 'barry-m').where('coats_count != 0').each{|p| p.draft = false; p.save; @result += 1}
+      # ------------- Barry M
+      # brand = Brand.find_by_slug('barry-m')
+      # ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|
+      #   page = agent.get link
+      #   shades = page.at('.col-sm-8').search('li')
+      #   shades.each do |shade|
+      #     polish = brand.polishes.where(name: shade.attr('data-rangename')).first_or_create
+      #     if polish.new_record? 
+      #       polish.synonym_list = shade.attr('data-rangename')
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #     end
+      #     polish.user_id = current_user.id
+      #     polish.remote_reference_url = 'https://www.barrym.com' + shade.at('img').attr('src').gsub('small.jpg','zoom.jpg')
+      #     polish.draft = true
+      #     @result += 1 if polish.save
+      #   end
+      # end
       
       # ----------------- china glaze
       # 6.times do |i|
