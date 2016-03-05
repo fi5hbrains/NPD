@@ -56,7 +56,7 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      Polish.where(brand_slug: 'barry-m').where('coats_count != 0').each{|p| p.draft = false; p.save; @result += 1}
+      # Polish.where(brand_slug: 'barry-m').where('coats_count != 0').each{|p| p.draft = false; p.save; @result += 1}
       # ------------- Barry M
       # brand = Brand.find_by_slug('barry-m')
       # ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|

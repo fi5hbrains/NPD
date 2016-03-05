@@ -96,6 +96,8 @@ class ApplicationController < ActionController::Base
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
         order('created_at desc')
+    elsif params[:action] == 'show' && params[:controller] == 'brands'
+      @polishes = @brand.polishes
     else
       @reset = true
     end
