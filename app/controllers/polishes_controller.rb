@@ -18,7 +18,7 @@ class PolishesController < ApplicationController
       find_related @polish
       render 'catalogue_show'
     else
-      @polishes = @brand.polishes.order('created_at desc').page(params[:page])
+      @polishes = lab_search.page(params[:page]).per(Defaults::PER[:lab_polishes])
     end
   end
   
@@ -31,7 +31,7 @@ class PolishesController < ApplicationController
     @polish.layers.new(layer_type: 'base')
     clear_tmp_folder
     all_layers_bottom_up
-    @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
+    @polishes = lab_search.page(params[:page]).per(Defaults::PER[:lab_polishes])
   end
 
   def edit
@@ -40,7 +40,7 @@ class PolishesController < ApplicationController
     clear_tmp_folder
     @polish.bottle_id ||= Brand.find_by_slug('default').bottles.first.id
     @polish.user_id = current_user.id
-    @polishes = @brand.polishes.order('created_at desc').where("id != #{@polish.id}").page(params[:page]).per(12)
+    @polishes = lab_search.page(params[:page]).per(Defaults::PER[:lab_polishes])
     @polish.layers.new(layer_type: 'base') if @polish.layers.size < 1
     @layers = @polish.layers.map(&:dup).reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
     generate_preview

@@ -96,11 +96,12 @@ class ApplicationController < ActionController::Base
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
         order('updated_at desc')
-    elsif params[:action] == 'show' && params[:controller] == 'brands'
+    elsif %w(brands polishes).include? params[:controller]
       @polishes = @brand.polishes.order('updated_at desc')
     else
       @reset = true
     end
+    return @polishes
   end
   
   def collection_search

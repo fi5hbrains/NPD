@@ -8,7 +8,7 @@ class Defaults < ActiveRecord::Base
   MAGNETS = %w(d_stripes tree star hatch h_stripes)
   GLITTERS = %w(hexagon circle stick square star heart snow halfmoon rhombus)
   PER = {
-    lab_polishes: 12
+    lab_polishes: 48
   }
   CANVAS = [305,572]
   BOTTLE = [128,186]
