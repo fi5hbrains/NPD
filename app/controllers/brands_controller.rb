@@ -8,7 +8,7 @@ class BrandsController < ApplicationController
     set_brand    
     set_bottles
     in_lab? ? lab_search : search
-    @polishes = @polishes.page(params[:page]).per(12)
+    @polishes = @polishes.page(params[:page]).per(48)
     render 'catalogue_show' if !in_lab?
   end
 

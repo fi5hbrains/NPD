@@ -92,12 +92,12 @@ class ApplicationController < ActionController::Base
         where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
         pluck('word_id').compact.uniq  
       @polishes = Polish.
-        where(brand_id: (params[:brand_id] || params[:id])).
+        where(brand_slug: (params[:brand_id] || params[:id])).
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
-        order('created_at desc')
+        order('updated_at desc')
     elsif params[:action] == 'show' && params[:controller] == 'brands'
-      @polishes = @brand.polishes
+      @polishes = @brand.polishes.order('updated_at desc')
     else
       @reset = true
     end
