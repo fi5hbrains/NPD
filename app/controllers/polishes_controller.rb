@@ -475,7 +475,7 @@ class PolishesController < ApplicationController
     unless redress
       stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite -write #{path + @polish.preview_url} +delete \\) "
     end
-    stack = " \\( #{stack} \\) -resize 140x140\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-68-90 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
+    stack = " \\( #{stack} \\) -resize 150x150\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-58-65 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
     stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
