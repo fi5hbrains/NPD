@@ -92,7 +92,7 @@ en:
     add_brand: 'Add brand'
     add_polish: 'Add polishes'
     add_list: 'Add list'
-    new_polish: 'Create polish'
+    new_polish: 'New %{brand} polish'
     one: 'Should have never existed'
     two: "Don't like it"
     three: "OK"

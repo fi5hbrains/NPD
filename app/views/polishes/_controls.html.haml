@@ -20,7 +20,7 @@
       = link_to lock_path(polish.id), method: :post, remote: true do
         <svg class='icon hoverBack withText'><use xlink:href='#lock' /></svg>
         = t 'controls.lock'
-      = link_to brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: true, data: { confirm: t('form.confirm') } do
+      = link_to brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: params[:action] != 'show', data: { confirm: t('form.confirm') } do
         <svg class='icon hoverBack withText'><use xlink:href='#trash'/></svg>
         = t 'controls.delete'
 - else
