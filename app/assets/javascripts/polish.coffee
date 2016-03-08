@@ -108,7 +108,10 @@ $(document).on 'ready page:load', ->
     nextImage.attr('id', 'layer_' + ordering)
     nextImage.before prevImage
     
-  $('#reference_image').load ->
+  $('#reference_image').on 'click', ->
+    $('#output').select()
+    return
+  $('#reference_image').on 'load', ->
     $(this).mousemove (e) ->
       if !@canvas
         @canvas = $('<canvas />')[0]
@@ -118,9 +121,6 @@ $(document).on 'ready page:load', ->
       pixelData = @canvas.getContext('2d').getImageData(event.offsetX, event.offsetY, 1, 1).data
       rgb = 'rgb(' + pixelData[0] + ', ' + pixelData[1] + ', ' + pixelData[2] + ')'
       $('#output').val(rgb).css('background', rgb).focus()
-      return
-    $(this).on 'click', ->
-      $('#output').select()
       return
     return
 

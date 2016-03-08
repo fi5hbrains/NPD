@@ -24,8 +24,9 @@
     - unless simple_form = (params[:action] == 'redress' || params[:redress])
       = f.file_field :reference, class: 'hidden', 'data-updatable' => true
       = f.hidden_field :reference_cache 
-      #reference
-        %div= render 'reference' if @polish.reference?
+      #reference{style: ('display:none' unless @polish.reference?)}
+        = image_tag(@polish.reference_url, id: 'reference_image', class: 'wide100')
+        = text_field_tag :output, '', id: 'output'
       #loadReference.menu
         .current
           %span.header= t('form.upload_reference')

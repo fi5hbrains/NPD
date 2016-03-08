@@ -4,10 +4,13 @@
   $('#changes').children().val('');
   $('#loadReference').removeClass('active');
   - if @polish.reference?
+    $('#reference').show();
     $('#polish_remote_reference_url').val('');
     $('#polish_reference_cache').val('#{j(@polish.reference_cache).html_safe}');
     $('#polish_reference').val('');
-    $('#reference').children('div').first().html('#{j(render('reference').html_safe)}');
+    $('#reference_image').attr('src', '#{j(@polish.reference_url).html_safe}');
+  - else
+    $('#reference').hide();
 - else
   $('#polishForm').remove();
   $('#listing').after('#{j(render('form')).html_safe}');

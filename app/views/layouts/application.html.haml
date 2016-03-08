@@ -8,8 +8,8 @@
     = javascript_include_tag 'lab', 'data-turbolinks-track' => false if params[:lab]
     = javascript_include_tag 'lab_icons', 'data-turbolinks-track' => false if params[:lab] && %w(new edit).include?(params[:action])
     = csrf_meta_tags
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:800&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    -# <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
   %body
     %svg{height: 0, width: 0, style: 'display:block', xmlns: 'http://www.w3.org/2000/svg', version: '1.1'}
       %defs{id: 'defs'}
