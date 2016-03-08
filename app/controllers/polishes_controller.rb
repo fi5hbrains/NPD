@@ -318,7 +318,7 @@ class PolishesController < ApplicationController
           
           multiplyer = (layer.particle_density * 5.0 / particle_scale).round + rand(2)
           scale_offset = 50
-          x_offset = 15 
+          x_offset = 0 
           shadow_shift_x = 0
           shadow_shift_y = 2
           
@@ -350,12 +350,14 @@ class PolishesController < ApplicationController
               mask_stack[c]      = ''
               shadow_stack[c]    = ''
               highlight_stack[c] = ''            
-              holo_stack[c]      = ''            
+              holo_stack[c]      = ''   
+
+              size = layer.particle_size         
               
               multiplyer.to_i.times do
-                rnd_x = rand(Defaults::CANVAS[0] - 2 * x_offset ) + x_offset - 96 * layer.particle_size / 100 
-                scl_x = 100 * Math.sin(Math::PI*(rnd_x + 128 * layer.particle_size / 100 + scale_offset)/(Defaults::CANVAS[0] + 2 * scale_offset ))
-                rnd_y = rand(Defaults::CANVAS[1]) - 128 * layer.particle_size / 100 
+                rnd_x = rand(Defaults::CANVAS[0] - 2 * x_offset ) + x_offset - 96 * size / 100 + 10
+                scl_x = 100 * Math.sin(Math::PI*(rnd_x + 128 * size / 100 + scale_offset)/(Defaults::CANVAS[0] + 2 * scale_offset ))
+                rnd_y = rand(Defaults::CANVAS[1]) - 128 * size / 100 
                 rnd_r = rand(80) - 40   
                 
                 shape_transform = "-rotate #{rnd_r} -scale #{scl_x}%x100%"
@@ -363,7 +365,7 @@ class PolishesController < ApplicationController
                 mask_stack[c] += " \\( #{shape_adjust} -background white -alpha shape \\) -compose dissolve -define compose:args=#{layer.opacity} -composite "
                 shadow_stack[c] += " \\( #{path + shape_shadow_tmp} -background black #{shape_transform} -geometry +#{rnd_x + shadow_shift_x}+#{rnd_y + shadow_shift_y} \\) -compose Screen -composite \\( #{shape_adjust} -negate \\) -compose Multiply -composite "
                 highlight_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_hl} -geometry -#{rnd_x}-#{rnd_y} \\) -compose In -composite \\) -alpha on -compose Over -composite "
-                holo_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_holo} -geometry -#{rand(572 - 256 * layer.particle_size / 100)}-#{rand(900 - 256 * layer.particle_size / 100)} \\) -compose In -composite \\) -alpha on -compose Over -composite "
+                holo_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_holo} -geometry -#{rand(572 - 256 * size / 100)}-#{rand(900 - 256 * size / 100)} \\) -compose In -composite \\) -alpha on -compose Over -composite "
               end    
               mask = coat(mask,c)
               holo = coat(holo,c)
