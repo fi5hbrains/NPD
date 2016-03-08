@@ -157,7 +157,7 @@ class PolishesController < ApplicationController
         last.slug.split('_copy(').last.to_i
       @copy.name = @copy.name_or_number + "_copy#{(last + 1)}"
     end
-    @copy.assign_attributes @polish.layers_to_hash
+    @copy.assign_attributes YAML.load( @polish.to_yaml )
     @copy.save
     rename_polish_files @polish.slug, @copy
     respond_to do |format|
