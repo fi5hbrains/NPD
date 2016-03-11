@@ -11,6 +11,24 @@ $(document).on 'ready page:load', ->
   syrup = document.getElementById('syrup')
   jelly = document.getElementById('jelly')
   cream = document.getElementById('cream')
+
+  pShimmer = document.getElementById("addShimmer")
+  pFlake = document.getElementById("addFlake")
+  pGlitter = document.getElementById("addGlitter")
+  pSand = document.getElementById("addSand")
+  pFleck = document.getElementById("addFleck")
+  
+  if pShimmer
+    pShimmer.innerHTML = '<svg class="icon iMid"><path d="m9.7 13a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zm18 0a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zm-3 10.9a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zm-11.8 0a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zM19 6.2a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zm0 9.7a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3zZ"/></svg>';
+  if pFlake
+    pFlake.innerHTML = '<svg class="icon iMid"><path d="m 18,13 0,6 3,1 0,7 -6,3 -9,-4 2,-4 -6,-5 0,-7 9,-4 z m 4,2 -2,-7 8,-1 -1,6 z"/></svg>';
+  if pGlitter
+    pGlitter.innerHTML = '<svg class="icon iMid"><path d="m22.7 27.7-13.5 0L2.5 16 9.3 4.3 22.7 4.3 29.5 16Z"/></svg>';
+  if pSand
+    pSand.innerHTML = '<svg class="icon iMid"><circle cx="9" cy="9" r="5"/><circle cx="23" cy="9" r="5"/><circle cx="23" cy="23" r="5"/><circle cx="9" cy="23" r="5"/></svg>';
+  if pFleck
+    pFleck.innerHTML = '<svg class="icon iMid inactive"><path d="m 16,1 6,7 0,16 -6,7 -6,-7 0,-16 z"/></svg>';
+
   if getRef
     $(getRef).prepend('<svg height="64" width="64"><rect class="strokeMed strokeActive noFill" stroke-width="4" stroke-dasharray="13.5,6" stroke-dashoffset="7" rx="4" height="61" width="61" y="2" x="2" stroke-width="4" fill="none"/><path opacity="0.3" d="m12,23c5,2,7,1,8-2l3-8c2-5-1-7-4-8-2-1-6.2-1.98-8,3l-3,8c-1,2-1,5,4,7zm32,34c2,4,4,4,6,3l7-4c4-2,3-6,2-8s-4-4-8-2l-7,4c-2,1-2,3,0,7zm-2-19c3,3,6,3,8,1l6-6c3-3,2-7,0-9s-6-3-9,0l-6,6c-2,2-2,5,1,8zm-10-16c4,2,7,2,8,0l5-9c2-3-1-7-3-8-3-2-7-1-9,3l-4.38,7.94c-1.6,2.1-0.6,4.1,3.4,6.1zm-4,41-26-18,0-39,3,13c1,5,8,8,12,7s5.98-7.6,8-14c-1,5,1,8,3,10,4,4,9,5,12,3-3,4-4.6,7.3-2,11,5.16,7.6,8,7,12,6-5,3-8,4-9,8-1,6,2,12,10,13z" /><path class="strokeMed strokeActive" stroke-width="4" d="m25,34,14,0" /><path class="strokeMed strokeActive" stroke-width="4" d="M32,41,32,27" /></svg>')
   if water

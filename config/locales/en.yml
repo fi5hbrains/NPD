@@ -164,7 +164,7 @@ en:
     edit_brand: 'Edit'
     brands: 'Brands'
     particles:
-      base: 'Base'
+      base: 'Base Layer'
       shimmer: 'Shimmer'
       flake: 'Flake'
       glitter: 'Glitter'

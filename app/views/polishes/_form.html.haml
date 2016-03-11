@@ -61,10 +61,12 @@
           .colourBack= f.text_field :gloss_colour, class: 'colour noAlpha', value: @polish.gloss_colour || '#dadada'
           = f.label :gloss_colour, t('lab.section.highlight_colour')
       
-      %h3= t('lab.section.add_layer')
-      - %w(shimmer flake glitter sand).each do |type|
-        = link_to_add_layer type, f
-      todo: glass flecks
+      .particles
+        %h3= t('lab.section.add_layer')
+        .array#particles
+          - %w(shimmer flake glitter sand fleck).each do |type|
+            .arrayItem>
+              = link_to_add_layer type, f
         
       - Defaults::MAGNETS.each do |m|
         = f.radio_button :magnet, m, class: 'hidden external uncheckable'

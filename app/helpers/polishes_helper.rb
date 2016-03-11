@@ -13,6 +13,9 @@ module PolishesHelper
     fields = f.fields_for(:layers, layer, child_index: id) do |ff|
       render 'layer_fields', l: layer, l_f: ff, f: f
     end
-    link_to( type, '#', class: "add_layer", data: {id: id, fields: fields.gsub("\n", "").gsub("class='layer'","class='layer' style='display:none'")})
+    link = link_to '#', class: "add_layer", data: {id: id, fields: fields.gsub("\n", "").gsub("class='layer'","class='layer' style='display:none'")} do
+      content_tag( 'span', '',  id: ('add' + type.capitalize)) + content_tag('label', t('lab.section.' + type))
+    end
+    return link.html_safe
   end
 end

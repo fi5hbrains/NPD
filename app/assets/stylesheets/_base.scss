@@ -591,11 +591,31 @@ li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-pro
   background: $colourHighlight;
   img { mix-blend-mode: darken };
 }
-.layer:not(.lBase){
+.layer:not(.lBase), .particles{
   background: $colourShadow;
   border-radius: $radiusMain;
   padding:0 6px 6px;
   margin: -6px;
+}
+.particles{
+  position: relative;  
+  padding-top: 10px;
+  margin-bottom:40px;
+  h3 { margin-top: 10px }
+  &:after{
+    box-sizing: border-box;
+    position:absolute;
+    display: block;
+    content: '';
+    height: 30px;
+    width: 60px;
+    border: 30px solid transparent;
+    border-top-color: $colourShadow;
+    border-bottom: 0;
+    bottom: -30px;
+    left: 50%;
+    margin-left: -30px;
+  }
 }
 #reference{
   position:fixed;
