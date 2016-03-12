@@ -89,7 +89,6 @@ $(document).on 'ready page:load', ->
     if currentOrdering >= 2
       $layers.prepend("<svg class='iSwap' data-ordering='" + currentOrdering + "'><use xlink:href='#swap'/></svg>")
     $layers.prepend $(this).data('fields').replace(regexp, time)
-    $('#changes').prepend('<input value="0" type="hidden" name="changes[' + currentOrdering + ']" id="changes_' + currentOrdering + '">')
 
     currentLayer = $layers.find('.layer').first()
     
