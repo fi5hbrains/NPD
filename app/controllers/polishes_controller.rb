@@ -284,7 +284,10 @@ class PolishesController < ApplicationController
 
     FileUtils.mkdir_p(path + tmp_folder)  
     
-    @layers.each do |layer|
+    @layers.each_with_index do |layer, i|
+      logger.debug '---------------------------------color----------'
+      logger.debug layer.c_base
+      layer.ordering = i
       Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
       unless %w(base sand).include? layer.layer_type
         noise_density[layer.layer_type] += layer.particle_density
@@ -489,7 +492,7 @@ class PolishesController < ApplicationController
   end
   
   def all_layers_bottom_up
-    @layers = @polish.layers.reject{|l| !l.new_record?}.sort{|a,b| a.ordering <=> b.ordering}
+    @layers = @polish.layers.reject{|l| !l.new_record? || l._destroy}.sort{|a,b| a.ordering <=> b.ordering}
   end
   
   def clear_tmp_folder

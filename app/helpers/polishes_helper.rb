@@ -11,7 +11,7 @@ module PolishesHelper
     layer = PolishLayer.new(layer_type: type)
     id = layer.object_id
     fields = f.fields_for(:layers, layer, child_index: id) do |ff|
-      render 'layer_fields', l: layer, l_f: ff, f: f
+      render 'layer_fields', l: layer, l_f: ff, f: f, object_id: id
     end
     link = link_to '#', class: "add_layer", data: {id: id, fields: fields.gsub("\n", "").gsub("class='layer'","class='layer' style='display:none'")} do
       content_tag( 'span', '',  id: ('add' + type.capitalize)) + content_tag('label', t('lab.section.' + type))

@@ -73,8 +73,9 @@
     
       #layers
         - @layers.sort{ |a,b| b.ordering <=> a.ordering}.each do |l|
-          = f.fields_for :layers, l, child_index: l.object_id do |ff|
-            = render 'layer_fields', l: ff.object, l_f: ff, f: f, object_id: l.object_id
+          - id = l.object_id.to_s
+          = f.fields_for :layers, l, child_index: id do |ff|
+            = render 'layer_fields', l: ff.object, l_f: ff, f: f, object_id: id
           
       #sliderBaseOpacity 
       .array#labelsBaseOpacity

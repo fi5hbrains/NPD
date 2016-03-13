@@ -3,17 +3,18 @@
 %section#action.left.block
   %h3.bigMargin
     = t('lab.new_polish_bottles')
-    = link_to new_brand_bottle_path(@brand), class: 'tipped relative' do
-      .tooltip.tippedR.noWrap
-        .tip
-        %span= t 'tooltip.add_bottle'
-      %svg.icon.button.inline.roundButton.previewButton
-        <use xlink:href=#plus />
+    - if current_user
+      = link_to new_brand_bottle_path(@brand), class: 'tipped relative' do
+        .tooltip.tippedR.noWrap
+          .tip
+          %span= t 'tooltip.add_bottle'
+        %svg.icon.button.inline.roundButton.previewButton
+          <use xlink:href=#plus />
 
   .array
     - @bottles.each do |bottle|
       .arrayItem>
-        .spotable.bottleThumbWrapper>= link_to (image_tag bottle.base_thumb_url, class: 'bottleThumb img'), new_brand_polish_path(@brand, bottle: bottle.id)
+        .spotable.bottleThumbWrapper>= link_to_if current_user, (image_tag bottle.base_thumb_url, class: 'bottleThumb img'), new_brand_polish_path(@brand, bottle: bottle.id)
         = bottle.name
     
   = link_to 'Edit', edit_brand_path(@brand)

@@ -1,7 +1,7 @@
 %section#listing.block.left
   %h2
     = link_to_if (params[:controller] != 'brands' || params[:action] != 'show'),  @brand.name, @brand
-    - unless %w(new edit).include? params[:action]
+    - unless %w(new edit).include?(params[:action]) || !current_user
       = link_to new_brand_polish_path(@brand), class: 'tipped relative' do
         .tooltip.tippedR.noWrap
           .tip

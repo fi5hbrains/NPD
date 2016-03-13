@@ -152,9 +152,10 @@ $.fn.initClone = ->
   $('#changes').prepend('<input value="0" type="hidden" name="changes[' + cloneOrdering + ']" id="changes_' + cloneOrdering + '">')
   clone = $layers.find('.layer').first()
   clone.find('.orderingField').val(cloneOrdering)
-  clone.find('.disableable').each ->
+  clone.find('.colour').each ->
     unless $(this).hasClass('disabled')
       $(this).val($(this).css('background-color'))
+    $(this).colorPicker()
   clone.find('.sliderV').each ->
     $(this).empty().initVSlider()
   clone.slideDown(500)
@@ -176,7 +177,11 @@ $.fn.initRemove = ->
   $iSwap.slideUp 100, ->
     $iSwap.remove()        
   currentLayer.slideUp 500, ->
-    $('#layers').after(currentLayer)
+    currentLayer.remove()
+    orderingFields = $('.orderingField')
+    layersCount = orderingFields.size()
+    orderingFields.each (i, layer) ->
+      $(layer).val(layersCount - i - 1)
   return
 
 $.fn.initVSlider = ->
