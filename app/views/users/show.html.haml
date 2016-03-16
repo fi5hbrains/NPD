@@ -1,4 +1,4 @@
-%section.blockx2<
+.main<
   .idBlock.user.botomUp
     = image_tag @user.avatar.url('big_thumb'), class: 'left avatar big'
     .info
@@ -27,27 +27,28 @@
     = link_to '', class: 'wide25 inline noDecor' do
       %h4.textLike.smallMargin Following
       %p.notable= @user.followee_count
-%section.block.left
-  - if is_owner
-    #quests   
-      %h3= t 'user.headers.quests'
-    %h3
-      = t 'user.headers.invites'
-      = link_to get_invite_path, class: 'relative tipped', method: 'post', remote: true do
-        .tooltip.tippedR.noWrap
-          .tip
-          %span= t 'tooltip.add_invite'
-        %svg.icon.button.inline.roundButton.previewButton
-          <use xlink:href=#plus />
-    %ul#invites
-      - (invites = @user.invites).each do |invite|
-        %li
-          - if invite.used_by
-            - user = User.find(invite.used_by)
-            %span.inactive= invite.word
-            = link_to (image_tag user.avatar.url('thumb'), class: 'avatar tiny') + user.name, user
-          -else
-            %span.selectable= invite.word
-%section.block.left
-  #lists
-    = render 'lists'
+  %section.block.left
+    - if is_owner
+      #quests   
+        %h3= t 'user.headers.quests'
+      %h3
+        = t 'user.headers.invites'
+        = link_to get_invite_path, class: 'relative tipped', method: 'post', remote: true do
+          .tooltip.tippedR.noWrap
+            .tip
+            %span= t 'tooltip.add_invite'
+          %svg.icon.button.inline.roundButton.previewButton
+            <use xlink:href=#plus />
+      %ul#invites
+        - (invites = @user.invites).each do |invite|
+          %li
+            - if invite.used_by
+              - user = User.find(invite.used_by)
+              %span.inactive= invite.word
+              = link_to (image_tag user.avatar.url('thumb'), class: 'avatar tiny') + user.name, user
+            -else
+              %span.selectable= invite.word
+  %section.block.left
+    #lists
+      = render 'lists'
+  .clearFix

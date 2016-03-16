@@ -1,35 +1,36 @@
-.blockx2
+.main
   %h1= t('settings.headers.profile')
-= form_for @user, html: { id: 'editForm', multipart: true, method: :put } do |f|
-  .block.left
-    .table.wide100
-      .cell.wide100
-        .resizable.relative
-          = f.text_area :about, class: 'resizable', rows: nil, cols: nil, placeholder: t('placeholder.bio')
-          %pre.resizable <span></span>
-    .menuSpacer.inline 
-    %ul#localeMenu.menu.furlable.inline.switch{'data-activate' => '#localeMenu'}
-      - %w(en ru es de fr it).each do |l|
-        %li{class: (l == I18n.locale.to_s ? 'current' : 'notCurrent')}= l.to_s 
-      <svg class='icon switch'><use xlink:href=#down /></svg>
-    = f.text_field :email, placeholder: t('placeholder.email'), class: 'smallMargin'
-
-    = f.submit t('settings.form.submit_update')
-
-  .block.left.relative
-    = f.label :avatar do
-      .avatar.big
-        = image_tag @user.avatar.url('big_thumb'), id: 'avatar', class: 'avatar big'
-      .button= 'Upload Image'
-    - if is_owner
-      = f.file_field :avatar, 'data-updatable' => true, class: 'hidden'
-      = f.hidden_field :crop_coords, id: 'cropCoords'
-      = f.hidden_field :avatar_cache
-    - if is_owner && 
-      #cropMenu{class: (@user.avatar_cache ? 'menu active' : 'menu')}
-        = image_tag @user.avatar.url, id: 'jcrop'
-        .inlineWrapper<
-          = f.submit t('form.action.cancel'), name: 'cancel'
-          = f.submit t('form.action.crop')
-
-  = f.submit t('form.preview'), name: 'preview', class: 'hidden'
+  = form_for @user, html: { id: 'editForm', multipart: true, method: :put } do |f|
+    .block.left
+      .table.wide100
+        .cell.wide100
+          .resizable.relative
+            = f.text_area :about, class: 'resizable', rows: nil, cols: nil, placeholder: t('placeholder.bio')
+            %pre.resizable <span></span>
+      .menuSpacer.inline 
+      %ul#localeMenu.menu.furlable.inline.switch{'data-activate' => '#localeMenu'}
+        - %w(en ru es de fr it).each do |l|
+          %li{class: (l == I18n.locale.to_s ? 'current' : 'notCurrent')}= l.to_s 
+        <svg class='icon switch'><use xlink:href=#down /></svg>
+      = f.text_field :email, placeholder: t('placeholder.email'), class: 'smallMargin'
+  
+      = f.submit t('settings.form.submit_update')
+  
+    .block.left.relative
+      = f.label :avatar do
+        .avatar.big
+          = image_tag @user.avatar.url('big_thumb'), id: 'avatar', class: 'avatar big'
+        .button= 'Upload Image'
+      - if is_owner
+        = f.file_field :avatar, 'data-updatable' => true, class: 'hidden'
+        = f.hidden_field :crop_coords, id: 'cropCoords'
+        = f.hidden_field :avatar_cache
+      - if is_owner && 
+        #cropMenu{class: (@user.avatar_cache ? 'menu active' : 'menu')}
+          = image_tag @user.avatar.url, id: 'jcrop'
+          .inlineWrapper<
+            = f.submit t('form.action.cancel'), name: 'cancel'
+            = f.submit t('form.action.crop')
+  
+    = f.submit t('form.preview'), name: 'preview', class: 'hidden'
+  .clearFix

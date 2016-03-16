@@ -479,9 +479,6 @@ cursor_positions:
   - :path: app/views/boxes/update.js.haml
     :cursor_offset: 500
     :timestamp: 2016-01-07 14:41:35 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 178
-    :timestamp: 2016-01-15 00:10:29 +03:00
   - :path: app/views/page/index.js.haml
     :cursor_offset: 74
     :timestamp: 2016-01-13 00:58:19 +03:00
@@ -534,9 +531,6 @@ cursor_positions:
   - :path: app/views/polishes/collect.js.haml
     :cursor_offset: 195
     :timestamp: 2016-01-03 20:41:15 +03:00
-  - :path: app/views/application/_navigation.html.haml
-    :cursor_offset: 761
-    :timestamp: 2015-12-08 23:20:08 +03:00
   - :path: app/views/application/search.html.haml
     :cursor_offset: 169
     :timestamp: 2015-10-10 22:10:24 +04:00
@@ -618,18 +612,12 @@ cursor_positions:
   - :path: app/views/polishes/reorder.js.haml
     :cursor_offset: 203
     :timestamp: 2016-02-13 21:35:43 +03:00
-  - :path: app/views/polishes/index.html.haml
-    :cursor_offset: 169
-    :timestamp: 2016-02-16 10:49:09 +03:00
   - :path: app/views/brands/catalogue_show.html.haml
     :cursor_offset: 13
     :timestamp: 2016-02-16 16:47:59 +03:00
   - :path: app/assets/stylesheets/_options.scss
     :cursor_offset: 673
     :timestamp: 2016-02-14 08:39:42 +03:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 572
-    :timestamp: 2015-11-12 22:20:26 +03:00
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 441
     :timestamp: 2016-02-20 09:14:29 +03:00
@@ -695,12 +683,6 @@ cursor_positions:
     :timestamp: 2016-03-02 16:31:18 +03:00
     :selection_offset: 644
     :block_selection_mode: false
-  - :path: app/views/polishes/show.html.haml
-    :cursor_offset: 265
-    :timestamp: 2016-03-03 16:53:53 +03:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 338
-    :timestamp: 2016-02-18 09:27:54 +03:00
   - :path: app/views/polishes/_polish.html.haml
     :cursor_offset: 840
     :timestamp: 2016-01-29 21:19:17 +03:00
@@ -742,9 +724,6 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 2280
     :timestamp: 2016-03-04 13:49:28 +03:00
-  - :path: app/views/brands/_show.html.haml
-    :cursor_offset: 700
-    :timestamp: 2016-03-04 13:46:34 +03:00
   - :path: app/views/brands/show.html.haml
     :cursor_offset: 628
     :timestamp: 2016-01-18 13:34:25 +03:00
@@ -781,4 +760,25 @@ cursor_positions:
   - :path: app/views/polishes/_reference.html.haml
     :cursor_offset: 119
     :timestamp: 2016-03-04 14:59:30 +03:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 5
+    :timestamp: 2016-03-15 21:01:13 +03:00
+  - :path: app/views/polishes/show.html.haml
+    :cursor_offset: 0
+    :timestamp: 2016-03-15 20:56:35 +03:00
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 5
+    :timestamp: 2016-03-15 20:55:55 +03:00
+  - :path: app/views/polishes/index.html.haml
+    :cursor_offset: 5
+    :timestamp: 2016-03-15 20:48:52 +03:00
+  - :path: app/views/application/_navigation.html.haml
+    :cursor_offset: 80
+    :timestamp: 2016-03-15 20:48:04 +03:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 0
+    :timestamp: 2016-03-06 20:55:28 +03:00
+  - :path: app/views/brands/_show.html.haml
+    :cursor_offset: 0
+    :timestamp: 2016-03-13 12:04:19 +03:00
 files_to_retain: 0

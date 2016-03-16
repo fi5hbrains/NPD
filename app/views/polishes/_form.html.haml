@@ -1,5 +1,5 @@
 = form_for [@brand, @polish], html: {multipart: true, id: 'polishForm', class: nil}  do |f|
-  .block.main.left.relative
+  .block.left.relative
     %h2= t 'lab.titles.polish_' + params[:action]
     - if @polish.errors.any?
       #error_explanation

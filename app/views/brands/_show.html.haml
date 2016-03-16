@@ -1,4 +1,4 @@
-%section#listing.block.left
+#listing.block.left
   %h2
     = link_to_if (params[:controller] != 'brands' || params[:action] != 'show'),  @brand.name, @brand
     - unless %w(new edit).include?(params[:action]) || !current_user

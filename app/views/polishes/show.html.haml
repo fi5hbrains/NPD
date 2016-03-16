@@ -1,39 +1,41 @@
-= render 'brands/show'
-
-%section#polish.block.left{'data-id' => @polish.id}>
-  %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number).to_s + @polish.name.to_s), length: 50, separator: /_|-| /
-  %h4
-    - if @polish.collection
-      = @polish.collection
-    - if @polish.collection
-      –
-    - if @polish.release_year
-      = @polish.release_year
-  = image_tag @polish.bottle_url, class: 'left biggestBottle'
-  - unless @polish.draft
-    #coatsWrapper.left
-      .previewWrapper.medium= image_tag @polish.preview_url
-  %p.clearFix.smallMargin
-    - if @synonyms.size > 0
-      %strong Synonyms:
-      = @synonyms.map(&:name).join(', ')
-    %br
-    %strong Rating:    
-    = @polish.rating.round(3)
-    = @polish.votes_count
-    = 'vote'.pluralize(@polish.votes_count)
-  = render 'polishes/controls', polish: @polish, with_text: true
-  - if @polish.versions.count > 0
-    %h3= 'History'
-    %table.wide100
-      - @polish.versions.each_with_index do |v,i|
-        %tr.noWrap
-          %td
-            .previewWrapper.tiny= image_tag(@polish.preview_url(v.version), class: 'thumb')
-          %td= v.event
-          %td
-            by
-            = link_to v.user_name, user_path(v.user_name) if v.user_name
-          %td= v.updated_at.strftime("%d %m %Y %H:%M")
-  %h3= 'Params'
-  %pre#pre.selectable= @polish.to_yaml.gsub('---', '')
+.main
+  = render 'brands/show'
+  
+  %section#polish.block.left{'data-id' => @polish.id}>
+    %h2.smallMargin= truncate ((@polish.number + ' ' if @polish.number).to_s + @polish.name.to_s), length: 50, separator: /_|-| /
+    %h4
+      - if @polish.collection
+        = @polish.collection
+      - if @polish.collection
+        –
+      - if @polish.release_year
+        = @polish.release_year
+    = image_tag @polish.bottle_url, class: 'left biggestBottle'
+    - unless @polish.draft
+      #coatsWrapper.left
+        .previewWrapper.medium= image_tag @polish.preview_url
+    %p.clearFix.smallMargin
+      - if @synonyms.size > 0
+        %strong Synonyms:
+        = @synonyms.map(&:name).join(', ')
+      %br
+      %strong Rating:    
+      = @polish.rating.round(3)
+      = @polish.votes_count
+      = 'vote'.pluralize(@polish.votes_count)
+    = render 'polishes/controls', polish: @polish, with_text: true
+    - if @polish.versions.count > 0
+      %h3= 'History'
+      %table.wide100
+        - @polish.versions.each_with_index do |v,i|
+          %tr.noWrap
+            %td
+              .previewWrapper.tiny= image_tag(@polish.preview_url(v.version), class: 'thumb')
+            %td= v.event
+            %td
+              by
+              = link_to v.user_name, user_path(v.user_name) if v.user_name
+            %td= v.updated_at.strftime("%d %m %Y %H:%M")
+    %h3= 'Params'
+    %pre#pre.selectable= @polish.to_yaml.gsub('---', '')
+  .clearFix

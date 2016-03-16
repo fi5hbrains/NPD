@@ -3,6 +3,7 @@ hr{
   border: 1px solid;
   margin: -1px 0;
 }
+html, body, .wrapper, { box-sizing: border-box; height: 100%; margin: 0px; padding: 0px }
 body, .textMain{
   font-size: $fontSizeBase; 
   line-height: 20px;
@@ -11,9 +12,9 @@ body, .textMain{
   color: $colourFont;   
 }
 body{ 
-  background: $colourBack;
+  background: darken($colourBack, 5);
   margin: 0; 
-  padding: 70px 20px 0;
+  padding: 60px 20px 0;
 }
 h1, h2, h3{ 
   font-family: $fontHead;
@@ -73,12 +74,21 @@ sup, sub{
 }
 sub { top: 0.4em }
 time { color: $colourStatsIcon }
-
+.main { 
+  min-height: calc(100% - 21px);
+  padding: 1px 20px 20px;
+  background: $colourBack;
+  width: 600px; margin-right: 20px;
+  .array > .arrayItem:nth-child(10n+10) { margin-right: -50px }
+  & .block +  .block { margin-right: 0 }
+}
+#navBar .main { background: none }
 .block{ 
-  width: 290px; margin-right: 20px;
+  width: 290px; margin-right: 20px; margin-left: 20px;
   .arrayItem { margin-right: 10px }
   .array > .arrayItem:nth-child(5n+5) { margin-right: -50px }
 }
+.block + .block, .main .block { margin-left: 0;}
 .blockx2 .block + .block {margin-right: 0;}
 .blockx2{ 
   width: 600px; margin-right: 20px;
@@ -189,6 +199,16 @@ a:hover{ color: $colourLinkHover }
 }
 .tags input[type='checkbox'] { display: none }
 input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader; }
+.darker{ 
+  z-index: -1;
+  position: fixed;
+  background: darken($colourBack,10);
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+.wrapper { width: 1072px; margin: 0 auto; }
+
 // ------------------------------ ID Blocks ------------------------------ //
 .avatar{
   height: 48px;
@@ -624,4 +644,4 @@ li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-pro
   left:15px;
   z-index: 3;  
 }
-#ads { width: 412px; margin-right: 0; }
+#ads { width: 412px; margin-right: 0; margin-left: 0;}
