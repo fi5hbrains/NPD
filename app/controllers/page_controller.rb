@@ -55,13 +55,16 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('picture-polish')      
+      
+      #---------- Picture Polish -------------
+      brand = Brand.find_by_slug('picture-polish') 
+      brand.polishes.each(&:destroy)
       page = agent.get 'http://www.picturepolish.com.au/index.php?route=product/category&path=142&limit=100'
       shades = page.at('.product-grid').search('.span3')
       
       shades.each do |shade|
         shade = shade.at('img')
-        polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '')).first_or_create
+        polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '').gsub('(Reborn)','')).first_or_create
         if polish.new_record? 
           polish.synonym_list = polish.name
           polish.brand_slug = brand.slug
@@ -74,7 +77,7 @@ class PageController < ApplicationController
       end
       
       # Polish.where(brand_slug: 'barry-m').where('coats_count != 0').each{|p| p.draft = false; p.save; @result += 1}
-      # ------------- Barry M
+      # ------------- Barry M -----------
       # brand = Brand.find_by_slug('barry-m')
       # ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|
       #   page = agent.get link
