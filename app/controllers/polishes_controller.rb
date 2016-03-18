@@ -281,12 +281,11 @@ class PolishesController < ApplicationController
     sand_size = 0
     sand_density = 0
     top_layer = 'base'
+    sand_layer = @layers.select{|l| l.layer_type == 'sand'}.first
 
     FileUtils.mkdir_p(path + tmp_folder)  
     
     @layers.each_with_index do |layer, i|
-      logger.debug '---------------------------------color----------'
-      logger.debug layer.c_base
       layer.ordering = i
       Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
       unless %w(base sand).include? layer.layer_type
@@ -332,8 +331,13 @@ class PolishesController < ApplicationController
         end
         
         (@layers.size > 1 ? @polish.coats_count : 1).times do |c| 
-          shadow = "#{parts}shadow_#{layer.layer_type}.png"
-          highlight = "#{parts}highlight_#{layer.layer_type}.png"    
+          if layer.layer_type == 'base' && sand_layer
+            shadow       = "#{parts}shadow_sand_#{sand_layer.particle_size}_#{sand_layer.particle_density < 60 ? 'few' : 'many'}.png"
+            highlight = "#{parts}highlight_sand_#{sand_layer.particle_size}_#{sand_layer.particle_density < 60 ? 'few' : 'many'}.png"
+          else
+            shadow = "#{parts}shadow_#{layer.layer_type}.png"
+            highlight = "#{parts}highlight_#{layer.layer_type}.png"    
+          end
           
           if layer.layer_type != 'base' || c == 0 
             if %w(shimmer flake).include? layer.layer_type
