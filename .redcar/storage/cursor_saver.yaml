@@ -677,9 +677,6 @@ cursor_positions:
   - :path: app/models/brand.rb
     :cursor_offset: 219
     :timestamp: 2016-03-02 09:54:02 +03:00
-  - :path: lib/slugify.rb
-    :cursor_offset: 340
-    :timestamp: 2016-03-02 07:14:25 +03:00
   - :path: config/initializers/backtrace_silencers.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -781,4 +778,7 @@ cursor_positions:
   - :path: app/views/polishes/new.html.haml
     :cursor_offset: 0
     :timestamp: 2016-03-15 23:23:49 +03:00
+  - :path: lib/slugify.rb
+    :cursor_offset: 315
+    :timestamp: 2016-03-17 08:11:32 +03:00
 files_to_retain: 0

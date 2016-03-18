@@ -1,4 +1,5 @@
 class PageController < ApplicationController
+  include Slugify
   def index
     @status = 'stare'
     @user = params[:user] ? User.new(params.require(:user).permit(:name, :password, :invite_phrase, :avatar)) : User.new
@@ -56,19 +57,21 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug('deborah-lippmann') 
-      page = agent.get 'http://www.deborahlippmann.com/nail-color/creme?___store=default'
-      shades = page.search('.popup-details-content')
-      shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('.product-name').at('h3').text.titleize).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-        end        
-        polish.user_id = current_user.id
-        polish.remote_reference_url = shade.at('img.lazy-popup').attr('data-original')
-        polish.draft = true
-        @result += 1 if polish.save  
+      ['http://www.deborahlippmann.com/nail-color/celebrity-shades?___store=default','http://www.deborahlippmann.com/nail-color/specialty?___store=default','http://www.deborahlippmann.com/nail-color/shimmer?___store=default', 'http://www.deborahlippmann.com/nail-color/glitter?___store=default','http://www.deborahlippmann.com/nail-color/sheer?___store=default'].each do |link|
+        page = agent.get link
+        shades = page.search('.popup-details-content')
+        shades.each do |shade|
+          polish = brand.polishes.where(slug: slugify( shade.at('.product-name').at('h3').text)).first_or_create
+          if polish.new_record? 
+            polish.name = polish.synonym_list = shade.at('.product-name').at('h3').text.titleize
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+          end        
+          polish.user_id = current_user.id
+          polish.remote_reference_url = shade.at('img.lazy-popup').attr('data-original')
+          polish.draft = true
+          @result += 1 if (polish.save if polish.new_record?)
+        end
       end
       
       #---------- Picture Polish -------------
