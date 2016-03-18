@@ -55,26 +55,41 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      
-      #---------- Picture Polish -------------
-      brand = Brand.find_by_slug('picture-polish') 
-      brand.polishes.each(&:destroy)
-      page = agent.get 'http://www.picturepolish.com.au/index.php?route=product/category&path=142&limit=100'
-      shades = page.at('.product-grid').search('.span3')
-      
+      brand = Brand.find_by_slug('deborah-lippmann') 
+      page = agent.get 'http://www.deborahlippmann.com/nail-color/creme?___store=default'
+      shades = page.search('.popup-details-content')
       shades.each do |shade|
-        shade = shade.at('img')
-        polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '').gsub('(Reborn)','')).first_or_create
+        polish = brand.polishes.where(name: shade.at('.product-name').at('h3').text.titleize).first_or_create
         if polish.new_record? 
           polish.synonym_list = polish.name
           polish.brand_slug = brand.slug
           polish.brand_name = brand.name
         end        
         polish.user_id = current_user.id
-        polish.remote_reference_url = shade.attr('src')
+        polish.remote_reference_url = shade.at('img.lazy-popup').attr('data-original')
         polish.draft = true
         @result += 1 if polish.save  
       end
+      
+      #---------- Picture Polish -------------
+      # brand = Brand.find_by_slug('picture-polish') 
+      ## brand.polishes.each(&:destroy)
+      # page = agent.get 'http://www.picturepolish.com.au/index.php?route=product/category&path=142&limit=100'
+      # shades = page.at('.product-grid').search('.span3')
+      # 
+      # shades.each do |shade|
+      #   shade = shade.at('img')
+      #   polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '').gsub('(Reborn)','')).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #   end        
+      #   polish.user_id = current_user.id
+      #   polish.remote_reference_url = shade.attr('src')
+      #   polish.draft = true
+      #   @result += 1 if polish.save  
+      # end
       
       # Polish.where(brand_slug: 'barry-m').where('coats_count != 0').each{|p| p.draft = false; p.save; @result += 1}
       # ------------- Barry M -----------
