@@ -302,7 +302,14 @@ class PolishesController < ApplicationController
       if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
         base = "#{tmp_folder}/layer_#{layer.ordering}.png"    
         layer.opacity ||= 100
-
+        
+        if layer.layer_type == 'flake'
+          flake_shadow_tmp = "#{tmp_folder}/layer_#{layer.ordering}_flake_shadow.mpc"
+          mask = parts + 'flake_' + (layer.particle_size / 34 * 50).to_s + 
+              '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png'
+          Magick.convert mask + ' -page +0+1 -background none -flatten -blur 0x3 ', '\\( ' + path + mask + ' -negate \\) -compose Multiply -composite -brightness-contrast -20 ', flake_shadow_tmp
+        end
+        
         if layer.layer_type == 'glitter'
           particle_holo_base = "#{parts}holo_glitter.png"
           particle_holo = "#{parts}holo_glitter.mpc"
@@ -403,6 +410,7 @@ class PolishesController < ApplicationController
 #{" \\( #{path + highlight} -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " unless layer.layer_type == 'glitter' } \
 #{"\\( #{path + mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite "} \
 #{"\\( #{path + particles_shadow} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'glitter'} \
+#{"\\( #{path + flake_shadow_tmp + mask.split('.png')[1]} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'flake'} \
 #{"\\( #{path + particles_hl} -alpha off -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " if layer.layer_type == 'glitter'} \
               "
               if c == 0

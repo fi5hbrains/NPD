@@ -56,24 +56,28 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('china-glaze')
-      brand.polishes.each do |polish|
-        if polish.draft
-          polish.synonym_list = polish.name
-          polish.save
-        end
-      end
-      brand = Brand.find_by_slug('zoya')
-      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
-      brand.polishes.each do |polish|
-        if polish.draft
-          shade = page.at('#' + polish.number)
-          polish.name = shade.at('.item-link').text.inspect.split("\\r\\n\\t\\t\\t\\t\\t\\t")[3]
-          polish.synonym_list = polish.name
-          polish.save
-        end
-      end      
-      # --------------------Zoya
+      # ----------------- fix china glaze
+      # brand = Brand.find_by_slug('china-glaze')
+      # brand.polishes.each do |polish|
+      #   if polish.draft
+      #     polish.synonym_list = polish.name
+      #     polish.save
+      #   end
+      # end
+      
+      # ----------------- fix zoya -----------
+      # brand = Brand.find_by_slug('zoya')
+      # page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      # brand.polishes.each do |polish|
+      #   if polish.draft
+      #     shade = page.at('#' + polish.number)
+      #     polish.name = shade.at('.item-link').text.inspect.split("\\r\\n\\t\\t\\t\\t\\t\\t")[3]
+      #     polish.synonym_list = polish.name
+      #     polish.save
+      #   end
+      # end      
+      
+      # -------------------- Zoya
       # brand = Brand.find_by_slug('zoya') 
       # page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
       # shades = page.search('.item')
@@ -90,6 +94,7 @@ class PageController < ApplicationController
       #   polish.draft = true
       #   @result += 1 if (polish.save if polish.new_record?)
       # end
+      
       # ---------------------- Deborah Lippmann ----------
       # brand = Brand.find_by_slug('deborah-lippmann') 
       # ['http://www.deborahlippmann.com/nail-color/celebrity-shades?___store=default','http://www.deborahlippmann.com/nail-color/specialty?___store=default','http://www.deborahlippmann.com/nail-color/shimmer?___store=default', 'http://www.deborahlippmann.com/nail-color/glitter?___store=default','http://www.deborahlippmann.com/nail-color/sheer?___store=default'].each do |link|
