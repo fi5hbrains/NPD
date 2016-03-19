@@ -56,22 +56,40 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('zoya') 
-      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
-      shades = page.search('.item')
-      shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('.item-name-1').attr('href')[39..-6].gsub('-',' ')).first_or_create
-        if polish.new_record? 
+      brand = Brand.find_by_slug('china-glaze')
+      brand.polishes.each do |polish|
+        if polish.draft
           polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.number = shade.attr('data-partnum')
-        end        
-        polish.user_id = current_user.id
-        polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
-        polish.draft = true
-        @result += 1 if (polish.save if polish.new_record?)
+          polish.save
+        end
       end
+      brand = Brand.find_by_slug('zoya')
+      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      brand.polishes.each do |polish|
+        if polish.draft
+          shade = page.at('#' + polish.number)
+          polish.name = shade.at('.item-link').text.inspect.split("\\r\\n\\t\\t\\t\\t\\t\\t")[3]
+          polish.synonym_list = polish.name
+          polish.save
+        end
+      end      
+      # --------------------Zoya
+      # brand = Brand.find_by_slug('zoya') 
+      # page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      # shades = page.search('.item')
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(name: shade.at('.item-name-1').attr('href')[39..-6].gsub('-',' ')).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.number = shade.attr('data-partnum')
+      #   end        
+      #   polish.user_id = current_user.id
+      #   polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
+      #   polish.draft = true
+      #   @result += 1 if (polish.save if polish.new_record?)
+      # end
       # ---------------------- Deborah Lippmann ----------
       # brand = Brand.find_by_slug('deborah-lippmann') 
       # ['http://www.deborahlippmann.com/nail-color/celebrity-shades?___store=default','http://www.deborahlippmann.com/nail-color/specialty?___store=default','http://www.deborahlippmann.com/nail-color/shimmer?___store=default', 'http://www.deborahlippmann.com/nail-color/glitter?___store=default','http://www.deborahlippmann.com/nail-color/sheer?___store=default'].each do |link|
