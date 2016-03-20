@@ -56,27 +56,39 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('opi')
-      page = agent.get 'http://opi.com/color/nail-lacquer#filter=*'
-      shades = page.at('.grid').search('.large-3')
-      shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('h3').text).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.number = shade.at('.lacquer-info').search('span').first.text
-          polish.collection = shade.at('.lacquer-info').search('span').last.at('a').try(:text)
-          polish.user_id = current_user.id
-          if shade.at('.swatchimg').at('img')
-            polish.remote_reference_url = shade.at('.swatchimg').at('img').attr('src')
-          else
-            polish.layers.new(layer_type: 'base', c_base: shade.at('.swatchimg').at('.img-block').attr('style')[11..-1])
-          end
-          polish.draft = true
-          @result += 1 if polish.save 
-        end        
+      
+      # ----------- Zoya reference image fix ----
+      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      brand.polishes.each do |polish|
+        if polish.draft
+          shade = page.at('#' + polish.number)
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
+          polish.save
+        end
       end
+      
+      # -------------- OPI ---------
+      # brand = Brand.find_by_slug('opi')
+      # page = agent.get 'http://opi.com/color/nail-lacquer#filter=*'
+      # shades = page.at('.grid').search('.large-3')
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(name: shade.at('h3').text).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.number = shade.at('.lacquer-info').search('span').first.text
+      #     polish.collection = shade.at('.lacquer-info').search('span').last.at('a').try(:text)
+      #     polish.user_id = current_user.id
+      #     if shade.at('.swatchimg').at('img')
+      #       polish.remote_reference_url = shade.at('.swatchimg').at('img').attr('src')
+      #     else
+      #       polish.layers.new(layer_type: 'base', c_base: shade.at('.swatchimg').at('.img-block').attr('style')[11..-1])
+      #     end
+      #     polish.draft = true
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # ----------------- fix china glaze
       # brand = Brand.find_by_slug('china-glaze')
