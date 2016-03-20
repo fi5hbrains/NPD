@@ -58,6 +58,7 @@ class PageController < ApplicationController
       agent = Mechanize.new
       
       # ----------- Zoya reference image fix ----
+      brand = Brand.find_by_slug('zoya')
       page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
       brand.polishes.each do |polish|
         if polish.draft
