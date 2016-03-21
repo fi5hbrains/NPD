@@ -59,7 +59,7 @@ class PageController < ApplicationController
       
       Polish.all.each do |p|
         unless p.draft
-          Magick.delay.convert p.preview_url, "\\( #{path}/assets/polish_parts/preview_mask.png -background white -alpha shape \\) -alpha on -compose DstIn -composite"
+          Magick.convert p.preview_url, "\\( #{path}/assets/polish_parts/preview_mask.png -background white -alpha shape \\) -alpha on -compose DstIn -composite"
           @result += 1
         end
       end
