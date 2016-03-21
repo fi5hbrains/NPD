@@ -81,6 +81,7 @@ class ApplicationController < ActionController::Base
   def lab_search
     @reset = false
     params[:lab] = true
+    polish_filter = (cookies[:lab_polish_filter] == 'bottle' ? {bottle_id: 63} : cookies[:lab_polish_filter] == 'draft' ? {draft: true} : nil)
     if !params[:brand].blank?
       brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
         pluck('word_id').compact.uniq
@@ -93,12 +94,13 @@ class ApplicationController < ActionController::Base
         where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
         pluck('word_id').compact.uniq  
       @polishes = Polish.
+        where(polish_filter).
         where(brand_slug: (params[:brand_id] || params[:id])).
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
         order('updated_at desc')
     elsif %w(brands polishes).include? params[:controller]
-      @polishes = @brand.polishes.order('updated_at desc')
+      @polishes = @brand.polishes.where(polish_filter).order('updated_at desc')
     else
       @reset = true
     end

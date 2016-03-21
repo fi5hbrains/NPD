@@ -53,6 +53,9 @@ en:
     by_slug: 'Name'
     by_colour: 'Colour'
     by_created_at: 'Time'
+    filter_all: 'All'
+    filter_bottle: 'Not Bottled'
+    filter_draft: 'Drafts'
   placeholder:
     name: 'Name'
     prefix: 'Serie or Line Name'

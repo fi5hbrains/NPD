@@ -10,12 +10,10 @@
           <use xlink:href=#plus />
   = render 'search', setup: %w(polish), css: 'wide100 autoupdatable', lab_search: true, remote: true     
   #controls.controls.bigMargin
-    %span.selected= 'All'
-    %span= link_to 'Not Bottled'
-    %span= link_to 'Drafts'
-    -#- unless %w(new edit redress).include? params[:action]
-    -#  = link_to new_brand_polish_path(@brand) do
-    -#    <svg class='icon button inline roundButton'><use xlink:href=#plus /></svg>
+    - cookies[:lab_polish_filter] ||= 'all'
+    - %w(all bottle draft).each do |f|
+      %span{class: ('active' if cookies[:lab_polish_filter] == f)}
+        = link_to_unless cookies[:lab_polish_filter] == f, t('controls.filter_' + f), switch_path('lab_polish_filter', f), method: 'post'
 
   #searchResults.wide100
   #results.wide100
