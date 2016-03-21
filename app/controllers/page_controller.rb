@@ -56,13 +56,29 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      
-      Polish.all.each do |p|
-        unless p.draft
-          Magick.convert p.preview_url, "\\( #{path}/assets/polish_parts/preview_mask.png -background white -alpha shape \\) -alpha on -compose DstIn -composite"
-          @result += 1
-        end
+      brand = Brand.find_by_slug('essie')
+      page = agent.get 'http://www.essie.com/Colors.aspx'
+      shades = page.search('.product-wrapper')
+      shades.each do |shade|
+        polish = brand.polishes.where(name: shade.at('h2').text).first_or_create
+        if polish.new_record? 
+          polish.synonym_list = polish.name
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.layers.new(layer_type: 'base', c_base: shade.at('.bottle').attr('style')[18..-1])
+          polish.draft = true
+          @result += 1 if polish.save 
+        end        
       end
+      
+      # -------- Update Polish Preview
+      # Polish.all.each do |p|
+      #   unless p.draft
+      #     Magick.convert p.preview_url, "\\( #{path}/assets/polish_parts/preview_mask.png -background white -alpha shape \\) -alpha on -compose DstIn -composite"
+      #     @result += 1
+      #   end
+      # end
       
       # ----------- Zoya reference image fix ----
       # brand = Brand.find_by_slug('zoya')
