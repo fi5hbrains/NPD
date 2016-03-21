@@ -57,16 +57,23 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      # ----------- Zoya reference image fix ----
-      brand = Brand.find_by_slug('zoya')
-      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
-      brand.polishes.each do |polish|
-        if polish.draft
-          shade = page.at('#' + polish.number)
-          polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
-          polish.save
+      Polish.all.each do |p|
+        unless p.draft
+          Magick.delay.convert p.preview_url, "\\( #{path}/assets/polish_parts/preview_mask.png -background white -alpha shape \\) -alpha on -compose DstIn -composite"
+          @result += 1
         end
       end
+      
+      # ----------- Zoya reference image fix ----
+      # brand = Brand.find_by_slug('zoya')
+      # page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      # brand.polishes.each do |polish|
+      #   if polish.draft
+      #     shade = page.at('#' + polish.number)
+      #     polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
+      #     polish.save
+      #   end
+      # end
       
       # -------------- OPI ---------
       # brand = Brand.find_by_slug('opi')
