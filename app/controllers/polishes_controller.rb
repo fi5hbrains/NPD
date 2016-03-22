@@ -127,8 +127,12 @@ class PolishesController < ApplicationController
       rename_polish_files old_slug if old_slug != @polish.slug
       @polish.save_version( params[:redress] ? 'redress' : 'update')
       if params[:redress]
+        if old_bottle_id != @polish.bottle_id
+          generate_bottle(true) 
+        else
+          @polish.bottling_status = true
+        end
         @polish.save
-        generate_bottle(true) if old_bottle_id != @polish.bottle_id
         redirect_to @brand, notice: 'Polish was successfully updated.' 
       else
         @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id) || l.new_record?}

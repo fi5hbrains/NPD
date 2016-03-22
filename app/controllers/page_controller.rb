@@ -56,21 +56,40 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'uslu-airlines'
-      page = agent.get 'http://usluairlines.com/c-shop-e/nail_polish_main_line.html'
-      shades = page.search '.item'
+      brand = Brand.find_by_slug 'naillook'
+      page = agent.get 'http://naillook.uk.com/catalog/lak/'
+      shades = page.search '.goods'
       shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('img').attr('alt').split('<br>')[0]).first_or_create
+        name = shade.at('.goods-title-in').text.squish
+        polish = brand.polishes.where(name: name.gsub(' ' + name.split(' ').last, '')).first_or_create
         if polish.new_record? 
           polish.synonym_list = polish.name
+          polish.number = name.split(' ').last
           polish.brand_slug = brand.slug
           polish.brand_name = brand.name
           polish.user_id = current_user.id
           polish.draft = true
-          polish.remote_reference_url = shade.at('img').attr('src')
+          polish.remote_reference_url = 'http://naillook.uk.com' + shade.at('.good-hover').at('img').attr('src')
           @result += 1 if polish.save 
         end        
       end
+      
+      # ------------ USLU
+      # brand = Brand.find_by_slug 'uslu-airlines'
+      # page = agent.get 'http://usluairlines.com/c-shop-e/nail_polish_main_line.html'
+      # shades = page.search '.item'
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(name: shade.at('img').attr('alt').split('<br>')[0]).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #     polish.remote_reference_url = shade.at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # ----------------- NCLA -----
       # brand = Brand.find_by_slug('ncla-los-angeles')
