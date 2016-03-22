@@ -57,20 +57,22 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug('ncla-los-angeles')
-      page = agent.get 'http://www.shopncla.com/collections/cremes'
-      shades = page.at('.span9').search('.span3')
-      shades.each do |shade|
-        unless shade.at('a').attr('title').blank? 
-          polish = brand.polishes.where(name: shade.at('a').attr('title')).first_or_create
-          if polish.new_record? 
-            polish.synonym_list = polish.name
-            polish.brand_slug = brand.slug
-            polish.brand_name = brand.name
-            polish.user_id = current_user.id
-            polish.draft = true
-            polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
-            @result += 1 if polish.save 
-          end        
+      ['http://www.shopncla.com/collections/cremes','http://www.shopncla.com/collections/glitters','http://www.shopncla.com/collections/metallics','http://www.shopncla.com/collections/shimmers','http://www.shopncla.com/collections/holographic'].each do |link|
+        page = agent.get link
+        shades = page.at('.span9').search('.span3')
+        shades.each do |shade|
+          unless shade.at('a').attr('title').blank? 
+            polish = brand.polishes.where(name: shade.at('a').attr('title')[5..-1]).first_or_create
+            if polish.new_record? 
+              polish.synonym_list = polish.name
+              polish.brand_slug = brand.slug
+              polish.brand_name = brand.name
+              polish.user_id = current_user.id
+              polish.draft = true
+              polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+              @result += 1 if polish.save 
+            end        
+          end
         end
       end
       
