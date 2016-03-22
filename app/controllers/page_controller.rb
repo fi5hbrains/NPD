@@ -56,25 +56,42 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('ncla-los-angeles')
-      ['http://www.shopncla.com/collections/cremes','http://www.shopncla.com/collections/glitters','http://www.shopncla.com/collections/metallics','http://www.shopncla.com/collections/shimmers','http://www.shopncla.com/collections/holographic'].each do |link|
-        page = agent.get link
-        shades = page.at('.span9').search('.span3')
-        shades.each do |shade|
-          unless shade.at('a').attr('title').blank? 
-            polish = brand.polishes.where(name: shade.at('a').attr('title')[5..-1]).first_or_create
-            if polish.new_record? 
-              polish.synonym_list = polish.name
-              polish.brand_slug = brand.slug
-              polish.brand_name = brand.name
-              polish.user_id = current_user.id
-              polish.draft = true
-              polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
-              @result += 1 if polish.save 
-            end        
-          end
-        end
+      brand = Brand.find_by_slug 'uslu-airlines'
+      page = agent.get 'http://usluairlines.com/c-shop-e/nail_polish_main_line.html'
+      shades = page.search '.item'
+      shades.each do |shade|
+        polish = brand.polishes.where(name: shade.at('img').attr('alt').split('<br>')[0]).first_or_create
+        if polish.new_record? 
+          polish.synonym_list = polish.name
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+          polish.remote_reference_url = shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
       end
+      
+      # ----------------- NCLA -----
+      # brand = Brand.find_by_slug('ncla-los-angeles')
+      # ['http://www.shopncla.com/collections/cremes','http://www.shopncla.com/collections/glitters','http://www.shopncla.com/collections/metallics','http://www.shopncla.com/collections/shimmers','http://www.shopncla.com/collections/holographic'].each do |link|
+      #   page = agent.get link
+      #   shades = page.at('.span9').search('.span3')
+      #   shades.each do |shade|
+      #     unless shade.at('a').attr('title').blank? 
+      #       polish = brand.polishes.where(name: shade.at('a').attr('title')[5..-1]).first_or_create
+      #       if polish.new_record? 
+      #         polish.synonym_list = polish.name
+      #         polish.brand_slug = brand.slug
+      #         polish.brand_name = brand.name
+      #         polish.user_id = current_user.id
+      #         polish.draft = true
+      #         polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+      #         @result += 1 if polish.save 
+      #       end        
+      #     end
+      #   end
+      # end
       
       # ---------------- essie
       # brand = Brand.find_by_slug('essie')
