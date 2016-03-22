@@ -56,21 +56,40 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('essie')
-      page = agent.get 'http://www.essie.com/Colors.aspx'
-      shades = page.search('.product-wrapper')
+      brand = Brand.find_by_slug('ncla-los-angeles')
+      page = agent.get 'http://www.shopncla.com/collections/cremes'
+      shades = page.at('.span9').search('.span3')
       shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('h2').text).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.layers.new(layer_type: 'base', c_base: shade.at('.bottle').attr('style')[18..-1])
-          polish.draft = true
-          @result += 1 if polish.save 
-        end        
+        unless shade.at('a').attr('title').blank? 
+          polish = brand.polishes.where(name: shade.at('a').attr('title')).first_or_create
+          if polish.new_record? 
+            polish.synonym_list = polish.name
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.draft = true
+            polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+            @result += 1 if polish.save 
+          end        
+        end
       end
+      
+      # ---------------- essie
+      # brand = Brand.find_by_slug('essie')
+      # page = agent.get 'http://www.essie.com/Colors.aspx'
+      # shades = page.search('.product-wrapper')
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(name: shade.at('h2').text).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.layers.new(layer_type: 'base', c_base: shade.at('.bottle').attr('style')[18..-1])
+      #     polish.draft = true
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # -------- Update Polish Preview
       # Polish.all.each do |p|
