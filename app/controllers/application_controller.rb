@@ -208,6 +208,24 @@ class ApplicationController < ActionController::Base
     when 'colour'; 'h ASC'
     when 'created_at'; 'box_items.created_at ASC' end
   end
+  
+  def charming_charlie colour = nil
+    colour ||= (params[:colour] || 'blue')
+    agent = Mechanize.new
+    page = agent.get( 'http://www.charmingcharlie.com/catalogsearch/result/?q=' + colour)
+    items = page.search('.item')
+    indices = (0..(items.size - 1)).to_a.sample(2)
+    @result = []
+    indices.each do |i|  
+      item = items[i]
+      images = item.search('img')
+      link = item.at('a').attr('href')
+      name = item.at('.product-name').at('a').text
+      price = item.at('.price').text
+      @result << {image: images.first.attr('data-yo-src'), hover: images.size > 1,  link: link, name: name, price: price}
+    end
+    return @result
+  end
   private
   
   def current_user_session

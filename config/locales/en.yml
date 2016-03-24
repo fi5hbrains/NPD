@@ -56,6 +56,10 @@ en:
     filter_all: 'All'
     filter_bottle: 'Not Bottled'
     filter_draft: 'Drafts'
+    include_bottle: 'Bottle'
+    include_nail: 'Nail'
+    include_rating: 'Rating'
+    include_note: 'Note'
   placeholder:
     name: 'Name'
     prefix: 'Serie or Line Name'
@@ -155,6 +159,7 @@ en:
         other: "because %{brands} are missing."
         }
     export: 'Download'
+    export_setup: 'Download Set-up:'
 
   catalogue: 
     titles:

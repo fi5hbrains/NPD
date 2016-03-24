@@ -1,0 +1,8 @@
+- @result.each do |item|
+  .charmingItem>
+    = link_to image_tag(item[:image]), item[:link], class: 'imgWrapper'
+    .centered_text
+      = link_to item[:link] do
+        = item[:name]
+        %br
+        = item[:price]

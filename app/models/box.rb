@@ -64,7 +64,7 @@ class Box < ActiveRecord::Base
     return stats
   end
   
-  def export
+  def export_csv(bottle = false, nail = false, rating = false, note = false)
     CSV.generate do |csv|
       headers = %w(brand name number colour notes).map{|h| I18n.t('sheet.' + h)}
       csv << headers

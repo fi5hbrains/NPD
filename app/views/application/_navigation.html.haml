@@ -7,8 +7,12 @@
         %span#logo
       %ul#dropMenu.menu.furlable
         - %w(home diary catalogue personal settings lab other).each do |li|
-          %li{class: set[li][:class]}= link_to_if set[li][:if], "<span id='i_#{li}'></span>".html_safe + t('navigation.' + li), set[li][:path]
-        <svg id='dropMenuButton' class='icon switch' data-activate='#dropMenu'><use xlink:href=#down /></svg>
+          %li{class: set[li][:class]}
+            - if set[li][:if]
+              = link_to "<span id='i_#{li}'></span>".html_safe + t('navigation.' + li), set[li][:path]  
+            - else
+              %span= "<span id='i_#{li}'></span>".html_safe + t('navigation.' + li)
+        %li.switchHolder <svg id='dropMenuButton' class='icon switch' data-activate='#dropMenu'><use xlink:href=#down /></svg>
   
       - icons.keys.each do |key|
         = render_nav_icon(icons, key).html_safe

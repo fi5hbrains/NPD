@@ -199,6 +199,19 @@ a:hover{ color: $colourLinkHover }
 }
 .tags input[type='checkbox'] { display: none }
 input[type='checkbox']:checked + .tag{color:white;    background: $colourHeader; }
+.checkBox > .icon { display: none }
+input[type='checkbox']:checked + .checkBox > .icon { display: inline-block }
+.checkBox{ 
+  float: right;
+  height: 18px;
+  width: 18px;
+  margin-right: 8px;
+  margin-top: 1px;
+  background: rgba(0,0,0,.05);
+  transition:all $speedDropdown;
+  .icon { padding: 0; margin-left: -1px }
+}
+.notCurrent:hover .checkBox{ background: rgba(255,255,255,.3) }
 .darker{ 
   z-index: -1;
   position: fixed;
@@ -645,3 +658,14 @@ li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-pro
   z-index: 3;  
 }
 #ads { width: 412px; margin-right: 0; margin-left: 0;}
+.banners li .charmingItem {
+  display:inline-block;
+  margin-right:12px;
+  &:nth-child(even) { margin-right:0 }
+  .imgWrapper { background: $colourForm; margin-bottom:4px; display: block; }
+  img {
+    mix-blend-mode: darken;
+    width: 200px;
+    height: 249px;
+  }
+}

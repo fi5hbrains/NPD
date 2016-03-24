@@ -7,8 +7,8 @@
       %span{id: name + 'List'}>
       <svg class='icon isOk button roundButton check' #{"style='display:none'" unless current_user.boxes.find_by(slug: name).box_items.detect{|item| item.polish_id == @polish.id} }><use xlink:href='#check' /></svg>
   .switchWrapper.inline.tipped
-    %ul#boxesList.menu.furlable
-      %li.current= t('catalogue.titles.lists')
+    %ul#boxesList.menu.furlable.formed
+      %li.current.formed= t('catalogue.titles.lists')
       - current_user.boxes.each do |box|
         - unless %w(collection wishlist giveaway).include? box.slug
           %li.notCurrent
@@ -25,7 +25,7 @@
             .cell
               = button_tag class: 'inline noWrap' do
                 <svg class='icon '><use xlink:href='#plus' /></svg>
-      <svg class='icon linkLike switch' data-activate='#boxesList'><use xlink:href='#x'/></svg>        
+      %li.switchHolder <svg class='icon linkLike switch' data-activate='#boxesList'><use xlink:href='#x'/></svg>        
     .tooltip
       .tip
       = t 'tooltip.list'

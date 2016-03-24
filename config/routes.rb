@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'get_invite', to: 'users#get_invite'
   post 'switch/:switch/:option', to: 'user_sessions#switch', as: 'switch'
   patch 'boxes/:id', to: 'boxes#update', as: 'update_box'
-  get ':user_id/download/:id', to: 'boxes#export', as: 'download_box'
+  post ':user_id/download/:id', to: 'boxes#export', as: 'download_box'
   get 'find_related', to: 'polishes#find_related'
   get 'search', to: 'application#search'
   get 'lab_search', to: 'application#lab_search'
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'autocomplete', to: 'application#autocomplete'
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
   get 'maintenance', to: 'page#maintenance'
+  get 'set_ads/:colour', to: 'application#charming_charlie'
 
   scope '/catalogue' do
     get '/', to: 'polishes#index', as: 'catalogue'

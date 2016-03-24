@@ -82,7 +82,7 @@ $(document).on 'ready page:load', ->
   gotBack = false      
   $('.notCurrent').click ->
     menu = $(this).parent()
-    if menu.attr('id') != 'boxesList'
+    if menu.attr('id') != 'boxesList' && menu.attr('id') != 'exportMenu'
       setTimeout (->
         menu.removeClass('active')
       ), 300

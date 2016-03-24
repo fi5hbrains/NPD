@@ -34,7 +34,7 @@
   z-index: 5;
   width: 100%;
   overflow: hidden;
-  & > li > a{ 
+  & > li > a, & > li > span, & > li > label{ 
     width: 100%;
     text-decoration: none;
     display: inline-block;
@@ -43,8 +43,8 @@
     transition:color $speedDropdown;
     .icon.option { fill: white }
   }
-  & > li > span{ box-sizing: border-box }
-  a:hover{
+  & > li > span, & > li > label{ box-sizing: border-box }
+  a:hover, span:hover, label:hover{
     color: white;
     .iNav, .icon.option { fill: white }
   }
@@ -82,8 +82,8 @@
   }
   .notCurrent{
     height: 0;
-    & > a, & > span { 
-     transition:all $speedDropdown;
+    & > a, & > span, & > label { 
+      transition:all $speedDropdown;
       display: inline-block; 
       padding: 0px 0 0px 12px; 
       height: 0 }
@@ -130,7 +130,7 @@
     .iNav { fill: white }
   }
   .notCurrent{ 
-    & > a, & > span { height: 34px; padding: 7px 0 7px 12px }
+    & > a, & > span, & > label { height: 34px; padding: 7px 0 7px 12px }
     -skip-padding: 7px 12px;
     height: auto;
     a:hover .icon { background: none }
@@ -190,17 +190,17 @@
   li.current { color: white }
   .current .iNav { fill: white }
 }
-#boxesList{
+#exportMenu { margin-top: -60px }
+.menu.formed{
   left: 0;
   margin: -7px 0 0 -3px;
   &.active, &.hover { margin: -10px 0 0 -6px }
-  & > .notCurrent { padding-right: 12px }
-  & > .current {
-    height: 38px;
-    padding: 12px 45px 0 10px;
-  }
+  .notCurrent { padding-right: 12px }
 }
-
+.current.formed {
+  height: 38px;
+  padding: 12px 45px 0 10px;
+}
 #gather { 
   top: 42px;
 }
@@ -234,3 +234,4 @@ span:hover > .option.logo { background: none }
   color: white;
   display: inline-block;
 }
+.switchHolder { padding: 0 }

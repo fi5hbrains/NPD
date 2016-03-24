@@ -123,8 +123,8 @@ class PolishesController < ApplicationController
       end
     elsif @polish.valid?
       @polish.bottling_status = false
-      @polish.draft = false
       rename_polish_files old_slug if old_slug != @polish.slug
+      @polish.draft = false
       @polish.save_version( params[:redress] ? 'redress' : 'update')
       if params[:redress]
         if old_bottle_id != @polish.bottle_id
@@ -256,10 +256,12 @@ class PolishesController < ApplicationController
     else
       FileUtils.mv path + polish.polish_folder(old_slug), path + polish.polish_folder 
     end
-    (polish.layers.count > 1 ? polish.coats_count : 1).
-      times{|c| FileUtils.mv( path + polish.coat_url(c, old_slug), path + polish.coat_url(c))}
-    [nil, 'thumb', 'big'].each do |option| 
-      FileUtils.mv( path + polish.bottle_url(option, true, old_slug), path + polish.bottle_url(option, true) ) end
+    unless polish.draft
+      (polish.layers.count > 1 ? polish.coats_count : 1).
+        times{|c| FileUtils.mv( path + polish.coat_url(c, old_slug), path + polish.coat_url(c))}
+      [nil, 'thumb', 'big'].each do |option| 
+        FileUtils.mv( path + polish.bottle_url(option, true, old_slug), path + polish.bottle_url(option, true) ) end
+    end
   end
 
   def generate_preview changed_layers = {}

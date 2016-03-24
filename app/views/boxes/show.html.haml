@@ -14,10 +14,26 @@
       = form_tag import_user_box_path(@user, @box), id: 'controls', class: 'controls', multipart: true do
         = label_tag :spreadsheet, t('user.import')
         = file_field_tag :spreadsheet, class: 'hidden', 'data-updatable' => true
-        = submit_tag 'import', class: 'hidden', name: 'preview'  
-        %span>= link_to t('user.export'), download_box_path(@user, @box, @box.slug, format: :csv)
+        = submit_tag 'import', class: 'hidden', name: 'preview'
+        %span.switch{'data-activate' => '#exportMenu'}>= t('user.export')
         %span#doneEditing.active{style: ('display:none' unless params[:edit])}>= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
         %span#goEdit{style: ('display:none' if params[:edit])}>= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
+      = form_tag download_box_path(@user, @box) do
+        %ul#exportMenu.menu.formed
+          %li.current.formed= t('user.export_setup')
+          %li.switchHolder <svg class='icon linkLike switch' data-activate='#exportMenu'><use xlink:href='#x'/></svg>
+          - export_setup = %w(bottle nail)
+          - %w(bottle nail rating note).each do |e|
+            %li.notCurrent
+              %label{for: e}
+                = t 'controls.include_' + e
+                = check_box_tag e, 'yes', export_setup.include?(e), class: 'hidden'
+                .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
+          %li.formLi
+            = button_tag 'CSV', value: 'csv', class: 'inline noWrap'
+            = button_tag 'XLSX', value: 'xlsx', class: 'inline noWrap'
+            = button_tag 'Image', value: 'img', class: 'inline noWrap'
+              
     
     #secondarySearchResults<
     #secondaryResults<

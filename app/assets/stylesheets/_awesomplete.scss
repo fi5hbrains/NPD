@@ -9,12 +9,13 @@ div.awesomplete {
 	display: inline-block;
 	position: relative;
   width: 100%;
+  z-index:2;
 }
 
 div.awesomplete > input {
 	display: block;
 	position: relative;
-  z-index: 2;
+  z-index:3;
 }
 
 div.awesomplete > ul {

@@ -52,3 +52,4 @@ a:hover .hoverBack.iRed, .linkLike.hoverBack.iRed:hover { fill:  lighten($colour
   text-decoration: none;
   .icon { fill: rgba($colourFont, .2) }
 }
+li.inactive > span { color: rgba($colourFont, .2) }

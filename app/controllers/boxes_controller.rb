@@ -26,10 +26,14 @@ class BoxesController < ApplicationController
   end
   
   def export
+    set_user
     set_box
-    respond_to do |format|
-      format.csv { send_data @box.export }
-    end    
+    case params[:button]
+    when 'csv'
+      send_data @box.export_csv, filename: @box.name + '.csv'
+    when 'img'
+      send_file '/path/to.jpeg', type: 'image/png', disposition: 'inline'
+    end
   end
   
   def create
