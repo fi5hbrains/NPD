@@ -59,13 +59,13 @@
       = link_to 'http://www.sayitwithpolish.com.au' do
         = image_tag 'ads/say_with_polish.jpg'
         %span Celebrate special moments, your way
-- if @polish
-  :javascript
-    $.ajax({
-      url: '/set_ads/#{get_charming_colour([@polish.h,@polish.s,@polish.l,@polish.opacity])}',
-      type: 'GET',
-      dataType: "script"
-    });
-
+- # - if @polish
+- #   :javascript
+- #     $.ajax({
+- #       url: '/set_ads/#{get_charming_colour([@polish.h,@polish.s,@polish.l,@polish.opacity])}',
+- #       type: 'GET',
+- #       dataType: "script"
+- #     });
+- # 
         
     
