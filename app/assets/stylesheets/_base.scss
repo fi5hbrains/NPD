@@ -599,31 +599,7 @@ h3 .tooltip { bottom: -30px }
 #listForm.active { display: block }
 #note { margin-bottom: -42px }
 #boxName.smallMargin { margin-bottom: 20px }
-.banners{
-  width:424px;
-  margin-right: -12px;
-}
-.banners li{
-  vertical-align: top;
-  display: inline-block;
-  margin-right:12px;
-  margin-bottom: 20px;
-  text-align:center;
-  max-width: 412px;
-  padding:0;
-  font-size: $fontSizeBase*0.9;
-  line-height: 16px;
-  img { width: 100% }
-  span { margin-bottom: 5px; display: inline-block }
-}
-li.w200{
-  width: 200px; float: left;
-}
-.banners li.amazon { min-height: 232px; max-height: 264px; }
-li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-product {
-  background: $colourHighlight;
-  img { mix-blend-mode: darken };
-}
+
 .layer:not(.lBase), .particles{
   background: $colourShadow;
   border-radius: $radiusMain;
@@ -658,15 +634,22 @@ li.amazon div#amzn-native-ad-0 div.amzn-native-products-list div.amzn-native-pro
   z-index: 3;  
 }
 #ads { width: 412px; margin-right: 0; margin-left: 0;}
-#charlie { height: 289px }
-.banners li .charmingItem {
-  display:inline-block;
-  margin-right:12px;
-  &:nth-child(even) { margin-right:0 }
-  .imgWrapper { background: $colourForm; margin-bottom:4px; display: block; }
-  img {
-    mix-blend-mode: darken;
-    width: 200px;
-    height: 249px;
+.banners li{
+  vertical-align: top;
+  display: inline-block;
+  margin-bottom: 20px;
+  padding:0;
+  font-size: $fontSizeBase*0.9;
+  line-height: 16px;
+  &.w200 > a { width: 200px; float: left; }
+  & > a { 
+    position:relative;
+    display: inline-block; 
+    text-align:center;
+    margin-left: 12px;
   }
+  .hover { position: absolute; top: 0; left: 0; visibility: hidden;}
+  & > a:hover .hover { visibility: visible }
+  & > a:first-child { margin-left: 0;}
+  span { margin-bottom: 5px; display: inline-block }
 }
