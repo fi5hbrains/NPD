@@ -2,7 +2,7 @@ class AdsController < ApplicationController
   before_action :set_ad, only: [:show, :edit, :update, :destroy]
 
   def index
-    @ads = Ad.all
+    @ads = Ad.all.order('updated_at Desc')
   end
 
   def show
