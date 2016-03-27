@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  h_start: 1
+  h_end: 1
+  s_start: 1
+
+two:
+  name: MyString
+  h_start: 1
+  h_end: 1
+  s_start: 1

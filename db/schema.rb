@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223141253) do
+ActiveRecord::Schema.define(version: 20160325065144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ads", force: :cascade do |t|
+    t.string    "name"
+    t.string    "image"
+    t.string    "image_hover"
+    t.string    "link"
+    t.string    "subtitle"
+    t.boolean   "omni",        default: true
+    t.int4range "h0",          default: 0...361
+    t.int4range "s0",          default: 0...101
+    t.int4range "l0",          default: 0...101
+    t.int4range "o0",          default: 0...101
+    t.int4range "h1",          default: 361...363
+    t.int4range "s1",          default: 101...103
+    t.int4range "l1",          default: 101...103
+    t.int4range "o1",          default: 101...103
+    t.int4range "h2",          default: 361...363
+    t.datetime  "created_at",                      null: false
+    t.datetime  "updated_at",                      null: false
+  end
+
+  add_index "ads", ["name"], name: "index_ads_on_name", using: :btree
 
   create_table "bottles", force: :cascade do |t|
     t.integer  "user_id",                null: false

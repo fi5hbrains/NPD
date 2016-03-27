@@ -1,0 +1,36 @@
+= form_for @ad, multipart: true do |f|
+  - if @ad.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ad.errors.count, "error")} prohibited this ad from being saved:"
+      %ul
+        - @ad.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :image
+    = f.file_field :image
+    = f.label :image_hover
+    = f.file_field :image_hover
+  .field
+    = f.label :subtitle
+    = f.text_field :subtitle
+  .field
+    = f.label :link
+    = f.text_field :link
+  .field
+    = f.label :omni
+    = f.check_box :omni
+  .field
+    = f.label :h_range
+    = f.text_field :h_range
+    = f.label :s_range
+    = f.text_field :s_range
+    = f.label :l_range
+    = f.text_field :l_range
+    = f.label :o_range
+    = f.text_field :o_range
+  .actions
+    = f.submit 'Save'

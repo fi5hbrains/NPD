@@ -411,9 +411,6 @@ cursor_positions:
   - :path: app/uploaders/avatar_uploader.rb
     :cursor_offset: 812
     :timestamp: 2015-12-23 21:43:39 +03:00
-  - :path: db/migrate/20150413140304_initialize.rb
-    :cursor_offset: 2701
-    :timestamp: 2015-11-25 20:09:43 +03:00
   - :path: db/migrate/20151223141253_add_follower_count_to_user.rb
     :cursor_offset: 189
     :timestamp: 2015-12-24 23:09:59 +03:00
@@ -770,9 +767,6 @@ cursor_positions:
     :timestamp: 2016-03-22 11:59:18 +03:00
     :selection_offset: 1934
     :block_selection_mode: false
-  - :path: app/models/defaults.rb
-    :cursor_offset: 2467
-    :timestamp: 2016-03-24 21:01:51 +03:00
   - :path: app/views/application/_ads.html.haml
     :cursor_offset: 2276
     :timestamp: 2016-03-24 21:24:21 +03:00
@@ -799,4 +793,12 @@ cursor_positions:
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 4404
     :timestamp: 2016-03-24 21:10:37 +03:00
+  - :path: db/migrate/20150413140304_initialize.rb
+    :cursor_offset: 3689
+    :timestamp: 2015-11-25 20:09:43 +03:00
+    :selection_offset: 3661
+    :block_selection_mode: false
+  - :path: app/models/defaults.rb
+    :cursor_offset: 7196
+    :timestamp: 2016-03-25 10:22:49 +03:00
 files_to_retain: 0

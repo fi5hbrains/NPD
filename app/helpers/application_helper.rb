@@ -122,13 +122,18 @@ module ApplicationHelper
     
   end
   
-  def get_charming_colour c
-    Defaults::CHARLIE.select do |k,v|
-      (v[:h].include?( c[0] ) || (v[:h2].include?( c[0]) if v[:h2])) && 
-      v[:s].include?(  c[1] ) && 
-      v[:l].include?(  c[2] ) &&
-      v[:o].include?(  c[3] )
-    end.keys.sample(1).first
+  def ad_items names, quantity = 1
+    records = Ad.where(name: names)
+    if params[:colour]
+      records = records.coloured( colour_to_hsl( params[:colour]) << 50 )
+    elsif @polish
+      records = records.coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity])
+    else
+      records = records.where(omni: true)
+    end
+    items = []
+    records.order("RANDOM()").first(quantity).each{|r| items << render_ad_item(r)}
+    return items.sum
   end
   
   def get_colour_names c
@@ -139,4 +144,13 @@ module ApplicationHelper
       v[:l].include?( c[2])
     end.keys
   end
+  
+  private
+  
+  def render_ad_item item
+    content_tag 'a', href: item.link do
+      image_tag( item.image.url) + (item.image_hover.url ? image_tag(item.image_hover.url, class: 'hover') : '') + content_tag('span',item.subtitle)
+    end
+  end
+
 end

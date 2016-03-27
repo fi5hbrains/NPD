@@ -1,0 +1,17 @@
+%p#notice= notice
+%p
+  = image_tag @ad.image.url
+  = image_tag @ad.image_hover.url
+%p
+  %b Name:
+  = @ad.name
+%p
+  %b H start:
+  = @ad.subtitle
+%p
+  %b H end:
+  = @ad.link
+
+= link_to 'Edit', edit_ad_path(@ad)
+\|
+= link_to 'Back', ads_path

@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get 'autocomplete', to: 'application#autocomplete'
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
   get 'maintenance', to: 'page#maintenance'
-  get 'set_ads/:colour', to: 'application#charming_charlie'
+
+  resources :ads
 
   scope '/catalogue' do
     get '/', to: 'polishes#index', as: 'catalogue'
