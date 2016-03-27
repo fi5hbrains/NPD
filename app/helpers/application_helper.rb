@@ -149,7 +149,7 @@ module ApplicationHelper
   
   def render_ad_item item
     content_tag 'a', href: item.link do
-      image_tag( item.image.url) + (item.image_hover.url ? image_tag(item.image_hover.url, class: 'hover') : '') + content_tag('span',item.subtitle)
+      image_tag( item.image.url) + (item.image_hover.url ? image_tag(item.image_hover.url, class: 'hover') : '') + content_tag('span',item.subtitle.html_safe)
     end
   end
 
