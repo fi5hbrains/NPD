@@ -420,9 +420,6 @@ cursor_positions:
   - :path: app/models/user.rb
     :cursor_offset: 877
     :timestamp: 2015-12-24 23:29:03 +03:00
-  - :path: lib/magick_methods.rb
-    :cursor_offset: 0
-    :timestamp: 2015-10-03 15:42:43 +04:00
   - :path: config/environment.rb
     :cursor_offset: 170
     :timestamp: 2015-08-10 10:13:39 +04:00
@@ -789,36 +786,41 @@ cursor_positions:
   - :path: app/views/ads/index.html.haml
     :cursor_offset: 333
     :timestamp: 2016-03-27 12:30:51 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 5902
-    :timestamp: 2016-03-08 21:29:12 +03:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 6211
-    :timestamp: 2016-03-22 14:52:58 +03:00
-  - :path: app/views/application/_ads.html.haml
-    :cursor_offset: 225
-    :timestamp: 2016-03-27 23:44:56 +04:00
-  - :path: app/models/ad.rb
-    :cursor_offset: 1206
-    :timestamp: 2016-03-27 11:14:55 +04:00
-  - :path: app/controllers/ads_controller.rb
-    :cursor_offset: 162
-    :timestamp: 2016-03-27 21:35:20 +04:00
+  - :path: lib/magick_methods.rb
+    :cursor_offset: 72
+    :timestamp: 2015-10-03 15:42:43 +04:00
+    :selection_offset: 77
+    :block_selection_mode: false
+  - :path: app/views/ads/show.html.haml
+    :cursor_offset: 121
+    :timestamp: 2016-03-27 12:29:34 +04:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 15722
+    :timestamp: 2016-03-29 11:49:17 +04:00
+  - :path: lib/colour_methods.rb
+    :cursor_offset: 1060
+    :timestamp: 2016-01-31 18:24:53 +03:00
+  - :path: app/helpers/application_helper.rb
+    :cursor_offset: 4333
+    :timestamp: 2016-03-27 23:45:15 +04:00
   - :path: app/models/brand.rb
     :cursor_offset: 359
     :timestamp: 2016-03-02 09:54:02 +03:00
     :selection_offset: 375
     :block_selection_mode: false
-  - :path: app/helpers/application_helper.rb
-    :cursor_offset: 4333
-    :timestamp: 2016-03-27 23:45:15 +04:00
-  - :path: lib/colour_methods.rb
-    :cursor_offset: 1060
-    :timestamp: 2016-01-31 18:24:53 +03:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 15867
-    :timestamp: 2016-03-27 16:40:46 +04:00
-  - :path: app/views/ads/show.html.haml
-    :cursor_offset: 121
-    :timestamp: 2016-03-27 12:29:34 +04:00
+  - :path: app/controllers/ads_controller.rb
+    :cursor_offset: 162
+    :timestamp: 2016-03-27 21:35:20 +04:00
+  - :path: app/models/ad.rb
+    :cursor_offset: 1206
+    :timestamp: 2016-03-27 11:14:55 +04:00
+  - :path: app/views/application/_ads.html.haml
+    :cursor_offset: 405
+    :timestamp: 2016-03-29 11:42:12 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 6211
+    :timestamp: 2016-03-22 14:52:58 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 5761
+    :timestamp: 2016-03-08 21:29:12 +03:00
 files_to_retain: 0

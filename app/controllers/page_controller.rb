@@ -11,7 +11,7 @@ class PageController < ApplicationController
       if p[:name]
         if @suspect = User.find_by_name(p[:name])
           @submit_text = t('form.login')
-          # @focus = 'user_password'
+          @focus = 'keep'
           @button_name = 'submit'
         else
           @focus = (params[:active] == 'null' ? 'user_password' : 'user_name')

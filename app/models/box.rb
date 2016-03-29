@@ -64,6 +64,17 @@ class Box < ActiveRecord::Base
     return stats
   end
   
+  def export_image bg = '#BBB'
+    path = Rails.root.join('public').to_s
+    stack = " -background '#{bg}'"
+    self.polishes.each_with_index do |p,i|
+      stack += " \\( #{path + p.bottle_url} #{path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:'<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>' \\) -append \\) "
+      stack += (i.modulo(4) == 0 ? ' -append' : ' +append') if i > 0
+    end
+    stack += " -alpha remove"
+    Magick.convert stack, '', '/out.png'
+  end
+  
   def export_csv(bottle = false, nail = false, rating = false, note = false)
     CSV.generate do |csv|
       headers = %w(brand name number colour notes).map{|h| I18n.t('sheet.' + h)}

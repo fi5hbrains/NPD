@@ -19,7 +19,8 @@ $('#status').text('#{@status}');
     $('#idName, #idPwd').removeClass('hidden');
     $('#phrase').addClass('hidden');
 
-$("##{@focus}").focus();
+- unless @focus == 'keep'
+  $("##{@focus}").focus();
     
   
 
