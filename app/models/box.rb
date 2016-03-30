@@ -64,16 +64,19 @@ class Box < ActiveRecord::Base
     return stats
   end
   
-  def export_image bg = '#BBB'
+  def export_image bg = '#BBB', columns = 4
     path = Rails.root.join('public').to_s
     stack = " -background '#{bg}'"
     self.polishes.each_with_index do |p,i|
-      stack += ' \\(' if i.modulo(4) == 0
       stack += " \\( #{path + p.bottle_url} #{path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
-      stack += (i.modulo(4) == 0 ? ' \\) -append' : ' +append') if i > 0
+      if i.modulo(columns - 1) == 0 && i > 0
+        stack += " -background '#{bg}' -alpha remove"
+        Magick.delay(queue: self.user_id).convert('', stack, "/output_#{i / columns}.png")
+      elsif i.modulo(columns) != 0
+        stack += ' +append'
+      end
     end
-    stack += " -background '#{bg}' -alpha remove"
-    return stack + ' output.png'
+    return stack
     # Magick.convert stack, '', '/out.png'
   end
   
