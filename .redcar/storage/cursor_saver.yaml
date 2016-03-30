@@ -598,11 +598,6 @@ cursor_positions:
   - :path: app/views/boxes/show.js.haml
     :cursor_offset: 1844
     :timestamp: 2016-02-21 22:00:48 +03:00
-  - :path: app/models/box.rb
-    :cursor_offset: 505
-    :timestamp: 2016-03-02 08:25:43 +03:00
-    :selection_offset: 517
-    :block_selection_mode: false
   - :path: app/helpers/boxes_helper.rb
     :cursor_offset: 150
     :timestamp: 2016-01-08 00:55:27 +03:00
@@ -823,4 +818,7 @@ cursor_positions:
   - :path: app/models/polish.rb
     :cursor_offset: 5761
     :timestamp: 2016-03-08 21:29:12 +03:00
+  - :path: app/models/box.rb
+    :cursor_offset: 3060
+    :timestamp: 2016-03-30 10:33:30 +04:00
 files_to_retain: 0
