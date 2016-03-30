@@ -32,8 +32,9 @@ class BoxesController < ApplicationController
     when 'csv'
       send_data @box.export_csv, filename: @box.name + '.csv'
     when 'img'
-      @box.export_image
-      send_file '/out.png', type: 'image/png', disposition: 'inline'
+      # @box.export_image
+      # send_file '/out.png', type: 'image/png', disposition: 'inline'
+      render plain: @box.export_image
     end
   end
   

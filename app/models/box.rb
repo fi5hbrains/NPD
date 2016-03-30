@@ -72,7 +72,8 @@ class Box < ActiveRecord::Base
       stack += (i.modulo(4) == 0 ? ' -append' : ' +append') if i > 0
     end
     stack += " -alpha remove"
-    Magick.convert stack, '', '/out.png'
+    return stack + ' output.png'
+    # Magick.convert stack, '', '/out.png'
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
