@@ -56,23 +56,43 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'naillook'
-      page = agent.get 'http://naillook.uk.com/catalog/lak/'
-      shades = page.search '.goods'
+      
+      brand = Brand.find_by_slug 'gelish'
+      page = agent.get 'http://gelish.com/products/gelish'
+      shades = page.at('#swatches').search 'li'
       shades.each do |shade|
-        name = shade.at('.goods-title-in').text.squish
-        polish = brand.polishes.where(name: name.gsub(' ' + name.split(' ').last, '')).first_or_create
+        name = shade.at('.item-name').text.squish
+        polish = brand.polishes.where(name: name).first_or_create
         if polish.new_record? 
           polish.synonym_list = polish.name
-          polish.number = name.split(' ').last
+          polish.number = shade.at('.item-num').text
           polish.brand_slug = brand.slug
           polish.brand_name = brand.name
           polish.user_id = current_user.id
           polish.draft = true
-          polish.remote_reference_url = 'http://naillook.uk.com' + shade.at('.good-hover').at('img').attr('src')
+          polish.remote_reference_url = shade.at('img').attr('src')
           @result += 1 if polish.save 
         end        
       end
+      
+      # ---------------- Naillook
+      # brand = Brand.find_by_slug 'naillook'
+      # page = agent.get 'http://naillook.uk.com/catalog/lak/'
+      # shades = page.search '.goods'
+      # shades.each do |shade|
+      #   name = shade.at('.goods-title-in').text.squish
+      #   polish = brand.polishes.where(name: name.gsub(' ' + name.split(' ').last, '')).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.number = name.split(' ').last
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #     polish.remote_reference_url = 'http://naillook.uk.com' + shade.at('.good-hover').at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # ------------ USLU
       # brand = Brand.find_by_slug 'uslu-airlines'
