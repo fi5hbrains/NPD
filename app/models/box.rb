@@ -73,7 +73,7 @@ class Box < ActiveRecord::Base
       if ((i + 1).modulo(columns) == 0 ) || i == (polishes.size - 1)
         stack += " +append -background '#{bg}' -alpha remove"
         Magick.convert('', stack, "/output_#{(i / columns).to_i}.png")
-        rows += path + "/output_#{(i / columns).to_i}.png \\( -size 198x10 canvas:#{bg} \\) -append  "
+        rows += path + "/output_#{(i / columns).to_i}.png \\( -size 198x15 canvas:#{bg} \\) -append  "
         stack = " -background '#{bg}'"
       elsif i.modulo(columns) != 0
         stack += ' +append'
