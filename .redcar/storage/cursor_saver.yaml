@@ -717,9 +717,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_navigation.scss
     :cursor_offset: 2955
     :timestamp: 2016-03-23 13:32:33 +03:00
-  - :path: app/models/magick.rb
-    :cursor_offset: 579
-    :timestamp: 2016-03-23 18:32:15 +03:00
   - :path: app/views/polishes/_collections.html.haml
     :cursor_offset: 1554
     :timestamp: 2016-03-23 07:47:38 +03:00
@@ -819,4 +816,7 @@ cursor_positions:
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2201
     :timestamp: 2016-03-31 10:12:36 +04:00
+  - :path: app/models/magick.rb
+    :cursor_offset: 642
+    :timestamp: 2016-03-30 03:22:16 +04:00
 files_to_retain: 0

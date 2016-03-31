@@ -67,19 +67,19 @@ class Box < ActiveRecord::Base
   def export_image bg = '#BBB', columns = 4
     path = Rails.root.join('public').to_s
     stack = " -background '#{bg}'"
+    rows = ''
     (polishes = self.polishes).each_with_index do |p,i|
-      stack += " \\( #{path + p.bottle_url} #{path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
+      stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} #{p.draft ? ' +append \\( -size 198x10 canvas:transparent \\) ' : path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
       if ((i + 1).modulo(columns) == 0 ) || i == (polishes.size - 1)
         stack += " +append -background '#{bg}' -alpha remove"
-        Magick.delay.convert('', stack, "/output_#{(i / columns).to_i}.png")
+        Magick.delay(queue: 'export_' + self.user_id.to_s).convert('', stack, "/output_#{(i / columns).to_i}.png")
+        rows += path + "/output_#{(i / columns).to_i}.png "
         stack = " -background '#{bg}'"
       elsif i.modulo(columns) != 0
         stack += ' +append'
       end
     end
-    return stack
-    
-    # Magick.convert stack, '', '/out.png'
+    Magick.delay(queue: 'export_' + self.user_id.to_s).convert(rows, ' -append', 'output.png')
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
