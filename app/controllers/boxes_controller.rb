@@ -34,7 +34,8 @@ class BoxesController < ApplicationController
     when 'img'
       # @box.export_image
       # send_file '/out.png', type: 'image/png', disposition: 'inline'
-      render plain: @box.export_image
+      @box.delay.export_image
+      render plain: 'lalala'
     end
   end
   

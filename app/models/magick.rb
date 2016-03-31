@@ -8,8 +8,8 @@ class Magick < ActiveRecord::Base
   def self.convert source, options, output = nil
     output ||= source
     `convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}` 
-    # puts '---------------------------'
-    # puts "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
+    puts '---------------------------'
+    puts "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
   end  
   
   def self.p name; (/-|\/U/ =~ name[0..1] ? '' :  Rails.root.join('public').to_s ) + name end
