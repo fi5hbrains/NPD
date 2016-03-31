@@ -742,11 +742,6 @@ cursor_positions:
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 5289
     :timestamp: 2016-03-24 21:19:36 +03:00
-  - :path: app/controllers/page_controller.rb
-    :cursor_offset: 1988
-    :timestamp: 2016-03-22 11:59:18 +03:00
-    :selection_offset: 1934
-    :block_selection_mode: false
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 8556
     :timestamp: 2016-03-24 19:58:38 +03:00
@@ -821,4 +816,7 @@ cursor_positions:
   - :path: app/models/box.rb
     :cursor_offset: 3060
     :timestamp: 2016-03-30 10:33:30 +04:00
+  - :path: app/controllers/page_controller.rb
+    :cursor_offset: 2201
+    :timestamp: 2016-03-31 10:12:36 +04:00
 files_to_retain: 0

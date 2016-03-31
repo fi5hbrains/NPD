@@ -69,7 +69,7 @@ class Box < ActiveRecord::Base
     stack = " -background '#{bg}'"
     (polishes = self.polishes).each_with_index do |p,i|
       stack += " \\( #{path + p.bottle_url} #{path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
-      if (i.modulo(columns - 1) == 0 && i > 0) || i == (polishes.size - 1)
+      if ((i + 1).modulo(columns) == 0 ) || i == (polishes.size - 1)
         stack += " +append -background '#{bg}' -alpha remove"
         Magick.convert('', stack, "/output_#{(i / columns).to_i}.png")
         stack = " -background '#{bg}'"
