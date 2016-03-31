@@ -71,7 +71,7 @@ class Box < ActiveRecord::Base
       stack += " \\( #{path + p.bottle_url} #{path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
       if ((i + 1).modulo(columns) == 0 ) || i == (polishes.size - 1)
         stack += " +append -background '#{bg}' -alpha remove"
-        Magick.convert('', stack, "/output_#{(i / columns).to_i}.png")
+        Magick.delay(queue: self.user_id).convert('', stack, "/output_#{(i / columns).to_i}.png")
         stack = " -background '#{bg}'"
       elsif i.modulo(columns) != 0
         stack += ' +append'
