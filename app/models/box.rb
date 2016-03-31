@@ -78,6 +78,7 @@ class Box < ActiveRecord::Base
       end
     end
     return stack
+    
     # Magick.convert stack, '', '/out.png'
   end
   
