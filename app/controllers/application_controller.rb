@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include Slugify
 
   before_filter :no_cache_on_ajax
-  helper_method :current_user_session, :current_user, :in_lab?, :coat, :set_catalogue_icons
+  helper_method :current_user_session, :current_user, :in_lab?, :set_catalogue_icons
 
   def set_users signables; User.find(signables.pluck(:user_id)) end
   def set_brand; @brand = Brand.find_by_slug(slugify params[:brand_id]) end

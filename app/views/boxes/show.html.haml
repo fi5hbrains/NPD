@@ -29,6 +29,8 @@
                 = t 'controls.include_' + e
                 = check_box_tag e, 'yes', export_setup.include?(e), class: 'hidden'
                 .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
+          %li.notCurrent
+            = color_field_tag :colour
           %li.formLi
             = button_tag 'CSV', value: 'csv', class: 'inline noWrap'
             = button_tag 'XLSX', value: 'xlsx', class: 'inline noWrap'

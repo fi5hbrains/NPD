@@ -1,5 +1,5 @@
 class Polish < ActiveRecord::Base
-  include Slugify, ColourMethods
+  include Slugify, ColourMethods, MagickMethods
 
   before_validation :name_or_number_to_slug
   before_save :set_colour
@@ -127,7 +127,6 @@ class Polish < ActiveRecord::Base
   def save_version_images index_old='', index_new=nil
     index_new ||= self.versions.count
     copy ||= self
-    path = Rails.root.join('public').to_s
     FileUtils::cp path + self.preview_url(index_old), path + copy.preview_url(index_new) if File.exists? path + self.preview_url(index_old)
   end
   
@@ -150,8 +149,50 @@ class Polish < ActiveRecord::Base
       where(nil)
     end
   end
+
+  def flatten_layers layers
+    FileUtils.mkdir_p(path + self.polish_folder) unless File.directory?(path + self.polish_folder)
+    File.rename path + self.gloss_tmp, path + self.gloss_url
+    Magick.convert self.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', self.gloss_preview_url
+    (layers.size > 1 ? self.coats_count : 1).times do |c|
+      stack = ''
+      layers.each do |layer|
+        stack += path + coat("#{self.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless %w(base sand).include?(layer.layer_type)
+      end
+      Magick.convert "#{self.tmp_folder}/layer_0.png", stack, self.coat_url(c)
+    end
+    generate_bottle
+  end
+
+  def generate_bottle redress = false
+    bottle = Bottle.find_by_id(self.bottle_id)
+    return true unless bottle   
+    preview_mask = path + '/assets/polish_parts/preview_mask.png'
+    blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
+    # usm = '-unsharp 0x.4'
+    # usm = '-unsharp 0x3+1.5+0.0196'
+    usm = '-unsharp 0.25x0.25+8+0.065'
     
+    stack = path + self.coat_url   
+    (self.coats_count - 1).times{|c| stack += " #{path + self.coat_url( c + 1)} -composite "}  
+    unless redress
+      stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + self.gloss_preview_url} -channel RGB -compose Screen -composite \\( #{preview_mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite -write #{path + self.preview_url} +delete \\) "
+    end
+    stack = " \\( #{stack} \\) -resize 150x100\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-58-65 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
+    stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
+    stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
+    stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c/2}.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.map{|c| c/2}.join('x')} -write #{path + self.bottle_url('thumb', true)} +delete \\) "
+    stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} -write #{path + self.bottle_url('big', true)} +delete \\) "
+    Magick.convert bottle.base_url, stack, self.bottle_url(nil, true)   
+    self.update_attributes bottling_status: true
+  end
+  
   private  
+  
+  def path
+    Rails.root.join('public').to_s
+  end
   
   def name_or_number?
     if %w(name number).all?{|attr| self[attr].blank?}

@@ -98,7 +98,7 @@ class PolishesController < ApplicationController
       @polish.bottling_status = false
       generate_preview params[:changes]
       @polish.save
-      flatten_layers
+      @polish.delay(queue: current_user.id).flatten_layers @layers
       redirect_to @brand, notice: 'Polish was successfully created.' 
     else
       @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
@@ -138,7 +138,7 @@ class PolishesController < ApplicationController
         @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id) || l.new_record?}
         generate_preview params[:changes]
         @polish.save
-        flatten_layers
+        @polish.delay(queue: current_user.id).flatten_layers @layers
         redirect_to @brand, notice: 'Polish was successfully updated.' 
       end
     else
@@ -472,44 +472,6 @@ class PolishesController < ApplicationController
     end
   end
 
-  def flatten_layers
-    FileUtils.mkdir_p(path + @polish.polish_folder) unless File.directory?(path + @polish.polish_folder)
-    File.rename path + @polish.gloss_tmp, path + @polish.gloss_url
-    Magick.delay( queue: current_user.id ).convert @polish.gloss_url, '-resize ' + Defaults::BOTTLE.map{|c| c * 2}.join('x') + ' -gravity center', @polish.gloss_preview_url
-    (@layers.size > 1 ? @polish.coats_count : 1).times do |c|
-      stack = ''
-      @layers.each do |layer|
-        stack += path + coat("#{@polish.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless %w(base sand).include?(layer.layer_type)
-      end
-      Magick.delay( queue: current_user.id ).convert "#{@polish.tmp_folder}/layer_0.png", stack, @polish.coat_url(c)
-    end
-    generate_bottle
-  end
-
-  def generate_bottle redress = false
-    bottle = Bottle.find_by_id(@polish.bottle_id)
-    return true unless bottle   
-    preview_mask = path + '/assets/polish_parts/preview_mask.png'
-    blur = bottle.blur > 5 ? " -blur 0x#{bottle.blur/10}" : ''
-    # usm = '-unsharp 0x.4'
-    # usm = '-unsharp 0x3+1.5+0.0196'
-    usm = '-unsharp 0.25x0.25+8+0.065'
-    
-    stack = path + @polish.coat_url   
-    (@polish.coats_count - 1).times{|c| stack += " #{path + @polish.coat_url( c + 1)} -composite "}  
-    unless redress
-      stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + @polish.gloss_preview_url} -channel RGB -compose Screen -composite \\( #{preview_mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite -write #{path + @polish.preview_url} +delete \\) "
-    end
-    stack = " \\( #{stack} \\) -resize 150x100\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-58-65 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
-    stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "
-    stack += " #{path + bottle.highlight_url} -channel RGB -compose Screen -composite "
-    stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
-    stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c/2}.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.map{|c| c/2}.join('x')} -write #{path + @polish.bottle_url('thumb', true)} +delete \\) "
-    stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} -write #{path + @polish.bottle_url('big', true)} +delete \\) "
-    Magick.delay(queue: current_user.id).convert bottle.base_url, stack, @polish.bottle_url(nil, true)   
-    @polish.delay(queue: current_user.id).update_attributes bottling_status: true
-  end
-  
   def all_layers_bottom_up
     @layers = @polish.layers.reject{|l| !l.new_record? || l._destroy}.sort{|a,b| a.ordering <=> b.ordering}
   end

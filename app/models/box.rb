@@ -64,22 +64,31 @@ class Box < ActiveRecord::Base
     return stats
   end
   
-  def export_image bg = '#BBB', columns = 4
+  def export_image bg = '#BBB', columns = 4, note = false
     path = Rails.root.join('public').to_s
-    stack = " -background '#{bg}'"
-    rows = " -background '#{bg}' "
-    (polishes = self.polishes).each_with_index do |p,i|
-      stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} #{p.draft ? ' +append \\( -size 198x10 canvas:transparent \\) ' : path + p.preview_url} +append -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='25000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
-      if ((i + 1).modulo(columns) == 0 ) || i == (polishes.size - 1)
-        stack += " +append -background '#{bg}' -alpha remove"
-        Magick.convert('', stack, "/output_#{(i / columns).to_i}.png")
-        rows += path + "/output_#{(i / columns).to_i}.png \\( -size 198x15 canvas:#{bg} \\) -append  "
-        stack = " -background '#{bg}'"
-      elsif i.modulo(columns) != 0
-        stack += ' +append'
+    row_items = []
+    stack = " -size #{columns * 360}x590 canvas:'#{bg}'"
+    (polishes = self.polishes).each_with_index do |polish,index|
+      row_items << polish
+      # stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} #{p.draft ? ' +append \\( -size 198x10 canvas:transparent \\) ' : path + p.preview_url} +append  -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
+      if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
+        row_items.reverse.each_with_index do |p,i|
+          stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+0 \\) -composite "
+          stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+82 \\) -composite " unless p.draft
+          if note
+            
+          else
+            stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
+          end
+        end
+        puts '-----------'
+        puts stack
+        stack = " -size #{columns * 360}x590 canvas:'#{bg}'"
+        row_items = []
+      elsif index.modulo(columns) != 0
       end
     end
-    Magick.convert(rows, ' -append', '/output.png')
+    # Magick.convert(rows, ' -append', '/output.png')
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
