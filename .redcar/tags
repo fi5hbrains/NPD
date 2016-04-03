@@ -1,4 +1,4 @@
-1459676430
+1459704557
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -239,6 +239,7 @@ p	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.p
 path	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def path;
 path	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def path;
 path	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def path
+pngquant	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.pngquant 
 pointerdown	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function pointerdown(e)
 polish_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def polish_folder 
 polish_params	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def polish_params

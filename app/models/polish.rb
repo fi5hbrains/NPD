@@ -159,7 +159,7 @@ class Polish < ActiveRecord::Base
       layers.each do |layer|
         stack += path + coat("#{self.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless %w(base sand).include?(layer.layer_type)
       end
-      Magick.convert "#{self.tmp_folder}/layer_0.png", stack, self.coat_url(c)
+      Magick.convert "#{self.tmp_folder}/layer_0.png", stack + ' -depth 8', self.coat_url(c)
     end
     generate_bottle
   end
@@ -184,7 +184,8 @@ class Polish < ActiveRecord::Base
     stack = "\\( #{stack} \\( #{path + bottle.mask_url} -alpha copy \\) -compose Dstin -composite \\) -compose Over -composite "
     stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c/2}.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.map{|c| c/2}.join('x')} -write #{path + self.bottle_url('thumb', true)} +delete \\) "
     stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} -write #{path + self.bottle_url('big', true)} +delete \\) "
-    Magick.convert bottle.base_url, stack, self.bottle_url(nil, true)   
+    Magick.convert bottle.base_url, stack, self.bottle_url(nil, true) 
+    Magick.pngquant [self.bottle_url('big', true), self.bottle_url('thumb', true), self.bottle_url(nil, true) ]
     self.update_attributes bottling_status: true
   end
   

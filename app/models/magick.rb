@@ -12,6 +12,13 @@ class Magick < ActiveRecord::Base
     puts "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
   end  
   
+  def self.pngquant filenames
+    filenames = [filenames] if filenames.class.name == 'String'
+    filenames.each do |f|
+    `pngquant #{self.p(f)} --force --ext=.png  `       
+    end
+  end
+  
   def self.p name; (/-|\/U/ =~ name[0..1] ? '' :  Rails.root.join('public').to_s ) + name end
   
 end

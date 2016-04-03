@@ -751,14 +751,6 @@ cursor_positions:
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2201
     :timestamp: 2016-03-31 10:12:36 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 6119
-    :timestamp: 2016-04-01 09:22:29 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 96
-    :timestamp: 2016-04-01 08:50:54 +04:00
-    :selection_offset: 83
-    :block_selection_mode: false
   - :path: app/models/box.rb
     :cursor_offset: 2860
     :timestamp: 2016-03-31 22:57:34 +04:00
@@ -774,9 +766,6 @@ cursor_positions:
   - :path: app/assets/javascripts/local.coffee
     :cursor_offset: 1774
     :timestamp: 2016-02-10 17:12:12 +03:00
-  - :path: app/models/magick.rb
-    :cursor_offset: 638
-    :timestamp: 2016-03-31 21:15:51 +04:00
   - :path: lib/magick_methods.rb
     :cursor_offset: 72
     :timestamp: 2015-10-03 15:42:43 +04:00
@@ -819,4 +808,15 @@ cursor_positions:
   - :path: app/models/defaults.rb
     :cursor_offset: 6833
     :timestamp: 2016-04-02 22:07:41 +04:00
+  - :path: app/models/magick.rb
+    :cursor_offset: 505
+    :timestamp: 2016-04-03 17:35:20 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 8458
+    :timestamp: 2016-04-03 17:35:34 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 96
+    :timestamp: 2016-04-01 08:50:54 +04:00
+    :selection_offset: 83
+    :block_selection_mode: false
 files_to_retain: 0

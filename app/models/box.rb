@@ -67,7 +67,7 @@ class Box < ActiveRecord::Base
   def export_image bg = '#BBB', columns = 4, note = false
     path = Rails.root.join('public').to_s
     row_items = []
-    stack = " -size #{columns * 360}x590 canvas:'#{bg}'"
+    stack = ''
     (polishes = self.polishes).each_with_index do |polish,index|
       row_items << polish
       # stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} #{p.draft ? ' +append \\( -size 198x10 canvas:transparent \\) ' : path + p.preview_url} +append  -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
@@ -81,9 +81,8 @@ class Box < ActiveRecord::Base
             stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
           end
         end
-        puts '-----------'
-        puts stack
-        stack = " -size #{columns * 360}x590 canvas:'#{bg}'"
+        Magick.convert " -size #{columns * 360}x590 canvas:'#{bg}'", stack, '/output_' + (index * polishes.sizr / columns ).to_i + '.png'
+        stack = ''
         row_items = []
       elsif index.modulo(columns) != 0
       end
