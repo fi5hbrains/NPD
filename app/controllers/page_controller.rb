@@ -57,23 +57,34 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      brand = Brand.find_by_slug 'gelish'
-      page = agent.get 'http://gelish.com/products/gelish'
-      shades = page.at('#swatches').search 'li'
-      shades.each do |shade|
-        name = shade.at('.item-name').text.squish
-        polish = brand.polishes.where(name: name).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.number = shade.at('.item-num').text
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-          polish.remote_reference_url = shade.at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
+      Polish.all.each do |p|
+        unless p.draft
+          Magick.pngquant [p.bottle_url('big', true), p.bottle_url('thumb', true), p.bottle_url(nil, true), p.preview_url ]
+          p.coats_count.times do |c|
+            Magick.convert p.coat_url(c), ' -depth 8 '
+          end
+          @result += 1
+        end
       end
+      
+      # ------------------ Gelish
+      # brand = Brand.find_by_slug 'gelish'
+      # page = agent.get 'http://gelish.com/products/gelish'
+      # shades = page.at('#swatches').search 'li'
+      # shades.each do |shade|
+      #   name = shade.at('.item-name').text.squish
+      #   polish = brand.polishes.where(name: name).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.number = shade.at('.item-num').text
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #     polish.remote_reference_url = shade.at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # ---------------- Naillook
       # brand = Brand.find_by_slug 'naillook'
