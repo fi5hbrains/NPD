@@ -185,7 +185,7 @@ class Polish < ActiveRecord::Base
     stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c/2}.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.map{|c| c/2}.join('x')} -write #{path + self.bottle_url('thumb', true)} +delete \\) "
     stack += " \\( +clone -resize #{Defaults::BOTTLE.join('x')}^ -gravity center -extent #{Defaults::BOTTLE.join('x')} -write #{path + self.bottle_url('big', true)} +delete \\) "
     Magick.convert bottle.base_url, stack, self.bottle_url(nil, true) 
-    Magick.pngquant [self.bottle_url('big', true), self.bottle_url('thumb', true), self.bottle_url(nil, true) ]
+    Magick.pngquant [self.bottle_url('big', true), self.bottle_url('thumb', true), self.bottle_url(nil, true), self.preview_url ]
     self.update_attributes bottling_status: true
   end
   

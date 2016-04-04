@@ -418,7 +418,7 @@ class PolishesController < ApplicationController
 #{"\\( #{path + particles_shadow} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'glitter'} \
 #{"\\( #{path + flake_shadow_tmp + mask.split('.png')[1]} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'flake'} \
 #{"\\( #{path + particles_hl} -alpha off -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " if layer.layer_type == 'glitter'} \
-              "
+              -depth 8 "
               if c == 0
                 Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
                 if layer.magnet_intensity > 0
