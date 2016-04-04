@@ -78,7 +78,7 @@ class Box < ActiveRecord::Base
           if note
             
           else
-            stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
+            # stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
           end
         end
         Magick.convert " -size #{columns * 360}x590 canvas:'#{bg}'", stack, '/output_' + (index * polishes.size / columns ).to_i.to_s + '.png'
