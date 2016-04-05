@@ -75,12 +75,12 @@ class Box < ActiveRecord::Base
       if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
         row_items.reverse.each_with_index do |p,i|
           stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+0 \\) -composite "
-          stack += " \\( #{path + '/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite " unless p.draft
+          stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite " unless p.draft
           stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+82 \\) -composite " unless p.draft
           if note
             
           else
-            stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.b;anl? && !p.name/blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
+            stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 30}+372 \\) -composite "
           end
         end
         Magick.convert " -size #{columns * 360}x590 canvas:#{bg} ", stack, '/output_' + (index / columns ).to_i.to_s + '.png'
