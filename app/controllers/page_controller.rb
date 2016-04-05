@@ -59,9 +59,10 @@ class PageController < ApplicationController
       
       brand = Brand.find_by_slug 'evixi'
       page = agent.get 'http://www.evixigel.co.uk/collections/colours?view=listall'
-      shades = page.search '.roduct-item'
+      shades = page.at('.product-list').search('.product-item')
+      logger.debug '-------------- ' + shades.size.to_s
       shades.each do |shade|
-        name = shade.at('.product-title').text.split(' - ')[1]
+        name = shade.at('.product-title').text.split(' - ').last
         polish = brand.polishes.where(name: name).first_or_create
         if polish.new_record? 
           polish.synonym_list = polish.name

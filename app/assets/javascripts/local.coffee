@@ -1,5 +1,7 @@
 $(document).on 'ready page:load', ->
-  $('#colour').colorPicker()
+  colour = document.getElementById('colour')
+  if colour
+    $(colour).colorPicker()
 
   $('#user_name').doneTyping ->
     field = $(this)
