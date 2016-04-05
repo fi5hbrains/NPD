@@ -61,6 +61,7 @@ en:
     include_rating: 'Rating'
     include_note: 'Note'
     export_colour: 'Background colour'
+    export_columns: 'Number of columns'
   placeholder:
     name: 'Name'
     prefix: 'Serie or Line Name'

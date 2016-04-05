@@ -32,6 +32,9 @@
           %li.notCurrent
             %label{for: 'colour'}= t 'controls.export_colour'
             = text_field_tag :colour, '', class: 'colour inMenu'
+          %li.notCurrent
+            %label{for: 'columns'}= t 'controls.export_columns'
+            = number_field_tag :columns, 4,  max: 9, min: 1
           %li.formLi
             = button_tag 'Download', value: 'img', class: 'inline noWrap wide100'
               

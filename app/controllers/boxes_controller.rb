@@ -34,8 +34,10 @@ class BoxesController < ApplicationController
     when 'img'
       # @box.export_image
       # send_file '/out.png', type: 'image/png', disposition: 'inline'
-      
-      render plain: @box.export_image
+      columns = params[:columns].to_i
+      columns = 9 if columns > 9 
+      columns = 1 if columns < 1
+      render plain: @box.export_image(params[:colour], columns)
     end
   end
   
