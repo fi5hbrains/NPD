@@ -1,4 +1,4 @@
-1459836559
+1459841992
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -187,7 +187,6 @@ give_to	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.give_t
 gloss_preview_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_preview_url;
 gloss_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_tmp;
 gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url;
-h	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/amazon.js	function h(A, z)
 h_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range;
 h_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range=(ranges)
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;

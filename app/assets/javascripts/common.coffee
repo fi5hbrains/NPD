@@ -165,7 +165,7 @@ $(document).on 'ready page:load', ->
     return
       
 skipBlanks = (element) ->
-  element.find(':input[type="text"]').each (->
+  element.find('input[type="text"]').each (->
     if $(this).val() == ''
       $(this).attr('disabled','true')
   )

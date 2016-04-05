@@ -60,6 +60,7 @@ en:
     include_nail: 'Nail'
     include_rating: 'Rating'
     include_note: 'Note'
+    export_colour: 'Background colour'
   placeholder:
     name: 'Name'
     prefix: 'Serie or Line Name'

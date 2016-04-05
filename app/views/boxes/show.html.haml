@@ -30,11 +30,10 @@
                 = check_box_tag e, 'yes', export_setup.include?(e), class: 'hidden'
                 .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
           %li.notCurrent
-            = color_field_tag :colour
+            %label{for: 'colour'}= t 'controls.export_colour'
+            = text_field_tag :colour, '', class: 'colour inMenu'
           %li.formLi
-            = button_tag 'CSV', value: 'csv', class: 'inline noWrap'
-            = button_tag 'XLSX', value: 'xlsx', class: 'inline noWrap'
-            = button_tag 'Image', value: 'img', class: 'inline noWrap'
+            = button_tag 'Download', value: 'img', class: 'inline noWrap wide100'
               
     
     #secondarySearchResults<

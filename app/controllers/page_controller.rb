@@ -57,14 +57,21 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      Polish.all.each do |p|
-        unless p.draft
-          Magick.pngquant [p.bottle_url('big', true), p.bottle_url('thumb', true), p.bottle_url(nil, true), p.preview_url ]
-          p.coats_count.times do |c|
-            Magick.convert p.coat_url(c), ' -depth 8 '
-          end
-          @result += 1
-        end
+      brand = Brand.find_by_slug 'evixi'
+      page = agent.get 'http://www.evixigel.co.uk/collections/colours?view=listall'
+      shades = page.search '.roduct-item'
+      shades.each do |shade|
+        name = shade.at('.product-title').text.split(' - ')[1]
+        polish = brand.polishes.where(name: name).first_or_create
+        if polish.new_record? 
+          polish.synonym_list = polish.name
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
       end
       
       # ------------------ Gelish

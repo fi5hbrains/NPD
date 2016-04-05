@@ -1,4 +1,6 @@
 $(document).on 'ready page:load', ->
+  $('#colour').colorPicker()
+
   $('#user_name').doneTyping ->
     field = $(this)
     $.ajax 

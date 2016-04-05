@@ -64,7 +64,7 @@ class Box < ActiveRecord::Base
     return stats
   end
   
-  def export_image bg = '#BBB', columns = 4, note = false
+  def export_image bg = 'transparent', columns = 4, note = false
     path = Rails.root.join('public').to_s
     row_items = []
     rows = []
@@ -94,7 +94,7 @@ class Box < ActiveRecord::Base
     rows.each_with_index do |r,i|
       stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
     end
-    Magick.convert "-size #{columns * 360 + 40}x#{rows.size * 430 + 130} canvas:#{bg}", stack, '/output.png'
+    Magick.convert "-size #{columns * 360 + 40}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
