@@ -90,8 +90,8 @@ class Box < ActiveRecord::Base
               stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "
             end
           elsif nail
-            stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 6}+82 \\) -composite "
-            stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250}+82 \\) -composite " unless p.draft
+            stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 11}+82 \\) -composite "
+            stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250 + 5}+82 \\) -composite " unless p.draft
           else
             if note
               
@@ -119,7 +119,7 @@ class Box < ActiveRecord::Base
     end
     stack = ''
     rows.each_with_index do |r,i|
-      stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
+      stack += " #{path}/#{r} -geometry +10+#{i * 490} -composite "
     end
     if bottle && nail
       Magick.convert "-size #{columns * 360 + 50}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
