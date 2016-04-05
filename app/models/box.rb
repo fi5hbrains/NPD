@@ -73,7 +73,7 @@ class Box < ActiveRecord::Base
       row_items << polish
       if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
         row_items.reverse.each_with_index do |p,i|
-          stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+0 \\) -composite "
+          stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+#{p.draft ? 88 : 0} \\) -composite "
           stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite "
           stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+82 \\) -composite " unless p.draft
           if note
