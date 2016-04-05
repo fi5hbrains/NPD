@@ -92,12 +92,13 @@ class Box < ActiveRecord::Base
           elsif nail
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 11}+82 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250 + 5}+82 \\) -composite " unless p.draft
-          else
             if note
               
             else
               stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "
             end
+          else
+
           end
         end
         row = "output_#{(index / columns ).to_i}.png"
