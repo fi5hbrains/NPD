@@ -37,7 +37,7 @@ class BoxesController < ApplicationController
       columns = params[:columns].to_i
       columns = 9 if columns > 9 
       columns = 1 if columns < 1
-      render plain: @box.export_image(params[:colour], columns)
+      render plain: @box.export_image(params[:bg_colour], columns, params[:note], params[:bottle], params[:nail])
     end
   end
   
