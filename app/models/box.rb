@@ -67,15 +67,14 @@ class Box < ActiveRecord::Base
   def export_image bg = '#BBB', columns = 4, note = false
     path = Rails.root.join('public').to_s
     row_items = []
+    rows = []
     stack = ''
-    stacks = ''
     (polishes = self.polishes).each_with_index do |polish,index|
       row_items << polish
-      # stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} #{p.draft ? ' +append \\( -size 198x10 canvas:transparent \\) ' : path + p.preview_url} +append  -size 254x10 canvas:transparent \\( -size 454 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> #{p.brand_name} \\n #{p.number} <b>#{p.name}</b></span>\" \\) -append \\) "
       if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
         row_items.reverse.each_with_index do |p,i|
           stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+0 \\) -composite "
-          stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite " unless p.draft
+          stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite "
           stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+82 \\) -composite " unless p.draft
           if note
             
@@ -83,15 +82,19 @@ class Box < ActiveRecord::Base
             stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 35}+377 \\) -composite "
           end
         end
-        Magick.convert " -size #{columns * 360}x590 canvas:#{bg} ", stack, '/output_' + (index / columns ).to_i.to_s + '.png'
-        stacks += ' ------ Row ------ ' + stack
+        row = "output_#{(index / columns ).to_i}.png"
+        rows << row
+        Magick.convert " -size #{columns * 360}x590 canvas:#{bg} ", stack, '/' + row
         stack = ''
         row_items = []
       elsif index.modulo(columns) != 0
       end
     end
-    return stacks
-    # Magick.convert(rows, ' -append', '/output.png')
+    stack = ''
+    rows.each_with_index do |r,i|
+      stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
+    end
+    Magick.convert "-size #{columns * 360 + 30}x#{rows.size * 430 + 100} canvas:#{bg}", stack, '/output.png'
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
