@@ -107,7 +107,7 @@ class Box < ActiveRecord::Base
         elsif bottle
           Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, '/' + row
         elsif nail
-          
+          Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, '/' + row
         else
           
         end
