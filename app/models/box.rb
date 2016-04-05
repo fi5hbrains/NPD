@@ -84,7 +84,7 @@ class Box < ActiveRecord::Base
         end
         row = "output_#{(index / columns ).to_i}.png"
         rows << row
-        Magick.convert " -size #{columns * 360}x590 canvas:#{bg} ", stack, '/' + row
+        Magick.convert " -size #{columns * 360}x590 canvas:transparent ", stack, '/' + row
         stack = ''
         row_items = []
       elsif index.modulo(columns) != 0
@@ -94,7 +94,7 @@ class Box < ActiveRecord::Base
     rows.each_with_index do |r,i|
       stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
     end
-    Magick.convert "-size #{columns * 360 + 30}x#{rows.size * 430 + 100} canvas:#{bg}", stack, '/output.png'
+    Magick.convert "-size #{columns * 360 + 40}x#{rows.size * 430 + 130} canvas:#{bg}", stack, '/output.png'
   end
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
