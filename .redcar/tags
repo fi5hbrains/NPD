@@ -1,4 +1,4 @@
-1459849610
+1459858587
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -190,8 +190,8 @@ gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url
 h_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range;
 h_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range=(ranges)
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;
-import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 import	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def import
+import	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def import(file)
 in_box?	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def in_box? 
 in_brands	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def self.in_brands(brands); where("brand_id IN (?)", brands.pluck(:id)) 
 in_lab?	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def in_lab?;
