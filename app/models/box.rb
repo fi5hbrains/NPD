@@ -119,7 +119,11 @@ class Box < ActiveRecord::Base
     end
     stack = ''
     rows.each_with_index do |r,i|
-      stack += " #{path}/#{r} -geometry +10+#{i * 490} -composite "
+      if !bottle && nail
+        stack += " #{path}/#{r} -geometry +10+#{i * 490} -composite "
+      else
+        stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
+      end
     end
     if bottle && nail
       Magick.convert "-size #{columns * 360 + 50}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
