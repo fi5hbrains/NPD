@@ -126,7 +126,7 @@ class Box < ActiveRecord::Base
     elsif bottle
       Magick.convert "-size #{columns * 250}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
     elsif nail
-      Magick.convert "-size #{columns * 250}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
+      Magick.convert "-size #{columns * 250 + 10}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
     else
       
     end
