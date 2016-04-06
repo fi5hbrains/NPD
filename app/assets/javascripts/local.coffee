@@ -1,5 +1,5 @@
 $(document).on 'ready page:load', ->
-  colour = document.getElementById('colour')
+  colour = document.getElementById('bg_colour')
   if colour
     $(colour).colorPicker()
 

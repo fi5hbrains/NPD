@@ -31,7 +31,7 @@ class BoxesController < ApplicationController
     case params[:button]
     when 'csv'
       send_data @box.export_csv, filename: @box.name + '.csv'
-    when 'img'
+    when 'image'
       # @box.export_image
       # send_file '/out.png', type: 'image/png', disposition: 'inline'
       columns = params[:columns].to_i

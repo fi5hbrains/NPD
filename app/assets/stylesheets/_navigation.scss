@@ -43,6 +43,7 @@
     transition:color $speedDropdown;
     .icon.option { fill: white }
   }
+  & > li.controls > span{ width: auto }
   & > li > span, & > li > label{ box-sizing: border-box }
   a:hover, span:hover, label:hover{
     color: white;

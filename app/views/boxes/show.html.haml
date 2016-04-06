@@ -19,8 +19,12 @@
         %span#doneEditing.active{style: ('display:none' unless params[:edit])}>= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
         %span#goEdit{style: ('display:none' if params[:edit])}>= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
       = form_tag download_box_path(@user, @box) do
-        %ul#exportMenu.menu.formed
+        %ul#exportMenu{class: params[:export] ? 'menu formed active' : 'menu formed'}
           %li.current.formed= t('user.export_setup')
+          %li.controls.noMargin
+            %span{class: ('active' if !params[:export] || params[:export] == 'xlsx')}= link_to 'XLSX', export: 'xlsx'
+            %span{class: ('active' if params[:export] == 'csv')}= link_to 'CSV', export: 'csv'
+            %span{class: ('active' if params[:export] == 'image')}= link_to 'Image', export: 'image'
           %li.switchHolder <svg class='icon linkLike switch' data-activate='#exportMenu'><use xlink:href='#x'/></svg>
           - export_setup = %w(bottle nail)
           - %w(bottle nail rating note).each do |e|
@@ -36,7 +40,7 @@
             %label{for: 'columns'}= t 'controls.export_columns'
             = number_field_tag :columns, 4,  max: 9, min: 1
           %li.formLi
-            = button_tag 'Download', value: 'img', class: 'inline noWrap wide100'
+            = button_tag 'Download', value: (params[:export] || 'xslx'), class: 'inline noWrap wide100'
               
     
     #secondarySearchResults<
