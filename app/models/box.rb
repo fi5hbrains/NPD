@@ -72,6 +72,8 @@ class Box < ActiveRecord::Base
   
   def export_image bg = 'transparent', columns = 4, note = false, bottle = false, nail = false
     path = Rails.root.join('public').to_s
+    output_folder = "/downloads/#{self.user_id}"
+    FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
     row_items = []
     rows = []
     stack = ''
@@ -84,14 +86,14 @@ class Box < ActiveRecord::Base
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+82 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+82 \\) -composite " unless p.draft
             if note
-              
+              stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 35}+377 \\) -composite "              
             else
               stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 35}+377 \\) -composite "
             end
           elsif bottle
             stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 250}+#{p.draft ? 92 : 0} \\) -composite "
             if note
-              
+              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "              
             else
               stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "
             end
@@ -99,7 +101,7 @@ class Box < ActiveRecord::Base
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 28}+60 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250 + 22}+60 \\) -composite " unless p.draft
             if note
-              
+              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 1}+442 \\) -composite "              
             else
               stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 1}+442 \\) -composite "
             end
@@ -107,14 +109,14 @@ class Box < ActiveRecord::Base
 
           end
         end
-        row = "output_#{(index / columns ).to_i}.png"
+        row = "row_#{(index / columns ).to_i}.png"
         rows << row
         if bottle && nail
-          Magick.convert " -size #{columns * 360}x590 canvas:transparent ", stack, '/' + row
+          Magick.convert " -size #{columns * 360}x590 canvas:transparent ", stack, output_folder + '/' + row
         elsif bottle
-          Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, '/' + row
+          Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, output_folder + '/' + row
         elsif nail
-          Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, '/' + row
+          Magick.convert " -size #{columns * 250}x590 canvas:transparent ", stack, output_folder + '/' + row
         else
           
         end
@@ -125,19 +127,19 @@ class Box < ActiveRecord::Base
       end
     end
     stack = ''
-    rows.each_with_index do |r,i|
+    rows.each_with_index do |row,i|
       if !bottle && nail
-        stack += " #{path}/#{r} -geometry +10+#{i * 525} -composite "
+        stack += " #{path + output_folder}/#{row} -geometry +10+#{i * 525} -composite "
       else
-        stack += " #{path}/#{r} -geometry +10+#{i * 430} -composite "
+        stack += " #{path + output_folder}/#{row} -geometry +10+#{i * 430} -composite "
       end
     end
     if bottle && nail
-      Magick.convert "-size #{columns * 360 + 50}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
+      Magick.convert "-size #{columns * 360 + 50}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, output_folder + '/' + self.slug + '.png'
     elsif bottle
-      Magick.convert "-size #{columns * 250}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, '/output.png'
+      Magick.convert "-size #{columns * 250}x#{rows.size * 430 + 130} canvas:'#{bg}'", stack, output_folder + '/' + self.slug + '.png'
     elsif nail
-      Magick.convert "-size #{columns * 250 + 10}x#{rows.size * 525 + 130} canvas:'#{bg}'", stack, '/output.png'
+      Magick.convert "-size #{columns * 250 + 10}x#{rows.size * 525 + 130} canvas:'#{bg}'", stack, output_folder + '/' + self.slug + '.png'
     else
       
     end

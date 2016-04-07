@@ -37,7 +37,8 @@ class BoxesController < ApplicationController
       columns = params[:columns].to_i
       columns = 9 if columns > 9 
       columns = 1 if columns < 1
-      render plain: @box.export_image(params[:bg_colour], columns, params[:note], params[:bottle], params[:nail])
+      @box.export_image(params[:bg_colour], columns, params[:note], params[:bottle], params[:nail])
+      send_file Rails.root.join('public').to_s + "/downloads/#{@box.user_id}/#{@box.slug}.png", type: 'image/png', disposition: 'inline'
     end
   end
   

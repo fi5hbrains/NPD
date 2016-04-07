@@ -448,9 +448,6 @@ cursor_positions:
   - :path: app/views/bottles/destroy.js.haml
     :cursor_offset: 38
     :timestamp: 2016-01-18 16:19:55 +03:00
-  - :path: app/views/polishes/_layer_fields.html.haml
-    :cursor_offset: 161
-    :timestamp: 2016-01-22 13:14:50 +03:00
   - :path: app/views/brands/edit.html.haml
     :cursor_offset: 324
     :timestamp: 2016-01-20 16:06:47 +03:00
@@ -619,11 +616,6 @@ cursor_positions:
   - :path: app/controllers/brands_controller.rb
     :cursor_offset: 0
     :timestamp: 2016-03-06 10:09:14 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 2810
-    :timestamp: 2016-03-15 23:21:12 +03:00
-    :selection_offset: 2779
-    :block_selection_mode: false
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 897
     :timestamp: 2016-03-21 09:01:03 +03:00
@@ -643,9 +635,6 @@ cursor_positions:
     :timestamp: 2016-01-18 16:09:23 +03:00
     :selection_offset: 595
     :block_selection_mode: false
-  - :path: app/assets/stylesheets/_navigation.scss
-    :cursor_offset: 2955
-    :timestamp: 2016-03-23 13:32:33 +03:00
   - :path: app/helpers/polishes_helper.rb
     :cursor_offset: 0
     :timestamp: 2016-03-12 17:48:46 +03:00
@@ -658,9 +647,6 @@ cursor_positions:
   - :path: app/assets/stylesheets/_variables.scss
     :cursor_offset: 0
     :timestamp: 2016-03-06 20:55:28 +03:00
-  - :path: app/assets/stylesheets/_options.scss
-    :cursor_offset: 2046
-    :timestamp: 2016-03-23 08:53:09 +03:00
   - :path: app/views/polishes/catalogue_show.html.haml
     :cursor_offset: 431
     :timestamp: 2016-03-15 20:55:55 +03:00
@@ -705,9 +691,6 @@ cursor_positions:
   - :path: app/views/ads/show.html.haml
     :cursor_offset: 121
     :timestamp: 2016-03-27 12:29:34 +04:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 15722
-    :timestamp: 2016-03-29 11:49:17 +04:00
   - :path: lib/colour_methods.rb
     :cursor_offset: 1060
     :timestamp: 2016-01-31 18:24:53 +03:00
@@ -795,21 +778,9 @@ cursor_positions:
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 25
     :timestamp: 2015-05-23 06:53:13 +04:00
-  - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 975
-    :timestamp: 2016-04-05 13:32:28 +04:00
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2124
     :timestamp: 2016-04-05 12:21:13 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 4213
-    :timestamp: 2016-04-05 13:07:10 +04:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 1573
-    :timestamp: 2016-04-05 12:44:51 +04:00
-  - :path: app/assets/javascripts/local.coffee
-    :cursor_offset: 105
-    :timestamp: 2016-04-05 12:23:43 +04:00
   - :path: app/assets/javascripts/polish.coffee
     :cursor_offset: 6785
     :timestamp: 2016-03-13 18:51:30 +03:00
@@ -819,7 +790,34 @@ cursor_positions:
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 583
     :timestamp: 2016-04-05 10:50:16 +04:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 4164
+    :timestamp: 2016-04-07 12:29:15 +04:00
+  - :path: app/assets/javascripts/local.coffee
+    :cursor_offset: 76
+    :timestamp: 2016-04-05 23:11:17 +04:00
+  - :path: app/controllers/boxes_controller.rb
+    :cursor_offset: 894
+    :timestamp: 2016-04-06 14:40:03 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 647
+    :timestamp: 2016-04-07 09:56:01 +04:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 2762
+    :timestamp: 2016-04-07 09:55:16 +04:00
+  - :path: app/assets/stylesheets/_navigation.scss
+    :cursor_offset: 1419
+    :timestamp: 2016-04-07 12:26:42 +04:00
+  - :path: app/assets/stylesheets/_options.scss
+    :cursor_offset: 696
+    :timestamp: 2016-04-06 21:36:27 +04:00
+  - :path: app/views/polishes/_layer_fields.html.haml
+    :cursor_offset: 915
+    :timestamp: 2016-03-13 17:58:48 +03:00
   - :path: app/models/defaults.rb
-    :cursor_offset: 6833
+    :cursor_offset: 778
     :timestamp: 2016-04-02 22:07:41 +04:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 4016
+    :timestamp: 2016-04-07 10:10:07 +04:00
 files_to_retain: 0
