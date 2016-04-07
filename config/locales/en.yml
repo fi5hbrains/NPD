@@ -161,7 +161,7 @@ en:
         other: "because %{brands} are missing."
         }
     export: 'Download'
-    export_setup: 'Download Set-up:'
+    export_setup: 'Save as:'
 
   catalogue: 
     titles:

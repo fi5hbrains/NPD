@@ -45,10 +45,11 @@
   }
   & > li.controls > span{ width: auto }
   & > li > span, & > li > label{ box-sizing: border-box }
-  a:hover, span:hover, label:hover{
+  li:not(.controls) a:hover, span:hover, label:hover{
     color: white;
     .iNav, .icon.option { fill: white }
   }
+  li.controls { margin-left: 7px }
   .switch{ 
     position: absolute;
     padding: 19px 20px; 

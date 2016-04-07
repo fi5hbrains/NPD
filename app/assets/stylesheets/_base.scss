@@ -88,7 +88,7 @@ time { color: $colourStatsIcon }
   .arrayItem { margin-right: 10px }
   .array > .arrayItem:nth-child(5n+5) { margin-right: -50px }
 }
-.block + .block, .main .block { margin-left: 0;}
+.block + .block, .main .block:not(.center) { margin-left: 0;}
 .blockx2 .block + .block {margin-right: 0;}
 .blockx2{ 
   width: 600px; margin-right: 20px;
@@ -166,13 +166,12 @@ a:hover{ color: $colourLinkHover }
 
 .controls{
   font-size: $fontSizeBase*1.4;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0 20px -2px;
   position:relative;
   z-index: 1;
   & > span, label{
     display: inline-block;
-    padding: 4px .5em 1px;
+    padding: 3px .5em;
     border-radius: $radiusMain;
     cursor: pointer;
     color: $colourLink;
@@ -306,6 +305,7 @@ form img { vertical-align: middle }
 input, textarea, button, .button, .roundButton{ 
   position: relative;
   z-index: 1;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05); 
   &:focus{
     outline: none; 
     box-shadow: 0 0 0 1px $colourMain; 
@@ -384,6 +384,7 @@ button.inField{
   right: -6px;
   top: -3px;
   z-index: 3;
+  box-shadow: none;
   .icon { fill: $colourButton; margin-bottom: -5px; background: none }
 }
 button.inField:focus{ box-shadow: none; outline: none }

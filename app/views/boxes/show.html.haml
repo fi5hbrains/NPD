@@ -19,26 +19,30 @@
         %span#doneEditing.active{style: ('display:none' unless params[:edit])}>= link_to t('form.done_editing'), user_box_path(@user, @box, done_editing: true), remote: true
         %span#goEdit{style: ('display:none' if params[:edit])}>= link_to t('form.edit'), edit_user_box_path(@user, @box), remote: true
       = form_tag download_box_path(@user, @box) do
+        - setup = Box::EXPORT_OPTIONS
+        - type = params[:export] || 'xlsx'
         %ul#exportMenu{class: params[:export] ? 'menu formed active' : 'menu formed'}
           %li.current.formed= t('user.export_setup')
           %li.controls.noMargin
-            %span{class: ('active' if !params[:export] || params[:export] == 'xlsx')}= link_to 'XLSX', export: 'xlsx'
-            %span{class: ('active' if params[:export] == 'csv')}= link_to 'CSV', export: 'csv'
-            %span{class: ('active' if params[:export] == 'image')}= link_to 'Image', export: 'image'
+            %span{class: ('active' if type == 'xlsx')}= link_to 'XLSX', export: 'xlsx'
+            %span{class: ('active' if type == 'csv')}= link_to 'CSV', export: 'csv'
+            %span{class: ('active' if type == 'image')}= link_to 'Image', export: 'image'
           %li.switchHolder <svg class='icon linkLike switch' data-activate='#exportMenu'><use xlink:href='#x'/></svg>
-          - export_setup = %w(bottle nail)
           - %w(bottle nail rating note).each do |e|
+            - if setup[type].keys.include? e
+              %li.notCurrent
+                %label{for: e}
+                  = t 'controls.include_' + e
+                  = check_box_tag e, 'yes', setup[type][e], class: 'hidden'
+                  .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
+          - if setup[type].keys.include? 'bg_colour'
             %li.notCurrent
-              %label{for: e}
-                = t 'controls.include_' + e
-                = check_box_tag e, 'yes', export_setup.include?(e), class: 'hidden'
-                .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
-          %li.notCurrent
-            %label{for: 'bg_colour'}= t 'controls.export_colour'
-            = text_field_tag :bg_colour, '', class: 'colour inMenu'
-          %li.notCurrent
-            %label{for: 'columns'}= t 'controls.export_columns'
-            = number_field_tag :columns, 4,  max: 9, min: 1
+              %label{for: 'bg_colour'}= t 'controls.export_colour'
+              = text_field_tag :bg_colour, setup[type]['bg_colour'], class: 'colour inMenu'
+          - if setup[type].keys.include? 'columns'
+            %li.notCurrent
+              %label{for: 'columns'}= t 'controls.export_columns'
+              = number_field_tag :columns, setup[type]['columns'],  max: 9, min: 1
           %li.formLi
             = button_tag 'Download', value: (params[:export] || 'xslx'), class: 'inline noWrap wide100'
               

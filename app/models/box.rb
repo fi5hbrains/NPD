@@ -9,6 +9,12 @@ class Box < ActiveRecord::Base
   has_many :polishes, through: :box_items
   
   validates :slug, uniqueness: {scope: :user_id, message: 'already exists for this user', :case_sensitive => false }, :allow_blank => false
+  
+  EXPORT_OPTIONS = {
+    'csv' => {'note' => true, 'rating' => true},
+    'xlsx' => {'colour' => true, 'bottle' => false, 'nail' => false, 'note' => true, 'rating' => true},
+    'image' => {'bottle' => true, 'nail' => false, 'note' => true, 'rating' => false, 'bg_colour' => '#fff', 'columns' => 7}
+  }
 
   def import(file)
     spreadsheet = Roo::Spreadsheet.open(file.path, extension: File.extname(file.path))
