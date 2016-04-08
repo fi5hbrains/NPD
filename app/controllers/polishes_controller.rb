@@ -128,7 +128,7 @@ class PolishesController < ApplicationController
       @polish.save_version( params[:redress] ? 'redress' : 'update')
       if params[:redress]
         if old_bottle_id != @polish.bottle_id
-          generate_bottle(true) 
+          @polish.generate_bottle(true) 
         else
           @polish.bottling_status = true
         end
