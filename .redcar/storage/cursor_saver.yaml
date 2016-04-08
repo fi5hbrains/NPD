@@ -803,21 +803,21 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 4016
     :timestamp: 2016-04-07 10:10:07 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 18417
-    :timestamp: 2016-04-04 09:21:12 +04:00
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 2519
     :timestamp: 2015-12-25 00:16:42 +03:00
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 318
     :timestamp: 2016-04-01 09:11:51 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 6801
-    :timestamp: 2016-04-04 09:24:22 +04:00
   - :path: lib/slugify.rb
     :cursor_offset: 18
     :timestamp: 2016-03-17 08:11:32 +03:00
     :selection_offset: 0
     :block_selection_mode: false
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 3989
+    :timestamp: 2016-04-09 01:55:22 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 6801
+    :timestamp: 2016-04-04 09:24:22 +04:00
 files_to_retain: 0
