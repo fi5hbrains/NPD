@@ -70,7 +70,7 @@ class PageController < ApplicationController
             polish.brand_name = brand.name
             polish.user_id = current_user.id
             polish.draft = true
-            polish.remote_reference_url = 'http:' + shade.at('.product-image').at('img').attr('src').gsub('.jpg','.png').gsub('small_image','swapimage').gsub('_b_','_p_').gsub('lg_web','web')
+            polish.remote_reference_url = shade.at('.product-image').at('img').attr('src').gsub('.jpg','.png').gsub('small_image','swapimage').gsub('_b_','_p_').gsub('lg_web','web')
             @result += 1 if polish.save 
           end        
         end
