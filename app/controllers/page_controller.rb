@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PageController < ApplicationController
   include Slugify
   def index
@@ -55,25 +56,43 @@ class PageController < ApplicationController
     @result = 'wrong user, sorry'
     if current_user && current_user.name == 'bobin'
       @result = 0
-      agent = Mechanize.new
-      
-      brand = Brand.find_by_slug 'evixi'
-      page = agent.get 'http://www.evixigel.co.uk/collections/colours?view=listall'
-      shades = page.at('.product-list').search('.product-item')
-      logger.debug '-------------- ' + shades.size.to_s
-      shades.each do |shade|
-        name = shade.at('.product-title').text.split(' - ').last
-        polish = brand.polishes.where(name: name).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
+      agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
+      brand = Brand.find_by_slug 'ciaté-london'
+      (1..3).each do |i|
+        page = agent.get 'https://www.ciatelondon.com/collections/nails?constraint=polish&page=' + i.to_s
+        shades = page.search('.no_crop_image')
+        shades.each do |shade|
+          name = shade.at('.product-title').text.strip
+          polish = brand.polishes.where(name: name).first_or_create
+          if polish.new_record? 
+            polish.synonym_list = polish.name
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.draft = true
+            polish.remote_reference_url = 'http:' + shade.at('.image-swap').search('img').last.attr('src')
+            @result += 1 if polish.save 
+          end        
+        end
       end
+      
+      # ------------------ Evixi
+      # brand = Brand.find_by_slug 'evixi'
+      # page = agent.get 'http://www.evixigel.co.uk/collections/colours?view=listall'
+      # shades = page.at('.product-list').search('.product-item')
+      # shades.each do |shade|
+      #   name = shade.at('.product-title').text.split(' - ').last
+      #   polish = brand.polishes.where(name: name).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #     polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # ------------------ Gelish
       # brand = Brand.find_by_slug 'gelish'

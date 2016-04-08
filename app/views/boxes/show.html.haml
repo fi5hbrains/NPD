@@ -28,7 +28,7 @@
             %span{class: ('active' if type == 'csv')}= link_to 'CSV', export: 'csv'
             %span{class: ('active' if type == 'image')}= link_to 'Image', export: 'image'
           %li.switchHolder <svg class='icon linkLike switch' data-activate='#exportMenu'><use xlink:href='#x'/></svg>
-          - %w(bottle nail rating note).each do |e|
+          - %w(colour bottle nail rating note).each do |e|
             - if setup[type].keys.include? e
               %li.notCurrent
                 %label{for: e}

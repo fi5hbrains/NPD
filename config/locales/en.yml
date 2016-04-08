@@ -60,6 +60,7 @@ en:
     include_nail: 'Nail'
     include_rating: 'Rating'
     include_note: 'Note'
+    include_colour: 'Colour'
     export_colour: 'Background colour'
     export_columns: 'Number of columns'
   placeholder:
