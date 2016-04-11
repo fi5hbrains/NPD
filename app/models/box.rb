@@ -177,6 +177,8 @@ class Box < ActiveRecord::Base
         if p.h
           color_cell_styles << sheet.styles.add_style(bg_color: hsl_to_rgbhex(p.h,p.s,p.l), fg_color: fg_colour, alignment: {horizontal: :center})
           sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: [nil, :string]
+        else
+          sheet.add_row [p.brand_name, name_or_number, colour_name]
         end
         sheet.add_hyperlink :location => link, :ref => sheet.rows.last.cells[1]
       end
