@@ -1,10 +1,10 @@
 --- 
 open_files: 
-  - app/views/application/_ads.html.haml
-  - app/models/ad.rb
-  - app/controllers/ads_controller.rb
-  - app/models/brand.rb
-  - app/helpers/application_helper.rb
-  - lib/colour_methods.rb
-  - app/assets/stylesheets/_base.scss
-  - app/views/ads/show.html.haml
+  - app/models/box.rb
+  - app/controllers/boxes_controller.rb
+  - app/views/application/collect_search.js.haml
+  - Gemfile
+  - app/views/boxes/show.html.haml
+  - config/locales/ru.yml
+  - app/models/defaults.rb
+  - config/locales/en.yml

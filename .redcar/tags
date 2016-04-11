@@ -1,4 +1,4 @@
-1460343377
+1460355383
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -157,7 +157,7 @@ edit	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  
 entry_params	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	    def entry_params
 excluded_name?	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def excluded_name?
 export	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def export
-export_csv	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def export_csv(bottle = false, nail = false, rating = false, note = false)
+export_csv	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def export_csv 
 export_image	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def export_image 
 export_xlsx	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def export_xlsx 
 extension_white_list	/Users/fish/Dropbox/work/Interpol/app/uploaders/reference_uploader.rb	  def extension_white_list;

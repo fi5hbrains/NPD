@@ -145,23 +145,23 @@ class Box < ActiveRecord::Base
     end
   end
   
-  def export_csv(bottle = false, nail = false, rating = false, note = false)
+  def export_csv colour = true, bottle = false, nail = false, note = true, rating = true, user_id
     CSV.generate do |csv|
-      headers = %w(brand name colour notes).map{|h| I18n.t('sheet.' + h)}
+      headers = %w(brand name colour rating notes).map{|h| I18n.t('sheet.' + h)}
       csv << headers
       self.polishes.each do |p|
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
-        colour = get_colour_names([p.h,p.s,p.l]).first
+        colour = get_colour_names([p.h,p.s,p.l]).last
         csv << [p.brand_name, name_or_number, colour]
       end
     end
   end
   
-  def export_xlsx colour = true, bottle = false, nail = false, note = true, rating = true
+  def export_xlsx colour = true, bottle = false, nail = false, note = true, rating = true, user_id
     path = Rails.root.join('public').to_s
     output_folder = "/downloads/#{self.user_id}"
     FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
-    headers = %w(brand name colour notes).map{|h| I18n.t('sheet.' + h)}
+    headers = %w(brand name colour rating notes).map{|h| I18n.t('sheet.' + h)}
     package = Axlsx::Package.new
     package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
       heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 18)
@@ -171,7 +171,7 @@ class Box < ActiveRecord::Base
       self.polishes.each_with_index do |p,i|
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
         colour_name = get_colour_names([p.h,p.s,p.l]).last
-        fg_colour = (p.l && p.l > 50) ? '000000' : 'FFFFFF' 
+        fg_colour = (p.l && p.l > 40) ? '000000' : 'FFFFFF' 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         color_cell_styles << sheet.styles.add_style(bg_color: (hsl_to_rgbhex(p.h,p.s,p.l) if p.h), fg_color: fg_colour, alignment: {horizontal: :center})

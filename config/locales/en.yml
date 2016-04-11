@@ -224,10 +224,11 @@ en:
       submit_update: 'Update Profile'
   sheet:
     brand: 'Brand'
-    bottle: '  '
+    bottle: ' '
     name: 'Name'
     number: 'Number'
     colour: 'Colour'
+    rating: 'Rating'
     notes: 'Notes'
     
 
