@@ -174,9 +174,10 @@ class Box < ActiveRecord::Base
         fg_colour = (p.l.blank? || p.l > 50) ? '000000' : 'FFFFFF' 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
-        color_cell_styles << sheet.styles.add_style(bg_color: (p.h ? hsl_to_rgbhex(p.h,p.s,p.l) : 'FFFFFF'), fg_color: fg_colour, alignment: {horizontal: :center})
-        
-        sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: [nil, :string]
+        if p.h
+          color_cell_styles << sheet.styles.add_style(bg_color: hsl_to_rgbhex(p.h,p.s,p.l), fg_color: fg_colour, alignment: {horizontal: :center})
+          sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: [nil, :string]
+        end
         sheet.add_hyperlink :location => link, :ref => sheet.rows.last.cells[1]
       end
     end
