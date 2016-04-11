@@ -10,6 +10,15 @@ module ColourMethods
       '100'
     end
   end
+
+  def get_colour_names c
+    c = colour_to_hsl(c)
+    Defaults::COLOURS[I18n.locale].select do |k,v| 
+      (v[:h].include?( c[0]) || (v[:h2].include?( c[0]) if v[:h2])) && 
+      v[:s].include?( c[1]) && 
+      v[:l].include?( c[2])
+    end.keys
+  end  
   
   def colour_to_hsl colour, spread = nil
     if colour.class.name == 'Array'
@@ -96,7 +105,36 @@ module ColourMethods
     end
     return [(h*360).round,(s*100).round,(l*100).round, rgb[3]]
   end
+  
+  def hsl_to_rgbhex h, s, l
+    if s == 0
+      r = g = b = l
+    else
+      s = s.to_f / 100
+      l = l.to_f / 100
+      h = h.to_f / 360
+      q = l < 0.5 ? l * (1 + s) : l + s - l * s
+      p = 2 * l - q
+      r = (hue_to_rgb(p, q, h + 1.0 / 3) * 255).round.to_s(16)
+      g = (hue_to_rgb(p, q, h) * 255).round.to_s(16)
+      b = (hue_to_rgb(p, q, h - 1.0 / 3) * 255).round.to_s(16)
+    end
+    r = '0' + r if r.size ==1
+    g = '0' + g if g.size ==1
+    b = '0' + b if b.size ==1
+    return r + g + b
+  end
+
   private
+  
+  def hue_to_rgb p, q, t
+    t += 1 if t < 0
+    t -= 1 if t > 1
+    return p + (q - p) * 6 * t if t < 1.0 / 6
+    return q if t < 1.0 / 2
+    return p + (q - p) * (2.0 / 3 - t) * 6 if t < 2.0 / 3
+    return p
+  end
   
   def middle range
     (range.min + range.max) / 2

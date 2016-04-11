@@ -136,15 +136,6 @@ module ApplicationHelper
     return items.sum
   end
   
-  def get_colour_names c
-    c = colour_to_hsl(c)
-    Defaults::COLOURS[I18n.locale].select do |k,v| 
-      (v[:h].include?( c[0]) || (v[:h2].include?( c[0]) if v[:h2])) && 
-      v[:s].include?( c[1]) && 
-      v[:l].include?( c[2])
-    end.keys
-  end
-  
   private
   
   def render_ad_item item

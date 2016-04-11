@@ -101,6 +101,7 @@ class Defaults < ActiveRecord::Base
       'violet red'     => {h: 325..340, s: 70..100, l: 42..65},
       'licorice'       => {h:0..1, s: 1..2, l: 2..3},
       'lead'           => {h:0..1, s: 1..2, l: 2..3},
+      'mauve'          => {h:0..1, s: 1..2, l: 2..3},
       'tungsten'       => {h:0..1, s: 1..2, l: 2..3},
       'iron'           => {h:0..1, s: 1..2, l: 2..3},
       'steel'          => {h:0..1, s: 1..2, l: 2..3},

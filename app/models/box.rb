@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Box < ActiveRecord::Base
-  include Slugify
+  include Slugify, ColourMethods
 
   before_validation :name_to_slug
   
@@ -11,7 +11,7 @@ class Box < ActiveRecord::Base
   validates :slug, uniqueness: {scope: :user_id, message: 'already exists for this user', :case_sensitive => false }, :allow_blank => false
   
   EXPORT_OPTIONS = {
-    'csv' => {'note' => true, 'rating' => true},
+    'csv' => {'colour' => true, 'note' => true, 'rating' => true},
     'xlsx' => {'colour' => true, 'bottle' => false, 'nail' => false, 'note' => true, 'rating' => true},
     'image' => {'bottle' => true, 'nail' => false, 'note' => true, 'rating' => false, 'bg_colour' => '#fff', 'columns' => 7}
   }
@@ -147,12 +147,39 @@ class Box < ActiveRecord::Base
   
   def export_csv(bottle = false, nail = false, rating = false, note = false)
     CSV.generate do |csv|
-      headers = %w(brand name number colour notes).map{|h| I18n.t('sheet.' + h)}
+      headers = %w(brand name colour notes).map{|h| I18n.t('sheet.' + h)}
       csv << headers
       self.polishes.each do |p|
-        csv << [p.brand_name, p.name, p.number, ("hsl(#{p.h},#{p.s},#{p.l})" if p.h)]
+        name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
+        colour = get_colour_names([p.h,p.s,p.l]).first
+        csv << [p.brand_name, name_or_number, colour]
       end
     end
+  end
+  
+  def export_xlsx colour = true, bottle = false, nail = false, note = true, rating = true
+    path = Rails.root.join('public').to_s
+    headers = %w(brand name colour notes).map{|h| I18n.t('sheet.' + h)}
+    package = Axlsx::Package.new
+    package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
+      heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 18)
+      imaged = sheet.styles.add_style(height: 50)
+      sheet.add_row headers, style: heading, height: 30
+      color_cell_styles = []
+      self.polishes.each_with_index do |p,i|
+        name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
+        colour_name = get_colour_names([p.h,p.s,p.l]).first
+        fg_colour = (p.l && p.l > 50) ? '000000' : 'FFFFFF' 
+        link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
+        img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
+        color_cell_styles << sheet.styles.add_style(bg_color: (hsl_to_rgbhex(p.h,p.s,p.l) if p.h), fg_color: fg_colour, alignment: {horizontal: :center})
+        
+        sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], height: 35
+        sheet.add_hyperlink :location => link, :ref => sheet.rows.last.cells[1]
+      end
+    end
+    package.use_shared_strings = true
+    package.serialize("public/downloads/#{self.user_id}/#{self.slug}.xlsx")
   end
   
   def rename_header_columns(header)

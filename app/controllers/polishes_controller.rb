@@ -15,6 +15,7 @@ class PolishesController < ApplicationController
     @comments = @polish.comments
     set_users @comments
     if !in_lab? && !@polish.draft
+      @colour_names = get_colour_names([@polish.h,@polish.s,@polish.l])
       find_related @polish
       render 'catalogue_show'
     else

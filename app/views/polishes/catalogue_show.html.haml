@@ -11,8 +11,8 @@
     - if @polish.release_year
       = link_to @polish.release_year, '#'
       ,
-    - (names = get_colour_names([@polish.h,@polish.s,@polish.l])).each_with_index do |colour, i|
-      = link_to( colour, catalogue_path(colour: colour)) + (i < names.size - 1 ? ', ' : '')
+    - @colour_names.each_with_index do |colour, i|
+      = link_to( colour, catalogue_path(colour: colour)) + (i < @colour_names.size - 1 ? ', ' : '')
   .block.left{'data-id' => @polish.id}>
     = image_tag @polish.bottle_url, class: "left biggestBottle #{'getBottlingStatus' unless @polish.draft || @polish.bottling_status}"
     - unless @polish.draft
