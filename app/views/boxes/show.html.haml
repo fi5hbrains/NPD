@@ -44,7 +44,7 @@
               %label{for: 'columns'}= t 'controls.export_columns'
               = number_field_tag :columns, setup[type]['columns'],  max: 9, min: 1
           %li.formLi
-            = button_tag 'Download', value: (params[:export] || 'xslx'), class: 'inline noWrap wide100'
+            = button_tag 'Download', value: (params[:export] || 'xlsx'), class: 'inline noWrap wide100'
               
     
     #secondarySearchResults<

@@ -794,9 +794,6 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 4006
     :timestamp: 2016-04-10 21:35:56 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 8428
-    :timestamp: 2016-04-11 07:17:59 +04:00
   - :path: app/controllers/boxes_controller.rb
     :cursor_offset: 679
     :timestamp: 2016-04-11 07:14:17 +04:00
@@ -818,4 +815,7 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 5517
     :timestamp: 2016-04-11 07:15:31 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 9736
+    :timestamp: 2016-04-11 10:57:31 +04:00
 files_to_retain: 0
