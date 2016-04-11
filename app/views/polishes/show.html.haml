@@ -36,6 +36,9 @@
               by
               = link_to v.user_name, user_path(v.user_name) if v.user_name
             %td= v.updated_at.strftime("%d %m %Y %H:%M")
+    = @polish.h
+    = @polish.s
+    = @polish.l
     %h3= 'Params'
     %pre#pre.selectable= @polish.to_yaml.gsub('---', '')
   .clearFix
