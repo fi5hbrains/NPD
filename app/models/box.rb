@@ -171,7 +171,7 @@ class Box < ActiveRecord::Base
       self.polishes.each_with_index do |p,i|
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
         colour_name = get_colour_names([p.h,p.s,p.l]).last
-        fg_colour = (p.l && p.l > 40) ? '000000' : 'FFFFFF' 
+        fg_colour = (p.l && p.l > 50) ? '000000' : 'FFFFFF' 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         color_cell_styles << sheet.styles.add_style(bg_color: (hsl_to_rgbhex(p.h,p.s,p.l) if p.h), fg_color: fg_colour, alignment: {horizontal: :center})

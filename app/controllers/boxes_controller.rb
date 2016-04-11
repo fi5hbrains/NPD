@@ -30,11 +30,11 @@ class BoxesController < ApplicationController
     set_box
     case params[:button]
     when 'csv'
-      send_data @box.export_csv(params[:colour], params[:bottle], params[:nail], params[:note], params[:rating], current_user.id), filename: @box.name + '.csv'
+      send_data @box.export_csv(params[:colour], params[:bottle], params[:nail], params[:note], params[:rating], current_user.id), filename: @box.name + '.csv' and return
     when 'xlsx'
       @box.export_xlsx params[:colour], params[:bottle], params[:nail], params[:note], params[:rating], current_user.id
       # render plain: 'lalala'
-      send_file Rails.root.join('public').to_s + "/downloads/#{@box.user_id}/#{@box.slug}.xlsx", type: "application/vnd.ms-excel"
+      send_file Rails.root.join('public').to_s + "/downloads/#{@box.user_id}/#{@box.slug}.xlsx", type: "application/vnd.ms-excel" and return
     when 'image'
       # @box.export_image
       # send_file '/out.png', type: 'image/png', disposition: 'inline'
