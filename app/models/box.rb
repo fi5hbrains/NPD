@@ -159,6 +159,8 @@ class Box < ActiveRecord::Base
   
   def export_xlsx colour = true, bottle = false, nail = false, note = true, rating = true
     path = Rails.root.join('public').to_s
+    output_folder = "/downloads/#{self.user_id}"
+    FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
     headers = %w(brand name colour notes).map{|h| I18n.t('sheet.' + h)}
     package = Axlsx::Package.new
     package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
@@ -168,13 +170,13 @@ class Box < ActiveRecord::Base
       color_cell_styles = []
       self.polishes.each_with_index do |p,i|
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
-        colour_name = get_colour_names([p.h,p.s,p.l]).first
+        colour_name = get_colour_names([p.h,p.s,p.l]).last
         fg_colour = (p.l && p.l > 50) ? '000000' : 'FFFFFF' 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         color_cell_styles << sheet.styles.add_style(bg_color: (hsl_to_rgbhex(p.h,p.s,p.l) if p.h), fg_color: fg_colour, alignment: {horizontal: :center})
         
-        sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], height: 35
+        sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: [nil, :string]
         sheet.add_hyperlink :location => link, :ref => sheet.rows.last.cells[1]
       end
     end
