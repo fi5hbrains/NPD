@@ -25,11 +25,12 @@ class Box < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unless !row['brand'] || row['brand'].empty?
-        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand'].to_s.squeeze.strip}%").pluck('word_id')
+        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{name.to_s.squish.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = row['polish'].to_s.squeeze.strip
-          number = row['number'].to_s.squeeze.strip
+          name = row['polish'].to_s.squish.strip
+          number = row['number'].to_s.squish.strip
+          collection = row['collection'].to_s.squish.strip
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
@@ -38,6 +39,7 @@ class Box < ActiveRecord::Base
               polish.synonyms.new(name: name)
             end
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
+            polish.collection = collection unless collection.blank?
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
@@ -172,6 +174,7 @@ class Box < ActiveRecord::Base
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
         colour_name = get_colour_names([p.h,p.s,p.l]).last
         fg_colour = (p.l.blank? || p.l > 50) ? '000000' : 'FFFFFF' 
+        bg_colour = 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         if p.h
@@ -191,18 +194,23 @@ class Box < ActiveRecord::Base
     brand = false
     polish = false
     number = false
+    collection = false
     brands = ['brand', 'brand name','фирма','марка', 'брэнд', 'бренд']
-    polishes = ['color name', 'colour name','color','colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
+    polishes = ['color name', 'shade', 'colour name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
+    collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
     header.each_with_index do |col, i|
-      if col && !brand && brands.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
+      if col && !brand && brands.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'brand'
         brand = true
-      elsif col && !polish && polishes.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
+      elsif col && !polish && polishes.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'polish'
         polish = true
-      elsif col && !number && numbers.include?(col.to_s.squeeze.strip.mb_chars.downcase) 
+      elsif col && !number && numbers.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'number'
+        number = true
+      elsif col && !collection && collections.include?(col.to_s.squish.strip.mb_chars.downcase) 
+        header[i] = 'collection'
         number = true
       end
     end

@@ -1,4 +1,4 @@
-1460363799
+1460460965
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -203,8 +203,8 @@ index	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/ads_controller.rb	  def index
-index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def index
+index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
 init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function init()
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 

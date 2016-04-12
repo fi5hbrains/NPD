@@ -57,24 +57,26 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'orly'
-      (1..5).each do |i|
-        page = agent.get 'http://www.orlybeauty.com/nail-color/nail-color-by-types/creme.html?p=' + i.to_s
-        shades = page.search('li.item')
-        shades.each do |shade|
-          name = shade.at('.product-name').at('a').text.strip
-          polish = brand.polishes.where(name: name).first_or_create
-          if polish.new_record? 
-            polish.synonym_list = polish.name
-            polish.brand_slug = brand.slug
-            polish.brand_name = brand.name
-            polish.user_id = current_user.id
-            polish.draft = true
-            polish.remote_reference_url = shade.at('.product-image').at('img').attr('src').gsub('.jpg','.png').gsub('small_image','swapimage').gsub('_b_','_p_').gsub('lg_web','web')
-            @result += 1 if polish.save 
-          end        
-        end
-      end
+      Polish.where(brand_slug: 'chanel', draft: true).each &:destroy
+      
+      # brand = Brand.find_by_slug 'orly'
+      # (1..5).each do |i|
+      #   page = agent.get 'http://www.orlybeauty.com/nail-color/nail-color-by-types/creme.html?p=' + i.to_s
+      #   shades = page.search('li.item')
+      #   shades.each do |shade|
+      #     name = shade.at('.product-name').at('a').text.strip
+      #     polish = brand.polishes.where(name: name).first_or_create
+      #     if polish.new_record? 
+      #       polish.synonym_list = polish.name
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #       polish.user_id = current_user.id
+      #       polish.draft = true
+      #       polish.remote_reference_url = shade.at('.product-image').at('img').attr('src').gsub('.jpg','.png').gsub('small_image','swapimage').gsub('_b_','_p_').gsub('lg_web','web')
+      #       @result += 1 if polish.save 
+      #     end        
+      #   end
+      # end
       
       #-------------------- https Ciate
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}

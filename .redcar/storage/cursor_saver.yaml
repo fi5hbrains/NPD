@@ -389,9 +389,6 @@ cursor_positions:
   - :path: app/models/following.rb
     :cursor_offset: 237
     :timestamp: 2015-12-24 23:13:37 +03:00
-  - :path: app/models/user.rb
-    :cursor_offset: 877
-    :timestamp: 2015-12-24 23:29:03 +03:00
   - :path: config/environment.rb
     :cursor_offset: 170
     :timestamp: 2015-08-10 10:13:39 +04:00
@@ -539,9 +536,6 @@ cursor_positions:
     :timestamp: 2016-03-01 21:39:36 +03:00
     :selection_offset: 48988
     :block_selection_mode: false
-  - :path: app/views/boxes/show.js.haml
-    :cursor_offset: 1844
-    :timestamp: 2016-02-21 22:00:48 +03:00
   - :path: app/helpers/boxes_helper.rb
     :cursor_offset: 150
     :timestamp: 2016-01-08 00:55:27 +03:00
@@ -638,9 +632,6 @@ cursor_positions:
   - :path: app/views/ads/index.html.haml
     :cursor_offset: 333
     :timestamp: 2016-03-27 12:30:51 +04:00
-  - :path: app/views/polishes/show.html.haml
-    :cursor_offset: 1440
-    :timestamp: 2016-03-16 02:08:39 +03:00
   - :path: app/views/page/index.js.haml
     :cursor_offset: 770
     :timestamp: 2016-03-29 20:47:51 +04:00
@@ -657,11 +648,6 @@ cursor_positions:
   - :path: app/views/ads/show.html.haml
     :cursor_offset: 121
     :timestamp: 2016-03-27 12:29:34 +04:00
-  - :path: app/models/brand.rb
-    :cursor_offset: 359
-    :timestamp: 2016-03-02 09:54:02 +03:00
-    :selection_offset: 375
-    :block_selection_mode: false
   - :path: app/controllers/ads_controller.rb
     :cursor_offset: 162
     :timestamp: 2016-03-27 21:35:20 +04:00
@@ -751,9 +737,6 @@ cursor_positions:
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 2519
     :timestamp: 2015-12-25 00:16:42 +03:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 6801
-    :timestamp: 2016-04-04 09:24:22 +04:00
   - :path: Capfile
     :cursor_offset: 579
     :timestamp: 2015-11-03 22:47:43 +03:00
@@ -763,14 +746,6 @@ cursor_positions:
   - :path: app/views/polishes/catalogue_show.html.haml
     :cursor_offset: 544
     :timestamp: 2016-04-10 16:00:10 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 427
-    :timestamp: 2016-04-10 15:59:08 +04:00
-  - :path: lib/slugify.rb
-    :cursor_offset: 18
-    :timestamp: 2016-03-17 08:11:32 +03:00
-    :selection_offset: 0
-    :block_selection_mode: false
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 4339
     :timestamp: 2016-04-10 15:56:46 +04:00
@@ -812,10 +787,31 @@ cursor_positions:
   - :path: app/models/defaults.rb
     :cursor_offset: 7666
     :timestamp: 2016-04-11 09:50:25 +04:00
+  - :path: lib/slugify.rb
+    :cursor_offset: 452
+    :timestamp: 2016-04-12 15:29:04 +04:00
+  - :path: app/models/brand.rb
+    :cursor_offset: 729
+    :timestamp: 2016-03-02 09:54:02 +03:00
+  - :path: app/models/user.rb
+    :cursor_offset: 877
+    :timestamp: 2015-12-24 23:29:03 +03:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 6801
+    :timestamp: 2016-04-04 09:24:22 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 427
+    :timestamp: 2016-04-10 15:59:08 +04:00
+  - :path: app/views/polishes/show.html.haml
+    :cursor_offset: 1385
+    :timestamp: 2016-04-11 12:36:39 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 11476
+    :timestamp: 2016-04-12 15:28:20 +04:00
+  - :path: app/views/boxes/show.js.haml
+    :cursor_offset: 1844
+    :timestamp: 2016-02-21 22:00:48 +03:00
   - :path: config/locales/en.yml
     :cursor_offset: 5517
     :timestamp: 2016-04-11 07:15:31 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 9736
-    :timestamp: 2016-04-11 10:57:31 +04:00
 files_to_retain: 0
