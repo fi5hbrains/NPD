@@ -1,7 +1,7 @@
 .main
   #status= @status
   #notice= raw(notice)
-  = Polish.where(slug: nil).size
+  = Polish.where(slug: '').size
   -if current_user
     = link_to current_user.name, current_user
     = link_to 'Log out', user_session_path, method: :delete
