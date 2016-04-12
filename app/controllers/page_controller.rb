@@ -57,7 +57,6 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      Polish.where(brand_slug: 'chanel', draft: true).each &:destroy
       
       # brand = Brand.find_by_slug 'orly'
       # (1..5).each do |i|

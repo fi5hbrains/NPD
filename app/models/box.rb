@@ -25,7 +25,7 @@ class Box < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unless !row['brand'] || row['brand'].empty?
-        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{name.to_s.squish.strip}%").pluck('word_id')
+        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand'].to_s.squish.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
           name = row['polish'].to_s.squish.strip
