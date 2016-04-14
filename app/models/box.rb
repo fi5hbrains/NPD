@@ -201,7 +201,7 @@ class Box < ActiveRecord::Base
     number = false
     collection = false
     brands = ['brand', 'brand name','фирма','марка', 'брэнд', 'бренд']
-    polishes = ['color name', 'shade', 'colour name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
+    polishes = ['color name', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
     header.each_with_index do |col, i|

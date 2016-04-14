@@ -21,6 +21,7 @@ require 'capistrano/bundler'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
+require 'capistrano/delayed-job'
 # require 'delayed/recipes'
 
 require 'capistrano/rbenv'

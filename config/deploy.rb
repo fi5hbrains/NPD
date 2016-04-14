@@ -8,7 +8,8 @@ set :repo_url, "git@github.com:fi5hbrains/NPD.git"
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{log public/uploads public/assets/brands public/assets/users public/assets/polish_tmp public/assets/font public/assets/polish_parts}
 set :branch, "master"
-set :rails_env, "production" #added for delayed job  
+set :rails_env, "production" #added for delayed job 
+set :delayed_job_pid_dir, '/tmp'
 set :passenger_restart_with_touch, true
 
 namespace :deploy do

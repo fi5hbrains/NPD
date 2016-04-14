@@ -114,6 +114,8 @@ class PolishesController < ApplicationController
     old_slug = @polish.slug
     @polish.assign_attributes polish_params
     set_name
+    @polish.brand_name = @brand.name
+    @polish.brand_slug = @brand.slug
     @polish.user_id = current_user.id
     all_layers_bottom_up
     if params[:preview]

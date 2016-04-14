@@ -36,6 +36,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 group :development do
+  gem 'capistrano3-delayed-job', '~> 1.0'
   gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails', '~> 1.1.3'
   gem 'capistrano-rbenv', '~> 2.0'

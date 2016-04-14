@@ -763,9 +763,6 @@ cursor_positions:
   - :path: app/models/polish.rb
     :cursor_offset: 6801
     :timestamp: 2016-04-04 09:24:22 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 427
-    :timestamp: 2016-04-10 15:59:08 +04:00
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 1385
     :timestamp: 2016-04-11 12:36:39 +04:00
@@ -816,4 +813,7 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 622
     :timestamp: 2016-04-14 10:51:23 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 3548
+    :timestamp: 2016-04-15 03:29:08 +04:00
 files_to_retain: 0
