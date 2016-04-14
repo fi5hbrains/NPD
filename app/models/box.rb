@@ -19,18 +19,24 @@ class Box < ActiveRecord::Base
   def import(file)
     spreadsheet = Roo::Spreadsheet.open(file.path, extension: File.extname(file.path))
     header = self.rename_header_columns(spreadsheet.row(1))
+    brand_i = header.index('brand') + 1
+    name_i = header.index('polish') + 1
+    number_i = header.index('number') + 1 if header.include?('number')
+    collection_i = header.index('collection') + 1 if header.include?('collection')
     items = self.box_items
     stats = {total: 0, added: 0, new: 0, failed: 0, unknown: Set.new}
     brands = Set.new
     (2..spreadsheet.last_row).each do |i|
-      row = Hash[[header, spreadsheet.row(i)].transpose]
-      unless !row['brand'] || row['brand'].to_s.empty?
-        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{row['brand'].to_s.squish.strip}%").pluck('word_id')
+      # row = Hash[[header, spreadsheet.row(i)].transpose]
+      
+      unless spreadsheet.cell(i,brand_i).blank?
+        brand_name = (spreadsheet.excelx_type(i,brand_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i))
+        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{brand_name.squish.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = row['polish'].to_s.squish.strip
-          number = row['number'].to_s.squish.strip
-          collection = row['collection'].to_s.squish.strip
+          name = (spreadsheet.excelx_type(i,name_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,name_i) : spreadsheet.cell(i,name_i))
+          number = (spreadsheet.excelx_type(i,number_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,number_i) : spreadsheet.cell(i,number_i))
+          collection = (spreadsheet.excelx_type(i,collection_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,collection_i) : spreadsheet.cell(i,collection_i))
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
@@ -51,7 +57,7 @@ class Box < ActiveRecord::Base
           end
         else
           stats[:failed] += 1
-          stats[:unknown] << row['brand']
+          stats[:unknown] << brand_name
         end
         if polish && polish.id
           unless items.find_by_polish_id(polish.id)
@@ -163,7 +169,7 @@ class Box < ActiveRecord::Base
     path = Rails.root.join('public').to_s
     output_folder = "/downloads/#{self.user_id}"
     FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
-    headers = %w(brand name colour rating notes).map{|h| I18n.t('sheet.' + h)}
+    headers = ['brand', 'name', 'colour', 'rating', 'notes'].map{|h| I18n.t('sheet.' + h)}
     package = Axlsx::Package.new
     package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
       heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 18)
@@ -174,12 +180,11 @@ class Box < ActiveRecord::Base
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
         colour_name = get_colour_names([p.h,p.s,p.l]).last
         fg_colour = (p.l.blank? || p.l > 50) ? '000000' : 'FFFFFF' 
-        bg_colour = 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         if p.h
           color_cell_styles << sheet.styles.add_style(bg_color: hsl_to_rgbhex(p.h,p.s,p.l), fg_color: fg_colour, alignment: {horizontal: :center})
-          sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: [nil, :string]
+          sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: :string
         else
           sheet.add_row [p.brand_name, name_or_number, colour_name]
         end
