@@ -237,9 +237,6 @@ cursor_positions:
   - :path: app/models/comment.rb
     :cursor_offset: 111
     :timestamp: 2015-10-17 19:52:58 +04:00
-  - :path: app/models/user_session.rb
-    :cursor_offset: 80
-    :timestamp: 2015-10-27 09:42:09 +03:00
   - :path: (
     :cursor_offset: 0
     :timestamp: 2015-08-31 16:40:40 +04:00
@@ -511,9 +508,6 @@ cursor_positions:
   - :path: app/views/application/_lists.html.haml
     :cursor_offset: 13
     :timestamp: 2016-02-14 08:38:31 +03:00
-  - :path: app/controllers/user_sessions_controller.rb
-    :cursor_offset: 429
-    :timestamp: 2016-02-14 22:21:23 +03:00
   - :path: app/views/polishes/reorder.js.haml
     :cursor_offset: 203
     :timestamp: 2016-02-13 21:35:43 +03:00
@@ -560,9 +554,6 @@ cursor_positions:
   - :path: app/views/polishes/_reference.html.haml
     :cursor_offset: 119
     :timestamp: 2016-03-04 14:59:30 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 5
-    :timestamp: 2016-03-15 21:01:13 +03:00
   - :path: app/views/polishes/index.html.haml
     :cursor_offset: 5
     :timestamp: 2016-03-15 20:48:52 +03:00
@@ -657,9 +648,6 @@ cursor_positions:
   - :path: app/models/magick.rb
     :cursor_offset: 698
     :timestamp: 2016-04-03 20:49:01 +04:00
-  - :path: app/views/page/maintenance.html.haml
-    :cursor_offset: 9
-    :timestamp: 2016-03-02 09:47:58 +03:00
   - :path: app/assets/javascripts/amazon.js
     :cursor_offset: 37047
     :timestamp: 2016-02-21 00:13:27 +03:00
@@ -752,9 +740,6 @@ cursor_positions:
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 318
     :timestamp: 2016-04-01 09:11:51 +04:00
-  - :path: app/controllers/page_controller.rb
-    :cursor_offset: 2548
-    :timestamp: 2016-04-09 02:46:20 +04:00
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 897
     :timestamp: 2016-03-21 09:01:03 +03:00
@@ -769,27 +754,6 @@ cursor_positions:
   - :path: lib/colour_methods.rb
     :cursor_offset: 4006
     :timestamp: 2016-04-10 21:35:56 +04:00
-  - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 679
-    :timestamp: 2016-04-11 07:14:17 +04:00
-  - :path: app/views/application/collect_search.js.haml
-    :cursor_offset: 51
-    :timestamp: 2016-01-05 23:50:17 +03:00
-  - :path: Gemfile
-    :cursor_offset: 420
-    :timestamp: 2016-04-10 11:33:02 +04:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 2199
-    :timestamp: 2016-04-07 22:13:52 +04:00
-  - :path: config/locales/ru.yml
-    :cursor_offset: 31
-    :timestamp: 2015-12-05 06:35:48 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 7666
-    :timestamp: 2016-04-11 09:50:25 +04:00
-  - :path: lib/slugify.rb
-    :cursor_offset: 452
-    :timestamp: 2016-04-12 15:29:04 +04:00
   - :path: app/models/brand.rb
     :cursor_offset: 729
     :timestamp: 2016-03-02 09:54:02 +03:00
@@ -805,13 +769,51 @@ cursor_positions:
   - :path: app/views/polishes/show.html.haml
     :cursor_offset: 1385
     :timestamp: 2016-04-11 12:36:39 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 11476
-    :timestamp: 2016-04-12 15:28:20 +04:00
   - :path: app/views/boxes/show.js.haml
     :cursor_offset: 1844
     :timestamp: 2016-02-21 22:00:48 +03:00
+  - :path: app/controllers/user_sessions_controller.rb
+    :cursor_offset: 429
+    :timestamp: 2016-02-14 22:21:23 +03:00
+  - :path: app/controllers/boxes_controller.rb
+    :cursor_offset: 1590
+    :timestamp: 2016-04-11 11:19:12 +04:00
+  - :path: app/views/application/collect_search.js.haml
+    :cursor_offset: 51
+    :timestamp: 2016-01-05 23:50:17 +03:00
+  - :path: Gemfile
+    :cursor_offset: 326
+    :timestamp: 2016-04-10 11:33:02 +04:00
+    :selection_offset: 317
+    :block_selection_mode: false
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 3112
+    :timestamp: 2016-04-11 11:19:36 +04:00
+  - :path: config/locales/ru.yml
+    :cursor_offset: 31
+    :timestamp: 2015-12-05 06:35:48 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 6756
+    :timestamp: 2016-04-12 15:30:13 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 1220
+    :timestamp: 2016-04-12 17:05:07 +04:00
+  - :path: app/views/page/maintenance.html.haml
+    :cursor_offset: 9
+    :timestamp: 2016-03-02 09:47:58 +03:00
+  - :path: app/controllers/page_controller.rb
+    :cursor_offset: 1891
+    :timestamp: 2016-04-12 17:00:12 +04:00
+  - :path: lib/slugify.rb
+    :cursor_offset: 488
+    :timestamp: 2016-04-12 18:10:46 +04:00
+  - :path: app/models/user_session.rb
+    :cursor_offset: 163
+    :timestamp: 2016-04-14 07:48:41 +04:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 332
+    :timestamp: 2016-04-14 10:49:41 +04:00
   - :path: config/locales/en.yml
-    :cursor_offset: 5517
-    :timestamp: 2016-04-11 07:15:31 +04:00
+    :cursor_offset: 622
+    :timestamp: 2016-04-14 10:51:23 +04:00
 files_to_retain: 0

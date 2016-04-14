@@ -22,6 +22,7 @@
 en:
   welcome: 
     hi: 'Hello!'
+    details: 'Contact me on instagram %{link} if you have any questions.'
   form:
     enter: 'Enter'
     signup: 'Sign Up'

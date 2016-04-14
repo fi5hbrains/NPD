@@ -1,10 +1,15 @@
 --- 
 open_files: 
-  - app/models/box.rb
   - app/controllers/boxes_controller.rb
   - app/views/application/collect_search.js.haml
   - Gemfile
   - app/views/boxes/show.html.haml
   - config/locales/ru.yml
   - app/models/defaults.rb
+  - app/models/box.rb
+  - app/views/page/maintenance.html.haml
+  - app/controllers/page_controller.rb
+  - lib/slugify.rb
+  - app/models/user_session.rb
+  - app/views/page/index.html.haml
   - config/locales/en.yml

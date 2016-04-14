@@ -4,8 +4,9 @@
   -if current_user
     = link_to current_user.name, current_user
     = link_to 'Log out', user_session_path, method: :delete
-  %h2.centeredText= t('welcome.hi')
-
+  %h2.centeredText= t 'welcome.hi'
+  .center.centeredText.medMargin
+    = t( 'welcome.details', link: (link_to '@i.n.p.d', 'https://www.instagram.com/i.n.p.d')).html_safe
   #loginForm.block.center.animated
     = form_for @user, url: '/', remote: true do |f|
       = f.hidden_field :locale, value: session[:locale] || I18n.locale
