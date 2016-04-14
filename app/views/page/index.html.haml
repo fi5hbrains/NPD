@@ -26,7 +26,7 @@
         .cell
           = button_tag class: 'inline noWrap', name: (@button_name) do
             = t('form.signup')
-  .center.centeredText.medMargin= t( 'welcome.details', link: (link_to '@i.n.p.d', 'https://www.instagram.com/i.n.p.d')).html_safe            
+  .center.centeredText.bigMargin= t( 'welcome.details', link: (link_to '@i.n.p.d', 'https://www.instagram.com/i.n.p.d')).html_safe            
   - if polish = Polish.last
     %p
       = render polish

@@ -22,7 +22,7 @@
 en:
   welcome: 
     hi: 'Hello!'
-    details: '%{link} if you have any questions.'
+    details: 'Contact %{link} if you have any questions.'
   form:
     enter: 'Enter'
     signup: 'Sign Up'
