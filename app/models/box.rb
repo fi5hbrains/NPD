@@ -48,7 +48,7 @@ class Box < ActiveRecord::Base
             end
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.collection = collection unless collection.blank?
-            polish.year = year unless year.blank?
+            polish.release_year = year unless year.blank?
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
