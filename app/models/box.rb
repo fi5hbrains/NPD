@@ -208,7 +208,7 @@ class Box < ActiveRecord::Base
     polishes = ['color name', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
-    years = ['year', 'год']
+    years = ['release year']
     header.each_with_index do |col, i|
       if col && !brand && brands.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'brand'
