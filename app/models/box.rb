@@ -23,6 +23,7 @@ class Box < ActiveRecord::Base
     name_i = header.index('polish') + 1
     number_i = header.index('number') + 1 if header.include?('number')
     collection_i = header.index('collection') + 1 if header.include?('collection')
+    year_i = header.index('year') + 1 if header.include?('year')
     items = self.box_items
     stats = {total: 0, added: 0, new: 0, failed: 0, unknown: Set.new}
     brands = Set.new
@@ -37,6 +38,7 @@ class Box < ActiveRecord::Base
           name = (spreadsheet.excelx_type(i,name_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,name_i) : spreadsheet.cell(i,name_i))
           number = (spreadsheet.excelx_type(i,number_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,number_i) : spreadsheet.cell(i,number_i))
           collection = (spreadsheet.excelx_type(i,collection_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,collection_i) : spreadsheet.cell(i,collection_i))
+          year = (spreadsheet.excelx_type(i,year_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,year_i) : spreadsheet.cell(i,year_i))
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
@@ -46,6 +48,7 @@ class Box < ActiveRecord::Base
             end
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.collection = collection unless collection.blank?
+            polish.year = year unless year.blank?
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
@@ -200,10 +203,12 @@ class Box < ActiveRecord::Base
     polish = false
     number = false
     collection = false
+    year = false
     brands = ['brand', 'brand name','фирма','марка', 'брэнд', 'бренд']
     polishes = ['color name', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
+    years = ['year', 'год']
     header.each_with_index do |col, i|
       if col && !brand && brands.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'brand'
@@ -216,7 +221,10 @@ class Box < ActiveRecord::Base
         number = true
       elsif col && !collection && collections.include?(col.to_s.squish.strip.mb_chars.downcase) 
         header[i] = 'collection'
-        number = true
+        collection = true
+      elsif col && !year && years.include?(col.to_s.squish.strip.mb_chars.downcase) 
+        header[i] = 'year'
+        year = true
       end
     end
     if !brand
