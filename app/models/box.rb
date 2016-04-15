@@ -57,7 +57,7 @@ class Box < ActiveRecord::Base
             polish.save
             stats[:new] += 1
             brands << brand
-          elsif (polish.collection.blank && !collection.blank?) || (polish.release_year.blank? && !year.blank?)
+          elsif (polish.collection.blank? && !collection.blank?) || (polish.release_year.blank? && !year.blank?)
             polish.collection = collection unless collection.blank?
             polish.release_year = year unless year.blank?
             polish.save
