@@ -75,7 +75,7 @@ class Box < ActiveRecord::Base
         end
       end
     end
-    stats[:unknown] = stats[:unknown].to_a[0..-1].join(', ') + ' and ' + stats[:unknown].to_a.last if stats[:unknown].size >= 2
+    stats[:unknown] = stats[:unknown].to_a[0..-2].join(', ') + ' and ' + stats[:unknown].to_a.last if stats[:unknown].size >= 2
     self.import_result = "#{stats[:total]};#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown]}"
     self.save
     for b in brands
@@ -197,6 +197,12 @@ class Box < ActiveRecord::Base
         end
         sheet.add_hyperlink :location => link, :ref => sheet.rows.last.cells[1]
       end
+      sheet.sheet_view do |vs|
+        vs.pane do |pane|
+          pane.state = :frozen
+          pane.y_split = 1
+        end
+      end
     end
     package.use_shared_strings = true
     package.serialize("public/downloads/#{self.user_id}/#{self.slug}.xlsx")
@@ -208,7 +214,7 @@ class Box < ActiveRecord::Base
     number = false
     collection = false
     year = false
-    brands = ['brand', 'brand name','фирма','марка', 'брэнд', 'бренд']
+    brands = ['brand', 'brand name', 'polish brand','фирма','марка', 'брэнд', 'бренд']
     polishes = ['color name', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
