@@ -6,7 +6,7 @@ set :use_sudo, false
 set :scm, "git"
 set :repo_url, "git@github.com:fi5hbrains/NPD.git"
 set :linked_files, %w{config/database.yml config/secrets.yml}
-set :linked_dirs, %w{bin log public/uploads public/downloads public/assets/brands public/assets/users public/assets/polish_tmp public/assets/font public/assets/polish_parts}
+set :linked_dirs, %w{log public/uploads public/downloads public/assets/brands public/assets/users public/assets/polish_tmp public/assets/font public/assets/polish_parts}
 set :branch, "master"
 set :rails_env, "production" #added for delayed job 
 set :delayed_job_pid_dir, '/tmp'

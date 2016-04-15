@@ -281,9 +281,6 @@ cursor_positions:
   - :path: bin/rails
     :cursor_offset: 0
     :timestamp: 2015-11-15 12:40:35 +03:00
-  - :path: config/deploy/production.rb
-    :cursor_offset: 452
-    :timestamp: 2015-11-03 21:35:31 +03:00
   - :path: bin/delayed_job
     :cursor_offset: 0
     :timestamp: 2015-11-15 12:44:59 +03:00
@@ -363,9 +360,6 @@ cursor_positions:
   - :path: app/models/delayed_job.rb
     :cursor_offset: 85
     :timestamp: 2015-12-21 22:31:21 +03:00
-  - :path: .gitignore
-    :cursor_offset: 542
-    :timestamp: 2015-12-17 15:15:31 +03:00
   - :path: config/secrets.yml
     :cursor_offset: 657
     :timestamp: 2015-11-04 19:46:18 +03:00
@@ -772,35 +766,9 @@ cursor_positions:
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
-  - :path: Gemfile
-    :cursor_offset: 326
-    :timestamp: 2016-04-10 11:33:02 +04:00
-    :selection_offset: 317
-    :block_selection_mode: false
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 3112
-    :timestamp: 2016-04-11 11:19:36 +04:00
-  - :path: config/locales/ru.yml
-    :cursor_offset: 31
-    :timestamp: 2015-12-05 06:35:48 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 6756
-    :timestamp: 2016-04-12 15:30:13 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 1220
-    :timestamp: 2016-04-12 17:05:07 +04:00
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 3548
     :timestamp: 2016-04-15 03:29:08 +04:00
-  - :path: Capfile
-    :cursor_offset: 697
-    :timestamp: 2016-04-14 22:53:11 +04:00
-  - :path: config/deploy.rb
-    :cursor_offset: 515
-    :timestamp: 2016-04-14 22:51:11 +04:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 655
-    :timestamp: 2016-04-14 11:40:42 +04:00
   - :path: app/views/page/index.html.haml
     :cursor_offset: 1433
     :timestamp: 2016-04-14 11:39:49 +04:00
@@ -816,4 +784,34 @@ cursor_positions:
   - :path: app/views/page/maintenance.html.haml
     :cursor_offset: 9
     :timestamp: 2016-03-02 09:47:58 +03:00
+  - :path: config/deploy.rb
+    :cursor_offset: 276
+    :timestamp: 2016-04-15 14:18:41 +04:00
+  - :path: config/deploy/production.rb
+    :cursor_offset: 452
+    :timestamp: 2015-11-03 21:35:31 +03:00
+  - :path: Capfile
+    :cursor_offset: 697
+    :timestamp: 2016-04-14 22:53:11 +04:00
+  - :path: .gitignore
+    :cursor_offset: 643
+    :timestamp: 2015-12-17 15:15:31 +03:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 5496
+    :timestamp: 2016-04-15 12:44:03 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 11918
+    :timestamp: 2016-04-15 12:39:23 +04:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 6756
+    :timestamp: 2016-04-12 15:30:13 +04:00
+  - :path: config/locales/ru.yml
+    :cursor_offset: 31
+    :timestamp: 2015-12-05 06:35:48 +03:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 3112
+    :timestamp: 2016-04-11 11:19:36 +04:00
+  - :path: Gemfile
+    :cursor_offset: 1006
+    :timestamp: 2016-04-14 22:47:34 +04:00
 files_to_retain: 0
