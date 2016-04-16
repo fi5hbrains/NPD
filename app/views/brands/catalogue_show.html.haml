@@ -2,6 +2,6 @@
   %h1.wide50.inline>= truncate (@brand.name), length: 50, separator: /_|-| /
   = render 'search', css: 'wide50 bigMargin completable', setup: %w(polish colour), remote: true
   - if @brand.link
-    %h4= to_link @brand.link
+    %h4.abovePolish= to_link @brand.link
   = render 'polishes/catalogue_search'
 = render 'ads'

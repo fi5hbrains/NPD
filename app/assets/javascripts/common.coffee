@@ -61,16 +61,16 @@ $(document).on 'ready page:load', ->
   $('.switch[data-activate]').click (e) -> 
     e.preventDefault()
     target = $($(this).attr('data-activate'))
-    if !target.hasClass('active')
-      target.find('input[type=text]').focus()
     target.toggleClass('active')
+    if target.hasClass('active')
+      target.find('input[type=text]').focus()
     
   $('.switch[data-show]').click (e) -> 
     e.preventDefault()
     target = $($(this).attr('data-show'))
-    if !target.hasClass('active')
-      target.find('input[type=text]').focus()
     target.toggleClass('active')
+    if target.hasClass('active')
+      target.find('input[type=text]').focus()
     
   $('.switch[data-activate]').hover (->
     $($(this).attr('data-activate')).addClass 'hover'

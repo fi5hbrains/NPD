@@ -39,7 +39,9 @@ class ApplicationController < ActionController::Base
       brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
         pluck('word_id').compact.uniq
       @brands = Brand.where(id: brand_ids).sort_by_polishes_count
-      brand = @brands.first if @brands.count == 1
+      if @brands.size > 0
+        brand = Brand.find_by_name(params[:brand]) 
+      end
     end
     if !params[:polish].blank? || brand || colour
       if params[:polish] 
@@ -49,7 +51,7 @@ class ApplicationController < ActionController::Base
       else
         polish_ids = []
       end
-      polishes = @brands ? Polish.where(brand_id: @brands.pluck(:id)) : brand ? brand.polishes : Polish.where(nil)
+      polishes = brand ? brand.polishes : @brands ? Polish.where(brand_id: @brands.pluck(:id)) : Polish.where(nil)
       @polishes = polishes.
         where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
         "slug ilike ?", "#{params[:polish] || ''}%").
@@ -66,8 +68,8 @@ class ApplicationController < ActionController::Base
     end
     if @reset && params[:action] == 'search'
       render js: "window.location.href = '#{env["HTTP_REFERER"].split('?')[0].to_s }'"
-    elsif params[:action] == 'search' && @brands && @brands.size == 1 && slugify(params[:brand]) == @brands.first.slug
-      render js: "window.location.href = '/catalogue/#{@brands.first.slug}'"
+    elsif params[:action] == 'search' && brand
+      render js: "window.location.href = '/catalogue/#{brand.slug}'"
     else
       if @polishes && colour
         @polishes = @polishes.coloured( colour, spread )

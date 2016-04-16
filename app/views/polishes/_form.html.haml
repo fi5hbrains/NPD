@@ -90,7 +90,6 @@
         %pre.resizable <span></span>
     - if simple_form
       .inlineWrapper<
-        = f.submit t('form.preview'), name: 'preview'
         = f.submit t('form.action.' + params[:action]), name: params[:action]    
   
   - unless simple_form 
