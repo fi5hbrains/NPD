@@ -18,8 +18,9 @@
           = bottle.name
       
     = link_to 'Edit', edit_brand_path(@brand)
-    \|
-    = to_link @brand.link
+    - if @brand.link
+      \|
+      = to_link @brand.link
     \|
     = link_to 'Back', brands_path 
   .clearFix
