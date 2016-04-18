@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
         pluck('word_id').compact.uniq  
       @polishes = Polish.
         where(polish_filter).
-        where(brand_slug: (params[:brand_id] || params[:id])).
+        where(brand_slug: (slugify( params[:brand_id] || params[:id]))).
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
         where('id != ?', params[:polish_id] || 0).
         order('updated_at desc')

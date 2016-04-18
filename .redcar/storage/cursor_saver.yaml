@@ -453,9 +453,6 @@ cursor_positions:
   - :path: app/views/application/search.html.haml
     :cursor_offset: 169
     :timestamp: 2015-10-10 22:10:24 +04:00
-  - :path: app/views/application/autocomplete.js.haml
-    :cursor_offset: 82
-    :timestamp: 2015-10-23 22:05:40 +04:00
   - :path: app/views/application/search.js.haml
     :cursor_offset: 377
     :timestamp: 2016-01-31 10:52:12 +03:00
@@ -816,4 +813,7 @@ cursor_positions:
   - :path: app/models/box.rb
     :cursor_offset: 12335
     :timestamp: 2016-04-18 11:05:22 +04:00
+  - :path: app/views/application/autocomplete.js.haml
+    :cursor_offset: 335
+    :timestamp: 2016-04-18 12:27:19 +04:00
 files_to_retain: 0
