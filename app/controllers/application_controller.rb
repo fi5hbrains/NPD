@@ -185,7 +185,7 @@ class ApplicationController < ActionController::Base
       brand_ids = Synonym.where(word_type: 'Brand').where("name ilike ?", "%#{params[:brand] || ''}%").pluck(:word_id).uniq
       @brands = Brand.where(id: brand_ids)
       @brand_names = @brands.pluck(:name)
-      @unfit_brand_names = @brand_names.reject{|name| /#{params[:brand]}/i.match(name)}
+      @unfit_brand_names = @brand_names.reject{|name| /#{Regexp.quote params[:brand]}/i.match(name)}
     end
     @brand_names ||= []
 
