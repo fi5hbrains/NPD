@@ -215,7 +215,7 @@ class Box < ActiveRecord::Base
     collection = false
     year = false
     brands = ['brand', 'brand name', 'polish brand','фирма','марка', 'брэнд', 'бренд']
-    polishes = ['color name', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
+    polishes = ['color name', 'name of color', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер']
     years = ['release year', 'year']

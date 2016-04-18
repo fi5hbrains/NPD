@@ -264,9 +264,6 @@ cursor_positions:
   - :path: app/models/synonym.rb
     :cursor_offset: 114
     :timestamp: 2015-11-06 17:40:40 +03:00
-  - :path: config/database.yml
-    :cursor_offset: 672
-    :timestamp: 2015-11-04 19:39:54 +03:00
   - :path: app/assets/stylesheets/_slider.scss
     :cursor_offset: 2053
     :timestamp: 2015-10-18 10:38:09 +04:00
@@ -793,18 +790,12 @@ cursor_positions:
   - :path: Gemfile
     :cursor_offset: 1006
     :timestamp: 2016-04-14 22:47:34 +04:00
-  - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 125
-    :timestamp: 2016-04-14 19:45:01 +04:00
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2416
     :timestamp: 2016-04-16 03:05:24 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 12564
-    :timestamp: 2016-04-16 03:28:41 +04:00
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 2163
     :timestamp: 2016-04-16 07:24:34 +04:00
@@ -814,4 +805,15 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 17359
     :timestamp: 2016-04-15 03:29:08 +04:00
+  - :path: app/controllers/boxes_controller.rb
+    :cursor_offset: 125
+    :timestamp: 2016-04-14 19:45:01 +04:00
+  - :path: config/database.yml
+    :cursor_offset: 2849
+    :timestamp: 2015-11-04 19:39:54 +03:00
+    :selection_offset: 2864
+    :block_selection_mode: false
+  - :path: app/models/box.rb
+    :cursor_offset: 12335
+    :timestamp: 2016-04-18 11:05:22 +04:00
 files_to_retain: 0

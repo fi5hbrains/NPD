@@ -181,11 +181,14 @@ class ApplicationController < ActionController::Base
   end
   def autocomplete
     @id = params[:id]
-    if !params[:brand].blank?
+    unless params[:brand].blank?
       brand_ids = Synonym.where(word_type: 'Brand').where("name ilike ?", "%#{params[:brand] || ''}%").pluck(:word_id).uniq
       @brands = Brand.where(id: brand_ids)
       @brand_names = @brands.pluck(:name)
+      @unfit_brand_names = @brand_names.reject{|name| /#{params[:brand]}/i.match(name)}
     end
+    @brand_names ||= []
+
     # if !params[:polish].blank?
     #   @polishes = Polish.where(@brands ? {brand_id: @brands.pluck(:word_id)} : nil).coloured(params[:colour]) 
     #   polish_ids = @polishes.pluck(:id)
@@ -196,8 +199,7 @@ class ApplicationController < ActionController::Base
     #     where("name ilike ?","%#{params[:polish] || ''}%").
     #     pluck(:name)).compact.uniq
     # end
-    @brand_names ||= []
-    @polish_names ||= []
+    # @polish_names ||= []
   end
 
   def path; Rails.root.join('public').to_s end
