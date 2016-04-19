@@ -59,7 +59,7 @@ class Box < ActiveRecord::Base
             brands << brand
           elsif (polish.collection.blank? && !collection.blank?) || (polish.release_year.blank? && !year.blank?)
             polish.collection = collection unless collection.blank?
-            polish.release_year = year unless year.blank?
+            polish.release_year = year unless year.blank? || year == '0'
             polish.save
           end
         else
@@ -179,9 +179,8 @@ class Box < ActiveRecord::Base
     headers = ['brand', 'name', 'colour', 'rating', 'notes'].map{|h| I18n.t('sheet.' + h)}
     package = Axlsx::Package.new
     package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
-      heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 18)
-      imaged = sheet.styles.add_style(height: 50)
-      sheet.add_row headers, style: heading, height: 30
+      heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 14, bg_color: 'A4C03C', fg_color: 'FFFFFF')
+      sheet.add_row headers, style: heading, height: 20
       color_cell_styles = []
       self.polishes.each_with_index do |p,i|
         name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
