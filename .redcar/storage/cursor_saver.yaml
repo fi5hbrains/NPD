@@ -421,17 +421,9 @@ cursor_positions:
   - :path: app/views/bottles/destroy.js.haml
     :cursor_offset: 38
     :timestamp: 2016-01-18 16:19:55 +03:00
-  - :path: app/views/brands/edit.html.haml
-    :cursor_offset: 324
-    :timestamp: 2016-01-20 16:06:47 +03:00
   - :path: app/views/bottles/_form.html.haml
     :cursor_offset: 188
     :timestamp: 2016-01-22 21:10:10 +03:00
-  - :path: app/views/bottles/new.html.haml
-    :cursor_offset: 0
-    :timestamp: 2015-05-17 12:13:41 +04:00
-    :selection_offset: 26
-    :block_selection_mode: false
   - :path: app/uploaders/layer_uploader.rb
     :cursor_offset: 134
     :timestamp: 2016-01-22 13:23:22 +03:00
@@ -464,9 +456,6 @@ cursor_positions:
     :timestamp: 2015-09-02 18:11:17 +04:00
     :selection_offset: 86
     :block_selection_mode: false
-  - :path: app/models/bottle.rb
-    :cursor_offset: 517
-    :timestamp: 2016-01-22 13:23:59 +03:00
   - :path: app/views/polishes/_polish_preview.haml
     :cursor_offset: 114
     :timestamp: 2016-02-06 16:26:19 +03:00
@@ -585,9 +574,6 @@ cursor_positions:
   - :path: app/views/application/charming_charlie.js.haml
     :cursor_offset: 61
     :timestamp: 2016-03-24 20:17:51 +03:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 0
-    :timestamp: 2016-03-06 20:55:28 +03:00
   - :path: db/migrate/20150413140304_initialize.rb
     :cursor_offset: 3689
     :timestamp: 2015-11-25 20:09:43 +03:00
@@ -754,18 +740,12 @@ cursor_positions:
   - :path: config/deploy/production.rb
     :cursor_offset: 452
     :timestamp: 2015-11-03 21:35:31 +03:00
-  - :path: Capfile
-    :cursor_offset: 697
-    :timestamp: 2016-04-14 22:53:11 +04:00
   - :path: .gitignore
     :cursor_offset: 643
     :timestamp: 2015-12-17 15:15:31 +03:00
   - :path: config/locales/en.yml
     :cursor_offset: 5496
     :timestamp: 2016-04-15 12:44:03 +04:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 6756
-    :timestamp: 2016-04-12 15:30:13 +04:00
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
@@ -783,21 +763,12 @@ cursor_positions:
     :timestamp: 2015-11-04 19:39:54 +03:00
     :selection_offset: 2864
     :block_selection_mode: false
-  - :path: app/models/box.rb
-    :cursor_offset: 12335
-    :timestamp: 2016-04-18 11:05:22 +04:00
   - :path: app/views/application/autocomplete.js.haml
     :cursor_offset: 335
     :timestamp: 2016-04-18 12:27:19 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 3246
-    :timestamp: 2016-04-19 09:28:10 +04:00
   - :path: app/controllers/application_controller.rb
     :cursor_offset: 3993
     :timestamp: 2016-04-18 14:22:23 +04:00
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 13346
-    :timestamp: 2016-04-18 09:34:34 +04:00
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 16239
     :timestamp: 2016-04-15 03:29:08 +04:00
@@ -814,8 +785,35 @@ cursor_positions:
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
   - :path: config/deploy.rb
-    :cursor_offset: 312
-    :timestamp: 2016-04-15 14:18:41 +04:00
-    :selection_offset: 318
+    :cursor_offset: 306
+    :timestamp: 2016-04-19 16:34:27 +04:00
+  - :path: Capfile
+    :cursor_offset: 697
+    :timestamp: 2016-04-14 22:53:11 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 3443
+    :timestamp: 2016-04-19 15:46:46 +04:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 13346
+    :timestamp: 2016-04-18 09:34:34 +04:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 273
+    :timestamp: 2016-03-06 20:55:28 +03:00
+    :selection_offset: 267
     :block_selection_mode: false
+  - :path: app/models/box.rb
+    :cursor_offset: 3498
+    :timestamp: 2016-04-19 10:31:06 +04:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 126
+    :timestamp: 2016-04-19 16:35:45 +04:00
+  - :path: app/views/brands/edit.html.haml
+    :cursor_offset: 753
+    :timestamp: 2016-01-20 16:06:47 +03:00
+  - :path: app/views/bottles/new.html.haml
+    :cursor_offset: 61
+    :timestamp: 2015-05-17 12:13:41 +04:00
+  - :path: app/models/bottle.rb
+    :cursor_offset: 397
+    :timestamp: 2016-01-22 13:23:59 +03:00
 files_to_retain: 0

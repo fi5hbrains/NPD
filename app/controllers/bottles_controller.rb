@@ -3,6 +3,10 @@ class BottlesController < ApplicationController
   before_action :set_bottle, only: [:show, :edit, :update, :destroy]
   before_action :set_brand
   
+  def index
+    @bottles = Bottle.all
+  end
+  
   def new
     @bottle = @brand.bottles.new
   end
