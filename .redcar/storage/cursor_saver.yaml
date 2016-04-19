@@ -786,9 +786,6 @@ cursor_positions:
   - :path: app/views/bottles/new.js.haml
     :cursor_offset: 105
     :timestamp: 2015-05-18 07:50:06 +04:00
-  - :path: app/models/bottle.rb
-    :cursor_offset: 566
-    :timestamp: 2016-01-22 13:23:59 +03:00
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2416
     :timestamp: 2016-04-16 03:05:24 +04:00
@@ -826,4 +823,9 @@ cursor_positions:
   - :path: app/views/bottles/index.html.haml
     :cursor_offset: 206
     :timestamp: 2016-04-19 16:56:17 +04:00
+  - :path: app/models/bottle.rb
+    :cursor_offset: 495
+    :timestamp: 2016-01-22 13:23:59 +03:00
+    :selection_offset: 509
+    :block_selection_mode: false
 files_to_retain: 0
