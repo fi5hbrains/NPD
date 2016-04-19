@@ -1,13 +1,13 @@
 class BottlesController < ApplicationController
   
   before_action :set_bottle, only: [:show, :edit, :update, :destroy]
-  before_action :set_brand
   
   def index
     @bottles = Bottle.all
   end
   
   def new
+    set_brand
     @bottle = @brand.bottles.new
   end
 
@@ -15,6 +15,7 @@ class BottlesController < ApplicationController
   end
 
   def create
+    set_brand
     @bottle = @brand.bottles.new(bottle_params)
     @bottle.user_id = current_user.id
     @bottle.brand_slug = params[:brand_id]
@@ -31,15 +32,24 @@ class BottlesController < ApplicationController
   end
 
   def update
-    if @bottle.update_attributes(bottle_params)
-      Magick.convert "\"#{bottle_parts_path + @bottle.base_url.split('/').last}\"","-resize '50x64^'", "\"#{Rails.root.to_s}/public#{@bottle.base_thumb_url}\""      
-      redirect_to brand_path(params[:brand_id]), notice: @bottle.name + ' bottle was successfully updated.' 
+    @bottle = Bottle.find(params[:id])
+    @bottle.assign_attributes bottle_params
+    @bottle.user_id = current_user.id
+    @bottle.brand_slug = params[:brand_id]
+    @bottle.layers = params[:bottle][:layers]
+    if params[:preview]
+      render :new
     else
-      render action: "edit" 
+      if @bottle.save
+        redirect_to bottles_path
+      else
+        render :edit
+      end
     end
   end
 
   def destroy
+    set_brand
     FileUtils.rm_rf(path + '/' + @bottle.bottle_folder)
     @bottle_id = @bottle.id
     @bottle.destroy
@@ -48,7 +58,9 @@ class BottlesController < ApplicationController
       format.js
     end
   end
+  
   private
+  
   def bottle_params
     params.require(:bottle).permit(:name, :blur)
   end
