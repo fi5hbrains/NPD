@@ -3,6 +3,6 @@
     %tr
       %td= link_to bottle.brand_slug, brand_path(bottle.brand_slug)
       %td= bottle.name
-      %td= image_tag bottle.base_thumb_url
+      %td= image_tag bottle.base_thumb_url, class: 'bottleThumb'
       %td= link_to 'edit', edit_brand_bottle_path(bottle.brand_slug, bottle)
       %td= link_to 'destroy', brand_bottle_path(bottle.brand_slug, bottle), method: :delete, remote: true

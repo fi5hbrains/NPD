@@ -1,5 +1,4 @@
 class LayerUploader < CarrierWave::Uploader::Base
-  include MagickMethods
   storage :file
   
   def store_dir

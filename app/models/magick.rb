@@ -8,8 +8,8 @@ class Magick < ActiveRecord::Base
   def self.convert source, options, output = nil
     output ||= source
     `convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}` 
-    Rails.logger.info '---------------------------'
-    Rails.logger.info "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
+    # Rails.logger.info '---------------------------'
+    # Rails.logger.info "/usr/local/bin/convert #{self.p(source) + ' ' + options + ' ' + self.p(output)}"
   end  
   
   def self.pngquant filenames
