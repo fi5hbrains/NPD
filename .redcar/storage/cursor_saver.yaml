@@ -751,9 +751,6 @@ cursor_positions:
   - :path: app/views/page/maintenance.html.haml
     :cursor_offset: 9
     :timestamp: 2016-03-02 09:47:58 +03:00
-  - :path: config/deploy.rb
-    :cursor_offset: 276
-    :timestamp: 2016-04-15 14:18:41 +04:00
   - :path: config/deploy/production.rb
     :cursor_offset: 452
     :timestamp: 2015-11-03 21:35:31 +03:00
@@ -816,4 +813,9 @@ cursor_positions:
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
+  - :path: config/deploy.rb
+    :cursor_offset: 312
+    :timestamp: 2016-04-15 14:18:41 +04:00
+    :selection_offset: 318
+    :block_selection_mode: false
 files_to_retain: 0
