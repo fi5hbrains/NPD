@@ -11,6 +11,7 @@ class LayerUploader < CarrierWave::Uploader::Base
   
   def resize(source = self, width = Defaults::BOTTLE[0], height = Defaults::BOTTLE[1])
     Magick.convert source.to_s, "-resize #{w = width}x#{h = height}^ -gravity center -extent #{w}x#{h}", self.to_s
+    Magick.pngquant self.to_s
   end
 
   def extension_white_list; ['png'] end  
