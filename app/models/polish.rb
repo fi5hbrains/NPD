@@ -72,7 +72,7 @@ class Polish < ActiveRecord::Base
       self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
     else
       if self.draft
-        '/assets/draft.png'
+        'draft.png'
       elsif self.bottling_status
         self.polish_folder + '/' + name_slug + '_bottle' + (option ? '_' + option : '' )  + '.png' 
       else
