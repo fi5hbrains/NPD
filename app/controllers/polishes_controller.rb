@@ -334,7 +334,7 @@ class PolishesController < ApplicationController
           Magick.convert shape, "-scale #{particle_scale}%", shape_tmp
           Magick.convert shape, "-negate -blur 0x6 -scale #{particle_scale}% +level-colors '#444',Black ", shape_shadow_tmp
           
-          multiplyer = (layer.particle_density * 5.0 / particle_scale).round + rand(2)
+          multiplyer = (layer.particle_density * 4.7 / particle_scale).round + rand(2)
           scale_offset = 50
           x_offset = 0 
           shadow_shift_x = 0

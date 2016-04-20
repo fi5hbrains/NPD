@@ -15,7 +15,7 @@ class Magick < ActiveRecord::Base
   def self.pngquant filenames
     filenames = [filenames] if filenames.class.name == 'String'
     filenames.each do |f|
-    `pngquant #{self.p(f)} --force --ext=.png  `       
+    # `pngquant #{self.p(f)} --force --ext=.png  `       
     end
   end
   
