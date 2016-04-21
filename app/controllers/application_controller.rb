@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
       polishes = brand ? brand.polishes : @brands ? Polish.where(brand_id: @brands.pluck(:id)) : Polish.where(nil)
       @polishes = polishes.
         where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
-        "slug ilike ?", "#{params[:polish] || ''}%").
+        "number ilike ? OR slug ilike ?", "%#{params[:polish]}%", "#{params[:polish]}%").
         where(draft: false).
         where('id != ?', polish_id)
     elsif params[:polish].blank?

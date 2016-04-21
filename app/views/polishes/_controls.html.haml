@@ -10,9 +10,8 @@
       = link_to edit_brand_polish_path(polish.brand_slug, polish.slug) do
         <svg class='icon hoverBack withText'><use xlink:href='#pencil'/></svg>
         = t 'controls.edit'
-      = link_to_unless polish.draft, redress_brand_polish_path(polish.brand_slug, polish.slug) do
-        <svg class='icon hoverBack withText'><use xlink:href='#pour'/></svg>
-        = t 'controls.redress'
+      = link_to_unless polish.draft, ("<svg class='icon hoverBack withText'><use xlink:href='#pour'/></svg>" + t( 'controls.redress')).html_safe, redress_brand_polish_path(polish.brand_slug, polish.slug) do
+        = ''
       = link_to clone_brand_polish_path(polish.brand_slug, polish.slug), method: :post, remote: true do
         <svg class='icon hoverBack withText'><use xlink:href='#dolly'/></svg>
         = t 'controls.clone'

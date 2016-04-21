@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160325065144) do
+ActiveRecord::Schema.define(version: 20160421090633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20160325065144) do
   add_index "polishes", ["l"], name: "index_polishes_on_l", using: :btree
   add_index "polishes", ["l2"], name: "index_polishes_on_l2", using: :btree
   add_index "polishes", ["mask_type"], name: "index_polishes_on_mask_type", using: :btree
+  add_index "polishes", ["number"], name: "index_polishes_on_number", using: :btree
   add_index "polishes", ["opacity"], name: "index_polishes_on_opacity", using: :btree
   add_index "polishes", ["release_year"], name: "index_polishes_on_release_year", using: :btree
   add_index "polishes", ["s"], name: "index_polishes_on_s", using: :btree

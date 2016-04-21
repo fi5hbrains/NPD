@@ -14,7 +14,7 @@
     .array
       - Defaults::GLITTERS.each do |p|
         .arrayItem>
-          = l_f.radio_button :particle_type, p, class: 'hidden', checked: p == 'hexagon'
+          = l_f.radio_button :particle_type, p, class: 'hidden', checked: (l.particle_type == p || (l.particle_type.blank? && p == 'hexagon'))
           = l_f.label "particle_type_#{p}", nil, class: "p#{p.capitalize}"
   - unless l.layer_type == 'sand'
     .array.colours
