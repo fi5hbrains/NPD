@@ -6,7 +6,7 @@ class Ad < ActiveRecord::Base
   def h_range
     ranges = []
     3.times do |i|
-      ranges << self.send("h#{i}").to_s if self.send("h#{i}")
+      ranges << self.send("h#{i}").to_s.gsub('...','..')
     end
     ranges.join('; ')
   end
@@ -20,7 +20,7 @@ class Ad < ActiveRecord::Base
   def s_range
     ranges = []
     2.times do |i|
-      ranges << self.send("s#{i}").to_s if self.send("s#{i}")
+      ranges << self.send("s#{i}").to_s.gsub('...','..')
     end
     ranges.join('; ')
   end
@@ -34,7 +34,7 @@ class Ad < ActiveRecord::Base
   def l_range
     ranges = []
     2.times do |i|
-      ranges << self.send("o#{i}").to_s if self.send("o#{i}")
+      ranges << self.send("o#{i}").to_s.gsub('...','..')
     end
     ranges.join('; ')
   end
@@ -48,7 +48,7 @@ class Ad < ActiveRecord::Base
   def o_range
     ranges = []
     2.times do |i|
-      ranges << self.send("o#{i}").to_s if self.send("o#{i}")
+      ranges << self.send("o#{i}").to_s.gsub('...','..')
     end
     ranges.join('; ')
   end
