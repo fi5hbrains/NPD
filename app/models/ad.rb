@@ -34,7 +34,7 @@ class Ad < ActiveRecord::Base
   def l_range
     ranges = []
     2.times do |i|
-      ranges << self.send("o#{i}").to_s.gsub('...','..')
+      ranges << self.send("l#{i}").to_s.gsub('...','..')
     end
     ranges.join('; ')
   end
