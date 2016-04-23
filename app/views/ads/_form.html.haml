@@ -10,8 +10,12 @@
     = f.label :name
     = f.text_field :name
   .field
+    - unless @ad.new_record?
+      = @ad.image.url.split('/').last
     = f.label :image
     = f.file_field :image
+    - unless @ad.new_record?
+      = @ad.image_hover.url.split('/').last
     = f.label :image_hover
     = f.file_field :image_hover
   .field

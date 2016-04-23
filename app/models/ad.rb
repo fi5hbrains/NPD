@@ -3,7 +3,13 @@ class Ad < ActiveRecord::Base
   
   mount_uploader :image, AdImageUploader
   mount_uploader :image_hover, AdImageUploader
-  def h_range;end
+  def h_range
+    ranges = []
+    3.times do |i|
+      ranges << self.send("h#{i}").to_s if self.send("h#{i}")
+    end
+    ranges.join('; ')
+  end
   def h_range=(ranges)
     ranges = ranges.split(';').first(3)
     ranges.each_with_index do |r,i|
@@ -11,7 +17,13 @@ class Ad < ActiveRecord::Base
       self.send("h#{i}=", r[0]..r[1])
     end
   end
-  def s_range;end
+  def s_range
+    ranges = []
+    2.times do |i|
+      ranges << self.send("s#{i}").to_s if self.send("s#{i}")
+    end
+    ranges.join('; ')
+  end
   def s_range=(ranges)
     ranges = ranges.split(';').first(2)
     ranges.each_with_index do |r,i|
@@ -19,7 +31,13 @@ class Ad < ActiveRecord::Base
       self.send("s#{i}=", r[0]..r[1])
     end
   end
-  def l_range;end
+  def l_range
+    ranges = []
+    2.times do |i|
+      ranges << self.send("o#{i}").to_s if self.send("o#{i}")
+    end
+    ranges.join('; ')
+  end
   def l_range=(ranges)
     ranges = ranges.split(';').first(2)
     ranges.each_with_index do |r,i|
@@ -27,7 +45,13 @@ class Ad < ActiveRecord::Base
       self.send("l#{i}=", r[0]..r[1])
     end
   end
-  def o_range;end
+  def o_range
+    ranges = []
+    2.times do |i|
+      ranges << self.send("o#{i}").to_s if self.send("o#{i}")
+    end
+    ranges.join('; ')
+  end
   def o_range=(ranges)
     ranges = ranges.split(';').first(2)
     ranges.each_with_index do |r,i|

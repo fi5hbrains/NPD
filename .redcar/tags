@@ -1,4 +1,4 @@
-1461230444
+1461383230
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -116,8 +116,8 @@ collection=	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def collect
 collection_search	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def collection_search
 colour_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def colour_to_hsl 
 colour_to_hsl_range	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def colour_to_hsl_range 
-coloured	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def self.coloured 
 coloured	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def self.coloured 
+coloured	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def self.coloured 
 comment_params	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	  def comment_params
 composite	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.composite 
 configure	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function configure(properties, o)
@@ -191,7 +191,7 @@ give_to	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.give_t
 gloss_preview_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_preview_url;
 gloss_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_tmp;
 gloss_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def gloss_url;
-h_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range;
+h_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range
 h_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def h_range=(ranges)
 highlight_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def highlight_url;
 hsl_to_rgbhex	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def hsl_to_rgbhex 
@@ -212,7 +212,7 @@ init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	fun
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 
 is_owner	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def is_owner
-l_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def l_range;
+l_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def l_range
 l_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def l_range=(ranges)
 lab_search	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def lab_search
 layer_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def layer_tmp 
@@ -237,7 +237,7 @@ new	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  de
 new	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def new
 no_cache_on_ajax	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def no_cache_on_ajax
 note	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def note
-o_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def o_range;
+o_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def o_range
 o_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def o_range=(ranges)
 opacity_mask	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def opacity_mask
 p	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def p 
@@ -266,7 +266,7 @@ retry	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/smart_poll.js	fun
 rgb_hex_to_dec	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgb_hex_to_dec 
 rgbdec_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgbdec_to_hsl 
 rgbhex_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgbhex_to_hsl 
-s_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def s_range;
+s_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def s_range
 s_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def s_range=(ranges)
 save_version	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def save_version 
 save_version_images	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def save_version_images 
