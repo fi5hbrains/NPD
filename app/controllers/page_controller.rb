@@ -59,12 +59,12 @@ class PageController < ApplicationController
       agent = Mechanize.new
       
       brand = Brand.find_by_slug('chanel')
-      page = agent.get 'http://www.chanel.com/en_GB/fragrance-beauty/makeup/nails/nail-colour/le-vernis-nail-colour-p128000.html'
-      shades = page.at('.fnb_shades_container').search('.fnb_shade')
+      page = agent.get 'http://www.sephora.fr/Maquillage/Ongles/Vernis-a-ongles/Le-Vernis-Vernis-a-Ongles/P96354'
+      shades = page.at('.product-sku-list').search('.sku-line')
       shades.each do |shade|
-        polish = brand.polishes.where(number: shade.attr('title').to_i).first_or_create
+        polish = brand.polishes.where(number: shade.at('.sku-title').text.split(' ').first).first_or_create
         if polish.draft
-          polish.remote_reference_url = shade.attr('data-shade')
+          polish.remote_reference_url = 'http://www.sephora.fr' + shade.at('img').attr('src')
           @result += 1  if polish.save
         end
       end
