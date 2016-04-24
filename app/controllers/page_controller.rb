@@ -57,17 +57,42 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'evixi'
-      page = agent.get 'http://www.evixigel.co.uk/collections/colours?view=listall'
-      shades = page.at('.product-list').search('.product-item')
+      
+      brand = Brand.find_by_slug 'gelish'
+      page = agent.get 'http://gelish.com/products/gelish'
+      shades = page.at('#swatches').search 'li'
       shades.each do |shade|
-        name = shade.at('.product-title').text.split(' - ').last
+        name = shade.at('.item-name').text.squish
         polish = brand.polishes.where(name: name).first_or_create
-        if polish.draft
-          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+        if polish.draft 
+          polish.remote_reference_url = shade.at('img').attr('src')
           @result += 1 if polish.save 
         end        
-      end      
+      end
+      
+      brand = Brand.find_by_slug 'naillook'
+      page = agent.get 'http://naillook.uk.com/catalog/lak/'
+      shades = page.search '.goods'
+      shades.each do |shade|
+        name = shade.at('.goods-title-in').text.squish
+        polish = brand.polishes.where(name: name.gsub(' ' + name.split(' ').last, '')).first_or_create
+        if polish.draft 
+          polish.remote_reference_url = 'http://naillook.uk.com' + shade.at('.good-hover').at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
+      end
+      
+      brand = Brand.find_by_slug 'uslu-airlines'
+      page = agent.get 'http://usluairlines.com/c-shop-e/nail_polish_main_line.html'
+      shades = page.search '.item'
+      shades.each do |shade|
+        polish = brand.polishes.where(name: shade.at('img').attr('alt').split('<br>')[0]).first_or_create
+        if polish.draft 
+          polish.remote_reference_url = shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
+      end
+  
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       # brand = Brand.find_by_slug 'alessandro-international'
