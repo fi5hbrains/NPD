@@ -57,42 +57,29 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      
-      brand = Brand.find_by_slug 'gelish'
-      page = agent.get 'http://gelish.com/products/gelish'
-      shades = page.at('#swatches').search 'li'
-      shades.each do |shade|
-        name = shade.at('.item-name').text.squish
-        polish = brand.polishes.where(name: name).first_or_create
-        if polish.draft 
-          polish.remote_reference_url = shade.at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
+      brand = Brand.find_by_slug('ncla-los-angeles')
+      ['http://www.shopncla.com/collections/cremes','http://www.shopncla.com/collections/glitters','http://www.shopncla.com/collections/metallics','http://www.shopncla.com/collections/shimmers','http://www.shopncla.com/collections/holographic'].each do |link|
+        page = agent.get link
+        shades = page.at('.span9').search('.span3')
+        shades.each do |shade|
+          unless shade.at('a').attr('title').blank? 
+            polish = brand.polishes.where(name: shade.at('a').attr('title')[5..-1]).first_or_create
+            if polish.draft 
+              polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+              @result += 1 if polish.save 
+            end        
+          end
+        end
       end
-      
-      brand = Brand.find_by_slug 'naillook'
-      page = agent.get 'http://naillook.uk.com/catalog/lak/'
-      shades = page.search '.goods'
-      shades.each do |shade|
-        name = shade.at('.goods-title-in').text.squish
-        polish = brand.polishes.where(name: name.gsub(' ' + name.split(' ').last, '')).first_or_create
-        if polish.draft 
-          polish.remote_reference_url = 'http://naillook.uk.com' + shade.at('.good-hover').at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
-      end
-      
-      brand = Brand.find_by_slug 'uslu-airlines'
-      page = agent.get 'http://usluairlines.com/c-shop-e/nail_polish_main_line.html'
-      shades = page.search '.item'
-      shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('img').attr('alt').split('<br>')[0]).first_or_create
-        if polish.draft 
-          polish.remote_reference_url = shade.at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
-      end
-  
+      brand = Brand.find_by_slug('zoya')
+      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
+      brand.polishes.each do |polish|
+        if polish.draft
+          shade = page.at('#' + polish.number)
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
+          polish.save
+        end
+      end      
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       # brand = Brand.find_by_slug 'alessandro-international'
