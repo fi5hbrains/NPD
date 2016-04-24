@@ -57,18 +57,33 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('opi')
-      page = agent.get 'http://opi.com/color/nail-lacquer#filter=*'
-      shades = page.at('.grid').search('.large-3')
-      shades.each do |shade|
-        polish = brand.polishes.where(name: shade.at('h3').text).first_or_create
-        if polish.draft
-          if shade.at('.swatchimg').at('img')
-            polish.remote_reference_url = shade.at('.swatchimg').at('img').attr('src')
+
+      brand = Brand.find_by_slug('deborah-lippmann') 
+      ['http://www.deborahlippmann.com/nail-color/celebrity-shades?___store=default','http://www.deborahlippmann.com/nail-color/specialty?___store=default','http://www.deborahlippmann.com/nail-color/shimmer?___store=default', 'http://www.deborahlippmann.com/nail-color/glitter?___store=default','http://www.deborahlippmann.com/nail-color/sheer?___store=default'].each do |link|
+        page = agent.get link
+        shades = page.search('.popup-details-content')
+        shades.each do |shade|
+          polish = brand.polishes.where(slug: slugify( shade.at('.product-name').at('h3').text)).first_or_create
+          if polish.draft
+            polish.remote_reference_url = shade.at('img.lazy-popup').attr('data-original')
+            @result += 1 if (polish.save if polish.new_record?)
           end
-          @result += 1 if polish.save 
+        end
+      end
+      
+      brand = Brand.find_by_slug('picture-polish') 
+      page = agent.get 'http://www.picturepolish.com.au/index.php?route=product/category&path=142&limit=100'
+      shades = page.at('.product-grid').search('.span3')
+      
+      shades.each do |shade|
+        shade = shade.at('img')
+        polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '').gsub('(Reborn)','')).first_or_create
+        if polish.draft 
+          polish.remote_reference_url = shade.attr('src')
+          @result += 1 if polish.save  
         end        
       end
+      
       
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
