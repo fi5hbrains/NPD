@@ -57,29 +57,19 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug('ncla-los-angeles')
-      ['http://www.shopncla.com/collections/cremes','http://www.shopncla.com/collections/glitters','http://www.shopncla.com/collections/metallics','http://www.shopncla.com/collections/shimmers','http://www.shopncla.com/collections/holographic'].each do |link|
-        page = agent.get link
-        shades = page.at('.span9').search('.span3')
-        shades.each do |shade|
-          unless shade.at('a').attr('title').blank? 
-            polish = brand.polishes.where(name: shade.at('a').attr('title')[5..-1]).first_or_create
-            if polish.draft 
-              polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
-              @result += 1 if polish.save 
-            end        
-          end
-        end
-      end
-      brand = Brand.find_by_slug('zoya')
-      page = agent.get 'http://www.zoya.com/content/category/Zoya_Nail_Polish.html'
-      brand.polishes.each do |polish|
+      brand = Brand.find_by_slug('opi')
+      page = agent.get 'http://opi.com/color/nail-lacquer#filter=*'
+      shades = page.at('.grid').search('.large-3')
+      shades.each do |shade|
+        polish = brand.polishes.where(name: shade.at('h3').text).first_or_create
         if polish.draft
-          shade = page.at('#' + polish.number)
-          polish.remote_reference_url = 'http:' + shade.at('img').attr('src').gsub('450','452')
-          polish.save
-        end
-      end      
+          if shade.at('.swatchimg').at('img')
+            polish.remote_reference_url = shade.at('.swatchimg').at('img').attr('src')
+          end
+          @result += 1 if polish.save 
+        end        
+      end
+      
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       # brand = Brand.find_by_slug 'alessandro-international'
