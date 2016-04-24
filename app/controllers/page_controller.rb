@@ -58,30 +58,44 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
 
-      brand = Brand.find_by_slug('deborah-lippmann') 
-      ['http://www.deborahlippmann.com/nail-color/celebrity-shades?___store=default','http://www.deborahlippmann.com/nail-color/specialty?___store=default','http://www.deborahlippmann.com/nail-color/shimmer?___store=default', 'http://www.deborahlippmann.com/nail-color/glitter?___store=default','http://www.deborahlippmann.com/nail-color/sheer?___store=default'].each do |link|
+      brand = Brand.find_by_slug('barry-m')
+      ["https://www.barrym.com/product/Classic","https://www.barrym.com/product/Sunset-Gel","https://www.barrym.com/product/Gelly-Hi-Shine","https://www.barrym.com/product/Speedy","https://www.barrym.com/product/Matte","https://www.barrym.com/product/Aquarium","https://www.barrym.com/product/Glitterati"].each do |link|
         page = agent.get link
-        shades = page.search('.popup-details-content')
+        shades = page.at('.col-sm-8').search('li')
         shades.each do |shade|
-          polish = brand.polishes.where(slug: slugify( shade.at('.product-name').at('h3').text)).first_or_create
+          polish = brand.polishes.where(name: shade.attr('data-rangename')).first_or_create
           if polish.draft
-            polish.remote_reference_url = shade.at('img.lazy-popup').attr('data-original')
-            @result += 1 if (polish.save if polish.new_record?)
+            polish.remote_reference_url = 'https://www.barrym.com' + shade.at('img').attr('src').gsub('small.jpg','zoom.jpg')
+            @result += 1 if polish.save
           end
         end
       end
       
-      brand = Brand.find_by_slug('picture-polish') 
-      page = agent.get 'http://www.picturepolish.com.au/index.php?route=product/category&path=142&limit=100'
-      shades = page.at('.product-grid').search('.span3')
+      6.times do |i|
+        brand = Brand.find_by_slug('china-glaze')
+        page = agent.get 'http://chinaglaze.com/Colour/China-Glaze-Lacquer/pageNum_' + i.to_s + '.html'
+        shades = page.at('#color_dot').search('.bottle')
+        shades.each do |shade|
+          polish = brand.polishes.where(name: (name = shade.at('#color-name').text)).first_or_create
+          if polish.draft
+            polish.remote_reference_url = 'http://chinaglaze.com' + shade.at('img').attr('src')
+            @result += 1 if polish.save
+          end
+        end
+      end
       
+      brand = Brand.find_by_slug('chanel')
+      agent = Mechanize.new
+      page = agent.get 'http://www.chanel.com/en_GB/fragrance-beauty/makeup/nails/nail-colour/le-vernis-nail-colour-p128000.html'
+      shades = page.at('.fnb_shades_container').search('.fnb_shade')
       shades.each do |shade|
-        shade = shade.at('img')
-        polish = brand.polishes.where(name: shade.attr('alt').gsub(' Nail Polish', '').gsub('(Reborn)','')).first_or_create
-        if polish.draft 
-          polish.remote_reference_url = shade.attr('src')
-          @result += 1 if polish.save  
-        end        
+        polish = brand.polishes.where(number: shade.attr('title').to_i).first_or_create
+        if polish && (polish.new_record? || polish.draft)
+          if polish.draft
+            polish.remote_reference_url = shade.attr('data-shade')
+            @result += 1  if polish.save
+          end
+        end
       end
       
       
