@@ -57,6 +57,7 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       # agent = Mechanize.new
+      
       agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       brand = Brand.find_by_slug 'alessandro-international'
       page = agent.get 'https://www.alessandro-international.com/b2b_uk_en/nail-polishes/colour-code-4/'
@@ -64,17 +65,30 @@ class PageController < ApplicationController
       shades.each do |shade|
         name = shade.at('.innerName').text.strip
         polish = brand.polishes.where(name: name).first_or_create
-        if polish.new_record? 
-          polish.number = shade.at('strong').text
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
+        if polish.draft
           polish.remote_reference_url = shade.at('img').attr('src')
           @result += 1 if polish.save 
         end        
-      end
+      end      
+      # ----------------------- Alessandro
+      # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
+      # brand = Brand.find_by_slug 'alessandro-international'
+      # page = agent.get 'https://www.alessandro-international.com/b2b_uk_en/nail-polishes/colour-code-4/'
+      # shades = page.search('.dot')
+      # shades.each do |shade|
+      #   name = shade.at('.innerName').text.strip
+      #   polish = brand.polishes.where(name: name).first_or_create
+      #   if polish.new_record? 
+      #     polish.number = shade.at('strong').text
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #     polish.remote_reference_url = shade.at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # brand = Brand.find_by_slug 'orly'
       # (1..5).each do |i|

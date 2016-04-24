@@ -744,9 +744,6 @@ cursor_positions:
   - :path: app/models/box.rb
     :cursor_offset: 3498
     :timestamp: 2016-04-19 10:31:06 +04:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 126
-    :timestamp: 2016-04-19 16:35:45 +04:00
   - :path: app/views/brands/edit.html.haml
     :cursor_offset: 753
     :timestamp: 2016-01-20 16:06:47 +03:00
@@ -798,9 +795,6 @@ cursor_positions:
   - :path: app/views/bottles/index.html.haml
     :cursor_offset: 200
     :timestamp: 2016-04-19 20:35:20 +04:00
-  - :path: app/models/magick.rb
-    :cursor_offset: 696
-    :timestamp: 2016-04-20 01:33:28 +04:00
   - :path: app/models/polish.rb
     :cursor_offset: 8268
     :timestamp: 2016-04-19 15:46:46 +04:00
@@ -828,4 +822,13 @@ cursor_positions:
   - :path: app/models/brand.rb
     :cursor_offset: 729
     :timestamp: 2016-03-02 09:54:02 +03:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 422
+    :timestamp: 2016-04-19 16:35:45 +04:00
+  - :path: public/robots.txt
+    :cursor_offset: 331
+    :timestamp: 2016-04-24 05:28:50 +04:00
+  - :path: app/models/magick.rb
+    :cursor_offset: 873
+    :timestamp: 2016-04-23 20:18:05 +04:00
 files_to_retain: 0
