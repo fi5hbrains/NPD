@@ -57,19 +57,20 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'orly'
-      (1..5).each do |i|
-        page = agent.get 'http://www.orlybeauty.com/nail-color/nail-color-by-types/creme.html?p=' + i.to_s
-        shades = page.search('li.item')
+      agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
+      brand = Brand.find_by_slug 'ciaté-london'
+      (1..3).each do |i|
+        page = agent.get 'https://www.ciatelondon.com/collections/nails?constraint=polish&page=' + i.to_s
+        shades = page.search('.no_crop_image')
         shades.each do |shade|
-          name = shade.at('.product-name').at('a').text.strip
+          name = shade.at('.product-title').text.strip
           polish = brand.polishes.where(name: name).first_or_create
           if polish.draft
-            polish.remote_reference_url = shade.at('.product-image').at('img').attr('src').gsub('.jpg','.png').gsub('small_image','swapimage').gsub('_b_','_p_').gsub('lg_web','web')
+            polish.remote_reference_url = 'http:' + shade.at('.image-swap').search('img').last.attr('src')
             @result += 1 if polish.save 
           end        
         end
-      end
+      end 
       
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
