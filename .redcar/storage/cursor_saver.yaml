@@ -781,9 +781,6 @@ cursor_positions:
   - :path: app/views/polishes/_layer_fields.html.haml
     :cursor_offset: 844
     :timestamp: 2016-04-20 13:50:43 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 12155
-    :timestamp: 2016-04-20 10:44:54 +04:00
   - :path: app/views/polishes/_form.html.haml
     :cursor_offset: 2656
     :timestamp: 2016-04-16 07:35:49 +04:00
@@ -831,4 +828,7 @@ cursor_positions:
   - :path: app/models/magick.rb
     :cursor_offset: 873
     :timestamp: 2016-04-23 20:18:05 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 8356
+    :timestamp: 2016-04-24 15:24:26 +04:00
 files_to_retain: 0

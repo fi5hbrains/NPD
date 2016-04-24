@@ -58,17 +58,58 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      brand = Brand.find_by_slug('chanel')
-      page = agent.get 'http://www.sephora.fr/Maquillage/Ongles/Vernis-a-ongles/Le-Vernis-Vernis-a-Ongles/P96354'
-      shades = page.at('.product-sku-list').search('.sku-line')
+      # ------------------------ Kiko
+      brand = Brand.find_by_slug('kiko-milano')
+      page = agent.get 'http://www.kikocosmetics.com/en-gb/make-up/hands/nail-polishes/Quick-Dry-Nail-Lacquer/p-KM004010018#zoom'
+      shades = page.at('#js-palette').search('.icon-zoom')
       shades.each do |shade|
-        polish = brand.polishes.where(number: shade.at('.sku-title').text.split(' ').first).first_or_create
-        if polish.draft
-          polish.remote_reference_url = 'http://www.sephora.fr' + shade.at('img').attr('src')
-          @result += 1  if polish.save
-        end
+        name = shade.at('.only-smart').at('span').text
+        polish = brand.polishes.where(name: name[3..-1]).first_or_create
+        if polish.new_record? 
+          polish.number = name[0..2]
+          polish.synonym_list = polish.name[3..-1]
+          polish.bottle_id = 160
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
       end
-      
+      page = agent.get 'http://www.kikocosmetics.com/en-gb/make-up/hands/nail-polishes/Nail-Lacquer/p-KM00401001'
+      shades = page.at('#js-palette').search('.icon-zoom')
+      shades.each do |shade|
+        name = shade.at('.only-smart').at('span').text
+        polish = brand.polishes.where(name: name[3..-1]).first_or_create
+        if polish.new_record? 
+          polish.number = name[0..2]
+          polish.synonym_list = polish.name[3..-1]
+          polish.bottle_id = 82
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
+      end      
+      page = agent.get 'http://www.kikocosmetics.com/en-gb/make-up/hands/nail-polishes/Power-Pro-Nail-Lacquer/p-KMPOWER'
+      shades = page.at('#js-palette').search('.icon-zoom')
+      shades.each do |shade|
+        name = shade.at('.only-smart').at('span').text
+        polish = brand.polishes.where(name: name[3..-1]).first_or_create
+        if polish.new_record? 
+          polish.number = name[0..2]
+          polish.synonym_list = polish.name[3..-1]
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+          polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end        
+      end      
       
       # ----------------------- Alessandro
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}

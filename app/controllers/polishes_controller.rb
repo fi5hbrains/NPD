@@ -254,12 +254,13 @@ class PolishesController < ApplicationController
   def rename_polish_files old_slug, polish = nil
     copy = polish.present?
     polish ||= @polish
-    if copy
-      FileUtils.copy_entry path + polish.polish_folder(old_slug), path + polish.polish_folder 
-    else
-      FileUtils.mv path + polish.polish_folder(old_slug), path + polish.polish_folder 
-    end
+
     unless polish.draft
+      if copy
+        FileUtils.copy_entry path + polish.polish_folder(old_slug), path + polish.polish_folder 
+      else
+        FileUtils.mv path + polish.polish_folder(old_slug), path + polish.polish_folder 
+      end
       (polish.layers.count > 1 ? polish.coats_count : 1).
         times{|c| FileUtils.mv( path + polish.coat_url(c, old_slug), path + polish.coat_url(c))}
       [nil, 'thumb', 'big'].each do |option| 
