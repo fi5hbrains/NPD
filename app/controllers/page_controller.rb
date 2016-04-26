@@ -58,7 +58,7 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug 'barielle'
-      8times do |i|
+      8.times do |i|
         page = agent.get 'http://www.nailsupplies.us/barielle/?sort=featured&page=' + i.to_s
         shades = page.at('.ProductList').search('li')
         shades.each do |shade|
