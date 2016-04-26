@@ -70,10 +70,11 @@ class PageController < ApplicationController
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
             polish.user_id = current_user.id
+            polish.bottle_id = 165 if type == 'http://www.barielle.com/nail-color-going-to-the-chapel.html'
             polish.draft = true
           end        
           if polish.draft
-            polish.remote_reference_url = shade.at('img').attr('src')
+            polish.remote_reference_url = 'http://www.barielle.com/' + shade.at('img').attr('src')
             @result += 1 if polish.save 
           end
         end
