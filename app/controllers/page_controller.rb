@@ -58,23 +58,22 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug 'barielle'
-      types = ['http://www.barielle.com/nail-color-going-to-the-chapel.html','http://www.barielle.com/PRO-Shooting-Star.html']
-      types.each do |type|
-        page = agent.get type
-        shades = page.search('.shades-cell')
+      8times do |i|
+        page = agent.get 'http://www.nailsupplies.us/barielle/?sort=featured&page=' + i.to_s
+        shades = page.at('.ProductList').search('li')
         shades.each do |shade|
-          name = shade.at('a').attr('title')
+          name = shade.at('.ProductDetails').at('strong').text.sub('Barielle - ','').sub(' 0.45oz','')
           polish = brand.polishes.where(name: name).first_or_create
           if polish.new_record? 
             polish.synonym_list = polish.name
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
             polish.user_id = current_user.id
-            polish.bottle_id = 165 if type == 'http://www.barielle.com/nail-color-going-to-the-chapel.html'
+            polish.bottle_id = 165
             polish.draft = true
           end        
           if polish.draft
-            polish.remote_reference_url = 'http://www.barielle.com/' + shade.at('img').attr('src')
+            polish.remote_reference_url = shade.at('img').attr('src')
             @result += 1 if polish.save 
           end
         end
