@@ -686,9 +686,6 @@ cursor_positions:
   - :path: app/controllers/user_sessions_controller.rb
     :cursor_offset: 429
     :timestamp: 2016-02-14 22:21:23 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 1433
-    :timestamp: 2016-04-14 11:39:49 +04:00
   - :path: app/models/user_session.rb
     :cursor_offset: 163
     :timestamp: 2016-04-14 07:48:41 +04:00
@@ -831,4 +828,15 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 8356
     :timestamp: 2016-04-24 15:24:26 +04:00
+  - :path: ga.txt
+    :cursor_offset: 0
+    :timestamp: 2016-04-27 13:10:14 +04:00
+    :selection_offset: 412
+    :block_selection_mode: false
+  - :path: hs_err_pid2126.log
+    :cursor_offset: 0
+    :timestamp: 2016-02-18 10:46:45 +03:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 2255
+    :timestamp: 2016-04-27 13:21:30 +04:00
 files_to_retain: 0
