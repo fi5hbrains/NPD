@@ -57,9 +57,9 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'barielle'
+      brand = Brand.find_by_slug 'julep'
       28.times do |i|
-        page = agent.get 'http://www.julep.com/nail/polish.html?page=' + i.to_s
+        page = agent.get 'http://www.julep.com/nail/polish.html?page=' + (i + 1).to_s
         shades = page.search('h5')
         shades.each do |shade|
           name = shade.at('.name').text
