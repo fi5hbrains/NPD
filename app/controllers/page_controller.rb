@@ -57,24 +57,48 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'eleccio'
-      page = agent.get 'http://eleccio.com/shop/?product_count=200'
-      shades = page.search('li.product')
-      shades.each do |shade|
-        name = shade.at('.product-title').at('a').text
-        polish = brand.polishes.where(name: name).first_or_create
-        if polish.new_record? 
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-        end        
-        if polish.draft
-          polish.remote_reference_url = shade.at('.hover-image').attr('src')
-          @result += 1 if polish.save 
+      brand = Brand.find_by_slug 'barielle'
+      28.times do |i|
+        page = agent.get 'http://www.julep.com/nail/polish.html?page=' + i.to_s
+        shades = page.search('h5')
+        shades.each do |shade|
+          name = shade.at('.name').text
+          polish = brand.polishes.where(name: name).first_or_create
+          if polish.new_record? 
+            polish.synonym_list = polish.name
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.bottle_id = 165
+            polish.draft = true
+          end        
+          if polish.draft
+            polish.collection = shade.at('.product-name').search('div').last.text
+            polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+            @result += 1 if polish.save 
+          end
         end
       end
+      
+      # -------------eleccio
+      # brand = Brand.find_by_slug 'eleccio'
+      # page = agent.get 'http://eleccio.com/shop/?product_count=200'
+      # shades = page.search('li.product')
+      # shades.each do |shade|
+      #   name = shade.at('.product-title').at('a').text
+      #   polish = brand.polishes.where(name: name).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #   end        
+      #   if polish.draft
+      #     polish.remote_reference_url = shade.at('.hover-image').attr('src')
+      #     @result += 1 if polish.save 
+      #   end
+      # end
       
       # brand = Brand.find_by_slug 'barielle'
       # 8.times do |i|
