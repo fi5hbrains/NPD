@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     elsif @brand
       brand = @brand
     end
-    @polish = Polish.find(params[:polish_id]) if params[:polish_id]
+    @polish = Polish.find_by_slug(params[:polish_id]) if params[:polish_id]
     polish_id = (@polish.try(:id) || 0)
     colour ||= [@polish.h, @polish.s, @polish.l] if @polish && spread
     sort ||= cookies[:polish_sort]
@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
         pluck('word_id').compact.uniq
       @brands = Brand.
         where(id: brand_ids).
-        where('id != ?', params[:brand_id] || 0).
+        where('slug != ?', params[:brand_id] || '=').
         sort_by_polishes_count.first(10)
     elsif !params[:polish].blank?
       polish_ids = Synonym.
@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
         where(polish_filter).
         where(brand_slug: (slugify( params[:brand_id] || params[:id]))).
         where((polish_ids.blank? ? "number ilike ?" : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR number ilike ?"), "%#{params[:polish]}%").
-        where('id != ?', params[:polish_id] || 0).
+        where('slug != ?', params[:polish_id] || '-').
         order('updated_at desc')
     elsif %w(brands polishes).include? params[:controller]
       @polishes = @brand.polishes.where(polish_filter).order('updated_at desc')

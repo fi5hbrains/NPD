@@ -69,7 +69,7 @@ class PageController < ApplicationController
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
             polish.user_id = current_user.id
-            polish.bottle_id = 165
+            polish.bottle_id = 194
             polish.draft = true
           end        
           if polish.draft

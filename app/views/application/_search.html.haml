@@ -14,8 +14,8 @@
       = hidden_field_tag :box_id, @box.id
       - if collection_search
         #filterBrand.hidden
-    = hidden_field_tag :brand_id, @brand.name if @brand
-    = hidden_field_tag :polish_id, @polish.name if @polish
+    = hidden_field_tag :brand_id, @brand.slug if @brand
+    = hidden_field_tag :polish_id, @polish.slug if @polish
     - setup.each do |p|
       .cell
         = text_field_tag p, (params[p] || (@brand.name if p == 'brand' && @brand)),  placeholder: t("search.#{p}"), autocomplete: 'off', class: 'search' + p.capitalize, id: id + p.capitalize
