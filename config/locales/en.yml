@@ -176,6 +176,7 @@ en:
     new_polish_bottles: 'Bottles for New Polish'
     edit_brand: 'Edit'
     brands: 'Brands'
+    polish_count: 'Total polishes: %{total}, drafts: %{drafts}, unbottled: %{unbottled}'
     particles:
       base: 'Base Layer'
       shimmer: 'Shimmer'
