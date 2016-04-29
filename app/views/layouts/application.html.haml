@@ -1,7 +1,7 @@
 !!!
 %html{lang: I18n.locale}
   %head
-    %title= @polish ? (@polish.brand_name + ' – ' + @polish.name_and_number + ' – ' + 'INPD') : @brand  ? @brand.name  + ' – ' + 'INPD' : 'INPD – Nail Polish Database'
+    %title= in_lab? ? 'INPD lab' : @polish ? (@polish.brand_name + ' – ' + @polish.name_and_number + ' – ' + 'INPD') : @brand  ? @brand.name  + ' – ' + 'INPD' : 'INPD – Nail Polish Database'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'profile', 'data-turbolinks-track' => false if (params[:controller] == 'users' && params[:action] == 'edit')
