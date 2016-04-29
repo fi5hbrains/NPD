@@ -12,12 +12,13 @@
     -# <link href='https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    - if @polish
-      %meta{ name: "description", content: "Rate and discuss the qualities of " + @polish.name_and_number + ' nail polish'}
-    - elsif @brand
-      %meta{ name: "description", content: "See all nail polishes by " +  @brand.name}
-    - else 
-      <meta name="description" content="Bring order to your nail polish collection: make lists, add notes, rate, search, sort, and share.">
+    - unless in_lab?
+      - if @polish
+        %meta{ name: "description", content: "Rate and discuss the qualities of " + @polish.name_and_number + ' nail polish'}
+      - elsif @brand
+        %meta{ name: "description", content: "See all nail polishes by " +  @brand.name}
+      - else 
+        <meta name="description" content="Bring order to your nail polish collection: make lists, add notes, rate, search, sort, and share.">
 
   %body
     %svg{height: 0, width: 0, style: 'display:block', xmlns: 'http://www.w3.org/2000/svg', version: '1.1'}
