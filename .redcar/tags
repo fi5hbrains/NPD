@@ -1,4 +1,4 @@
-1461937972
+1461945846
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -116,8 +116,8 @@ collection=	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def collect
 collection_search	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def collection_search
 colour_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def colour_to_hsl 
 colour_to_hsl_range	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def colour_to_hsl_range 
-coloured	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def self.coloured 
 coloured	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def self.coloured 
+coloured	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def self.coloured 
 comment_params	/Users/fish/Dropbox/work/Interpol/app/controllers/comments_controller.rb	  def comment_params
 composite	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.composite 
 configure	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function configure(properties, o)
@@ -222,6 +222,7 @@ maintenance	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb
 make_default_boxes	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def make_default_boxes
 mask_url	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def mask_url;
 middle	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def middle 
+name_and_number	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_and_number;
 name_or_number	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number;
 name_or_number?	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number?
 name_or_number_to_slug	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def name_or_number_to_slug
@@ -243,8 +244,8 @@ opacity_mask	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def opacit
 p	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def p 
 p	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.p 
 path	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def path;
-path	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def path
 path	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def path;
+path	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def path
 pngquant	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.pngquant 
 pointerdown	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function pointerdown(e)
 polish_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def polish_folder 

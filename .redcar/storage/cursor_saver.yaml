@@ -476,11 +476,6 @@ cursor_positions:
   - :path: config/environments/production.rb
     :cursor_offset: 2101
     :timestamp: 2015-04-09 20:56:52 +04:00
-  - :path: app/views/application/_search.html.haml
-    :cursor_offset: 615
-    :timestamp: 2016-01-31 21:29:00 +03:00
-    :selection_offset: 620
-    :block_selection_mode: false
   - :path: app/views/application/collection_search.js.haml
     :cursor_offset: 842
     :timestamp: 2016-02-21 20:08:01 +03:00
@@ -643,18 +638,12 @@ cursor_positions:
   - :path: app/assets/stylesheets/_navigation.scss
     :cursor_offset: 1419
     :timestamp: 2016-04-07 12:26:42 +04:00
-  - :path: app/assets/stylesheets/_options.scss
-    :cursor_offset: 696
-    :timestamp: 2016-04-06 21:36:27 +04:00
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 2519
     :timestamp: 2015-12-25 00:16:42 +03:00
   - :path: app/views/application/_ads.html.haml
     :cursor_offset: 594
     :timestamp: 2016-04-10 09:37:11 +04:00
-  - :path: app/views/polishes/catalogue_show.html.haml
-    :cursor_offset: 544
-    :timestamp: 2016-04-10 16:00:10 +04:00
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 4339
     :timestamp: 2016-04-10 15:56:46 +04:00
@@ -784,9 +773,6 @@ cursor_positions:
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 623
     :timestamp: 2016-04-19 18:55:09 +04:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 1203
-    :timestamp: 2016-04-15 12:44:03 +04:00
   - :path: app/views/polishes/_controls.html.haml
     :cursor_offset: 616
     :timestamp: 2016-04-21 12:41:25 +04:00
@@ -816,9 +802,6 @@ cursor_positions:
   - :path: hs_err_pid2126.log
     :cursor_offset: 0
     :timestamp: 2016-02-18 10:46:45 +03:00
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 2255
-    :timestamp: 2016-04-27 13:21:30 +04:00
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2458
     :timestamp: 2016-04-28 11:41:06 +04:00
@@ -837,9 +820,22 @@ cursor_positions:
   - :path: app/views/brands/_show.html.haml
     :cursor_offset: 897
     :timestamp: 2016-03-21 09:01:03 +03:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 789
+    :timestamp: 2016-04-29 17:52:52 +04:00
+  - :path: app/assets/stylesheets/_options.scss
+    :cursor_offset: 587
+    :timestamp: 2016-04-16 23:33:09 +04:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 1556
+    :timestamp: 2016-04-29 17:28:48 +04:00
   - :path: app/controllers/application_controller.rb
-    :cursor_offset: 1231
-    :timestamp: 2016-04-29 00:41:04 +04:00
-    :selection_offset: 1249
-    :block_selection_mode: false
+    :cursor_offset: 3587
+    :timestamp: 2016-04-29 00:47:23 +04:00
+  - :path: app/views/application/_search.html.haml
+    :cursor_offset: 627
+    :timestamp: 2016-04-29 00:41:13 +04:00
+  - :path: app/views/polishes/catalogue_show.html.haml
+    :cursor_offset: 178
+    :timestamp: 2016-04-28 20:33:46 +04:00
 files_to_retain: 0
