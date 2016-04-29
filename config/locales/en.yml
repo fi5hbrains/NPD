@@ -22,7 +22,7 @@
 en:
   welcome: 
     hi: 'Hello!'
-    description: 'This place is all about organizing nail polish collections: list, sort, search, add notes, export to spreadsheet document, and more.'
+    description: 'This place is all about organizing nail polish collections: list, sort, search, add notes, export to spreadsheet document, and such.'
     details: 'Feel free to DM %{link} if you want an invite code or have any questions.'
   form:
     enter: 'Enter'
