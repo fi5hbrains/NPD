@@ -6,25 +6,25 @@ class PageController < ApplicationController
     @user = params[:user] ? User.new(params.require(:user).permit(:name, :password, :invite_phrase, :avatar)) : User.new
     @focus = 'user_name'
     @submit_text = t('form.enter')
-    @button_name = 'submit'
-    @shake = false
-    if (p = params[:user]) && p[:name].present?
-      if p[:name]
-        if @suspect = User.find_by_name(p[:name])
-          @submit_text = t('form.login')
-          @focus = 'keep'
-          @button_name = 'submit'
-        else
-          @focus = (params[:active] == 'null' ? 'user_password' : 'user_name')
-          @submit_text = t('form.signup')
-          @button_name = 'preview'
+      @button_name = 'submit'
+      @shake = false
+      if (p = params[:user]) && p[:name].present?
+        if p[:name]
+          if @suspect = User.find_by_name(p[:name])
+            @submit_text = t('form.login')
+            @focus = 'keep'
+            @button_name = 'submit'
+          else
+            @focus = (params[:active] == 'null' ? 'user_password' : 'user_name')
+            @submit_text = t('form.signup')
+            @button_name = 'preview'
+          end
         end
       end
-    end
-    if params[:preview]
-      @user.valid?
-      if @shake = (@user.errors[:name].present? || @user.errors[:password].present?)
-        @status = 'explain error'
+      if params[:preview]
+        @user.valid?
+        if @shake = (@user.errors[:name].present? || @user.errors[:password].present?)
+          @status = 'explain error'
         @focus = (@user.errors[:password].present? ? 'user_password' : 'user_name')
       else
         @status = 'say invites only'
@@ -57,28 +57,49 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'julep'
-      28.times do |i|
-        page = agent.get 'http://www.julep.com/nail/polish.html?page=' + (i + 1).to_s
-        shades = page.search('h5')
+      brand = Brand.find_by_slug 'inglot'
+      ['o2m.breathable.nail.enamel/products/141/1511','o2m.breathable.nail.enamel.soft.matte/products/141/1982','nail.enamel/products/141/1512','nail.enamel.dream/products/141/1513','nail.enamel.matte/products/141/1514'].each do |link|
+        page = agent.get  'http://inglotcosmetics.com/' + link
+        shades = page.search('.product-color-item')
         shades.each do |shade|
-          name = shade.at('.name').text
-          polish = brand.polishes.where(name: name).first_or_create
+          number = shade.at('span').text
+          polish = brand.polishes.where(number: number).first_or_create
           if polish.new_record? 
-            polish.synonym_list = polish.name
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
             polish.user_id = current_user.id
-            polish.bottle_id = 194
             polish.draft = true
           end        
           if polish.draft
-            polish.collection = shade.at('.product-name').search('div').last.text
-            polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+            polish.remote_reference_url = 'http://inglotcosmetics.com' + shade.at('img').attr('src')
             @result += 1 if polish.save 
           end
         end
       end
+      
+      # ----------------------'Julep'
+      # brand = Brand.find_by_slug 'julep'
+      # 28.times do |i|
+      #   page = agent.get 'http://www.julep.com/nail/polish.html?page=' + (i + 1).to_s
+      #   shades = page.search('h5')
+      #   shades.each do |shade|
+      #     name = shade.at('.name').text
+      #     polish = brand.polishes.where(name: name).first_or_create
+      #     if polish.new_record? 
+      #       polish.synonym_list = polish.name
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #       polish.user_id = current_user.id
+      #       polish.bottle_id = 194
+      #       polish.draft = true
+      #     end        
+      #     if polish.draft
+      #       polish.collection = shade.at('.product-name').search('div').last.text
+      #       polish.remote_reference_url = 'http:' + shade.at('img').attr('src')
+      #       @result += 1 if polish.save 
+      #     end
+      #   end
+      # end
       
       # -------------eleccio
       # brand = Brand.find_by_slug 'eleccio'
