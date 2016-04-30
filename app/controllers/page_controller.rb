@@ -57,6 +57,7 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
+      brand = Brand.find_by_slug 'astor'
       ['products/nails/nail-color/color-care', 'node/2618', 'products/splash-collection', 'products/nails/nail-color/quick-shine', 'products/nails/nail-color/gel-shine'].each do |link|
         page = agent.get  'http://www.astorcosmetics.com/' + link
         shades = page.search('.node-color')
