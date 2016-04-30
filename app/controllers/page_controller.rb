@@ -58,7 +58,7 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug 'astor'
-      ['products/nails/nail-color/color-care', 'node/2618', 'products/splash-collection', 'products/nails/nail-color/quick-shine', 'products/nails/nail-color/gel-shine'].each do |link|
+      ['products/nails/nail-color/quick-shine'].each do |link|
         page = agent.get  'http://www.astorcosmetics.com/' + link
         shades = page.search('.node-color')
         shades.each do |shade|
@@ -72,7 +72,7 @@ class PageController < ApplicationController
             polish.draft = true
           end        
           if polish.draft
-            polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/N01_pack_shot_!!!_0.png'.sub('!!!', polish.number)
+            polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/18522_ast1633_format_web_quick_shine_01_pp01_!!!.png'.sub('!!!', polish.number)
             polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
             @result += 1 if polish.save 
           end
