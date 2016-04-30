@@ -58,26 +58,26 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
-      brand = Brand.find_by_slug 'christian-dior'
-      page = agent.get 'http://www.dior.com/beauty/en_us/fragrance-beauty/makeup/nails/nail-lacquers/dior-vernis/pr-diorvernis-y0002959-couturecolorgelshinelongwearnaillacquer.html'
-      shades = page.search('.js-swatch-hover')
-      shades.each do |shade|
-        name = shade.at('img').attr('alt').split(' - ')
-        polish = brand.polishes.where(name: name.last).first_or_create
-        if polish.new_record? 
-          polish.number = name.first
-          polish.synonym_list = polish.name unless polish.name.blank?
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-        end
-        if polish.draft?
-          polish.remote_reference_url = 'http://www.dior.com' + shade.at('img').attr('src')
-          @result += 1 if polish.save 
-        end        
-      end      
+      # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
+      # brand = Brand.find_by_slug 'christian-dior'
+      # page = agent.get 'http://www.dior.com/beauty/en_us/fragrance-beauty/makeup/nails/nail-lacquers/dior-vernis/pr-diorvernis-y0002959-couturecolorgelshinelongwearnaillacquer.html'
+      # shades = page.search('.js-swatch-hover')
+      # shades.each do |shade|
+      #   name = shade.at('img').attr('alt').split(' - ')
+      #   polish = brand.polishes.where(name: name.last).first_or_create
+      #   if polish.new_record? 
+      #     polish.number = name.first
+      #     polish.synonym_list = polish.name unless polish.name.blank?
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #   end
+      #   if polish.draft?
+      #     polish.remote_reference_url = 'http://www.dior.com' + shade.at('img').attr('src')
+      #     @result += 1 if polish.save 
+      #   end        
+      # end      
       # brand = Brand.find_by_slug 'inglot'
       # ['o2m.breathable.nail.enamel/products/141/1511','o2m.breathable.nail.enamel.soft.matte/products/141/1982','nail.enamel/products/141/1512','nail.enamel.dream/products/141/1513','nail.enamel.matte/products/141/1514'].each do |link|
       #   page = agent.get  'http://inglotcosmetics.com/' + link

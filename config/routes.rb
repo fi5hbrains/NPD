@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
   get 'maintenance', to: 'page#maintenance'
   get 'bottles', to: 'bottles#index'
+  get 'lab/user_list', to: 'users#index'
 
   resources :ads
 
