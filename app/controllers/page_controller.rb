@@ -57,6 +57,26 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
+       brand = Brand.find_by_slug 'illamasqua'
+      page = agent.get 'http://www.illamasqua.com/shop/nails/nail-varnishes/'
+      shades = page.search('.item')
+      shades.each do |shade|
+        name = shade.at('h4').text
+        unless name.blank?
+          polish = brand.polishes.where(name: name).first_or_create
+          if polish.new_record? 
+            polish.synonym_list = polish.name
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.draft = true
+          end
+          if polish.draft?
+            polish.remote_reference_url = shade.at('.product-image').attr('onmouseover').sub("this.src='",'').sub("';",'')
+            @result += 1 if polish.save 
+          end        
+        end
+      end      
       
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       # brand = Brand.find_by_slug 'christian-dior'
