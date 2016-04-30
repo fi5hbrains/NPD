@@ -64,7 +64,9 @@ class PageController < ApplicationController
         name = shade.at('h3').at('a').text.split('[')
         polish = brand.polishes.where(name: name.first).first_or_create
         polish.number = name.last.sub(']','')
-        if polish.new_record? 
+        if polish.new_record?
+          polish.prefix = 'quick shine'
+          polish.synonym_list = polish.name
           polish.brand_slug = brand.slug
           polish.brand_name = brand.name
           polish.user_id = current_user.id
