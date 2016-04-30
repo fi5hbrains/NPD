@@ -58,24 +58,22 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug 'astor'
-      ['products/nails/nail-color/quick-shine'].each do |link|
-        page = agent.get  'http://www.astorcosmetics.com/' + link
-        shades = page.search('.node-color')
-        shades.each do |shade|
-          name = shade.at('h3').at('a').text.split('[')
-          polish = brand.polishes.where(name: name.first).first_or_create
-          polish.number = name.last.sub(']','')
-          if polish.new_record? 
-            polish.brand_slug = brand.slug
-            polish.brand_name = brand.name
-            polish.user_id = current_user.id
-            polish.draft = true
-          end        
-          if polish.draft
-            polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/18522_ast1633_format_web_quick_shine_01_pp01_!!!.png'.sub('!!!', polish.number)
-            polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
-            @result += 1 if polish.save 
-          end
+      page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/quick-shine'
+      shades = page.search('.node-color')
+      shades.each do |shade|
+        name = shade.at('h3').at('a').text.split('[')
+        polish = brand.polishes.where(name: name.first).first_or_create
+        polish.number = name.last.sub(']','')
+        if polish.new_record? 
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+        end        
+        if polish.draft
+          polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/18522_ast1633_format_web_quick_shine_01_pp01_!!!.png'.sub('!!!', polish.number)
+          polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
+          @result += 1 if polish.save 
         end
       end
       
