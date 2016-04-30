@@ -57,26 +57,47 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-       brand = Brand.find_by_slug 'illamasqua'
-      page = agent.get 'http://www.illamasqua.com/shop/nails/nail-varnishes/'
-      shades = page.search('.item')
-      shades.each do |shade|
-        name = shade.at('h4').text
-        unless name.blank?
-          polish = brand.polishes.where(name: name).first_or_create
+      ['products/nails/nail-color/color-care', 'node/2618', 'products/splash-collection', 'products/nails/nail-color/quick-shine', 'products/nails/nail-color/gel-shine'].each do |link|
+        page = agent.get  'http://www.astorcosmetics.com/' + link
+        shades = page.search('.node-color')
+        shades.each do |shade|
+          name = shade.at('h3').at('a').text.split('[')
+          polish = brand.polishes.where(name: name.first).first_or_create
+          polish.number = name.last.sub(']','')
           if polish.new_record? 
-            polish.synonym_list = polish.name
             polish.brand_slug = brand.slug
             polish.brand_name = brand.name
             polish.user_id = current_user.id
             polish.draft = true
-          end
-          if polish.draft?
-            polish.remote_reference_url = shade.at('.product-image').attr('onmouseover').sub("this.src='",'').sub("';",'')
-            @result += 1 if polish.save 
           end        
+          if polish.draft
+            polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/N01_pack_shot_!!!_0.png'.sub('!!!', polish.number)
+            polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
+            @result += 1 if polish.save 
+          end
         end
-      end      
+      end
+      
+      #  brand = Brand.find_by_slug 'illamasqua'
+      # page = agent.get 'http://www.illamasqua.com/shop/nails/nail-varnishes/'
+      # shades = page.search('.item')
+      # shades.each do |shade|
+      #   name = shade.at('h4').text
+      #   unless name.blank?
+      #     polish = brand.polishes.where(name: name).first_or_create
+      #     if polish.new_record? 
+      #       polish.synonym_list = polish.name
+      #       polish.brand_slug = brand.slug
+      #       polish.brand_name = brand.name
+      #       polish.user_id = current_user.id
+      #       polish.draft = true
+      #     end
+      #     if polish.draft?
+      #       polish.remote_reference_url = shade.at('.product-image').attr('onmouseover').sub("this.src='",'').sub("';",'')
+      #       @result += 1 if polish.save 
+      #     end        
+      #   end
+      # end      
       
       # agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
       # brand = Brand.find_by_slug 'christian-dior'
