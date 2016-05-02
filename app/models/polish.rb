@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Polish < ActiveRecord::Base
   include Slugify, ColourMethods, MagickMethods
 
@@ -41,7 +42,7 @@ class Polish < ActiveRecord::Base
   def to_param; slug end
   
   def name_or_number; self.name || self.number end
-  def name_and_number; (self.number + ' ' unless self.number.blank?).to_s + self.name.to_s end
+  def name_and_number; self.number.to_s + (' – ' unless self.number.blank? || self.name.blank?).to_s + self.name.to_s end
   
   def name_or_number_to_slug
     self.prefix.squish! if self.prefix

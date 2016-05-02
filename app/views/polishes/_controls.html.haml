@@ -19,7 +19,7 @@
       = link_to lock_path(polish.id), method: :post, remote: true do
         <svg class='icon hoverBack withText'><use xlink:href='#lock' /></svg>
         = t 'controls.lock'
-      = link_to brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: params[:action] != 'show', data: { confirm: t('form.confirm') } do
+      = link_to brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: params[:action] != 'show', data: { confirm: t('form.confirm_polish', polish: polish.name) } do
         <svg class='icon hoverBack withText'><use xlink:href='#trash'/></svg>
         = t 'controls.delete'
 - else
@@ -28,4 +28,4 @@
     = link_to_unless polish.lock || polish.draft, "<svg class='icon hoverBack'><use xlink:href='#pour'  /></svg>".html_safe, redress_brand_polish_path(polish.brand_slug, polish.slug)
     = link_to_if !polish.lock, "<svg class='icon hoverBack'><use xlink:href='#dolly' /></svg>".html_safe, clone_brand_polish_path(polish.brand_slug, polish.slug), method: :post, remote: true
     = link_to "<svg class='icon hoverBack'><use xlink:href='##{polish.lock ? 'key' : 'lock' }' /></svg>".html_safe, lock_path(polish.id), method: :post, remote: true
-    = link_to_if !polish.lock, "<svg class='icon hoverBack'><use xlink:href='#trash' /></svg>".html_safe, brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: true, data: { confirm: t('form.confirm') }
+    = link_to_if !polish.lock, "<svg class='icon hoverBack'><use xlink:href='#trash' /></svg>".html_safe, brand_polish_path(polish.brand_slug, polish.slug), method: :delete, remote: true, data: { confirm: t('form.confirm_polish', polish: polish.name) }

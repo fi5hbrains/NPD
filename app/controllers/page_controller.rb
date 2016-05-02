@@ -58,7 +58,6 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       brand = Brand.find_by_slug 'astor'
-      brand.polishes.each{|p| p.synonym_list = p.name; p.save}
       page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'
       shades = page.search('.node-color')
       shades.each do |shade|

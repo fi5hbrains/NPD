@@ -176,21 +176,21 @@ class Box < ActiveRecord::Base
     path = Rails.root.join('public').to_s
     output_folder = "/downloads/#{self.user_id}"
     FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
-    headers = ['brand', 'name', 'colour', 'rating', 'notes'].map{|h| I18n.t('sheet.' + h)}
+    headers = ['brand', 'name','collection', 'year', 'colour', 'rating', 'notes'].map{|h| I18n.t('sheet.' + h)}
     package = Axlsx::Package.new
     package.workbook.add_worksheet(:name => self.user.slug + '_' + self.slug) do |sheet|
       heading = sheet.styles.add_style(alignment: {horizontal: :center, vertical: :center}, b: true, sz: 14, bg_color: 'A4C03C', fg_color: 'FFFFFF')
       sheet.add_row headers, style: heading, height: 20
       color_cell_styles = []
       self.polishes.each_with_index do |p,i|
-        name_or_number = !p.name.blank? ? !p.number.blank? ? (p.name + ' - ' + p.number) : p.name : p.number 
+        name_or_number = p.name_and_number
         colour_name = get_colour_names([p.h,p.s,p.l]).last
         fg_colour = (p.l.blank? || p.l > 50) ? '000000' : 'FFFFFF' 
         link = 'http://i-n-p-d.com/catalogue/' + p.brand_slug + '/' + p.slug
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         if p.h
           color_cell_styles << sheet.styles.add_style(bg_color: hsl_to_rgbhex(p.h,p.s,p.l), fg_color: fg_colour, alignment: {horizontal: :center})
-          sheet.add_row [p.brand_name, name_or_number, colour_name], style: [nil, nil, color_cell_styles.last], types: :string
+          sheet.add_row [p.brand_name, name_or_number, p.collection, p.year, colour_name], style: [nil, nil, nil, nil, color_cell_styles.last], types: :string
         else
           sheet.add_row [p.brand_name, name_or_number, colour_name]
         end
