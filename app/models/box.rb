@@ -190,7 +190,7 @@ class Box < ActiveRecord::Base
         img = path + (p.draft ? '/assets/' : '') + p.bottle_url('thumb')
         if p.h
           color_cell_styles << sheet.styles.add_style(bg_color: hsl_to_rgbhex(p.h,p.s,p.l), fg_color: fg_colour, alignment: {horizontal: :center})
-          sheet.add_row [p.brand_name, name_or_number, p.collection, p.year, colour_name], style: [nil, nil, nil, nil, color_cell_styles.last], types: :string
+          sheet.add_row [p.brand_name, name_or_number, p.collection, p.release_year, colour_name], style: [nil, nil, nil, nil, color_cell_styles.last], types: :string
         else
           sheet.add_row [p.brand_name, name_or_number, colour_name]
         end
