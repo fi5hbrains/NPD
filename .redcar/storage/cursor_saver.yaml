@@ -787,9 +787,6 @@ cursor_positions:
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 4339
     :timestamp: 2016-04-10 15:56:46 +04:00
-  - :path: db/schema.rb
-    :cursor_offset: 0
-    :timestamp: 2016-04-21 13:11:19 +04:00
   - :path: app/views/brands/show.html.haml
     :cursor_offset: 728
     :timestamp: 2016-04-29 20:31:40 +04:00
@@ -840,4 +837,7 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 8356
     :timestamp: 2016-04-24 15:24:26 +04:00
+  - :path: db/schema.rb
+    :cursor_offset: 8802
+    :timestamp: 2016-04-21 13:11:19 +04:00
 files_to_retain: 0

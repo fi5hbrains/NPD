@@ -57,27 +57,35 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      brand = Brand.find_by_slug 'astor'
-      page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'
-      shades = page.search('.node-color')
-      shades.each do |shade|
-        name = shade.at('h3').at('a').text.split('[')
-        polish = brand.polishes.where(name: name.first).first_or_create
-        polish.number = name.last.sub(']','')
-        if polish.new_record?
-          polish.prefix = 'splash'
-          polish.synonym_list = polish.name
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-        end        
-        if polish.draft
-          polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/17491-page-web-perfect-stay-cc-nude-02_!!!.png'.sub('!!!', polish.number)
-          polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
-          @result += 1 if polish.save 
-        end
+      Brand.where("slug like '%ʼ%'").each do |o|
+        o.slug = o.slug.gsub('ʼ',"’")
+        @result += 1
       end
+      Polish.where("slug like '%ʼ%'").each do |o|
+        o.slug = o.slug.gsub('ʼ',"’")
+        @result += 1
+      end
+      # brand = Brand.find_by_slug 'astor'
+      # page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'
+      # shades = page.search('.node-color')
+      # shades.each do |shade|
+      #   name = shade.at('h3').at('a').text.split('[')
+      #   polish = brand.polishes.where(name: name.first).first_or_create
+      #   polish.number = name.last.sub(']','')
+      #   if polish.new_record?
+      #     polish.prefix = 'splash'
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #   end        
+      #   if polish.draft
+      #     polish.remote_reference_url = 'http://www.astorcosmetics.com/sites/default/files/public/field_product_col_image/17491-page-web-perfect-stay-cc-nude-02_!!!.png'.sub('!!!', polish.number)
+      #     polish.layers.new(layer_type: 'base', c_base: shade.at('.color-swatch').attr('style')[18..24])
+      #     @result += 1 if polish.save 
+      #   end
+      # end
       
       #  brand = Brand.find_by_slug 'illamasqua'
       # page = agent.get 'http://www.illamasqua.com/shop/nails/nail-varnishes/'
