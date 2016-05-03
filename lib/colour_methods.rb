@@ -108,7 +108,7 @@ module ColourMethods
   
   def hsl_to_rgbhex h, s, l
     if s == 0
-      r = g = b = l
+      r = g = b = l.to_s(16)
     else
       s = s.to_f / 100
       l = l.to_f / 100
@@ -119,9 +119,9 @@ module ColourMethods
       g = (hue_to_rgb(p, q, h) * 255).round.to_s(16)
       b = (hue_to_rgb(p, q, h - 1.0 / 3) * 255).round.to_s(16)
     end
-    r = '0' + r if r.size ==1
-    g = '0' + g if g.size ==1
-    b = '0' + b if b.size ==1
+    r = '0' + r if r.size == 1
+    g = '0' + g if g.size == 1
+    b = '0' + b if b.size == 1
     return r + g + b
   end
 
