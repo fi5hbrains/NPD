@@ -48,7 +48,7 @@ class Box < ActiveRecord::Base
             end
             polish.number = number.gsub(/\.0$/, '') unless number.blank? || number.mb_chars.downcase == 'n/a'
             polish.collection = collection unless collection.blank?
-            polish.release_year = year if !year.blank? && (p.release_year.blank? || p.release_year == 0)
+            polish.release_year = year if !year.blank? 
             polish.brand_id = brand.id
             polish.brand_name = brand.name
             polish.brand_slug = brand.slug
@@ -57,7 +57,7 @@ class Box < ActiveRecord::Base
             polish.save
             stats[:new] += 1
             brands << brand
-          elsif (polish.collection.blank? && !collection.blank?) || (polish.release_year.blank? && !year.blank?)
+          elsif (polish.collection.blank? && !collection.blank?) || ((polish.release_year.blank? || polish.release_year == 0) && !year.blank?)
             polish.collection = collection unless collection.blank?
             polish.release_year = year unless year.blank? || year == '0'
             polish.save
