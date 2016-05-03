@@ -89,5 +89,10 @@
       = submit_tag nil, name: 'preview', class: 'hidden', id: 'submitFilterBrands'
       
     = render 'lists'
+    ToDo: design 
+    = link_to 'clear list', clear_user_box_path(@user,@box), method: :post
+    and 
+    = link_to 'destroy', user_box_path(@user,@box), method: :delete
+    buttons
   .clearFix
   

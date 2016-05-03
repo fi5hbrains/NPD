@@ -19,6 +19,15 @@ class BoxesController < ApplicationController
     render :show
   end
   
+  def clear
+    set_user
+    set_box
+    if @box.user_id == current_user.id
+      @box.box_items.each &:destroy
+    end
+    render :show
+  end
+  
   def import
     @box = current_user.boxes.find_by_slug(params[:id])
     @box.import(params[:spreadsheet])
@@ -57,6 +66,15 @@ class BoxesController < ApplicationController
     @box = Box.find(params[:id])
     @box.name = params[:box][:name]
     @box.save
+  end
+  
+  def destroy
+    set_user
+    set_box
+    if @box.user_id == current_user.id
+      @box.destroy
+    end
+    redirect_to @user
   end
   
   private
