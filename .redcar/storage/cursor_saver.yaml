@@ -670,12 +670,6 @@ cursor_positions:
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 2163
     :timestamp: 2016-04-16 07:24:34 +04:00
-  - :path: config/deploy.rb
-    :cursor_offset: 306
-    :timestamp: 2016-04-19 16:34:27 +04:00
-  - :path: Capfile
-    :cursor_offset: 697
-    :timestamp: 2016-04-14 22:53:11 +04:00
   - :path: app/assets/stylesheets/_variables.scss
     :cursor_offset: 273
     :timestamp: 2016-03-06 20:55:28 +03:00
@@ -838,4 +832,13 @@ cursor_positions:
   - :path: app/models/box.rb
     :cursor_offset: 0
     :timestamp: 2016-05-03 14:30:40 +04:00
+  - :path: config/deploy.rb
+    :cursor_offset: 390
+    :timestamp: 2016-04-19 16:34:27 +04:00
+  - :path: Capfile
+    :cursor_offset: 697
+    :timestamp: 2016-04-14 22:53:11 +04:00
+  - :path: public/googleba1109f49de9832e.html
+    :cursor_offset: 0
+    :timestamp: 2016-04-30 04:51:50 +04:00
 files_to_retain: 0

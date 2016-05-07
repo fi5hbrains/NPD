@@ -29,6 +29,7 @@ pickle-email-*.html
 /public/assets/brands/
 /public/assets/polish_parts/
 /public/assets/polish_tmp/
+/public/assets/defaults/avatars/
 /public/assets/users/
 
 # TODO Comment out these rules if you are OK with secrets being uploaded to the repo
