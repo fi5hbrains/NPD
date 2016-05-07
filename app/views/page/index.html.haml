@@ -11,7 +11,7 @@
       = f.hidden_field :locale, value: session[:locale] || I18n.locale
       #idName.table.wide100.tinyMargin
         .cell#avatar
-          = image_tag ( @suspect ? @suspect.avatar : 'defaults/avatars/0.png'), class: 'avatar'
+          = image_tag ( @suspect ? @suspect.avatar : '/assets/defaults/avatars/0.png'), class: 'avatar'
         .cell.wide100
           = f.text_field :name, placeholder: t('placeholder.name'), class: 'wide100 inline', autofocus: @focus == 'user_name'
       #idPwd.table.wide100
