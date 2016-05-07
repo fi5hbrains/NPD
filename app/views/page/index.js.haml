@@ -1,7 +1,7 @@
 $('#user_submit').html("#{@submit_text}").attr('name',"#{@button_name}");
 $('#status').text('#{@status}');
 - if @suspect
-  $('#avatar img').attr('src', "#{escape_javascript(@suspect.avatar.thumb.url)}");
+  $('#avatar img').attr('src', "#{escape_javascript('/assets' + @suspect.avatar.thumb.url)}");
   $('#user_password').attr('type','password');
 - else
   $('#avatar img').attr('src', '/assets/defaults/avatars/0.png');

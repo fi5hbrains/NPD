@@ -9,7 +9,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def default_url
     numbername = model.name.mb_chars.downcase.to_s.split('').sum{|char| char.ord}
     numbername -= 22 while numbername > 22
-    ActionController::Base.helpers.asset_path 'defaults/avatars/' + numbername.to_s + '.png'
+    ActionController::Base.helpers.asset_path '/defaults/avatars/' + numbername.to_s + '.png'
   end
   def extension_white_list; %w(webp jpg jpeg gif png) end  
   def filename

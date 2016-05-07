@@ -31,6 +31,7 @@ en:
     save: 'Save'
     update: 'Update'
     preview: 'Preview'
+    save_draft: 'Save as draft'
     confirm: 'Are you sure?'
     confirm_polish: 'Remove %{polish} polish?'
     edit: 'Edit'

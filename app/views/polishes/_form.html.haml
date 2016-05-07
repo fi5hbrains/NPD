@@ -96,6 +96,9 @@
     .block#preview.left
       #previewWrapper.previewWrapper.bigMargin
         = render'polish_preview'
+      .inlineWrapper.bigMargin<
+        = f.check_box :draft, checked: false
+        = f.label :draft, t('form.save_draft')
       .inlineWrapper<
         = f.submit t('form.preview'), name: 'preview'
         = f.submit t('form.action.' + params[:action]), name: params[:action]

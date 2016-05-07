@@ -57,14 +57,9 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      Brand.where("slug like '%ʼ%'").each do |o|
-        o.slug = o.slug.gsub('ʼ',"’")
-        @result += 1
-      end
-      Polish.where("slug like '%ʼ%'").each do |o|
-        o.slug = o.slug.gsub('ʼ',"’")
-        @result += 1
-      end
+      
+      Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'")
+      
       # brand = Brand.find_by_slug 'astor'
       # page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'
       # shades = page.search('.node-color')

@@ -127,7 +127,7 @@ class PolishesController < ApplicationController
     elsif @polish.valid?
       @polish.bottling_status = false
       rename_polish_files old_slug if old_slug != @polish.slug
-      @polish.draft = false
+      @polish.draft = params[:polish][:draft] == '1'
       @polish.save_version( params[:redress] ? 'redress' : 'update')
       if params[:redress]
         if old_bottle_id != @polish.bottle_id
