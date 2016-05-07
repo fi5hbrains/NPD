@@ -58,7 +58,19 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'")
+      Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
+        p_b = Polish.find_by_slug(p_a.sulg.gsub('... ', '').gsub('...','').gsub("'",'’'))
+        if p_a.draft
+          if p_b 
+            p_b.collection = p_a.collection if p_b.collection.blank?
+            p_b.release_year = p_a.release_year if p_b.release_year.blank? || p_b.release_year == 0
+            p_b.save
+            p_a.destroy
+          end
+        else
+          #alala
+        end
+      end
       
       # brand = Brand.find_by_slug 'astor'
       # page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'

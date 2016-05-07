@@ -357,9 +357,6 @@ cursor_positions:
     :timestamp: 2015-04-09 20:56:52 +04:00
     :selection_offset: 972
     :block_selection_mode: false
-  - :path: app/uploaders/avatar_uploader.rb
-    :cursor_offset: 812
-    :timestamp: 2015-12-23 21:43:39 +03:00
   - :path: db/migrate/20151223141253_add_follower_count_to_user.rb
     :cursor_offset: 189
     :timestamp: 2015-12-24 23:09:59 +03:00
@@ -543,9 +540,6 @@ cursor_positions:
   - :path: app/views/ads/index.html.haml
     :cursor_offset: 333
     :timestamp: 2016-03-27 12:30:51 +04:00
-  - :path: app/views/page/index.js.haml
-    :cursor_offset: 770
-    :timestamp: 2016-03-29 20:47:51 +04:00
   - :path: lib/magick_methods.rb
     :cursor_offset: 72
     :timestamp: 2015-10-03 15:42:43 +04:00
@@ -647,9 +641,6 @@ cursor_positions:
   - :path: config/deploy/production.rb
     :cursor_offset: 452
     :timestamp: 2015-11-03 21:35:31 +03:00
-  - :path: .gitignore
-    :cursor_offset: 643
-    :timestamp: 2015-12-17 15:15:31 +03:00
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
@@ -841,4 +832,13 @@ cursor_positions:
   - :path: public/googleba1109f49de9832e.html
     :cursor_offset: 0
     :timestamp: 2016-04-30 04:51:50 +04:00
+  - :path: .gitignore
+    :cursor_offset: 653
+    :timestamp: 2016-05-07 20:05:22 +04:00
+  - :path: app/uploaders/avatar_uploader.rb
+    :cursor_offset: 341
+    :timestamp: 2016-05-07 19:21:52 +04:00
+  - :path: app/views/page/index.js.haml
+    :cursor_offset: 743
+    :timestamp: 2016-05-07 19:24:19 +04:00
 files_to_retain: 0
