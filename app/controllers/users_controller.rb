@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       @user.assign_attributes(user_params.except(:avatar, :avatar_cache))
       render :edit
     else
-      if @user.update(user_params) 
+      if @user.update user_params
         unless params[:user][:avatar_cache].blank? && params[:user][:avatar].blank?
           @user.avatar.big_thumb.crop_and_resize(params[:user][:crop_coords])
           @user.avatar.thumb.resize(@user.avatar.big_thumb)
