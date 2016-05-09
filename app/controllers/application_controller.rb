@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
         where('id != ?', polish_id)
     elsif params[:polish].blank?
       if params[:action] == 'search'
-        @reset = true
+        @reset = true unless params[:brand_id]
       else
         @polishes = Polish.where(draft: false)
       end
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     end
     if @reset && params[:action] == 'search'
       render js: "window.location.href = '#{env["HTTP_REFERER"].split('?')[0].to_s }'"
-    elsif params[:action] == 'search' && brand
+    elsif params[:action] == 'search' && brand && params[:polish].blank? && params[:colour].blank?
       render js: "window.location.href = '/catalogue/#{brand.slug}'"
     else
       if @polishes && colour
