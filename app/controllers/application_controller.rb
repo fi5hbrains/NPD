@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     colour ||= [@polish.h, @polish.s, @polish.l] if @polish && spread
     sort ||= cookies[:polish_sort]
     page ||= params[:page]
-    per ||= 48
+    per ||= (params[:limit] || 48)
     
     if !params[:brand].blank?
       brand_ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "%#{params[:brand] || ''}%").
