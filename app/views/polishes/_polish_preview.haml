@@ -5,5 +5,8 @@
 - else
   - @layers.sort{|a,b| a.ordering <=> b.ordering}.each_with_index do |layer, i|
     - unless layer.layer_type == 'sand'
-      = image_tag @polish.layer_tmp(i) + stamp, id: 'layer_' + layer.ordering.to_s, class: 'absolute'
+      - if @polish.crackle_type
+        = image_tag @polish.crackled_url(@polish.layer_tmp(i)) + stamp, id: 'layer_' + layer.ordering.to_s, class: 'absolute'
+      - else
+        = image_tag @polish.layer_tmp(i) + stamp, id: 'layer_' + layer.ordering.to_s, class: 'absolute'
   = image_tag @polish.gloss_tmp + stamp, class: 'absolute screen'

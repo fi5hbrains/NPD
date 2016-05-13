@@ -179,6 +179,11 @@ en:
     edit_brand: 'Edit'
     brands: 'Brands'
     polish_count: 'Total polishes: %{total}, drafts: %{drafts}, unbottled: %{unbottled}'
+    crackle:
+      ceramic: 'Ceramic'
+      fiber: 'Fiber'
+      mud: 'Mud'
+      leather: 'Leather'
     particles:
       base: 'Base Layer'
       shimmer: 'Shimmer'
@@ -191,6 +196,7 @@ en:
       polish_update: Update Polish
     section:
       bottle: 'Bottle'
+      mask: 'Crackle Type'
       highlight: 'Highlight'
       add_layer: 'Add Particles'
       shimmer: 'Shimmer'

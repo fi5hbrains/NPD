@@ -58,7 +58,9 @@ class Polish < ActiveRecord::Base
     "/assets/polish_parts/opacity_#{self.opacity.blank? ? '90' : ((self.opacity / 10.0).round * 10)}.png" 
   end
   def gloss_tmp; self.tmp_folder + '/reflection.png' end
-  def layer_tmp ordering, magnet = ''; "#{self.tmp_folder}/layer_#{ordering}.png" end
+  def layer_tmp ordering; "#{self.tmp_folder}/layer_#{ordering}.png" end
+  def crackled_url source; source.sub('.png', '_crackled.png') end
+  def magnet_url source, magnet; source.sub('.png', "_#{magnet}.png") end
 
   def polish_folder  name_slug = self.slug, brand_slug = self.brand_slug;  "/assets/brands/#{brand_slug}/polish/#{name_slug}" end
   def coat_url coat_index = 0, name_slug = self.slug
@@ -106,7 +108,7 @@ class Polish < ActiveRecord::Base
     self.layers.each do |l|
       mergee['layers_attributes'][l.ordering] = l.attributes.except('id','polish_id','created_at','updated_at').reject{|k,v| v.blank?}
     end
-    attributes = self.attributes.except('id', 'name', 'bottle_id', 'slug', 'collection_id', 'brand_id', 'brand_name', 'brand_slug', 'coats_count', 'layers_count','draft', 'bottling_status', 'h', 's', 'l', 'h2', 's2', 's2', 'magnet', 'reference', 'user_id', 'created_at', 'updated_at', 'lock', 'votes_count', 'usages_count', 'comments_count', 'rating').reject{|k,v| v.blank?}
+    attributes = self.attributes.except('id', 'name', 'bottle_id', 'slug', 'collection_id', 'brand_id', 'brand_name', 'brand_slug', 'coats_count', 'layers_count','draft', 'bottling_status', 'crackle_type', 'h', 's', 'l', 'h2', 's2', 's2', 'magnet', 'reference', 'user_id', 'created_at', 'updated_at', 'lock', 'votes_count', 'usages_count', 'comments_count', 'rating').reject{|k,v| v.blank?}
     (mergee['layers_attributes'].size > 0 ? attributes.merge( mergee) : attributes).to_yaml
   end 
 
@@ -161,7 +163,11 @@ class Polish < ActiveRecord::Base
       layers.each do |layer|
         stack += path + coat("#{self.tmp_folder}/layer_#{layer.ordering}.png", c) + ' -composite ' unless %w(base sand).include?(layer.layer_type)
       end
+      if self.crackle_type
+        stack += " \\( +clone \\( #{path}/assets/polish_parts/mask_#{self.crackle_type}.png -negate -background black -alpha shape \\) -compose DstOut -composite  -write #{path + self.crackled_url(self.coat_url(c))} +delete \\) "
+      end
       Magick.convert "#{self.tmp_folder}/layer_0.png", stack + ' -depth 8', self.coat_url(c)
+      
     end
     generate_bottle
   end
@@ -178,7 +184,7 @@ class Polish < ActiveRecord::Base
     stack = path + self.coat_url   
     (self.coats_count - 1).times{|c| stack += " #{path + self.coat_url( c + 1)} -composite "}  
     unless redress
-      stack += " \\( +clone -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + self.gloss_preview_url} -channel RGB -compose Screen -composite \\( #{preview_mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite -write #{path + self.preview_url} +delete \\) "
+      stack += " \\( +clone #{"\\( #{path}/assets/polish_parts/mask_#{self.crackle_type}.png -negate -background black -alpha shape \\) -compose DstOut -composite" if self.crackle_type} -resize #{Defaults::BOTTLE.map{|c| c*2}.join('x')} -gravity South #{usm} #{path + self.gloss_preview_url} -channel RGB -compose Screen -composite \\( #{preview_mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite -write #{path + self.preview_url} +delete \\) "
     end
     stack = " \\( #{stack} \\) -resize 150x100\! -set option:distort:viewport #{Defaults::BOTTLE.map{|c| c*2}.join('x')}-58-65 -virtual-pixel Mirror -filter point -distort SRT 0 +repage #{usm} #{blur} "
     stack += " #{path + bottle.shadow_url} -channel RGB -compose Multiply -composite "

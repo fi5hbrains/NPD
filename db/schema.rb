@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421090633) do
+ActiveRecord::Schema.define(version: 20160513080537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(version: 20160421090633) do
     t.string   "magnet"
     t.string   "gloss_type"
     t.string   "gloss_colour"
-    t.string   "mask_type"
+    t.string   "crackle_type"
     t.boolean  "lock"
     t.string   "reference"
     t.datetime "created_at"
@@ -269,12 +269,12 @@ ActiveRecord::Schema.define(version: 20160421090633) do
   add_index "polishes", ["bottle_id"], name: "index_polishes_on_bottle_id", using: :btree
   add_index "polishes", ["brand_id"], name: "index_polishes_on_brand_id", using: :btree
   add_index "polishes", ["collection_id"], name: "index_polishes_on_collection_id", using: :btree
+  add_index "polishes", ["crackle_type"], name: "index_polishes_on_crackle_type", using: :btree
   add_index "polishes", ["gloss_type"], name: "index_polishes_on_gloss_type", using: :btree
   add_index "polishes", ["h"], name: "index_polishes_on_h", using: :btree
   add_index "polishes", ["h2"], name: "index_polishes_on_h2", using: :btree
   add_index "polishes", ["l"], name: "index_polishes_on_l", using: :btree
   add_index "polishes", ["l2"], name: "index_polishes_on_l2", using: :btree
-  add_index "polishes", ["mask_type"], name: "index_polishes_on_mask_type", using: :btree
   add_index "polishes", ["number"], name: "index_polishes_on_number", using: :btree
   add_index "polishes", ["opacity"], name: "index_polishes_on_opacity", using: :btree
   add_index "polishes", ["release_year"], name: "index_polishes_on_release_year", using: :btree

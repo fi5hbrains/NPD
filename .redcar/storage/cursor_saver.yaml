@@ -497,9 +497,6 @@ cursor_positions:
   - :path: app/views/polishes/_reference.html.haml
     :cursor_offset: 119
     :timestamp: 2016-03-04 14:59:30 +03:00
-  - :path: app/views/polishes/index.html.haml
-    :cursor_offset: 5
-    :timestamp: 2016-03-15 20:48:52 +03:00
   - :path: app/views/users/edit.html.haml
     :cursor_offset: 1551
     :timestamp: 2016-03-15 23:19:41 +03:00
@@ -636,12 +633,6 @@ cursor_positions:
   - :path: config/locales/ru.yml
     :cursor_offset: 31
     :timestamp: 2015-12-05 06:35:48 +03:00
-  - :path: app/views/boxes/show.html.haml
-    :cursor_offset: 3112
-    :timestamp: 2016-04-11 11:19:36 +04:00
-  - :path: Gemfile
-    :cursor_offset: 1006
-    :timestamp: 2016-04-14 22:47:34 +04:00
   - :path: config/database.yml
     :cursor_offset: 2849
     :timestamp: 2015-11-04 19:39:54 +03:00
@@ -680,9 +671,6 @@ cursor_positions:
     :timestamp: 2016-01-22 13:23:59 +03:00
     :selection_offset: 509
     :block_selection_mode: false
-  - :path: app/views/polishes/_layer_fields.html.haml
-    :cursor_offset: 844
-    :timestamp: 2016-04-20 13:50:43 +04:00
   - :path: app/assets/stylesheets/_base.scss
     :cursor_offset: 2861
     :timestamp: 2016-04-19 20:36:45 +04:00
@@ -764,18 +752,9 @@ cursor_positions:
   - :path: app/controllers/user_sessions_controller.rb
     :cursor_offset: 429
     :timestamp: 2016-02-14 22:21:23 +03:00
-  - :path: db/schema.rb
-    :cursor_offset: 8802
-    :timestamp: 2016-04-21 13:11:19 +04:00
-  - :path: app/controllers/boxes_controller.rb
-    :cursor_offset: 0
-    :timestamp: 2016-05-03 05:57:52 +04:00
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
-  - :path: app/models/box.rb
-    :cursor_offset: 0
-    :timestamp: 2016-05-03 14:30:40 +04:00
   - :path: Capfile
     :cursor_offset: 697
     :timestamp: 2016-04-14 22:53:11 +04:00
@@ -804,22 +783,9 @@ cursor_positions:
     :timestamp: 2016-05-05 19:05:21 +04:00
     :selection_offset: 2138
     :block_selection_mode: false
-  - :path: config/locales/en.yml
-    :cursor_offset: 1037
-    :timestamp: 2016-05-07 19:15:34 +04:00
   - :path: config/deploy.rb
     :cursor_offset: 399
     :timestamp: 2016-05-07 20:04:08 +04:00
-  - :path: app/views/layouts/application.html.haml
-    :cursor_offset: 1268
-    :timestamp: 2016-05-09 21:47:22 +04:00
-    :selection_offset: 1180
-    :block_selection_mode: false
-  - :path: public/code.txt
-    :cursor_offset: 0
-    :timestamp: 2016-05-09 16:17:22 +04:00
-    :selection_offset: 151
-    :block_selection_mode: false
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2258
     :timestamp: 2016-05-07 20:25:38 +04:00
@@ -828,23 +794,14 @@ cursor_positions:
     :timestamp: 2016-05-07 19:11:55 +04:00
     :selection_offset: 8392
     :block_selection_mode: false
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 2905
-    :timestamp: 2016-05-08 18:36:54 +04:00
   - :path: app/controllers/users_controller.rb
     :cursor_offset: 911
     :timestamp: 2016-05-08 04:21:27 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 2656
-    :timestamp: 2016-05-02 06:30:08 +04:00
   - :path: app/views/polishes/_polish.html.haml
     :cursor_offset: 1542
     :timestamp: 2016-01-29 21:19:17 +03:00
     :selection_offset: 1547
     :block_selection_mode: false
-  - :path: app/views/page/index.html.haml
-    :cursor_offset: 613
-    :timestamp: 2016-05-08 04:41:57 +04:00
   - :path: app/views/page/index.js.haml
     :cursor_offset: 173
     :timestamp: 2016-05-07 20:40:22 +04:00
@@ -854,4 +811,50 @@ cursor_positions:
   - :path: app/helpers/application_helper.rb
     :cursor_offset: 1111
     :timestamp: 2016-04-10 15:56:46 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 2839
+    :timestamp: 2016-05-12 13:23:40 +04:00
+  - :path: app/views/boxes/show.html.haml
+    :cursor_offset: 2487
+    :timestamp: 2016-05-03 05:56:20 +04:00
+  - :path: app/controllers/boxes_controller.rb
+    :cursor_offset: 2521
+    :timestamp: 2016-05-11 10:49:01 +04:00
+  - :path: public/code.txt
+    :cursor_offset: 0
+    :timestamp: 2016-05-10 06:53:47 +04:00
+    :selection_offset: 743
+    :block_selection_mode: false
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 1456
+    :timestamp: 2016-05-09 22:18:56 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 2656
+    :timestamp: 2016-05-02 06:30:08 +04:00
+  - :path: Gemfile
+    :cursor_offset: 1006
+    :timestamp: 2016-04-14 22:47:34 +04:00
+  - :path: app/views/polishes/_layer_fields.html.haml
+    :cursor_offset: 3114
+    :timestamp: 2016-04-20 13:50:43 +04:00
+    :selection_offset: 3121
+    :block_selection_mode: false
+  - :path: app/views/polishes/index.html.haml
+    :cursor_offset: 167
+    :timestamp: 2016-05-13 10:36:23 +04:00
+  - :path: app/views/page/index.html.haml
+    :cursor_offset: 1972
+    :timestamp: 2016-05-13 10:36:29 +04:00
+  - :path: app/views/layouts/application.html.haml
+    :cursor_offset: 10319
+    :timestamp: 2016-05-13 10:43:30 +04:00
+  - :path: db/migrate/20160513080537_fix_column_name.rb
+    :cursor_offset: 113
+    :timestamp: 2016-05-13 12:06:46 +04:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 4708
+    :timestamp: 2016-05-13 12:07:44 +04:00
+  - :path: db/schema.rb
+    :cursor_offset: 9936
+    :timestamp: 2016-05-13 12:07:01 +04:00
 files_to_retain: 0

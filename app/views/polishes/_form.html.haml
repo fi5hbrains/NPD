@@ -84,10 +84,19 @@
             %span{id: o}
             = t 'lab.section.' + o
       = f.hidden_field :opacity, value: @polish.opacity || 87.5, id: 'baseOpacity'
+      %h3= t('lab.section.mask')
+      .array<
+        - %w(ceramic fiber mud leather).each do |m|
+          .arrayItem>
+            = f.radio_button :crackle_type, m, class: 'uncheckable', checked: (m == @polish.crackle_type)
+            = f.label "crackle_type_#{m}", id: m, class: 'uncheckable' do
+              = 'lalala'
+              = t 'lab.crackle.' + m
       %h3= t('lab.section.text_input')
       .resizable.relative
         = text_area_tag :yaml, nil, class: 'resizable', rows: nil, cols: nil
         %pre.resizable <span></span>
+
     - if simple_form
       .inlineWrapper<
         = f.submit t('form.action.' + params[:action]), name: params[:action]    

@@ -88,6 +88,7 @@ class PolishesController < ApplicationController
     @polish.brand_slug = @brand.slug
     @polish.user_id = current_user.id
     set_name
+    set_crackle
     all_layers_bottom_up
     if params[:preview]
       generate_preview params[:changes]
@@ -114,6 +115,7 @@ class PolishesController < ApplicationController
     old_slug = @polish.slug
     @polish.assign_attributes polish_params
     set_name
+    set_crackle
     @polish.brand_name = @brand.name
     @polish.brand_slug = @brand.slug
     @polish.user_id = current_user.id
@@ -231,10 +233,15 @@ class PolishesController < ApplicationController
   def set_name
     @polish.name = params[:polish][:synonym_list].split(';')[0].try(:strip)
   end
+  def set_crackle
+    if params[:polish][:crackle_type].blank?
+      @polish.crackle_type = nil
+    end
+  end
   def polish_params
     if params[:yaml].blank?
       params.require(:polish).permit(
-        :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, 
+        :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, :crackle_type,
         :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
         {layers_attributes: [ 
           :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
@@ -310,13 +317,13 @@ class PolishesController < ApplicationController
       top_layer = layer.layer_type
 
       if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < @polish.coats_count)
-        base = "#{tmp_folder}/layer_#{layer.ordering}.png"    
+        base = @polish.layer_tmp(layer.ordering)
         layer.opacity ||= 100
         
         if layer.layer_type == 'flake'
           flake_shadow_tmp = "#{tmp_folder}/layer_#{layer.ordering}_flake_shadow.mpc"
           mask = parts + 'flake_' + (layer.particle_size / 34 * 50).to_s + 
-              '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png'
+            '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png'
           Magick.convert mask + ' -page +0+1 -background none -flatten -blur 0x3 ', '\\( ' + path + mask + ' -negate \\) -compose Multiply -composite -brightness-contrast -20 ', flake_shadow_tmp
         end
         
@@ -427,13 +434,13 @@ class PolishesController < ApplicationController
                 Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
                 if layer.magnet_intensity > 0
                   magnet = @polish.magnet
-                  Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png')
+                  Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, @polish.magnet_url(base,magnet)
                 end
               else
                 Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
                 if layer.magnet_intensity > 0
                   Defaults::MAGNETS.each do |magnet|
-                    Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, base.gsub('.png', '_' + magnet + '.png') unless magnet == @polish.magnet
+                    Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, @polish.magnet_url(base,magnet) unless magnet == @polish.magnet
                   end
                 end
               end
@@ -441,8 +448,11 @@ class PolishesController < ApplicationController
           end
         end
       end
+      if @polish.crackle_type
+        Magick.convert @polish.layer_tmp(layer.ordering), "\\( #{path + parts}mask_#{@polish.crackle_type}.png -negate -background black -alpha shape \\) -compose DstOut -composite ", @polish.crackled_url(@polish.layer_tmp(layer.ordering))
+      end
     end
-  
+    
     ref_type = @polish.gloss_type
     noisiest = noise_density.sort_by{|k,v| v}[2]
     ref_density = 'default'
@@ -472,7 +482,7 @@ class PolishesController < ApplicationController
       Magick.convert parts + sand_ref, "+level-colors ,'#{@polish.gloss_colour}'", reflection  
 
     else
-      Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'", reflection   
+      Magick.convert parts + ref_source, "+level-colors ,'#{@polish.gloss_colour}'" + (@polish.crackle_type ? " #{path + parts}mask_#{@polish.crackle_type}.png -compose Multiply -composite" : ''), reflection   
     end
   end
 
