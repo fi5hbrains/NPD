@@ -60,7 +60,8 @@ class PageController < ApplicationController
       b = Brand.find_by_name('O·P·I')
       b.slug = 'opi'
       b.save
-      
+      @result = b.inspect
+
       # Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
       #   p_b = Polish.find_by_slug(p_a.sulg.gsub('... ', '').gsub('...','').gsub("'",'’'))
       #   if p_a.draft
