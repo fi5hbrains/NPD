@@ -57,13 +57,16 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
 
-      Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
-        p_b = Polish.find_by_slug(p_a.slug.gsub('... ', '…').gsub('...','…').gsub("'",'’'))
-        if p_a.draft && p_b
+      brand = Brand.find_by_slug('opi')
+      brand.polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
+        p_b = brand.polishes.find_by_slug(p_a.slug.gsub('... ', '…').gsub('...','…').gsub("'",'’'))
+        p_b ||= brand.polishes.new(slug: p_a.slug.gsub('... ', '…').gsub('...','…').gsub("'",'’'))
+        if p_a.draft
           if p_b 
             p_b.collection = p_a.collection if p_b.collection.blank?
             p_b.release_year = p_a.release_year if p_b.release_year.blank? || p_b.release_year == 0
             p_b.synonym_list = p_a.name.gsub('... ', '…').gsub('...','…').gsub("'",'’') + ';' + p_a.name
+            p_b.draft = true if p_b.new_record?
             if p_b.save
               p_a.destroy
               @result += 1
