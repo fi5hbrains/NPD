@@ -57,7 +57,9 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      @result = Brand.find_by_name('O·P·I').inspect
+      b = Brand.find_by_name('O·P·I')
+      b.slug = 'opi'
+      b.save
       
       # Brand.find_by_slug('opi').polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
       #   p_b = Polish.find_by_slug(p_a.sulg.gsub('... ', '').gsub('...','').gsub("'",'’'))
