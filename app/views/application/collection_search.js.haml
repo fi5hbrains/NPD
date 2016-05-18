@@ -2,7 +2,7 @@ $('#filterPolish').val($('#secondarySearchPolish').val());
 - if params[:box_sort]
   var active = $('#sort').find('.active');
   var input = active.next();
-  var replacee = $('#sort').find('label[for=#{params[:box_sort]}]');
+  var replacee = $('#sort').find('label[for=#{'box_sort_' + params[:box_sort]}]');
   active.after('<label for=' + input.attr('id') + '>' + active.html() + '</label>');
   active.remove()
   replacee.after('<span class="active">' + replacee.html() + '</span>');

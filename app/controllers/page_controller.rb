@@ -56,26 +56,23 @@ class PageController < ApplicationController
     @result = 'wrong user, sorry'
     if current_user && current_user.name == 'bobin'
       @result = 0
+      agent = Mechanize.new
 
-      brand = Brand.find_by_slug('opi')
-      brand.polishes.where("name ilike '%...%' OR name ilike '%''%'").each do |p_a|
-        p_b = brand.polishes.find_by_slug(p_a.slug.gsub('... ', '…').gsub('...','…').gsub("'",'’'))
-        p_b ||= brand.polishes.new(slug: p_a.slug.gsub('... ', '…').gsub('...','…').gsub("'",'’'))
-        if p_a.draft
-          if p_b 
-            p_b.collection = p_a.collection if p_b.collection.blank?
-            p_b.release_year = p_a.release_year if p_b.release_year.blank? || p_b.release_year == 0
-            p_b.synonym_list = p_a.name.gsub('... ', '…').gsub('...','…').gsub("'",'’') + ';' + p_a.name
-            p_b.draft = true if p_b.new_record?
-            if p_b.save
-              p_a.destroy
-              @result += 1
-            end
-          end
-        else
-          #alala
-        end
-      end
+      # brand = Brand.find_by_slug('essie')
+      # page = agent.get 'http://www.essie.com/Colors.aspx'
+      # shades = page.search('.product-wrapper')
+      # shades.each do |shade|
+      #   polish = brand.polishes.where(name: shade.at('h2').text).first_or_create
+      #   if polish.new_record? 
+      #     polish.synonym_list = polish.name
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.layers.new(layer_type: 'base', c_base: shade.at('.bottle').attr('style')[18..-1])
+      #     polish.draft = true
+      #     @result += 1 if polish.save 
+      #   end        
+      # end
       
       # brand = Brand.find_by_slug 'astor'
       # page = agent.get  'http://www.astorcosmetics.com/products/nails/nail-color/color-care'
@@ -431,23 +428,6 @@ class PageController < ApplicationController
       #       end        
       #     end
       #   end
-      # end
-      
-      # ---------------- essie
-      # brand = Brand.find_by_slug('essie')
-      # page = agent.get 'http://www.essie.com/Colors.aspx'
-      # shades = page.search('.product-wrapper')
-      # shades.each do |shade|
-      #   polish = brand.polishes.where(name: shade.at('h2').text).first_or_create
-      #   if polish.new_record? 
-      #     polish.synonym_list = polish.name
-      #     polish.brand_slug = brand.slug
-      #     polish.brand_name = brand.name
-      #     polish.user_id = current_user.id
-      #     polish.layers.new(layer_type: 'base', c_base: shade.at('.bottle').attr('style')[18..-1])
-      #     polish.draft = true
-      #     @result += 1 if polish.save 
-      #   end        
       # end
       
       # -------- Update Polish Preview

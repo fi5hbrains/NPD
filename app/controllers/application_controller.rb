@@ -210,7 +210,7 @@ class ApplicationController < ActionController::Base
     when 'slug'; 'slug ASC'
     when 'rating'; 'rating DESC'
     when 'colour'; 'h ASC'
-    when 'created_at'; 'box_items.created_at ASC' end
+    when 'created_at'; 'box_items.created_at DESC' end
   end
   
   def charming_charlie colour = nil
