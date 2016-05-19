@@ -85,7 +85,8 @@ class BoxesController < ApplicationController
     @brands = @polishes.pluck(:brand_id, :brand_name).uniq.sort{|a,b| a[1].mb_chars.downcase <=> b[1].mb_chars.downcase}
     @polishes = @polishes.page(params[:page]).per(15000)
     if @user == current_user
-      @notes = @user.notes.where(polish_id: @polishes.pluck(:id)).pluck(:polish_id, :body)
+      @notes = {}
+      @user.notes.where(polish_id: @polishes.pluck(:id)).each{|note| @notes[note.polish_id] = note.body}
     end
     @lists = @user.boxes    
   end

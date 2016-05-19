@@ -58,6 +58,29 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
 
+      brand = Brand.find_by_slug 'lapierre'
+      page = agent.get  'http://lapierrecosmetics.com/shop-2'
+      shades = page.search('.ProductList-item')
+      shades.each do |shade|
+        name = shade.at('h1').text
+        polish = brand.polishes.where(name: name.first).first_or_create
+        if polish.new_record?
+          if polish.name.match(/'/)
+            polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+          else
+            polish.synonym_list = polish.name
+          end
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+        end        
+        if polish.draft
+          polish.remote_reference_url = shade.at('.ProductList-image--alt').try(:attr, 'data-image')
+          @result += 1 if polish.save 
+        end
+      end
+      
       # brand = Brand.find_by_slug('essie')
       # page = agent.get 'http://www.essie.com/Colors.aspx'
       # shades = page.search('.product-wrapper')
