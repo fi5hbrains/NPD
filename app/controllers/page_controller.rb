@@ -58,28 +58,28 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
 
-      brand = Brand.find_by_slug 'modish-polish'
-      page = agent.get  'http://modishpolish.com/collections/all-polishes'
-      shades = page.search('.bespoke-product-image')
-      shades.each do |shade|
-        name = shade.at('.title').text
-        polish = brand.polishes.where(name: name).first_or_create
-        if polish.new_record?
-          if polish.name.match(/'/)
-            polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
-          else
-            polish.synonym_list = polish.name
-          end
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-        end        
-        if polish.draft
-          polish.remote_reference_url = 'http:' + shade.at('img.hidden').try(:attr, 'src')
-          @result += 1 if polish.save 
-        end
-      end
+      # brand = Brand.find_by_slug 'modish-polish'
+      # page = agent.get  'http://modishpolish.com/collections/all-polishes'
+      # shades = page.search('.bespoke-product-image')
+      # shades.each do |shade|
+      #   name = shade.at('.title').text
+      #   polish = brand.polishes.where(name: name).first_or_create
+      #   if polish.new_record?
+      #     if polish.name.match(/'/)
+      #       polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+      #     else
+      #       polish.synonym_list = polish.name
+      #     end
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #   end        
+      #   if polish.draft
+      #     polish.remote_reference_url = 'http:' + shade.at('img.hidden').try(:attr, 'src')
+      #     @result += 1 if polish.save 
+      #   end
+      # end
       # brand = Brand.find_by_slug 'lapierre'
       # page = agent.get  'http://lapierrecosmetics.com/shop-2'
       # shades = page.search('.ProductList-item')

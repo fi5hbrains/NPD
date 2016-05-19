@@ -23,6 +23,8 @@ class ApplicationController < ActionController::Base
     @reset = false
     colour ||= params[:colour]
     spread ||= params[:spread]
+    collection ||= params[:collection]
+    year ||= params[:year]
     if brand || params[:brand_id]
       brand = Brand.find_by_slug(brand || params[:brand_id])
     elsif @brand
@@ -68,13 +70,16 @@ class ApplicationController < ActionController::Base
     end
     if @reset && params[:action] == 'search'
       render js: "window.location.href = '#{env["HTTP_REFERER"].split('?')[0].to_s }'"
-    elsif params[:action] == 'search' && brand && params[:polish].blank? && params[:colour].blank?
-      render js: "window.location.href = '/catalogue/#{brand.slug}'"
+    elsif params[:action] == 'search' && brand
+      render js: "window.location.href = '/catalogue/#{brand.slug}?#{'polish=' + params[:polish] unless params[:polish].blank?}&#{'colour=' + params[:colour] unless params[:colour].blank?}'"
     else
-      if @polishes && colour
-        @polishes = @polishes.coloured( colour, spread )
-      end
       if @polishes
+        @polishes = @polishes.coloured( colour, spread ) if colour
+        if collection
+          collection_ids = Collection.where('name ilike ?', "#{collection}%") 
+          @polishes = @polishes.where(collection_id: collection_ids)
+        end
+        @polishes = @polishes.where(release_year: year) if year
         @polishes = @polishes.order(sort).page(page).per(per)
       end
     end

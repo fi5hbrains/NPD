@@ -124,7 +124,7 @@ module ApplicationHelper
   
   def ad_items names, quantity = 1
     records = Ad.where(name: names)
-    if params[:colour]
+    if !params[:colour].blank?
       records = records.coloured( colour_to_hsl( params[:colour]) << 50 )
     elsif @polish
       records = records.coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity])
