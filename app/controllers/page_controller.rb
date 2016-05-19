@@ -63,7 +63,7 @@ class PageController < ApplicationController
       shades = page.search('.ProductList-item')
       shades.each do |shade|
         name = shade.at('h1').text
-        polish = brand.polishes.where(name: name.first).first_or_create
+        polish = brand.polishes.where(name: name).first_or_create
         if polish.new_record?
           if polish.name.match(/'/)
             polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
