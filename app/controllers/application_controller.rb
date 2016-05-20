@@ -149,6 +149,7 @@ class ApplicationController < ActionController::Base
         @box.polishes.where(brand_id: @brand_ids)
       end.order(set_polish_sort).page(params[:page])
     end
+    set_notes if current_user && @box.user_id == current_user.id
   end
   def collect_search
     @reset = false
@@ -214,7 +215,7 @@ class ApplicationController < ActionController::Base
     case cookies[:box_sort]
     when 'slug'; 'slug ASC'
     when 'rating'; 'rating DESC'
-    when 'colour'; 'h ASC'
+    when 'colour'; 'draft ASC, lightness_group DESC, h ASC'
     when 'created_at'; 'box_items.created_at DESC' end
   end
   
@@ -234,6 +235,12 @@ class ApplicationController < ActionController::Base
       @result << {image: images.first.attr('data-yo-src'), hover: images.size > 1,  link: link, name: name, price: price}
     end
     return @result
+  end
+  
+  def set_notes
+    @notes = {}
+    @user ||= User.find @box.user_id
+    @user.notes.where(polish_id: @polishes.pluck(:id)).each{|note| @notes[note.polish_id] = note.body}
   end
   private
   

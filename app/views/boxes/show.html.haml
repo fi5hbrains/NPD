@@ -1,6 +1,5 @@
 .main
   #List.block.left.relative<
-    = @notes.inspect
     = text_field_tag 'box[name]', @box.name, placeholder: 'List Name', id:'boxNameField',style: ('display:none' if !params[:edit] || %(collection wishlist giveaway).include?(@box.slug) ), class: 'formIndent bigMargin smallMargin', 'data-id' => @box.id
     %h1#boxName.smallMargin{style: ('display:none' if params[:edit] && !%(collection wishlist giveaway).include?(@box.slug) )}<
       %span<= @box.adapt_name

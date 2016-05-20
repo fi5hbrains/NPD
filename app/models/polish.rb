@@ -95,7 +95,10 @@ class Polish < ActiveRecord::Base
       base = self.layers.detect{|l| l.layer_type == 'base'}
       hsl = colour_to_hsl((base.c_multi if !base.c_multi.blank?) || (base.c_duo if !base.c_duo.blank?) || base.c_base)
       hsl2 = colour_to_hsl(base.c_base) if (base.c_multi if !base.c_multi.blank?) || (base.c_duo if !base.c_duo.blank?)
-      self.h = hsl[0]; self.s = hsl[1]; self.l = hsl[2]
+      self.h = hsl[0]
+      self.s = hsl[1]
+      self.l = hsl[2]
+      self.lightness_group = (self.l/50.0).round
       if hsl2
         self.h2 = hsl2[0]; self.s2 = hsl2[1]; self.l2 = hsl2[2]
       end

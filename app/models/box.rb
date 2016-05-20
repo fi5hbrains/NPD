@@ -85,14 +85,14 @@ class Box < ActiveRecord::Base
     return stats
   end
   
-  def export_image bg = 'transparent', columns = 4, note = false, bottle = false, nail = false
+  def export_image collection, bg = 'transparent', columns = 4, note = false, bottle = false, nail = false
     path = Rails.root.join('public').to_s
     output_folder = "/downloads/#{self.user_id}"
     FileUtils.mkdir_p(path + output_folder) unless File.directory?(path + output_folder)    
     row_items = []
     rows = []
     stack = ''
-    (polishes = self.polishes).each_with_index do |polish,index|
+    (polishes = collection).each_with_index do |polish,index|
       row_items << polish
       if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
         row_items.reverse.each_with_index do |p,i|

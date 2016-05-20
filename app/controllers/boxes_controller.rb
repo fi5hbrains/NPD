@@ -50,7 +50,7 @@ class BoxesController < ApplicationController
       columns = params[:columns].to_i
       columns = 9 if columns > 9 
       columns = 1 if columns < 1
-      @box.export_image(params[:bg_colour], columns, params[:note], params[:bottle], params[:nail])
+      @box.export_image(@polishes, params[:bg_colour], columns, params[:note], params[:bottle], params[:nail], params[:rating])
       send_file Rails.root.join('public').to_s + "/downloads/#{@box.user_id}/#{@box.slug}.png", type: 'image/png', disposition: 'inline'
     end
   end
@@ -84,10 +84,7 @@ class BoxesController < ApplicationController
     @polishes = @box.polishes.order(set_polish_sort)
     @brands = @polishes.pluck(:brand_id, :brand_name).uniq.sort{|a,b| a[1].mb_chars.downcase <=> b[1].mb_chars.downcase}
     @polishes = @polishes.page(params[:page]).per(15000)
-    if @user == current_user
-      @notes = {}
-      @user.notes.where(polish_id: @polishes.pluck(:id)).each{|note| @notes[note.polish_id] = note.body}
-    end
+    set_notes if @user == current_user
     @lists = @user.boxes    
   end
   

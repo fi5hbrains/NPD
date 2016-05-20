@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513080537) do
+ActiveRecord::Schema.define(version: 20160520031955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,7 @@ ActiveRecord::Schema.define(version: 20160513080537) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "prefix"
+    t.integer  "lightness_group"
   end
 
   add_index "polishes", ["bottle_id"], name: "index_polishes_on_bottle_id", using: :btree

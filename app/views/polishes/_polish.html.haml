@@ -9,7 +9,7 @@
   
   - if big_polish
     .bigPolish{'data-id' => polish.id}>
-      - if @box && current_user == @user
+      - if @box && @box.user_id == current_user.id
         - if add && @box
           = link_to collect_path(polish.id, box: @box.slug, from_list: true), method: :post, remote: true do
             = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)

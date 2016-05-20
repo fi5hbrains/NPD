@@ -57,7 +57,12 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-
+      Polish.all.each do |p|
+        unless p.draft
+          p.lightness_group = (p.l/50.0).round 
+          @result += 1 if p.save
+        end
+      end
       # brand = Brand.find_by_slug 'modish-polish'
       # page = agent.get  'http://modishpolish.com/collections/all-polishes'
       # shades = page.search('.bespoke-product-image')
