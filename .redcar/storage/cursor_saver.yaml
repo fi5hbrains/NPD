@@ -296,9 +296,6 @@ cursor_positions:
   - :path: app/controllers/entries_controller.rb
     :cursor_offset: 1613
     :timestamp: 2015-04-15 08:39:09 +04:00
-  - :path: app/models/box_item.rb
-    :cursor_offset: 35
-    :timestamp: 2015-09-05 21:50:35 +04:00
   - :path: app/views/boxes/create.js.haml
     :cursor_offset: 45
     :timestamp: 2015-11-28 01:27:42 +03:00
@@ -413,9 +410,6 @@ cursor_positions:
   - :path: app/views/polishes/clone.js.haml
     :cursor_offset: 140
     :timestamp: 2015-09-17 16:13:58 +04:00
-  - :path: app/views/polishes/collect.js.haml
-    :cursor_offset: 195
-    :timestamp: 2016-01-03 20:41:15 +03:00
   - :path: app/views/application/search.html.haml
     :cursor_offset: 169
     :timestamp: 2015-10-10 22:10:24 +04:00
@@ -741,11 +735,6 @@ cursor_positions:
   - :path: app/models/brand.rb
     :cursor_offset: 729
     :timestamp: 2016-03-02 09:54:02 +03:00
-  - :path: app/models/defaults.rb
-    :cursor_offset: 2140
-    :timestamp: 2016-05-05 19:05:21 +04:00
-    :selection_offset: 2138
-    :block_selection_mode: false
   - :path: config/deploy.rb
     :cursor_offset: 399
     :timestamp: 2016-05-07 20:04:08 +04:00
@@ -780,9 +769,6 @@ cursor_positions:
   - :path: app/views/page/index.html.haml
     :cursor_offset: 1972
     :timestamp: 2016-05-13 10:36:29 +04:00
-  - :path: app/views/layouts/application.html.haml
-    :cursor_offset: 10319
-    :timestamp: 2016-05-13 10:43:30 +04:00
   - :path: db/migrate/20160513080537_fix_column_name.rb
     :cursor_offset: 113
     :timestamp: 2016-05-13 12:06:46 +04:00
@@ -822,9 +808,6 @@ cursor_positions:
   - :path: app/views/polishes/_form.html.haml
     :cursor_offset: 4100
     :timestamp: 2016-05-13 21:31:44 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 1322
-    :timestamp: 2016-05-13 21:07:04 +04:00
   - :path: app/views/polishes/_polish_preview.haml
     :cursor_offset: 611
     :timestamp: 2016-05-13 19:54:10 +04:00
@@ -859,4 +842,21 @@ cursor_positions:
   - :path: db/migrate/20160520031955_add_lightness_group_to_polishes.rb
     :cursor_offset: 138
     :timestamp: 2016-05-20 07:54:02 +04:00
+  - :path: app/views/layouts/application.html.haml
+    :cursor_offset: 10319
+    :timestamp: 2016-05-13 10:43:30 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 4391
+    :timestamp: 2016-05-20 07:33:53 +04:00
+  - :path: app/models/defaults.rb
+    :cursor_offset: 4084
+    :timestamp: 2016-05-05 19:05:21 +04:00
+    :selection_offset: 4086
+    :block_selection_mode: false
+  - :path: app/models/box_item.rb
+    :cursor_offset: 100
+    :timestamp: 2015-09-05 21:50:35 +04:00
+  - :path: app/views/polishes/collect.js.haml
+    :cursor_offset: 82
+    :timestamp: 2016-05-20 15:18:42 +04:00
 files_to_retain: 0

@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
       @brands = Brand.
         where(id: brand_ids).
         where('slug != ?', params[:brand_id] || '=').
-        sort_by_polishes_count.first(10)
+        sort_by_polishes_count.first(12)
     elsif !params[:polish].blank?
       polish_ids = Synonym.
         where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
@@ -147,7 +147,7 @@ class ApplicationController < ActionController::Base
         @box.polishes
       else
         @box.polishes.where(brand_id: @brand_ids)
-      end.order(set_polish_sort).page(params[:page])
+      end.order(set_polish_sort)
     end
     set_notes if current_user && @box.user_id == current_user.id
   end

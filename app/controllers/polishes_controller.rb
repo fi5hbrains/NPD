@@ -69,12 +69,9 @@ class PolishesController < ApplicationController
       end
       if @is_in 
         @user_votes = current_user.votes.where(votable_type: 'Polish', votable_id: params[:polish_id])
-        @polishes = Polish.where('id NOT IN (?)', collection.map( &:polish_id)).page(params[:page_b]).per(12)
-        @next_item = @polishes.last if @polishes.count >= 12
+        polishes = Polish.where('id NOT IN (?)', collection.map( &:polish_id)).first(12 * (params[:page_b] || 1).to_i + 1)
+        @next_item = polishes.last if polishes.count > 12
         @added_item = Polish.find(@item.polish_id)
-      else
-        @polishes = @box.polishes.page(params[:page_b])
-        @next_item = @polishes.last if @polishes.count >= 24
       end 
       
     end

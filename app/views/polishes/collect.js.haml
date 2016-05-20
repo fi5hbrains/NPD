@@ -1,13 +1,15 @@
 - if params[:from_list]
-  var polish = $('.bigPolish[data-id=#{params[:polish_id]}]');
-  polish.remove();
+  $('.bigPolish[data-id=#{params[:polish_id]}]').remove();
   - if @is_in
     $('#secondaryResults').append('#{j(render(@added_item, big_polish: true).html_safe)}');    
+    if ($('#searchBrand').val() == '' && $('#searchPolish').val() == ''){
+    - if @next_item
+      console.log('add to results');
+      $('#results').append('#{j(render(@next_item, add: true).html_safe)}');    
+    } else {
     - if @next_item
       $('#searchResults').append('#{j(render(@next_item, add: true).html_safe)}');    
-  - else
-    - if @next_item
-      $('#secondaryResults').append('#{j(render(@next_item, remove: true).html_safe)}');    
+    }
 -else
   - if %w(collection wishlist giveaway).include? @box.slug
     - if @is_in
