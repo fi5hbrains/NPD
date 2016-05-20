@@ -76,8 +76,8 @@ class PageController < ApplicationController
           polish.user_id = current_user.id
           polish.draft = true
         end        
-        if polish.draft
-          image = shade.at('.image').at('a').attr('class') == 'has-second-image' ? shade.at('.image').at('a').attr('style').sub("background: url('", '').sub("') no-repeat;",'') : shade.at('.image').at('img').attr('src')
+        if true # polish.draft
+          image = shade.at('.image').search('a').last.attr('class') == 'has-second-image' ? shade.at('.image').at('a').attr('style').sub("background: url('", '').sub("') no-repeat;",'') : shade.at('.image').at('img').attr('src')
           polish.remote_reference_url = image
           @result += 1 if polish.save 
         end
