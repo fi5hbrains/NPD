@@ -6,8 +6,14 @@
   - big_polish ||= (add || remove)
   - no_vote ||= add
   - no_brand = (@brand.try(:slug) == polish.brand_slug) if no_brand == nil
+  - break_on_brand ||= false
   
   - if big_polish
+    -if break_on_brand
+      - @current_slug = polish.brand_slug
+      - if @old_slug != @current_slug
+        %h3= polish.brand_name
+      - @old_slug = @current_slug
     .bigPolish{'data-id' => polish.id}>
       - if @box && @box.user_id == current_user.id
         - if add && @box

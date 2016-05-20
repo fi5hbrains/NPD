@@ -49,7 +49,7 @@
     
     #secondarySearchResults<
     #secondaryResults<
-      = render @polishes, big_polish: true
+      = render @polishes, big_polish: true, break_on_brand: cookies[:box_sort] == 'slug'
     - if is_owner    
       #gather{class: (params[:action] == 'gather' ? 'menu active' : 'menu' )}
         .current

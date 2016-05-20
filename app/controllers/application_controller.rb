@@ -213,7 +213,7 @@ class ApplicationController < ActionController::Base
   def in_box? box, polish; (box || []).detect{|item| item.polish_id == polish.id} end 
   def set_polish_sort
     case cookies[:box_sort]
-    when 'slug'; 'slug ASC'
+    when 'slug'; 'brand_slug ASC, slug ASC'
     when 'rating'; 'rating DESC'
     when 'colour'; 'draft ASC, lightness_group DESC, h ASC'
     when 'created_at'; 'box_items.created_at DESC' end
