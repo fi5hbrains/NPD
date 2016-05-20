@@ -300,6 +300,10 @@ class PolishesController < ApplicationController
     FileUtils.mkdir_p(path + tmp_folder)  
     
     @layers.each_with_index do |layer, i|
+      layer.c_base ||= '#F00'
+      layer.highlight_colour ||= 'rgba(255,255,255,.2)'
+      layer.shadow_colour ||= 'rgba(0,0,0,.4)'
+      
       layer.ordering = i
       Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
       unless %w(base sand).include? layer.layer_type
