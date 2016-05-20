@@ -12,9 +12,9 @@ $('#filterPolish').val($('#secondarySearchPolish').val());
   - @brand_ids.each{|b| check_boxes += (check_box_tag('filter_brand[' + b + ']', nil, true, id: nil))}
   $('#filterBrand').html('#{j(check_boxes).html_safe}');
   - if @reset
-    $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
+    $('#secondaryResults').html('#{j(render @polishes, big_polish: true, break_on_brand: cookies[:box_sort] == 'slug').html_safe}');  
   -else
-    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true).html_safe}');  
+    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true, break_on_brand: cookies[:box_sort] == 'slug').html_safe}');  
 - else  
   $('#filterBrand').html('');
 
@@ -23,9 +23,9 @@ $('#filterPolish').val($('#secondarySearchPolish').val());
   $('#secondarySearchResults').hide();
   $('#secondarySearch').find('input').removeAttr('disabled').focus();
   - if @polishes
-    $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');
+    $('#secondaryResults').html('#{j(render @polishes, big_polish: true, break_on_brand: cookies[:box_sort] == 'slug').html_safe}');
 - else
   $('#secondaryResults').hide();
   $('#secondarySearchResults').show();
   - if @polishes
-    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true).html_safe}');
+    $('#secondarySearchResults').html('#{j(render @polishes, big_polish: true, break_on_brand: cookies[:box_sort] == 'slug').html_safe}');

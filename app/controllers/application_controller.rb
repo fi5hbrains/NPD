@@ -139,7 +139,7 @@ class ApplicationController < ActionController::Base
         else
           @polishes.
             where("id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR (id IN (#{box_polish_ids.inspect.gsub('[', '').gsub(']','')}) AND number ilike ?)", "%#{params[:polish]}%")
-        end.order(set_polish_sort).first(24)
+        end.order(set_polish_sort)
       end
     else
       @reset = true
