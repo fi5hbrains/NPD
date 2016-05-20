@@ -57,8 +57,7 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      html_dir = File.dirname('')
-      page = agent.get("file:///Users/fish/Dropbox/u.html")
+      page = agent.get("file://" + Rails.root.join("u.html").to_s)
       # page = agent.get 'http://www.misacosmetics.com/all-nail-polish-colors#/cream-tags/sort=p.sort_order/order=ASC/limit=120'
       brand = Brand.find_by_slug 'misa'
       shades = page.search('.product-grid-item')
