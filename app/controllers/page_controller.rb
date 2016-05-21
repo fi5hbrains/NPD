@@ -57,31 +57,61 @@ class PageController < ApplicationController
     if current_user && current_user.name == 'bobin'
       @result = 0
       agent = Mechanize.new
-      page = agent.get("file://" + Rails.root.join("u.html").to_s)
-      # page = agent.get 'http://www.misacosmetics.com/all-nail-polish-colors#/cream-tags/sort=p.sort_order/order=ASC/limit=120'
-      brand = Brand.find_by_slug 'misa'
-      shades = page.search('.product-grid-item')
+      
+      brand = Brand.find_by_slug 'nubar'
+      page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-580efnproducts47curpage-2-47-c.asp")
+      shades = page.search('.single-product-category')
       shades.each do |shade|
-        name = shade.at('.name').at('a').text.split(': ')
-        polish = brand.polishes.where(name: name[1]).first_or_create
-        if polish.new_record?
-          if polish.name.match(/'/)
-            polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
-          else
-            polish.synonym_list = polish.name
+        name = shade.at('.single-product-head').at('a').text
+        name = name.split(' - ') if name.match(/ - /)
+        if name[0].match(/ NU/)
+          polish = brand.polishes.where(name: name[0].split(' NU-')[0]).first_or_create
+          if polish.new_record?
+            if polish.name.match(/'/)
+              polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+            else
+              polish.synonym_list = polish.name
+            end
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.draft = true
+          end        
+          if polish.draft
+            polish.number = 'NU-' + name[0].split(' NU-')[1]
+            polish.collection = name[1].split(' Collec')[0] if name[1].match(/ Collec/)
+            image = 'http://www.foreverbeaux.com/' + shade.at('img').attr('src')
+            polish.remote_reference_url = image
+            @result += 1 if polish.save 
           end
-          polish.number = name[0]
-          polish.brand_slug = brand.slug
-          polish.brand_name = brand.name
-          polish.user_id = current_user.id
-          polish.draft = true
-        end        
-        if polish.draft
-          image = shade.at('.image').search('a').last.attr('class') == 'has-second-image' ? shade.at('.image').search('a').last.attr('style').sub("background: url('", '').sub("') no-repeat;",'') : shade.at('.image').at('img').attr('src')
-          polish.remote_reference_url = image
-          @result += 1 if polish.save 
         end
       end
+      
+      # page = agent.get("file://" + Rails.root.join("u.html").to_s)
+      # # page = agent.get 'http://www.misacosmetics.com/all-nail-polish-colors#/cream-tags/sort=p.sort_order/order=ASC/limit=120'
+      # brand = Brand.find_by_slug 'misa'
+      # shades = page.search('.product-grid-item')
+      # shades.each do |shade|
+      #   name = shade.at('.name').at('a').text.split(': ')
+      #   polish = brand.polishes.where(name: name[1]).first_or_create
+      #   if polish.new_record?
+      #     if polish.name.match(/'/)
+      #       polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+      #     else
+      #       polish.synonym_list = polish.name
+      #     end
+      #     polish.brand_slug = brand.slug
+      #     polish.brand_name = brand.name
+      #     polish.user_id = current_user.id
+      #     polish.draft = true
+      #   end        
+      #   if polish.draft
+      #     polish.number = name[0]
+      #     image = shade.at('.image').search('a').last.attr('class') == 'has-second-image' ? shade.at('.image').search('a').last.attr('style').sub("background: url('", '').sub("') no-repeat;",'') : shade.at('.image').at('img').attr('src')
+      #     polish.remote_reference_url = image
+      #     @result += 1 if polish.save 
+      #   end
+      # end
       
       # brand = Brand.find_by_slug 'modish-polish'
       # page = agent.get  'http://modishpolish.com/collections/all-polishes'
