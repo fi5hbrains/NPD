@@ -61,8 +61,13 @@ class PageController < ApplicationController
       brand = Brand.find_by_slug 'nubar'
       brand.polishes.each do |p|
         unless p.number.blank?
-          p.number = p.number[0..7] 
-          p.save
+          p.name = p.name.split('ubar ').last
+          if p.name.match(/'/)
+            p.synonym_list = p.name.gsub("'",'’') + ';' + p.name
+          else
+            p.synonym_list = p.name
+          end
+          @result += 1 if p.save
         end
       end
       
