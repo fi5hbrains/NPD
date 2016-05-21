@@ -59,46 +59,34 @@ class PageController < ApplicationController
       agent = Mechanize.new
       
       brand = Brand.find_by_slug 'nubar'
-      brand.polishes.each do |p|
-        unless p.number.blank?
-          p.name = p.name.split('ubar ').last
-          if p.name.match(/'/)
-            p.synonym_list = p.name.gsub("'",'’') + ';' + p.name
-          else
-            p.synonym_list = p.name
+      page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-47-c.asp")
+      shades = page.search('.single-product-category')
+      brand.polishes.where(draft: true).where('name ilike ?', "%nubar%").each{|p| p.destroy}
+      shades.each do |shade|
+        name = shade.at('.single-product-head').at('a').text
+        name = name.split(' - ') if name.match(/ - /)
+        if name[0].match(/ NU/)
+          polish = brand.polishes.where(name: name[0].split(' NU-')[0].sub('Nubar ', '')).first_or_create
+          if polish.new_record?
+            if polish.name.match(/'/)
+              polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+            else
+              polish.synonym_list = polish.name
+            end
+            polish.brand_slug = brand.slug
+            polish.brand_name = brand.name
+            polish.user_id = current_user.id
+            polish.draft = true
+          end        
+          if polish.draft
+            polish.number = name[0].match( /(NU-[^\s]+)/).to_s
+            polish.collection = name[1].split(' Collec')[0] if name[1].match(/ Collec/)
+            image = 'http://www.foreverbeaux.com/' + shade.at('img').attr('src')
+            polish.remote_reference_url = image
+            @result += 1 if polish.save 
           end
-          @result += 1 if p.save
         end
       end
-      
-      # brand = Brand.find_by_slug 'nubar'
-      # page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-47-c.asp")
-      # shades = page.search('.single-product-category')
-      # shades.each do |shade|
-      #   name = shade.at('.single-product-head').at('a').text
-      #   name = name.split(' - ') if name.match(/ - /)
-      #   if name[0].match(/ NU/)
-      #     polish = brand.polishes.where(name: name[0].split(' NU-')[0][0..4]).first_or_create
-      #     if polish.new_record?
-      #       if polish.name.match(/'/)
-      #         polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
-      #       else
-      #         polish.synonym_list = polish.name
-      #       end
-      #       polish.brand_slug = brand.slug
-      #       polish.brand_name = brand.name
-      #       polish.user_id = current_user.id
-      #       polish.draft = true
-      #     end        
-      #     if polish.draft
-      #       polish.number = 'NU-' + name[0].split(' NU-')[1]
-      #       polish.collection = name[1].split(' Collec')[0] if name[1].match(/ Collec/)
-      #       image = 'http://www.foreverbeaux.com/' + shade.at('img').attr('src')
-      #       polish.remote_reference_url = image
-      #       @result += 1 if polish.save 
-      #     end
-      #   end
-      # end
       
       # page = agent.get("file://" + Rails.root.join("u.html").to_s)
       # # page = agent.get 'http://www.misacosmetics.com/all-nail-polish-colors#/cream-tags/sort=p.sort_order/order=ASC/limit=120'
