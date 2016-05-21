@@ -59,7 +59,7 @@ class PageController < ApplicationController
       agent = Mechanize.new
       
       brand = Brand.find_by_slug 'nubar'
-      page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-580efnproducts47curpage-2-47-c.asp")
+      page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-47-c.asp")
       shades = page.search('.single-product-category')
       shades.each do |shade|
         name = shade.at('.single-product-head').at('a').text
