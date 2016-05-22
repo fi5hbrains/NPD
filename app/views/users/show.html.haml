@@ -33,7 +33,7 @@
         %h3= t 'user.headers.quests'
       %h3
         = t 'user.headers.invites'
-        - if current_user.name == 'bobin'
+        - if current_user.name == 'bobin' || current_user.name == 'Kirsty'
           = link_to get_invite_path, class: 'relative tipped', method: 'post', remote: true do
             .tooltip.tippedR.noWrap
               .tip
