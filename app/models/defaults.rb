@@ -6,6 +6,7 @@ class Defaults < ActiveRecord::Base
   PASS_COLOUR = %w(azure biege blue brown crimson green indigo orange pink purple red scarlet taupe teal violet yellow)
   LAYER = { particle_size: 50, particle_density: 25, opacity: 95 }
   MAGNETS = %w(d_stripes tree star hatch h_stripes)
+  STACK_LIMIT = 350
   GLITTERS = %w(hexagon circle stick square star heart snow halfmoon rhombus)
   PER = {
     lab_polishes: 48

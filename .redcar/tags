@@ -1,4 +1,4 @@
-1463925522
+1463993250
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -67,6 +67,7 @@ PolishesControllerTest	/Users/fish/Dropbox/work/Interpol/test/controllers/polish
 PolishesHelper	/Users/fish/Dropbox/work/Interpol/app/helpers/polishes_helper.rb	module PolishesHelper
 RESERVED_NAMES	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  RESERVED_NAMES =
 ReferenceUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/reference_uploader.rb	class ReferenceUploader 
+STACK_LIMIT	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  STACK_LIMIT =
 SYSTEM_NAMES	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  SYSTEM_NAMES =
 Slugify	/Users/fish/Dropbox/work/Interpol/lib/slugify.rb	module Slugify
 Synonym	/Users/fish/Dropbox/work/Interpol/app/models/synonym.rb	class Synonym 
@@ -213,8 +214,8 @@ index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  d
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/ads_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def index
-index	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
+index	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def index
 init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function init()
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 
