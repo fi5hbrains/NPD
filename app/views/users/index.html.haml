@@ -1,5 +1,7 @@
 = @users.size
 - @users.each do |user|
   %br
-  = link_to (image_tag user.avatar.url('thumb'), class: 'avatar tiny') + user.name + (' <b>online</b>'.html_safe  if user.logged_in?).to_s, user 
+  = link_to (image_tag user.avatar.url('thumb'), class: 'avatar tiny') + user.name, user 
+  - if user.logged_in?
+    %b *
   
