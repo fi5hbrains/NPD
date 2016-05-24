@@ -343,9 +343,7 @@ class PolishesController < ApplicationController
           Magick.convert particle_hl_base, '', particle_hl unless FileTest.exist? particle_hl
           Magick.convert shape, "-scale #{particle_scale}%", shape_tmp
           Magick.convert shape, "-negate -blur 0x6 -scale #{particle_scale}% +level-colors '#444',Black ", shape_shadow_tmp
-          
-          multiplier = (layer.particle_density * 20 / particle_scale).round + rand(2)
-          
+                    
           scale_offset = 50
           x_offset = 0 
           shadow_shift_x = 0
@@ -376,16 +374,14 @@ class PolishesController < ApplicationController
               '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png -geometry +0-' + 
               rand(452).to_s 
             elsif layer.layer_type == 'glitter' 
+              multiplier = (layer.particle_density * 20 / particle_scale).round + rand(2)
               mask             = "#{tmp_folder}/layer_#{layer.ordering.to_s}_mask.png"
               particles_hl     = "#{tmp_folder}/layer_#{layer.ordering.to_s}_highlight.png"
               holo             = "#{tmp_folder}/layer_#{layer.ordering.to_s}_holo.png"
-              particles_shadow = "#{tmp_folder}/layer_#{layer.ordering.to_s}_particles_shadow.png"
-
-              size = layer.particle_size  
+              particles_shadow = "#{tmp_folder}/layer_#{layer.ordering.to_s}_particles_shadow.png" 
               pass = 0
-
+              size = layer.particle_size  
               while multiplier > 0 do
-
                 mask_stack[c]      = ''
                 shadow_stack[c]    = ''
                 highlight_stack[c] = ''            
@@ -404,10 +400,10 @@ class PolishesController < ApplicationController
                   highlight_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_hl} -geometry -#{rnd_x}-#{rnd_y} \\) -compose In -composite \\) -alpha on -compose Over -composite "
                   holo_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_holo} -geometry -#{rand((572 - holo_scale_k * 4) * holo_scale_k / 100 )}-#{rand((900 - holo_scale_k * 4) * holo_scale_k / 100)} \\) -compose In -composite \\) -alpha on -compose Over -composite "
                 end    
-                mask = coat(mask,c)
-                holo = coat(holo,c)
-                particles_shadow = coat(particles_shadow,c)
-                particles_hl = coat(particles_hl,c)
+                mask_pass = coat(mask,c)
+                holo_pass = coat(holo,c)
+                particles_shadow_pass = coat(particles_shadow,c)
+                particles_hl_pass = coat(particles_hl,c)
                 
                 if pass == 0
                   mask_base = fill('black')
@@ -415,29 +411,33 @@ class PolishesController < ApplicationController
                   p_hl_base = fill('rgba(0,0,0,0)')
                   holo_base = fill('rgba(0,0,0,0)')
                 else
-                  mask_base = mask
-                  p_shadow_base = particles_shadow
-                  p_hl_base = particles_hl
-                  holo_base = holo             
+                  mask_base = mask_pass
+                  p_shadow_base = particles_shadow_pass
+                  p_hl_base = particles_hl_pass
+                  holo_base = holo_pass            
                 end
-  
+
                 if c == 0
-                  Magick.convert mask_base, mask_stack[c], mask                
-                  Magick.convert p_shadow_base, shadow_stack[c], particles_shadow
-                  Magick.convert p_hl_base, highlight_stack[c], particles_hl
-                  Magick.convert holo_base, holo_stack[c], holo  if layer.holo_intensity > 0
+                  Magick.convert mask_base, mask_stack[c], mask_pass            
+                  Magick.convert p_shadow_base, shadow_stack[c], particles_shadow_pass
+                  Magick.convert p_hl_base, highlight_stack[c], particles_hl_pass
+                  Magick.convert holo_base, holo_stack[c], holo_pass if layer.holo_intensity > 0
                 else
-                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('black'), mask_stack[c], mask                
-                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('black'), shadow_stack[c], particles_shadow
-                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('rgba(0,0,0,0)'), highlight_stack[c], particles_hl
-                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert fill('rgba(0,0,0,0)'), holo_stack[c], holo  if layer.holo_intensity > 0
+                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert mask_base, mask_stack[c], mask_pass              
+                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert p_shadow_base, shadow_stack[c], particles_shadow_pass
+                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert p_hl_base, highlight_stack[c], particles_hl_pass
+                  Magick.delay( queue: current_user.id, layer_ordering: layer.ordering ).convert holo_base, holo_stack[c], holo_pass if layer.holo_intensity > 0
                 end
                 multiplier -= Defaults::STACK_LIMIT
                 pass += 1
               end
+              mask = coat(mask,c)
+              holo = coat(holo,c)
+              particles_shadow = coat(particles_shadow,c)
+              particles_hl = coat(particles_hl,c)
             end
-            
             unless layer.layer_type == 'sand'
+
               convert_list = "\
 #{"\\( #{path + c_duo} -background '#{layer.c_duo}' -alpha shape \\) -composite " unless layer.c_duo.blank?} \
 #{"\\( #{path + c_multi} -background '#{layer.c_multi}' -alpha shape \\) -composite " unless layer.c_multi.blank?} \
