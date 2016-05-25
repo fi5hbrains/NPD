@@ -7,6 +7,11 @@ class UsersController < ApplicationController
   end
 
   def show
+    if @user == current_user
+      @events = @user.events
+      @events.each{|e| e.update(new: false)}
+      @user.update(events_count: 0)
+    end
   end
 
   def new

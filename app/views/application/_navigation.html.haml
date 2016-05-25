@@ -19,9 +19,9 @@
       
       - if current_user
         .right.noWrap.avatar
-          - if true
+          - if current_user.events_count > 0
             .notifyWrapper
-              .notify 53 
+              .notify= current_user.events_count
           = link_to image_tag(current_user.avatar.thumb.url, id: 'currentUser', class: 'avatar'), current_user
     
       

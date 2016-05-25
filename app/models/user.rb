@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :votes, class_name: 'UserVote', dependent: :destroy
   has_many :comments
+  has_many :events, dependent: :destroy
   has_many :followings, foreign_key: 'followee_id', dependent: :destroy
   has_many :followers, through: :followings
   has_many :followeeings, foreign_key: 'follower_id', class_name: 'Following', dependent: :destroy
@@ -59,12 +60,16 @@ class User < ActiveRecord::Base
   def cancel_invite
     invite = Invite.where(used_by: nil, word: invite_phrase.try(:strip)).first
     if invite
-      invite.used_by = id
+      invite.used_by = self.id
       invite.save
     end
+    create_event invite
   end
   def give_invites; 2.times {Invite.give_to self}; end
   def make_default_boxes
     %w(collection giveaway wishlist).each{ |box| self.boxes.new(name: box).save }
+  end
+  def create_event invite
+    Event.new(event_type: 'user', user_id: invite.user_id, author: name).save
   end
 end

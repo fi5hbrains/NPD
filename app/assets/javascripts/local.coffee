@@ -65,7 +65,7 @@ $(document).on 'ready page:load', ->
       type: 'POST'
       dataType: "script"
 
-  $(document).on 'mouseenter', '.selectable', ->
+  $(document).on 'mouseenter click', '.selectable', ->
     SelectText $(this)
     return
 

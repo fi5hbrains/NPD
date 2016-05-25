@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520031955) do
+ActiveRecord::Schema.define(version: 20160525072926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,19 @@ ActiveRecord::Schema.define(version: 20160520031955) do
   add_index "entries", ["colour"], name: "index_entries_on_colour", using: :btree
   add_index "entries", ["title"], name: "index_entries_on_title", using: :btree
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id",                   null: false
+    t.integer  "source_id"
+    t.string   "author"
+    t.string   "event_type"
+    t.text     "body"
+    t.boolean  "new",        default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "followings", force: :cascade do |t|
     t.integer  "followee_id"
@@ -370,6 +383,7 @@ ActiveRecord::Schema.define(version: 20160520031955) do
     t.string   "current_login_ip"
     t.integer  "follower_count",    default: 0
     t.integer  "followee_count",    default: 0
+    t.integer  "events_count",      default: 0
   end
 
   add_index "users", ["last_request_at"], name: "index_users_on_last_request_at", using: :btree
