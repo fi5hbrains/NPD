@@ -24,6 +24,7 @@ class Comment < ActiveRecord::Base
     parent = find_root(self.commentable)
     parent.comments_count -= 1 if parent.comments_count
     parent.save
+    Event.where(eventable_id: self.id, eventable_type: 'Comment').each(&:destroy)
   end
   
   def find_root parent

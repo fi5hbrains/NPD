@@ -159,16 +159,18 @@ ActiveRecord::Schema.define(version: 20160525072926) do
   add_index "entries", ["user_id"], name: "index_entries_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.integer  "user_id",                   null: false
-    t.integer  "source_id"
+    t.integer  "user_id",                       null: false
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
     t.string   "author"
     t.string   "event_type"
     t.text     "body"
-    t.boolean  "new",        default: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "new",            default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
+  add_index "events", ["eventable_id", "eventable_type"], name: "index_events_on_eventable_id_and_eventable_type", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "followings", force: :cascade do |t|

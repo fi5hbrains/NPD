@@ -1,4 +1,4 @@
-1464165881
+1464174844
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -76,6 +76,7 @@ SYSTEM_NAMES	/Users/fish/Dropbox/work/Interpol/app/models/defaults.rb	  SYSTEM_N
 Slugify	/Users/fish/Dropbox/work/Interpol/lib/slugify.rb	module Slugify
 Synonym	/Users/fish/Dropbox/work/Interpol/app/models/synonym.rb	class Synonym 
 TestCase	/Users/fish/Dropbox/work/Interpol/test/test_helper.rb	class ActiveSupport::TestCase
+Tmp	/Users/fish/Dropbox/work/Interpol/db/migrate/20160525111230_tmp.rb	class Tmp 
 Usage	/Users/fish/Dropbox/work/Interpol/app/models/usage.rb	class Usage 
 User	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	class User 
 UserSession	/Users/fish/Dropbox/work/Interpol/app/models/user_session.rb	class UserSession 
@@ -113,8 +114,9 @@ change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160325065144_create_ads.rb
 change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160421090633_add_index_to_polishes.rb	  def change
 change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160513080537_fix_column_name.rb	  def change
 change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160520031955_add_lightness_group_to_polishes.rb	  def change
-change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160525031737_create_events.rb	  def change
 change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160525072926_add_events_count_to_user.rb	  def change
+change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160525031737_create_events.rb	  def change
+change	/Users/fish/Dropbox/work/Interpol/db/migrate/20160525111230_tmp.rb	  def change
 charming_charlie	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def charming_charlie 
 clear	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def clear
 clear_tmp_folder	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def clear_tmp_folder

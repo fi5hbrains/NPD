@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   after_create  :update_counter
   belongs_to :user
+  belongs_to :eventable, polymorphic: true
   
   private
   

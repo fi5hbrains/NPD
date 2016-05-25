@@ -738,9 +738,6 @@ cursor_positions:
   - :path: config/locales/en.yml
     :cursor_offset: 4708
     :timestamp: 2016-05-13 12:07:44 +04:00
-  - :path: db/schema.rb
-    :cursor_offset: 9936
-    :timestamp: 2016-05-13 12:07:01 +04:00
   - :path: app/views/users/index.html.haml
     :cursor_offset: 36
     :timestamp: 2016-05-18 09:26:02 +04:00
@@ -865,9 +862,6 @@ cursor_positions:
     :timestamp: 2016-03-26 09:31:22 +03:00
     :selection_offset: 237
     :block_selection_mode: false
-  - :path: db/migrate/20150413140304_initialize.rb
-    :cursor_offset: 3969
-    :timestamp: 2015-11-25 20:09:43 +03:00
   - :path: db/migrate/20160525031737_create_events.rb
     :cursor_offset: 215
     :timestamp: 2016-05-25 08:44:50 +04:00
@@ -875,5 +869,15 @@ cursor_positions:
     :cursor_offset: 125
     :timestamp: 2016-05-25 11:33:24 +04:00
     :selection_offset: 112
+    :block_selection_mode: false
+  - :path: db/migrate/20150413140304_initialize.rb
+    :cursor_offset: 7646
+    :timestamp: 2015-11-25 20:09:43 +03:00
+    :selection_offset: 7589
+    :block_selection_mode: false
+  - :path: db/schema.rb
+    :cursor_offset: 4359
+    :timestamp: 2016-05-25 14:53:43 +04:00
+    :selection_offset: 4219
     :block_selection_mode: false
 files_to_retain: 0

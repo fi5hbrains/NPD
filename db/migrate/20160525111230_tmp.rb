@@ -1,5 +1,7 @@
-class CreateEvents < ActiveRecord::Migration
+class Tmp < ActiveRecord::Migration
   def change
+    drop_table :events
+    
     create_table :events do |t|
       t.integer :user_id, null: false, index: true
       t.integer :eventable_id
