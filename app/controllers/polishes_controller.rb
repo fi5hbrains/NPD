@@ -19,6 +19,7 @@ class PolishesController < ApplicationController
       find_related @polish
       render 'catalogue_show'
     else
+      @versions = @polish.versions
       @polishes = lab_search.page(params[:page]).per(Defaults::PER[:lab_polishes])
     end
   end
@@ -95,6 +96,7 @@ class PolishesController < ApplicationController
       end
     elsif @polish.valid?
       @polish.bottling_status = false
+      @polish.save_version('create')
       generate_preview params[:changes]
       @polish.save
       @polish.delay(queue: current_user.id).flatten_layers @layers
@@ -110,12 +112,12 @@ class PolishesController < ApplicationController
     set_bottles
     old_bottle_id = @polish.bottle_id
     old_slug = @polish.slug
+    old_owner = @polish.user_id
     @polish.assign_attributes polish_params
     set_name
     set_crackle
     @polish.brand_name = @brand.name
     @polish.brand_slug = @brand.slug
-    @polish.user_id = current_user.id
     all_layers_bottom_up
     if params[:preview]
       generate_preview params[:changes]
@@ -128,6 +130,8 @@ class PolishesController < ApplicationController
       rename_polish_files old_slug if old_slug != @polish.slug
       @polish.draft = params[:polish][:draft] == '1'
       @polish.save_version( params[:redress] ? 'redress' : 'update')
+      @polish.user_id = current_user.id
+      @polish.notify
       if params[:redress]
         if old_bottle_id != @polish.bottle_id
           @polish.generate_bottle(true) 
@@ -164,7 +168,9 @@ class PolishesController < ApplicationController
       @copy.name = @copy.name_or_number + "_copy#{(last + 1)}"
     end
     @copy.assign_attributes YAML.load( @polish.to_yaml )
+    @copy.user_id = current_user.id
     @copy.save
+    @copy.save_version('clone')
     rename_polish_files @polish.slug, @copy
     respond_to do |format|
       format.html { redirect_to @brand, notice: 'Polish was successfully cloned.' }

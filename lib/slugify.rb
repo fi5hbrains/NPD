@@ -23,6 +23,7 @@ module Slugify
       ]
       slug = name.squish
       replacements.each{ |p| slug.gsub!(p[0],p[1])}
+      slug[-1..-1] = '' if slug.last == ','
     end
     slug = '-NA-' if slug.blank?
     return slug.mb_chars.downcase

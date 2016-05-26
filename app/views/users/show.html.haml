@@ -29,6 +29,14 @@
       %p.notable= @user.followee_count
   %section.block.left
     - if is_owner
+      #events
+        %h3= t 'user.headers.events'
+        %ul
+          - @events.each do |e|
+            %li
+              - if e.author
+                = link_to e.author, user_path(e.author)
+              = t 'user.event.' + e.event_type
       #quests   
         %h3= t 'user.headers.quests'
       %h3

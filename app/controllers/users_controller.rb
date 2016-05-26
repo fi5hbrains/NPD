@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     if @user == current_user
-      @events = @user.events
+      @events = @user.events.where('new = true OR updated_at > ?', Time.now - 1.day).order('created_at DESC')
       @events.each{|e| e.update(new: false)}
       @user.update(events_count: 0)
     end

@@ -68,6 +68,13 @@ class Polish < ActiveRecord::Base
     coat_index -= max_coats while coat_index >= max_coats
     self.polish_folder + '/' + name_slug + "_coat#{coat_index == 0 ? '' : "_x#{coat_index + 1}"}.png" 
   end
+  def notify
+    self.versions.pluck(:user_id).uniq.each do |u_id|
+      unless self.user_id == u_id
+        Event.new(user_id: u_id, event_type: 'polish', author: User.find(self.user_id).name, eventable_type: 'Polish', eventable_id: self.id).save
+      end
+    end
+  end
   def gloss_url; self.polish_folder + '/reflection.png' end
   def gloss_preview_url; self.tmp_folder + '/reflection_preview.jpg' end
   def preview_url version = ''; self.polish_folder + "/preview#{version}.png" end
@@ -132,9 +139,11 @@ class Polish < ActiveRecord::Base
   end
   
   def save_version_images index_old='', index_new=nil
-    index_new ||= self.versions.count
-    copy ||= self
-    FileUtils::cp path + self.preview_url(index_old), path + copy.preview_url(index_new) if File.exists? path + self.preview_url(index_old)
+    index_new ||= self.versions.count - 1
+    if self.versions.count > 0
+      copy ||= self
+      FileUtils::cp path + self.preview_url(index_old), path + copy.preview_url(index_new) if File.exists? path + self.preview_url(index_old)
+    end
   end
   
   def get_colour

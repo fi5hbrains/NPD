@@ -167,7 +167,14 @@ en:
         }
     export: 'Download'
     export_setup: 'Save as:'
-
+    event:
+      user: 'has accepted your invitation'
+      polish: 'updated'
+      polish_comment: 'commented'
+      reply: 'replied your comment'
+      polish_comment_and_reply: 'replied to your comment'
+      following: 'started following you'
+      mention: 'mentioned you'
   catalogue: 
     titles:
       similar: 'Similar Polishes'

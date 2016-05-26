@@ -70,6 +70,6 @@ class User < ActiveRecord::Base
     %w(collection giveaway wishlist).each{ |box| self.boxes.new(name: box).save }
   end
   def create_event invite
-    Event.new(event_type: 'user', user_id: invite.user_id, author: name).save
+    Event.new(event_type: 'user', user_id: invite.user_id, author: name, eventable_id: self.id, eventable_type: 'User').save
   end
 end

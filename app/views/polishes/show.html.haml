@@ -24,18 +24,19 @@
       = @polish.votes_count
       = 'vote'.pluralize(@polish.votes_count)
     = render 'polishes/controls', polish: @polish, with_text: true
-    - if @polish.versions.count > 0
+    - if @polish.versions.count > 1
       %h3= 'History'
       %table.wide100
-        - @polish.versions.each_with_index do |v,i|
-          %tr.noWrap
-            %td
-              .previewWrapper.tiny= image_tag(@polish.preview_url(v.version), class: 'thumb')
-            %td= v.event
-            %td
-              by
-              = link_to v.user_name, user_path(v.user_name) if v.user_name
-            %td= v.updated_at.strftime("%d %m %Y %H:%M")
+        - @versions.each_with_index do |v,i|
+          - unless i == 0
+            %tr.noWrap
+              %td
+                .previewWrapper.tiny= image_tag(@polish.preview_url(v.version), class: 'thumb')
+              %td= v.event
+              %td
+                by
+                = link_to v.user_name, user_path(v.user_name) if v.user_name
+              %td= v.updated_at.strftime("%d %m %Y %H:%M")
     = @polish.h
     = @polish.s
     = @polish.l
