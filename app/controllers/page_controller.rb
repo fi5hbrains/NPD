@@ -58,9 +58,10 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      PolishLayer.where(layer_type: 'glitter').each do |l|
-        l.particle_density = l.particle_density / 4
-        @result += 1 if l.save
+      PolishVersion.where('version > 0').each( &:destroy)
+      Polish.where(draft: true).each do |p|
+        p.save_version 'draft'
+        @result += 1
       end
       # brand = Brand.find_by_slug 'nubar'
       # page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-580efnproducts47curpage-2-47-c.asp")

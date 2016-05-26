@@ -8,6 +8,18 @@ module ApplicationHelper
     link = 'http://' + link unless !link || link.blank? || link[/^http?:\/\//] || link[/^https?:\/\//]
     link_to link.sub('http://','').sub('https://','').split('/')[0], link
   end
+  def link_to_event event
+    case event.eventable_type
+    when 'Polish'
+      polish = @evented_polishes.detect{|p| p.id == event.eventable_id}
+      if event.event_type == 'polish_comment'
+        link_to polish.brand_number_or_name, catalogue_brand_polish_path(polish.brand_slug, polish.slug)
+      else
+        link_to polish.brand_number_or_name, brand_polish_path(polish.brand_slug, polish.slug)
+
+      end
+    end
+  end
   def set_section
     condition = false
     {

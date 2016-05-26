@@ -43,6 +43,7 @@ class Polish < ActiveRecord::Base
   
   def name_or_number; self.name || self.number end
   def name_and_number; self.number.to_s + (' – ' unless self.number.blank? || self.name.blank?).to_s + self.name.to_s end
+  def brand_number_or_name; self.name.blank? ? self.brand_name + self.number : self.name end
   
   def name_or_number_to_slug
     self.prefix.squish! if self.prefix

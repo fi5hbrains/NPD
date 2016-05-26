@@ -1,4 +1,4 @@
-1464236255
+1464257323
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -98,6 +98,7 @@ bottle_folder	/Users/fish/Dropbox/work/Interpol/app/models/bottle.rb	  def bottl
 bottle_or_spinner	/Users/fish/Dropbox/work/Interpol/app/helpers/polishes_helper.rb	  def bottle_or_spinner 
 bottle_params	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def bottle_params
 bottle_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def bottle_url 
+brand_number_or_name	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def brand_number_or_name;
 brand_params	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def brand_params
 brand_to_tag	/Users/fish/Dropbox/work/Interpol/app/helpers/boxes_helper.rb	  def brand_to_tag 
 build	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function build()
@@ -221,9 +222,9 @@ index	/Users/fish/Dropbox/work/Interpol/app/controllers/entries_controller.rb	  
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/brands_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/ads_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/bottles_controller.rb	  def index
-index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def index
 index	/Users/fish/Dropbox/work/Interpol/app/controllers/users_controller.rb	  def index
+index	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def index
 init	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/awesomplete.js	function init()
 invite_phrase	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  attr_accessor :invite_phrase, :crop_coords
 is_base?	/Users/fish/Dropbox/work/Interpol/app/uploaders/layer_uploader.rb	  def is_base? 
@@ -233,6 +234,7 @@ l_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def l_range=(range
 lab_search	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def lab_search
 layer_tmp	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def layer_tmp 
 link_to_add_layer	/Users/fish/Dropbox/work/Interpol/app/helpers/polishes_helper.rb	  def link_to_add_layer(type, f)
+link_to_event	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def link_to_event 
 lock	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def lock
 magnet_url	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def magnet_url 
 maintenance	/Users/fish/Dropbox/work/Interpol/app/controllers/page_controller.rb	  def maintenance

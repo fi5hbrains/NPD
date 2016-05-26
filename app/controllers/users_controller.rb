@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     if @user == current_user
       @events = @user.events.where('new = true OR updated_at > ?', Time.now - 1.day).order('created_at DESC')
       @events.each{|e| e.update(new: false)}
+      @evented_polishes = Polish.find(@events.where(eventable_type: 'Polish').pluck(:eventable_id).uniq)
       @user.update(events_count: 0)
     end
   end

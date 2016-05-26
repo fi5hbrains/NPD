@@ -37,6 +37,7 @@
               - if e.author
                 = link_to e.author, user_path(e.author)
               = t 'user.event.' + e.event_type
+              = link_to_event e
       #quests   
         %h3= t 'user.headers.quests'
       %h3

@@ -630,9 +630,6 @@ cursor_positions:
   - :path: app/controllers/bottles_controller.rb
     :cursor_offset: 623
     :timestamp: 2016-04-19 18:55:09 +04:00
-  - :path: app/views/polishes/show.html.haml
-    :cursor_offset: 1385
-    :timestamp: 2016-04-11 12:36:39 +04:00
   - :path: public/robots.txt
     :cursor_offset: 331
     :timestamp: 2016-04-24 05:28:50 +04:00
@@ -884,4 +881,7 @@ cursor_positions:
   - :path: app/models/comment.rb
     :cursor_offset: 1042
     :timestamp: 2016-05-26 04:15:20 +04:00
+  - :path: app/views/polishes/show.html.haml
+    :cursor_offset: 1051
+    :timestamp: 2016-05-26 10:28:14 +04:00
 files_to_retain: 0
