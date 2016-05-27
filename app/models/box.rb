@@ -260,6 +260,6 @@ class Box < ActiveRecord::Base
   private 
   
   def name_string s, p, w, h, m, row_i
-    " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{CGI::escapeHTML p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + CGI::escapeHTML(p.name) + '</b>' : !p.number.blank? ? p.number : '<b>' + CGI::escapeHTML(p.name) + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_i - 1) * w + m}+#{h} \\) -composite "
+    " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'> &amp; #{CGI::escapeHTML p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + CGI::escapeHTML(p.name) + '</b>' : !p.number.blank? ? p.number : '<b>' + CGI::escapeHTML(p.name) + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_i - 1) * w + m}+#{h} \\) -composite "
   end
 end
