@@ -167,6 +167,235 @@ class Polish < ActiveRecord::Base
     end
   end
 
+  def generate_preview layers, changed_layers = {}
+    tmp_folder = self.tmp_folder
+    reflection = self.gloss_tmp
+    parts = "/assets/polish_parts/"
+    
+    c_duo = "#{parts}colour_duo.png"
+    c_multi = "#{parts}colour_multi.png"
+    c_cold = "#{parts}colour_cold.png"
+    opacity_mask = "#{parts}opacity_#{(((self.opacity || 100) / 10).round * 10).to_s}.png"
+    magnet = "#{tmp_folder}/magnet.png"
+    holo = "#{parts}holo_default.png"
+    mask = self.opacity_mask
+        
+    self.magnet ||= 'blank'
+    old_coats_count = self.coats_count
+    self.coats_count = (1 + 8 * (100 - (self.opacity || 100)) / 100).round
+    
+    noise_density = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
+    noise_size = {'shimmer' => 0, 'flake' => 0, 'glitter' => 0}
+    sand_ordering = 0
+    sand_size = 0
+    sand_density = 0
+    top_layer = 'base'
+    sand_layer = layers.select{|l| l.layer_type == 'sand'}.first
+
+    FileUtils.mkdir_p(path + tmp_folder)  
+    
+    layers.each_with_index do |layer, i|
+      layer.c_base ||= '#F00'
+      layer.highlight_colour ||= 'rgba(255,255,255,.2)'
+      layer.shadow_colour ||= 'rgba(0,0,0,.4)'
+      
+      layer.ordering = i
+      Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
+      unless %w(base sand).include? layer.layer_type
+        noise_density[layer.layer_type] += layer.particle_density
+        noise_size[layer.layer_type] = [noise_size[layer.layer_type], layer.particle_size].max
+      end
+      if layer.layer_type == 'sand'
+        sand_ordering = layer.ordering
+        sand_size = [layer.particle_size, sand_size].max
+        sand_density += layer.particle_density
+      end
+      top_layer = layer.layer_type
+
+      if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < self.coats_count)
+        base = self.layer_tmp(layer.ordering)
+        layer.opacity ||= 100
+        
+        if layer.layer_type == 'flake'
+          flake_shadow_tmp = "#{tmp_folder}/layer_#{layer.ordering}_flake_shadow.mpc"
+          mask = parts + 'flake_' + (layer.particle_size / 34 * 50).to_s + 
+            '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png'
+          Magick.convert mask + ' -page +0+1 -background none -flatten -blur 0x3 ', '\\( ' + path + mask + ' -negate \\) -compose Multiply -composite -brightness-contrast -20 ', flake_shadow_tmp
+        end
+        
+        if layer.layer_type == 'glitter'
+          particle_holo_base = "#{parts}holo_glitter.png"
+          particle_holo = "#{tmp_folder}/holo_glitter.mpc"
+          particle_hl_base = "#{parts}highlight_glitter.png"    
+          particle_hl = "#{parts}highlight_glitter.mpc"
+          shape = "#{parts}shape_#{layer.particle_type}.png"
+          shape_tmp = "#{tmp_folder}/layer_#{layer.ordering}_shape.mpc"
+          shape_shadow_tmp = "#{tmp_folder}/layer_#{layer.ordering}_shape_shadow.mpc"
+          particle_scale = layer.particle_size ** 2 / 100 + 1
+          holo_scale_k = ((particle_scale / 1.5 + 25) * 2).round
+          
+          Magick.convert particle_holo_base, "-scale #{holo_scale_k}%", particle_holo unless layer.holo_intensity == 0
+          Magick.convert particle_hl_base, '', particle_hl unless FileTest.exist? particle_hl
+          Magick.convert shape, "-scale #{particle_scale}%", shape_tmp
+          Magick.convert shape, "-negate -blur 0x6 -scale #{particle_scale}% +level-colors '#444',Black ", shape_shadow_tmp
+                    
+          scale_offset = 50
+          x_offset = 0 
+          shadow_shift_x = 0
+          shadow_shift_y = 2
+          
+          mask_stack      = []
+          holo_stack      = []
+          highlight_stack = []
+          shadow_stack    = []
+        end
+        
+        (layers.size > 1 ? self.coats_count : 1).times do |c| 
+          if layer.layer_type == 'base' && sand_layer
+            shadow       = "#{parts}shadow_sand_#{sand_layer.particle_size}_#{sand_layer.particle_density < 60 ? 'few' : 'many'}.png"
+            highlight = "#{parts}highlight_sand_#{sand_layer.particle_size}_#{sand_layer.particle_density < 60 ? 'few' : 'many'}.png"
+          else
+            shadow = "#{parts}shadow_#{layer.layer_type}.png"
+            highlight = "#{parts}highlight_#{layer.layer_type}.png"    
+          end
+          
+          if layer.layer_type != 'base' || c == 0 
+            if %w(shimmer flake).include? layer.layer_type
+              shadow    += " -geometry +0-#{rand(28)}"
+              highlight += " -geometry +0-#{rand(28)}"
+            end
+            if %w(shimmer flake).include? layer.layer_type
+              mask = parts + layer.layer_type + '_' + (layer.particle_size / 34 * 50).to_s + 
+              '_' + ((layer.particle_density / 10.0).round * 10).to_s + '.png -geometry +0-' + 
+              rand(452).to_s 
+            elsif layer.layer_type == 'glitter' 
+              multiplier = (layer.particle_density * 20 / particle_scale).round + rand(2)
+              mask             = "#{tmp_folder}/layer_#{layer.ordering.to_s}_mask.png"
+              particles_hl     = "#{tmp_folder}/layer_#{layer.ordering.to_s}_highlight.png"
+              holo             = "#{tmp_folder}/layer_#{layer.ordering.to_s}_holo.png"
+              particles_shadow = "#{tmp_folder}/layer_#{layer.ordering.to_s}_particles_shadow.png" 
+              pass = 0
+              size = layer.particle_size  
+              while multiplier >= 0 do
+                mask_stack[c]      = ''
+                shadow_stack[c]    = ''
+                highlight_stack[c] = ''            
+                holo_stack[c]      = ''   
+              
+                (multiplier > Defaults::STACK_LIMIT ? Defaults::STACK_LIMIT : multiplier).times do
+                  rnd_x = rand(Defaults::CANVAS[0] - 2 * x_offset ) + x_offset - 96 * size / 100 + 10
+                  scl_x = 100 * Math.sin(Math::PI*(rnd_x + 128 * size / 100 + scale_offset)/(Defaults::CANVAS[0] + 2 * scale_offset ))
+                  rnd_y = rand(Defaults::CANVAS[1]) - 128 * size / 100 
+                  rnd_r = rand(80) - 40   
+                  
+                  shape_transform = "-rotate #{rnd_r} -scale #{scl_x}%x100%"
+                  shape_adjust = "#{path + shape_tmp} -background black #{shape_transform} -geometry +#{rnd_x}+#{rnd_y}"
+                  mask_stack[c] += " \\( #{shape_adjust} -background white -alpha shape \\) -compose dissolve -define compose:args=#{layer.opacity} -composite "
+                  shadow_stack[c] += " \\( #{path + shape_shadow_tmp} -background black #{shape_transform} -geometry +#{rnd_x + shadow_shift_x}+#{rnd_y + shadow_shift_y} \\) -compose Screen -composite \\( #{shape_adjust} -negate \\) -compose Multiply -composite "
+                  highlight_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_hl} -geometry -#{rnd_x}-#{rnd_y} \\) -compose In -composite \\) -alpha on -compose Over -composite "
+                  holo_stack[c] += " \\( \\( #{shape_adjust} -alpha copy \\) \\( #{path + particle_holo} -geometry -#{rand((572 - holo_scale_k * 4) * holo_scale_k / 100 )}-#{rand((900 - holo_scale_k * 4) * holo_scale_k / 100)} \\) -compose In -composite \\) -alpha on -compose Over -composite "
+                end    
+                mask_pass = coat(mask,c)
+                holo_pass = coat(holo,c)
+                particles_shadow_pass = coat(particles_shadow,c)
+                particles_hl_pass = coat(particles_hl,c)
+                
+                if pass == 0
+                  mask_base = fill('black')
+                  p_shadow_base = fill('black')
+                  p_hl_base = fill('rgba(0,0,0,0)')
+                  holo_base = fill('rgba(0,0,0,0)')
+                else
+                  mask_base = mask_pass
+                  p_shadow_base = particles_shadow_pass
+                  p_hl_base = particles_hl_pass
+                  holo_base = holo_pass            
+                end
+
+                if c == 0
+                  self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
+                else
+                  self.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
+                end
+                multiplier -= Defaults::STACK_LIMIT
+                pass += 1
+              end
+              mask = coat(mask,c)
+              holo = coat(holo,c)
+              particles_shadow = coat(particles_shadow,c)
+              particles_hl = coat(particles_hl,c)
+            end
+            unless layer.layer_type == 'sand'
+
+              convert_list = "\
+#{"\\( #{path + c_duo} -background '#{layer.c_duo}' -alpha shape \\) -composite " unless layer.c_duo.blank?} \
+#{"\\( #{path + c_multi} -background '#{layer.c_multi}' -alpha shape \\) -composite " unless layer.c_multi.blank?} \
+#{"\\( #{path + c_cold} -background '#{layer.c_cold}' -alpha shape \\) -composite " unless layer.c_cold.blank?} \
+\\( #{path + shadow} -background '#{layer.shadow_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.shadow_colour)} -composite \
+#{" -alpha on -channel a -evaluate set #{layer.opacity}% " if layer.opacity < 100 && layer.layer_type != 'glitter'} \
+#{" #{path + holo} -compose dissolve -define compose:args=#{layer.holo_intensity.to_s} -composite " if layer.holo_intensity > 0} \
+#{" \\( #{path + highlight} -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " unless layer.layer_type == 'glitter' } \
+#{"\\( #{path + mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite "} \
+#{"\\( #{path + particles_shadow} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'glitter'} \
+#{"\\( #{path + flake_shadow_tmp + mask.split('.png')[1]} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'flake'} \
+#{"\\( #{path + particles_hl} -alpha off -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " if layer.layer_type == 'glitter'} \
+              -depth 8 "
+              if c == 0
+                Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
+                if layer.magnet_intensity > 0
+                  magnet = self.magnet
+                  Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet)
+                end
+              else
+                Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
+                if layer.magnet_intensity > 0
+                  Defaults::MAGNETS.each do |magnet|
+                    Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet) unless magnet == self.magnet
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+      if self.crackle_type
+        Magick.convert self.layer_tmp(layer.ordering), "\\( #{path + parts}mask_#{self.crackle_type}.png -negate -background black -alpha shape \\) -compose DstOut -composite ", self.crackled_url(self.layer_tmp(layer.ordering))
+      end
+    end
+    
+    ref_type = self.gloss_type
+    noisiest = noise_density.sort_by{|k,v| v}[2]
+    ref_density = 'default'
+    if noisiest[1] > 10
+      case noisiest[0]
+      when 'shimmer'
+        ref_size = (noise_size[noisiest[0]] <= 33 ? '0' : noise_size[noisiest[0]] <= 66 ? '25' : '50')
+        ref_density = (noisiest[1] <= 33 ? 'few' : noisiest[1] <= 66 ? 'some' : noisiest[1] <= 95 ? 'many' : 'extra')
+      when 'flake'
+        if noisiest[1] >= 20 
+          ref_size = 'foil'
+          ref_density = (noisiest[1] <= 50 ? 'some' : noisiest[1] <= 95 ? 'many' : 'extra')
+        end
+      when 'glitter'
+        ref_size = (noise_size[noisiest[0]] <= 20 ? '50' : noise_size[noisiest[0]] <= 50 ? '75' : '100')
+        ref_density = (noisiest[1] <= 45 ? 'few' : noisiest[1] <= 90 ? 'some' : noisiest[1] <= 125 ? 'many' : 'extra')
+      end
+    end
+    ref_source = "reflection_#{[ref_type, ref_size, ref_density].compact.join('_')}.png"
+    
+    if sand_ordering > 0
+      sand_ref = "reflection_#{ref_type}_sand_#{sand_size}_#{sand_density < 60 ? 'few' : 'many'}.png" 
+      if sand_ordering < (layers.size - 1)
+        # todo generate upper layers mask > combine sand_ref & ref_source > generate reflection
+      end
+
+      Magick.convert parts + sand_ref, "+level-colors ,'#{self.gloss_colour}'", reflection  
+
+    else
+      Magick.convert parts + ref_source, "+level-colors ,'#{self.gloss_colour}'" + (self.crackle_type ? " #{path + parts}mask_#{self.crackle_type}.png -compose Multiply -composite" : ''), reflection   
+    end
+  end
+  
   def flatten_layers layers
     FileUtils.mkdir_p(path + self.polish_folder) unless File.directory?(path + self.polish_folder)
     File.rename path + self.gloss_tmp, path + self.gloss_url
@@ -208,6 +437,13 @@ class Polish < ActiveRecord::Base
     Magick.convert bottle.base_url, stack, self.bottle_url(nil, true) 
     Magick.pngquant [self.bottle_url('big', true), self.bottle_url('thumb', true), self.bottle_url(nil, true), self.preview_url ]
     self.update_attributes bottling_status: true
+  end
+  
+  def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo)
+    Magick.convert mask_base, mask_stack, mask_pass            
+    Magick.convert p_shadow_base, shadow_stack, particles_shadow_pass
+    Magick.convert p_hl_base, highlight_stack, particles_hl_pass
+    Magick.convert holo_base, holo_stack, holo_pass if is_holo
   end
   
   private  
