@@ -102,25 +102,25 @@ class Box < ActiveRecord::Base
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+112 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+112 \\) -composite " unless p.draft
             if note
-              stack += name_string(310, p, 360, 407, 35)
+              stack += name_string(310, p, 360, 407, 35, row_items.size - i)
             else
-              stack += name_string(310, p, 360, 407, 35)
+              stack += name_string(310, p, 360, 407, 35, row_items.size - i)
               # stack += " #{path}"
             end
           elsif bottle
             stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 250}+#{p.draft ? 92 : 0} \\) -composite "
             if note
-              stack += name_string(240, p, 250, 377, 5)
+              stack += name_string(240, p, 250, 377, 5, row_items.size - i)
             else
-              stack += name_string(240, p, 250, 377, 5)
+              stack += name_string(240, p, 250, 377, 5, row_items.size - i)
             end
           elsif nail
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 28}+60 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250 + 22}+60 \\) -composite " unless p.draft
             if note
-              stack += name_string(240, p, 250, 442, 1)
+              stack += name_string(240, p, 250, 442, 1, row_items.size - i)
             else
-              stack += name_string(240, p, 250, 442, 1)
+              stack += name_string(240, p, 250, 442, 1, row_items.size - i)
             end
           else
 
@@ -259,7 +259,7 @@ class Box < ActiveRecord::Base
 
   private 
   
-  def name_string s, p, w, h, m
-    " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{Shellwords.escape p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + Shellwords.escape(p.name) + '</b>' : !p.number.blank? ? p.number : '<b>' + Shellwords.escape(p.name) + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * w + m}+#{h} \\) -composite "
+  def name_string s, p, w, h, m, row_i
+    " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{Shellwords.escape p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + Shellwords.escape(p.name) + '</b>' : !p.number.blank? ? p.number : '<b>' + Shellwords.escape(p.name) + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_i - 1) * w + m}+#{h} \\) -composite "
   end
 end
