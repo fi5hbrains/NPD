@@ -165,6 +165,11 @@ en:
         one: "because there was no %{brands} in the DB",
         other: "because %{brands} are missing."
         }
+      ok: {
+        zero: 'no new items',
+        one: "Done.",
+        other: "imported %{count} items"        
+        }
     export: 'Download'
     export_setup: 'Save as:'
     event:

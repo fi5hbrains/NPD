@@ -712,9 +712,6 @@ cursor_positions:
   - :path: db/migrate/20160513080537_fix_column_name.rb
     :cursor_offset: 113
     :timestamp: 2016-05-13 12:06:46 +04:00
-  - :path: config/locales/en.yml
-    :cursor_offset: 4708
-    :timestamp: 2016-05-13 12:07:44 +04:00
   - :path: app/helpers/ads_helper.rb
     :cursor_offset: 0
     :timestamp: 2016-03-25 09:51:44 +03:00
@@ -872,9 +869,6 @@ cursor_positions:
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 0
     :timestamp: 2016-05-26 13:58:33 +04:00
-  - :path: app/models/box.rb
-    :cursor_offset: 5489
-    :timestamp: 2016-05-23 12:47:30 +04:00
   - :path: app/assets/javascripts/common.coffee
     :cursor_offset: 1545
     :timestamp: 2016-04-16 07:24:34 +04:00
@@ -884,4 +878,10 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 0
     :timestamp: 2016-05-26 06:05:09 +04:00
+  - :path: config/locales/en.yml
+    :cursor_offset: 4418
+    :timestamp: 2016-05-27 19:19:06 +04:00
+  - :path: app/models/box.rb
+    :cursor_offset: 4152
+    :timestamp: 2016-05-27 19:01:33 +04:00
 files_to_retain: 0

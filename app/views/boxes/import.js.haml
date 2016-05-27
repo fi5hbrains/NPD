@@ -6,4 +6,7 @@
 - missing_brands = result[4]
 - if @polishes
   $('#secondaryResults').html('#{j(render @polishes, big_polish: true).html_safe}');
-$('#secondaryResults').prepend('#{content_tag :p, t('user.import_msg.added', count: added) + t('user.import_msg.failed', count: failed) + t('user.import_msg.unknown', count: missing_brands.size, brands: missing_brands)}');
+- if failed.to_i > 0
+  $('#secondaryResults').prepend('#{content_tag :p, t('user.import_msg.added', count: added) + t('user.import_msg.failed', count: failed) + t('user.import_msg.unknown', count: missing_brands.size, brands: missing_brands)}');
+- else
+  $('#secondaryResults').prepend('#{content_tag :p, t('user.import_msg.ok', count: added)}');

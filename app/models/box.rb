@@ -76,7 +76,7 @@ class Box < ActiveRecord::Base
       end
     end
     stats[:unknown] = stats[:unknown].to_a[0..-2].join(', ') + ' and ' + stats[:unknown].to_a.last if stats[:unknown].size >= 2
-    self.import_result = "#{stats[:total]};#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown]}"
+    self.import_result = "#{stats[:total]};#{stats[:added]};#{stats[:new]};#{stats[:failed]};#{stats[:unknown] unless stats[:unknown].blank?}"
     self.save
     for b in brands
       b.drafts_count = b.polishes.where(draft: true).count
@@ -96,30 +96,31 @@ class Box < ActiveRecord::Base
       row_items << polish
       if ((index + 1).modulo(columns) == 0 ) || index == (polishes.size - 1)
         row_items.reverse.each_with_index do |p,i|
+          p.brand_name
           if bottle && nail
             stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 360}+30 \\) -composite "
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 145x290+#{(row_items.size - i - 1) * 360 + 210}+112 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry 155x290+#{(row_items.size - i - 1) * 360 + 205}+112 \\) -composite " unless p.draft
             if note
-              stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 35}+407 \\) -composite "              
+              stack += name_string(310, p, 360, 407, 35)
             else
-              stack += " \\( -size 310 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 360 + 35}+407 \\) -composite "
+              stack += name_string(310, p, 360, 407, 35)
               # stack += " #{path}"
             end
           elsif bottle
             stack += " \\( #{path + (p.draft ? '/assets/draft.png' : p.bottle_url)} -geometry +#{(row_items.size - i - 1) * 250}+#{p.draft ? 92 : 0} \\) -composite "
             if note
-              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "              
+              stack += name_string(240, p, 250, 377, 5)
             else
-              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 5}+377 \\) -composite "
+              stack += name_string(240, p, 250, 377, 5)
             end
           elsif nail
             stack += " \\( #{path + '/assets/preview_shadow.png'} -geometry 186x372+#{(row_items.size - i - 1) * 250 + 28}+60 \\) -composite "
             stack += " \\( #{path + p.preview_url} -geometry +#{(row_items.size - i - 1) * 250 + 22}+60 \\) -composite " unless p.draft
             if note
-              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 1}+442 \\) -composite "              
+              stack += name_string(240, p, 250, 442, 1)
             else
-              stack += " \\( -size 240 -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * 250 + 1}+442 \\) -composite "
+              stack += name_string(240, p, 250, 442, 1)
             end
           else
 
@@ -255,5 +256,10 @@ class Box < ActiveRecord::Base
   end  
   
   def adapt_name; %w(collection wishlist giveaway).include?(self.name) ? I18n.t('user.list.' + self.name) : self.name end
+
+  private 
   
+  def name_string s, p, w, h, m
+    " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{Shellwords.escape p.brand_name}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + Shellwords.escape(p.name) + '</b>' : !p.number.blank? ? p.number : '<b>' + Shellwords.escape(p.name) + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_items.size - i - 1) * w + m}+#{h} \\) -composite "
+  end
 end
