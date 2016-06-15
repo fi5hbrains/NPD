@@ -34,7 +34,7 @@ class PolishesController < ApplicationController
       @debug = colours.to_s
       colours = colours.
         split("\n").
-        map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /\d{1,3}(?=,\d{1,3}%)/.match(c).to_s.to_i, s: /\d{1,3}(?=%)/.match(c).to_s.to_i, l: /\d{1,3}(?=%\))/.match(c).to_s.to_i, hsl: /hsl\(.*\)/.match(c).to_s}}.
+        map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /[\d\.]+(?=,[\d\.]+%)/.match(c).to_s.to_f, s: /[\d\.]*?(?=%)/.match(c).to_s.to_f, l: /[\d\.]*?(?=%\))/.match(c).to_s.to_f, hsl: /hsl\(.*?\)/.match(c).to_s}}.
         sort{ |x,y| y[:s] + y[:count] / 60 <=> x[:s] + x[:count] / 60 }
       @dominant_colours = merge_similar_colours colours
       nude = Defaults::COLOURS[:en]['nude']
