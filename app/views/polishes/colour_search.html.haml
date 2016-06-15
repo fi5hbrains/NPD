@@ -40,13 +40,13 @@
         - if @dominant_colours
           - @dominant_colours.first(4).each do |c|
             .cBox.inline{'data-colour' => c[:hsl], 'data-field' => '#tmpColour', style: 'width:72.3px;height:80px;background:' + c[:hsl] + ';color:' + (c[:l] > 50 ? 'black' : 'white')}>
-               = c[:count]
-               %br
-               = c[:h]
-               %br
-               = c[:s]
-               %br
-               = c[:l]   
+              = c[:count]
+              %br
+              = c[:h]
+              %br
+              = c[:s]
+              %br
+              = c[:l]   
   .clearFix
   %h2
     = t 'catalogue.titles.colour_fidelity'
