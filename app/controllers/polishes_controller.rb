@@ -31,6 +31,7 @@ class PolishesController < ApplicationController
     set_user_votes
     if @polish.reference?
       colours = Magick.convert @polish.reference.url, '-resize 200x200^ -gravity center -crop 150x150+0+0 -depth 8 -colors 16 -colorspace HSL -format "%c" histogram:info:|sort -rn', ''
+      @debug = colours.to_s
       colours = colours.
         split("\n").
         map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /\d{1,3}(?=,\d{1,3}%)/.match(c).to_s.to_i, s: /\d{1,3}(?=%)/.match(c).to_s.to_i, l: /\d{1,3}(?=%\))/.match(c).to_s.to_i, hsl: /hsl\(.*\)/.match(c).to_s}}.
