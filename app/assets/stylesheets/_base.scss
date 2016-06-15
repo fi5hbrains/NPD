@@ -157,11 +157,13 @@ a:hover{ color: $colourLinkHover }
   0% { transform: translateY(-150px) }
   100% { transform: translateY(0) }
 }
+.bounceIn { animation-name: bounceIn }
 @keyframes bounceIn{
-  0%{ transform: scale(1) translate3d(0,0,0) }
-  50%{ transform: scale(1.3) }
-  80%{ transform: scale(1.09) }
-  100%{ transform: scale(1.2) translate3d(0,0,0) }
+  0%{ transform: scale(.5) translate3d(0,0,0) }
+  50%{ transform: scale(1.2) }
+  80%{ transform: scale(.95) }
+  93%{ transform: scale(1.05) }
+  100%{ transform: scale(1) translate3d(0,0,0) }
 }
 
 .controls{
@@ -588,12 +590,38 @@ h3 .tooltip { bottom: -30px }
   left:11px;
 }
 // ------------------------------ Local ------------------------------ //
+#colourFieldWrapper{}
+#referenceFieldsWrapper{top:50%;margin-top:-54px;}
+#referenceImageWrapper{
+  height: 290px; 
+  border-radius: $radiusMain;
+  box-sizing: border-box;
+  overflow:hidden;
+  background: $colourHighlight;
+}
+#referenceImage{
+  cursor: url('/assets/picker.cur', auto);
+  z-index:5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-width:130%;
+  max-height:130%;
+  min-width: 90%;
+  min-height: 90%;
+}
 #boxNameField{ 
   font-family: $fontHead;
   font-size: $fontSizeHead*1.8;
   height: 48px;
   padding-top: 0;
   padding-bottom: 0;
+}
+#cPreview{
+  height: 48px;
+  width: 48px;
+  border-radius: $radiusMain;
 }
 #otherLists { margin-top: 14px }
 #listForm { display: none }
@@ -628,11 +656,28 @@ h3 .tooltip { bottom: -30px }
   }
 }
 #reference{
-  position:fixed;
-  width: 300px;
-  top: 79px;
-  left:15px;
   z-index: 3;  
+}
+#referenceZoom { 
+  display:none;
+  z-index: 6;
+  position:absolute;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background: white;
+}
+#referenceImageZoom{
+  position:relative;
+  overflow:hidden;
+  border-radius: 50%;
+  margin: 10px;
+  width: 80px;
+  height: 80px;  
+}
+#referenceZoomImage {
+  position:absolute;
+  image-rendering: pixelated; 
 }
 #ads { width: 412px; margin-right: 0; margin-left: 0;}
 .banners li{

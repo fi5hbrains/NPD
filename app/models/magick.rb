@@ -19,6 +19,6 @@ class Magick < ActiveRecord::Base
     end
   end
   
-  def self.p name; (/-|\/U/ =~ name[0..1] || name[0..4] == '/home' ? '' :  Rails.root.join('public').to_s ) + name end
+  def self.p name; (/-|\/U/ =~ name[0..1] || name[0..4] == '/home' || name == '' ? '' :  Rails.root.join('public').to_s ) + name end
   
 end

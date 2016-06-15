@@ -46,6 +46,7 @@ en:
       redress: 'Update'
       crop: 'Apply'
       cancel: 'Cancel'
+      upload_image: 'Upload'
   controls:
     edit: 'Edit'
     clone: 'Clone'
@@ -181,9 +182,13 @@ en:
       following: 'started following you'
       mention: 'mentioned you'
   catalogue: 
+    headers:
+      main: 'Catalogue'
+      colour: 'Shade Finder'
     titles:
       similar: 'Similar Polishes'
       lists: 'Lists:'
+      colour_fidelity: 'Colour Fidelity'
   lab:
     new_brand: 'Add a Brand'
     new_polish: 'New Polish'

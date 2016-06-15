@@ -28,8 +28,7 @@ class User < ActiveRecord::Base
   validate :excluded_name?
   validate :valid_invite?, on: :create
   
-  
- mount_uploader :avatar, AvatarUploader  
+  mount_uploader :avatar, AvatarUploader  
 
   def self.ghost
     new(name: I18n.t('Ghost'), slug: 'ghost')

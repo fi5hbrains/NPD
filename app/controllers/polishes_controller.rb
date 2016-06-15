@@ -24,9 +24,39 @@ class PolishesController < ApplicationController
     end
   end
   
+  def colour_search
+    # `convert '/Users/fish/o.png' -resize 200x200^ -gravity center -crop 120x120+0+0 -colors 16 -depth 8 -colorspace HSL -format "%c" histogram:info:|sort -rn|head -16`
+    @polish = Polish.new(polish_params)
+    @load_colour_picker = true
+    set_user_votes
+    if @polish.reference?
+      colours = Magick.convert @polish.reference.url, '-resize 200x200^ -gravity center -crop 150x150+0+0 -depth 8 -colors 16 -colorspace HSL -format "%c" histogram:info:|sort -rn', ''
+      colours = colours.
+        split("\n").
+        map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /\d{1,3}(?=,\d{1,3}%)/.match(c).to_s.to_i, s: /\d{1,3}(?=%)/.match(c).to_s.to_i, l: /\d{1,3}(?=%\))/.match(c).to_s.to_i, hsl: /hsl\(.*\)/.match(c).to_s}}.
+        sort{ |x,y| y[:s] + y[:count] / 60 <=> x[:s] + x[:count] / 60 }
+      @dominant_colours = merge_similar_colours colours
+      nude = Defaults::COLOURS[:en]['nude']
+      nudes = []
+      size = @dominant_colours.size - 1
+      @dominant_colours.reverse.each_with_index do |colour, i|
+        if (colour[:h].between?(nude[:h].min,nude[:h].max) && colour[:s].between?(nude[:s].min,nude[:s].max) && colour[:l].between?(nude[:l].min,nude[:l].max))
+          nudes << colour
+          @dominant_colours.delete_at(size - i)
+        end
+      end
+      @dominant_colours += nudes
+    end
+    cookies[:spread] = params[:spread].to_i if params[:spread]
+    spread = spread || cookies[:spread] || 20
+    @related = Polish.coloured(params[:colour], spread) unless params[:colour].blank?
+    @colour = params[:colour].blank? ? 'f00' : colour_to_rgb(params[:colour])
+  end
+  
   def new
     set_brand
     set_bottles
+    @load_colour_picker = true
     @polish = Polish.new
     @polish.bottle_id = params[:bottle] || Brand.find_by_slug('default').bottles.first.id
     @polish.user_id = current_user.id
@@ -39,6 +69,7 @@ class PolishesController < ApplicationController
   def edit
     set_polish
     set_bottles
+    @load_colour_picker = true
     clear_tmp_folder
     @polish.bottle_id ||= Brand.find_by_slug('default').bottles.first.id
     @polish.user_id = current_user.id
@@ -206,10 +237,15 @@ class PolishesController < ApplicationController
   def find_related polish = nil, spread = nil
     set_user_votes
     cookies[:spread] = params[:spread].to_i if params[:spread]
-    @polish = polish || (Polish.find(params[:polish_id]) if params[:polish_id])
+    @polish = polish 
+    @polish ||= (Polish.find(params[:polish_id]) if (params[:polish_id]) && params[:polish_id] != 'null')
     spread = spread || cookies[:spread] || 20
-    @related = Polish.
-      coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], spread)
+    if @polish
+      @related = Polish.
+        coloured( [@polish.h, @polish.s, @polish.l, @polish.opacity], spread)
+    elsif !params[:colour].blank?
+      @related = Polish.coloured(params[:colour], spread) 
+    end
   end
   
   def reorder
@@ -243,22 +279,24 @@ class PolishesController < ApplicationController
   end
   def polish_params
     if params[:yaml].blank?
-      params.require(:polish).permit(
-        :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, :crackle_type,
-        :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
-        {layers_attributes: [ 
-          :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
-          :highlight_colour, :shadow_colour, :opacity, :particle_type, :particle_size, 
-          :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
-        ]})
-      else
-        polish_hash = YAML.load(params[:yaml])
-        polish_hash = polish_hash.select {|k,v| %w(prefix name synonym_list number release_year collection bottle_id gloss_type gloss_colour opacity layers_attributes).include?(k)}
-        polish_hash['layers_attributes'].each do |key,val|
-          polish_hash['layers_attributes'][key] = val.select {|k,v| %W(layer_type ordering c_base c_duo c_multi c_cold  highlight_colour shadow_colour opacity particle_type particle_size particle_density holo_intensity thickness magnet_intensity).include?(k)}
-        end
-        return polish_hash
+      unless params[:polish].blank?
+        params.require(:polish).permit(
+          :prefix, :name, :synonym_list, :number, :release_year, :collection, :bottle_id, :gloss_type, :crackle_type,
+          :gloss_colour, :opacity, :reference, :remote_reference_url, :remove_reference, :reference_cache,
+          {layers_attributes: [ 
+            :layer_type, :ordering, :c_base, :c_duo, :c_multi, :c_cold, 
+            :highlight_colour, :shadow_colour, :opacity, :particle_type, :particle_size, 
+            :particle_density, :holo_intensity, :thickness, :magnet_intensity, :_destroy 
+          ]})
       end
+    else
+      polish_hash = YAML.load(params[:yaml])
+      polish_hash = polish_hash.select {|k,v| %w(prefix name synonym_list number release_year collection bottle_id gloss_type gloss_colour opacity layers_attributes).include?(k)}
+      polish_hash['layers_attributes'].each do |key,val|
+        polish_hash['layers_attributes'][key] = val.select {|k,v| %W(layer_type ordering c_base c_duo c_multi c_cold  highlight_colour shadow_colour opacity particle_type particle_size particle_density holo_intensity thickness magnet_intensity).include?(k)}
+      end
+      return polish_hash
+    end
   end
     
   def rename_polish_files old_slug, polish = nil
@@ -284,5 +322,36 @@ class PolishesController < ApplicationController
   
   def clear_tmp_folder
     FileUtils.rm Dir.glob(path + @polish.tmp_folder + '/*')
+  end
+  
+  def merge_similar_colours colours
+    merged = false
+    merged_colours = []
+    colours.each do |colour|
+      unless merged_colours.size >= 16 || colour[:l] > 93 || colour[:l] < 7 
+        merged_colours.each_with_index do |c, i|
+          if ((c[:h] - colour[:h]).abs < 10  || (c[:h] - colour[:h]).abs > 350) && 
+             (c[:s] - colour[:s]).abs < 17  && 
+             (c[:l] - colour[:l]).abs < 23
+            if (c[:h] - colour[:h]).abs > 350
+              colour[:h] = ([c[:h], colour[:h]].max - 360 + [c[:h], colour[:h]].min) / 2
+              colour[:h] += 360 if colour[:h] < 0
+            else
+              colour[:h] = (c[:h] + colour[:h]) / 2
+            end
+            colour[:count] += c[:count]
+            colour[:s] = [c[:s],colour[:s]].max
+            colour[:l] = (c[:l] + colour[:l]) / 2
+            colour[:hsl] = "hsl(#{colour[:h]},#{colour[:s]}%,#{colour[:l]}%)"
+            merged_colours[i] = colour
+            merged = true
+          end
+          break if merged
+        end          
+        merged_colours << colour unless merged
+        merged = false
+      end
+    end
+    merged_colours
   end
 end

@@ -1,0 +1,48 @@
+.main.left
+  = form_for @polish, url: colour_search_path, html: {multipart: true, method: :post} do |f|
+    %h1.smallMargin= t 'catalogue.headers.colour'
+    .block.left
+      .inline
+        = f.file_field :reference, class: 'hidden', 'data-updatable' => true
+        = f.hidden_field :reference_cache 
+        = f.label :reference, t('form.choose_file'), class: 'previewButton'
+        .table.wide100
+          .cell.wide100
+            = f.text_field :remote_reference_url, placeholder: t('placeholder.http')
+          .cell.wide100
+            = f.submit t('form.action.upload_image')
+      #referenceImageWrapper.relative.centeredText
+        #reference{style: ('display:none' unless @polish.reference?)}
+          - if @polish.reference?
+            = image_tag @polish.reference_url, id: 'referenceImage', 'data-field' => '#tmpColour'
+      .inline
+        - if @dominant_colours
+          - @dominant_colours.first(4).each do |c|
+            .cBox.inline{'data-colour' => c[:hsl], 'data-field' => '#tmpColour', style: 'width:72.3px;height:80px;background:' + c[:hsl] + ';color:' + (c[:l] > 50 ? 'black' : 'white')}>
+              - # = c[:count]
+              - # %br
+              - # = c[:h]
+              - # %br
+              - # = c[:s]
+              - # %br
+              - # = c[:l]          
+    .block.left#colourFieldWrapper
+      = text_field_tag :tmp_colour, @colour, id: 'tmpColour', 'data-field' => '#colour', class: 'noAlpha relay hidden'
+      .table.wide100
+        .cell.vMiddle
+          #cPreview{style: 'background:#' + @colour}
+        .cell.wide100
+          = text_field_tag :colour, params[:colour], placeholder: t("search.colour"), autocomplete: 'off', class: 'awesomplete colourSearch', 'data-list' => Defaults::COLOURS[I18n.locale].keys.to_s.gsub('"', '')
+        .cell
+          = submit_tag t('search.find')
+  .clearFix
+  %h2
+    = t 'catalogue.titles.colour_fidelity'
+    = render_spread_slider
+  #searchResults
+    - if @related
+      = render @related, no_brand: false
+#referenceZoom.animated.bounceIn{style: ('display:none' unless @polish.reference?)}
+  - if @polish.reference?
+    #referenceImageZoom
+      = image_tag @polish.reference_url, id: 'referenceZoomImage'

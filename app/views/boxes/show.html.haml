@@ -37,8 +37,8 @@
                   .checkBox{for: e} <svg class='icon check'><use xlink:href='#check' /></svg>
           - if setup[type].keys.include? 'bg_colour'
             %li.notCurrent
-              %label{for: 'bg_colour'}= t 'controls.export_colour'
-              = text_field_tag :bg_colour, setup[type]['bg_colour'], class: 'colour inMenu'
+              %label{for: 'colour'}= t 'controls.export_colour'
+              = text_field_tag :bg_colour, setup[type]['bg_colour'], id: 'colour', class: 'colour inMenu'
           - if setup[type].keys.include? 'columns'
             %li.notCurrent
               %label{for: 'columns'}= t 'controls.export_columns'

@@ -20,6 +20,7 @@
     _options,
 
     _$trigger,
+    _$cPreview,
     _$UI, _$xy_slider, _$xy_cursor, _$z_cursor , _$alpha , _$alpha_cursor,
 
     _pointermove = 'touchmove.a mousemove.a pointermove.a',
@@ -71,6 +72,7 @@
 
     if (event) {
       _$trigger = findElement($this);
+      _$cPreview = $('#cPreview');
       _$trigger._colorMode = _$trigger.data('colorMode');
 
       _colorPicker.$trigger = $this;
@@ -228,6 +230,7 @@
       color: hasNoValue ? '' :
         colors.rgbaMixBGMixCustom.luminance > 0.22 ? dark : light
     };
+    _$cPreview.css('background-color', hasNoValue ? '' : text);
     _$trigger.text = hasNoValue ? '' : triggerValue !== text ? text : '';
 
     toggled !== undefined ? render(toggled) : _animate(render);
@@ -253,6 +256,7 @@
       _$trigger,
       typeof toggled === 'boolean' ? toggled : undefined
     );
+    $(_$trigger.data('field')).val(_$trigger.val());
   }
 
   $.fn.colorPicker = function(options) {

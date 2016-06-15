@@ -1,5 +1,6 @@
 .main.left
-  %h1.wide50.inline> Catalogue
+  %h1.wide50.inline> 
+    = t 'catalogue.headers.main'
   = render 'search', css: 'wide50 bigMargin completable', remote: true
   = render 'polishes/catalogue_search'
 = render 'ads'

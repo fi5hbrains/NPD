@@ -1,12 +1,12 @@
 !!!
 %html{lang: I18n.locale}
   %head
-    %title= in_lab? ? 'INPD lab' : @polish ? (@polish.brand_name + ' – ' + @polish.name_and_number + ' – ' + 'INPD') : @brand  ? @brand.name  + ' – ' + 'INPD' : 'INPD – Nail Polish Database'
+    %title= in_lab? ? 'INPD lab' : @polish ? @polish.new_record? ? 'Find Nail Polish by Colour' : (@polish.brand_name + ' – ' + @polish.name_and_number + ' – ' + 'INPD') : @brand  ? @brand.name  + ' – ' + 'INPD' : 'INPD – Nail Polish Database'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'profile', 'data-turbolinks-track' => false if (params[:controller] == 'users' && params[:action] == 'edit')
     = javascript_include_tag 'lab', 'data-turbolinks-track' => false if params[:lab]
-    = javascript_include_tag 'colour_picker', 'data-turbolinks-track' => false if params[:controller] == 'boxes' && params[:action] == 'show'
+    = javascript_include_tag 'colour_picker', 'data-turbolinks-track' => false if @load_colour_picker
     = javascript_include_tag 'lab_icons', 'data-turbolinks-track' => false if params[:lab] && %w(new edit).include?(params[:action])
     = csrf_meta_tags
     - if params[:lab]

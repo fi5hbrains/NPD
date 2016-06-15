@@ -20,6 +20,9 @@ module ApplicationHelper
       end
     end
   end
+  def render_spread_slider
+    tag :div, id: 'sliderSpread', 'data-start' => (100 - (cookies[:spread] || 20).to_i), 'data-polish_id' => ((@polish && !@polish.new_record?) ? @polish.id : 'null')
+  end
   def set_section
     condition = false
     {

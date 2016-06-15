@@ -37,6 +37,11 @@ module ColourMethods
     end
   end
   
+  def colour_to_rgb colour
+    colour = colour_to_hsl colour
+    colour = hsl_to_rgbhex colour[0], colour[1], colour[2]
+  end
+  
   def colour_to_hsl_range colour, spread = nil
     if colour.class.name == 'String' && Defaults::COLOURS.values.map(&:keys).sum.include?( colour.mb_chars.downcase.to_s ) && !spread
       colours = {}

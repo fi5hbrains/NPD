@@ -3,6 +3,7 @@ class BoxesController < ApplicationController
   
   def show
     set_user
+    @load_colour_picker = current_user && current_user == @user
     cookies[:box_sort] ||= 'slug'
     set_box
     set_user_votes

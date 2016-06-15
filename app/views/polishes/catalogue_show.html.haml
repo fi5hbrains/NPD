@@ -47,7 +47,7 @@
     %section
       %h2
         = t 'catalogue.titles.similar'
-        #sliderSpread{'data-start' => (100 - (cookies[:spread] || 20).to_i), 'data-polish_id' => @polish.id }
+        = render_spread_slider
       #searchResults
         = render @related, no_brand: false
 = render 'ads'

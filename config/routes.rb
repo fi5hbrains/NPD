@@ -21,8 +21,9 @@ Rails.application.routes.draw do
   get 'autocomplete', to: 'application#autocomplete'
   get 'bottling_status/:id', to: 'polishes#get_bottling_status', as: 'get_bottling_status'
   get 'maintenance', to: 'page#maintenance'
-  get 'bottles', to: 'bottles#index'
+  get 'lab/bottle_list', to: 'bottles#index'
   get 'lab/user_list', to: 'users#index'
+  match 'catalogue/colour_search', to: 'polishes#colour_search', as: 'colour_search', via: [:get, :post]
 
   resources :ads
 

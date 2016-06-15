@@ -58,11 +58,29 @@ class PageController < ApplicationController
       @result = 0
       agent = Mechanize.new
       
-      PolishVersion.where('version > 0').each( &:destroy)
-      Polish.where(draft: true).each do |p|
-        p.save_version 'draft'
-        @result += 1
+
+      page = agent.get 'http://www.cirquecolors.com/creme/'
+      brand = Brand.find_by_slug 'cirque'
+      shades = page.at('.ProductList').search('li')
+      shades.each do |shade|
+        polish = brand.polishes.where(name: shade.at('strong').text).first_or_create
+        if polish.new_record?
+          if polish.name.match(/'/)
+            polish.synonym_list = polish.name.gsub("'",'’') + ';' + polish.name
+          else
+            polish.synonym_list = polish.name
+          end
+          polish.brand_slug = brand.slug
+          polish.brand_name = brand.name
+          polish.user_id = current_user.id
+          polish.draft = true
+        end        
+        if polish.draft
+          polish.remote_reference_url = shade.at('img').attr('src')
+          @result += 1 if polish.save 
+        end
       end
+ 
       # brand = Brand.find_by_slug 'nubar'
       # page = agent.get("http://www.foreverbeaux.com/all-nubar-nail-polishes-580efnproducts47curpage-2-47-c.asp")
       # shades = page.search('.single-product-category')
