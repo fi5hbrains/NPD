@@ -16,8 +16,9 @@ class Defaults < ActiveRecord::Base
 
   COLOURS = {
     tech: {
-        'nude'           => {h: 1..40,   s: 32..82,  l: 50..87},
-      },
+      'nude_strict'  => {h: 6..25,   s: 32..75,  l: 50..87},
+      'nude_soft'    => {h: 1..40,   s: 32..82,  l: 50..87}
+    },
     en: {
       'light'          => {h: 0..360,   s: 0..100,  l: 71..100},
       'dark'           => {h: 0..360,   s: 0..100,  l: 0..29},

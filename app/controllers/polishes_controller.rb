@@ -37,11 +37,13 @@ class PolishesController < ApplicationController
         map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /[\d\.]+(?=,[\d\.]+%)/.match(c).to_s.to_f, s: /[\d\.]*?(?=%)/.match(c).to_s.to_f, l: /[\d\.]*?(?=%\))/.match(c).to_s.to_f, hsl: /hsl\(.*?\)/.match(c).to_s}}.
         sort{ |x,y| y[:s] + y[:count] / 60 <=> x[:s] + x[:count] / 60 }
       @dominant_colours = merge_similar_colours colours
-      nude = Defaults::COLOURS[:tech]['nude']
+      nude_strict = Defaults::COLOURS[:tech]['nude_strict']
+      nude_soft = Defaults::COLOURS[:tech]['nude_soft']
       nudes = []
       size = @dominant_colours.size - 1
       @dominant_colours.reverse.each_with_index do |colour, i|
-        if (colour[:count] > 3000 && colour[:h].between?(nude[:h].min,nude[:h].max) && colour[:s].between?(nude[:s].min,nude[:s].max) && colour[:l].between?(nude[:l].min,nude[:l].max))
+        if (colour[:h].between?(nude_strict[:h].min,nude_strict[:h].max) && colour[:s].between?(nude_strict[:s].min,nude_strict[:s].max) && colour[:l].between?(nude_strict[:l].min,nude_strict[:l].max)) ||
+          (colour[:count] > 4500 && colour[:h].between?(nude_soft[:h].min,nude_soft[:h].max) && colour[:s].between?(nude_soft[:s].min,nude_soft[:s].max) && colour[:l].between?(nude_soft[:l].min,nude_soft[:l].max))
           nudes << colour
           @dominant_colours.delete_at(size - i)
         end
