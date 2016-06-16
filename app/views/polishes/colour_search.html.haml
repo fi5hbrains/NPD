@@ -35,18 +35,6 @@
           = text_field_tag :colour, params[:colour], placeholder: t("search.colour"), autocomplete: 'off', class: 'awesomplete colourSearch', 'data-list' => Defaults::COLOURS[I18n.locale].keys.to_s.gsub('"', '')
         .cell
           = submit_tag t('search.find')
-      = @debug
-      .inline
-        - if @dominant_colours
-          - @dominant_colours.each do |c|
-            .cBox.inline{'data-colour' => c[:hsl], 'data-field' => '#tmpColour', style: 'width:72.3px;height:80px;background:' + c[:hsl] + ';color:' + (c[:l] > 50 ? 'black' : 'white')}>
-              = c[:count]
-              %br
-              = c[:h]
-              %br
-              = c[:s]
-              %br
-              = c[:l]   
   .clearFix
   %h2
     = t 'catalogue.titles.colour_fidelity'

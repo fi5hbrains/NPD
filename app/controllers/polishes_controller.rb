@@ -30,7 +30,7 @@ class PolishesController < ApplicationController
     @load_colour_picker = true
     set_user_votes
     if @polish.reference?
-      colours = Magick.convert @polish.reference.url, '-resize 200x200^ -gravity center -crop 150x150+0+0 -depth 8 -colors 16 -colorspace HSL -format "%c" histogram:info:|sort -rn', ''
+      colours = Magick.convert @polish.reference.url, '-resize 200x200^ -gravity center -crop 150x150+0+0 -depth 8 -colors 24 -colorspace HSL -format "%c" histogram:info:|sort -rn', ''
       @debug = colours.to_s
       colours = colours.
         split("\n").
@@ -334,8 +334,8 @@ class PolishesController < ApplicationController
       unless merged_colours.size >= 16 || colour[:l] > 93 || colour[:l] < 7 
         merged_colours.each_with_index do |c, i|
           if ((c[:h] - colour[:h]).abs < 10  || (c[:h] - colour[:h]).abs > 350) && 
-             (c[:s] - colour[:s]).abs < 17  && 
-             (c[:l] - colour[:l]).abs < 23
+             (c[:s] - colour[:s]).abs < 19  && 
+             (c[:l] - colour[:l]).abs < 25
             if (c[:h] - colour[:h]).abs > 350
               colour[:h] = ([c[:h], colour[:h]].max - 360 + [c[:h], colour[:h]].min) / 2
               colour[:h] += 360 if colour[:h] < 0
