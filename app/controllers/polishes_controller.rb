@@ -37,11 +37,11 @@ class PolishesController < ApplicationController
         map{|c| {count: /(\d+?)(?=:)/.match(c).to_s.to_i, h: /[\d\.]+(?=,[\d\.]+%)/.match(c).to_s.to_f, s: /[\d\.]*?(?=%)/.match(c).to_s.to_f, l: /[\d\.]*?(?=%\))/.match(c).to_s.to_f, hsl: /hsl\(.*?\)/.match(c).to_s}}.
         sort{ |x,y| y[:s] + y[:count] / 60 <=> x[:s] + x[:count] / 60 }
       @dominant_colours = merge_similar_colours colours
-      nude = Defaults::COLOURS[:en]['nude']
+      nude = Defaults::COLOURS[:tech]['nude']
       nudes = []
       size = @dominant_colours.size - 1
       @dominant_colours.reverse.each_with_index do |colour, i|
-        if (colour[:h].between?(nude[:h].min,nude[:h].max) && colour[:s].between?(nude[:s].min,nude[:s].max) && colour[:l].between?(nude[:l].min,nude[:l].max))
+        if (colour[:count] > 3000 && colour[:h].between?(nude[:h].min,nude[:h].max) && colour[:s].between?(nude[:s].min,nude[:s].max) && colour[:l].between?(nude[:l].min,nude[:l].max))
           nudes << colour
           @dominant_colours.delete_at(size - i)
         end
@@ -51,7 +51,7 @@ class PolishesController < ApplicationController
     cookies[:spread] = params[:spread].to_i if params[:spread]
     spread = spread || cookies[:spread] || 20
     @related = Polish.coloured(params[:colour], spread) unless params[:colour].blank?
-    @colour = params[:colour].blank? ? 'f00' : colour_to_rgb(params[:colour])
+    @colour = params[:colour].blank? ? @dominant_colours ? @dominant_colours.first[:hsl] : '' : colour_to_rgb(params[:colour])
   end
   
   def new
