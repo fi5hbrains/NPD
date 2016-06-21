@@ -25,8 +25,8 @@ $(document).on 'ready page:load', ->
   
   $('.autoupdatable').find('input[name=polish], input[name=brand]').doneTyping ->
     $(this).closest('form').submit()
-  $('.relay').on "change paste keyup click", ->
-    $($(this).data('field')).val($(this).val())
+  $('.autosubmitable').on 'change', -> 
+    $(this).closest('form').submit()
   $('.completable').find('input[name=brand]').doneTyping ->
     $.ajax 
       url: '/autocomplete'

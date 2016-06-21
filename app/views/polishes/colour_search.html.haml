@@ -10,11 +10,15 @@
           .cell.wide100
             = f.text_field :remote_reference_url, placeholder: t('placeholder.http')
           .cell.wide100
-            = f.submit t('form.action.upload_image')
+            = f.submit t('form.action.upload_image'), name: 'upload'
       #referenceImageWrapper.relative.centeredText
-        #reference{style: ('display:none' unless @polish.reference?)}
+        %span#getRef.icon.i64.centered
+        = f.label :reference, 'Drop image here', id: 'referenceDrop'
+        #referenceUploading
+        #reference{style: ('display:block' if @polish.reference?)}
           - if @polish.reference?
             = image_tag @polish.reference_url, id: 'referenceImage', 'data-field' => '#tmpColour'
+        #referenceError
       .inline
         - if @dominant_colours
           - @dominant_colours.first(4).each do |c|

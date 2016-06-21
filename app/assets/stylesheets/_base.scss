@@ -598,7 +598,10 @@ h3 .tooltip { bottom: -30px }
   box-sizing: border-box;
   overflow:hidden;
   background: $colourHighlight;
+  outline: 3px dashed $colourPlaceholder;
+  outline-offset: -10px;
 }
+#reference, #referenceUploading, #referenceError, #referenceDrop { display: none }
 #referenceImage{
   cursor: url('/assets/picker.cur', auto);
   z-index:5;

@@ -31,14 +31,20 @@ class Box < ActiveRecord::Base
       # row = Hash[[header, spreadsheet.row(i)].transpose]
       
       unless spreadsheet.cell(i,brand_i).blank?
-        brand_name = (spreadsheet.excelx_type(i,brand_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i))
+        brand_name = (is_numeric?(spreadsheet,i,brand_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i))
         ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{brand_name.squish.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
-          name = (spreadsheet.excelx_type(i,name_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,name_i) : spreadsheet.cell(i,name_i))
-          number = (spreadsheet.excelx_type(i,number_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,number_i) : spreadsheet.cell(i,number_i))
-          collection = (spreadsheet.excelx_type(i,collection_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,collection_i) : spreadsheet.cell(i,collection_i))
-          year = (spreadsheet.excelx_type(i,year_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,year_i) : spreadsheet.cell(i,year_i))
+          if is_numeric?(spreadsheet,i,name_i)
+            number = spreadsheet.excelx_value(i,name_i).to_s
+          else
+            name = spreadsheet.cell(i,name_i).to_s
+          end
+          unless spreadsheet.excelx_type(i,number_i).blank?
+            number = (is_numeric?(spreadsheet,i,number_i) ? spreadsheet.excelx_value(i,number_i) : spreadsheet.cell(i,number_i)).to_s
+          end
+          collection = (is_numeric?(spreadsheet,i,collection_i) ? spreadsheet.excelx_value(i,collection_i) : spreadsheet.cell(i,collection_i)).to_s
+          year = (is_numeric?(spreadsheet,i,year_i) ? spreadsheet.excelx_value(i,year_i) : spreadsheet.cell(i,year_i)).to_s
           polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
           if polish.new_record?
             polish.draft = true
@@ -215,7 +221,7 @@ class Box < ActiveRecord::Base
     number = false
     collection = false
     year = false
-    brands = ['brand', 'brand name', 'polish brand','фирма','марка', 'брэнд', 'бренд']
+    brands = ['brand', 'brand name', 'polish brand','фирма','марка', 'брэнд', 'бренд', 'firma']
     polishes = ['color name', 'name of color', 'shade', 'colour name', 'polish name', 'color', 'colour', 'name', 'polish', 'lacquer', 'наименование', 'название', 'имя', 'лак']
     collections = ['collection', 'коллекция']
     numbers = ['number', 'номер', 'nr.']
@@ -258,6 +264,9 @@ class Box < ActiveRecord::Base
   def adapt_name; %w(collection wishlist giveaway).include?(self.name) ? I18n.t('user.list.' + self.name) : self.name end
 
   private 
+  def is_numeric? spreadsheet, row, column
+    spreadsheet.excelx_type(row,column) == [:numeric_or_formula, "GENERAL"] || spreadsheet.excelx_type(row,column) == [:numeric_or_formula, "General"]
+  end
   
   def name_string s, p, w, h, m, row_i
     " \\( -size #{s} -gravity center -background transparent  pango:\"<span  size='23000' face='PT Sans Narrow'>#{p.brand_name.gsub('&','＆')}\\n#{!p.number.blank? && !p.name.blank? ? p.number + ' <b>' + p.name.gsub('&','＆') + '</b>' : !p.number.blank? ? p.number : '<b>' + p.name.gsub('&','＆') + '</b>'}</span>\" -gravity NorthWest -geometry +#{(row_i - 1) * w + m}+#{h} \\) -composite "
