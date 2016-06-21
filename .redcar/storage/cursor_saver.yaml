@@ -632,9 +632,6 @@ cursor_positions:
   - :path: .gitignore
     :cursor_offset: 653
     :timestamp: 2016-05-07 20:05:22 +04:00
-  - :path: app/models/brand.rb
-    :cursor_offset: 729
-    :timestamp: 2016-03-02 09:54:02 +03:00
   - :path: config/deploy.rb
     :cursor_offset: 399
     :timestamp: 2016-05-07 20:04:08 +04:00
@@ -885,4 +882,7 @@ cursor_positions:
   - :path: app/controllers/polishes_controller.rb
     :cursor_offset: 1746
     :timestamp: 2016-06-16 12:09:17 +04:00
+  - :path: app/models/brand.rb
+    :cursor_offset: 729
+    :timestamp: 2016-03-02 09:54:02 +03:00
 files_to_retain: 0

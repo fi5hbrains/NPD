@@ -31,7 +31,7 @@ class Box < ActiveRecord::Base
       # row = Hash[[header, spreadsheet.row(i)].transpose]
       
       unless spreadsheet.cell(i,brand_i).blank?
-        brand_name = (is_numeric?(spreadsheet,i,brand_i) == [:numeric_or_formula, "GENERAL"] ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i))
+        brand_name = (is_numeric?(spreadsheet,i,brand_i) ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i)).to_s
         ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{brand_name.squish.strip}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
@@ -45,7 +45,8 @@ class Box < ActiveRecord::Base
           end
           collection = (is_numeric?(spreadsheet,i,collection_i) ? spreadsheet.excelx_value(i,collection_i) : spreadsheet.cell(i,collection_i)).to_s
           year = (is_numeric?(spreadsheet,i,year_i) ? spreadsheet.excelx_value(i,year_i) : spreadsheet.cell(i,year_i)).to_s
-          polish = (Polish.where(brand_id: brand.id, slug: slugify(name || number)).first || Polish.new)
+          polish = Polish.find_brand_polishes(brand, name).first
+          polish ||= Polish.new
           if polish.new_record?
             polish.draft = true
             unless name.blank?

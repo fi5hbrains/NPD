@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
   def search brand = nil, colour = nil, spread = nil, sort = nil, page = nil, per = nil
     @reset = false
     colour ||= params[:colour]
@@ -46,19 +47,8 @@ class ApplicationController < ActionController::Base
       end
     end
     if !params[:polish].blank? || brand || colour
-      if params[:polish] 
-        polish_ids = Synonym.
-          where("name ilike ? AND word_type = 'Polish'", "%#{params[:polish]}%").
-          pluck('word_id').compact.uniq
-      else
-        polish_ids = []
-      end
-      polishes = brand ? brand.polishes : @brands ? Polish.where(brand_id: @brands.pluck(:id)) : Polish.where(nil)
-      @polishes = polishes.
-        where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
-        "number ilike ? OR slug ilike ?", "%#{params[:polish]}%", "#{params[:polish]}%").
-        where(draft: false).
-        where('id != ?', polish_id)
+      @polishes = Polish.find_brand_polishes(brand, params[:polish], @brands || nil)
+      @polishes = @polishes.where(draft: false).where('id != ?', polish_id)
     elsif params[:polish].blank?
       if params[:action] == 'search'
         @reset = true unless params[:brand_id]

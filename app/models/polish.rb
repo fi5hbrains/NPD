@@ -446,6 +446,20 @@ class Polish < ActiveRecord::Base
     Magick.convert holo_base, holo_stack, holo_pass if is_holo
   end
   
+  def self.find_brand_polishes brand, polish = nil, brands = nil
+    if polish
+      polish_ids = Synonym.
+        where("name ilike ? AND word_type = 'Polish'", "%#{polish}%").
+        pluck('word_id').compact.uniq
+    else
+      polish_ids = []
+    end
+    polishes = brand ? brand.polishes : brands ? Polish.where(brand_id: brands.pluck(:id)) : Polish.where(nil)
+    return polishes.
+      where( (polish_ids.empty? ? '' : "id IN (#{polish_ids.inspect.gsub('[', '').gsub(']','')}) OR ") + 
+      "number ilike ? OR slug ilike ?", "%#{polish}%", "#{polish}%")
+  end
+  
   private  
   
   def path
