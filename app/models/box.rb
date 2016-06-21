@@ -31,8 +31,8 @@ class Box < ActiveRecord::Base
       # row = Hash[[header, spreadsheet.row(i)].transpose]
       
       unless spreadsheet.cell(i,brand_i).blank?
-        brand_name = (is_numeric?(spreadsheet,i,brand_i) ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i)).to_s
-        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{brand_name.squish.strip}%").pluck('word_id')
+        brand_name = (is_numeric?(spreadsheet,i,brand_i) ? spreadsheet.excelx_value(i,brand_i) : spreadsheet.cell(i,brand_i)).to_s.squish.strip.gsub(/\.0$/, '')
+        ids = Synonym.where("name ilike ? AND word_type = 'Brand'", "#{brand_name}%").pluck('word_id')
         brand = Brand.find(ids.first) unless ids.empty?
         if brand
           if is_numeric?(spreadsheet,i,name_i)
