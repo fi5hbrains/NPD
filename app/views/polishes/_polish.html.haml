@@ -1,0 +1,54 @@
+- unless polish == @polish
+  - remove ||= params[:edit]
+  - remove = remove && @box
+  - add ||= false
+  - add = add && @box
+  - big_polish ||= (add || remove)
+  - no_vote ||= add
+  - no_brand = (@brand.try(:slug) == polish.brand_slug) if no_brand == nil
+  - break_on_brand ||= false
+  - if big_polish
+    -if break_on_brand
+      - @current_slug = polish.brand_slug
+      - if @old_slug != @current_slug
+        %h3= polish.brand_name
+      - @old_slug = @current_slug
+    .bigPolish{'data-id' => polish.id}>
+      - if @box && current_user && @box.user_id == current_user.id
+        - if add && @box
+          = link_to collect_path(polish.id, box: @box.slug, from_list: true), method: :post, remote: true do
+            = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
+            <svg class='icon button roundButton'><use xlink:href=#plus /></svg>
+        - else
+          = link_to (remove ? collect_path(polish.id, box: @box.slug, from_list: true) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), method: (remove ? 'post' : false), remote: remove do
+            = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
+            <svg class='icon button roundButton important' style='#{('display:none' unless remove)}'><use xlink:href=#trash /></svg>    
+      - else
+        = link_to catalogue_brand_polish_path(polish.brand_slug, polish.slug) do
+          = image_tag polish.bottle_url('big'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)
+      .info<
+        %p.truncatable
+          = link_to truncate(polish.name_or_number, length: 30, ), catalogue_brand_polish_path(polish.brand_slug, polish.slug)
+          - if @notes && @notes[polish.id]
+            %span *
+        - unless no_vote
+          .voteBox.relative.center
+            = render 'stars', polish: polish
+  - else
+    .idBlock.polish.noFlow.bottomUp{'data-id' => polish.id}<
+      = link_to image_tag( polish.bottle_url('thumb'), class: ('getBottlingStatus' unless polish.draft || polish.bottling_status)), (in_lab? ? brand_polish_path(polish.brand_slug, polish.slug) : catalogue_brand_polish_path(polish.brand_slug, polish.slug)), class: 'pic'
+      .info
+        - unless no_brand
+          %p= link_to truncate(polish.brand_name, length: 50, omission: '…', separator: / |-|_/), (in_lab? ? brand_path(polish.brand_slug) : catalogue_path(polish.brand_slug))
+        %p.truncatable
+          %strong
+            - if in_lab?
+              = link_to ((polish.number + ' ' if polish.number).to_s + polish.name.to_s), brand_polish_path(polish.brand_slug, polish.slug)
+            - else
+              = link_to polish.name_or_number, catalogue_brand_polish_path(polish.brand_slug, polish.slug)
+        - if in_lab?
+          = render 'polishes/controls', polish: polish
+        - elsif !no_vote
+          %p.voteBox
+            = render 'stars', polish: polish
+    

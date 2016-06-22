@@ -1,9 +1,16 @@
 --- 
 open_files: 
-  - app/controllers/boxes_controller.rb
-  - app/views/application/collect_search.js.haml
-  - app/controllers/page_controller.rb
-  - app/models/box.rb
+  - app/views/polishes/colour_search.html.haml
+  - app/assets/stylesheets/_base.scss
   - app/assets/javascripts/common.coffee
+  - app/assets/stylesheets/_variables.scss
   - app/views/polishes/_form.html.haml
+  - app/models/polish.rb
+  - app/assets/stylesheets/_icons.scss
+  - app/models/box.rb
+  - db/schema.rb
   - app/controllers/polishes_controller.rb
+  - app/controllers/brands_controller.rb
+  - app/controllers/application_controller.rb
+  - app/views/polishes/_polish_preview.haml
+  - app/views/polishes/_polish.html.haml

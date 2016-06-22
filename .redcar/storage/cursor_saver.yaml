@@ -465,11 +465,6 @@ cursor_positions:
     :timestamp: 2016-03-22 15:51:11 +03:00
     :selection_offset: 265
     :block_selection_mode: false
-  - :path: app/assets/stylesheets/_icons.scss
-    :cursor_offset: 592
-    :timestamp: 2016-01-18 16:09:23 +03:00
-    :selection_offset: 595
-    :block_selection_mode: false
   - :path: app/views/application/_charming_charlie.html.haml
     :cursor_offset: 24
     :timestamp: 2016-03-24 21:32:12 +03:00
@@ -629,9 +624,6 @@ cursor_positions:
   - :path: public/googleba1109f49de9832e.html
     :cursor_offset: 0
     :timestamp: 2016-04-30 04:51:50 +04:00
-  - :path: .gitignore
-    :cursor_offset: 653
-    :timestamp: 2016-05-07 20:05:22 +04:00
   - :path: config/deploy.rb
     :cursor_offset: 399
     :timestamp: 2016-05-07 20:04:08 +04:00
@@ -664,15 +656,9 @@ cursor_positions:
   - :path: app/views/application/_ads.html.haml
     :cursor_offset: 594
     :timestamp: 2016-04-10 09:37:11 +04:00
-  - :path: app/views/polishes/_polish_preview.haml
-    :cursor_offset: 611
-    :timestamp: 2016-05-13 19:54:10 +04:00
   - :path: app/models/note.rb
     :cursor_offset: 32
     :timestamp: 2015-04-23 14:31:34 +04:00
-  - :path: app/controllers/brands_controller.rb
-    :cursor_offset: 1057
-    :timestamp: 2016-03-06 10:09:14 +03:00
   - :path: db/migrate/20160520031955_add_lightness_group_to_polishes.rb
     :cursor_offset: 138
     :timestamp: 2016-05-20 07:54:02 +04:00
@@ -682,9 +668,6 @@ cursor_positions:
   - :path: app/views/polishes/collect.js.haml
     :cursor_offset: 82
     :timestamp: 2016-05-20 15:18:42 +04:00
-  - :path: app/views/polishes/_polish.html.haml
-    :cursor_offset: 437
-    :timestamp: 2016-05-20 08:41:38 +04:00
   - :path: app/views/application/collection_search.js.haml
     :cursor_offset: 1502
     :timestamp: 2016-05-20 12:14:24 +04:00
@@ -720,11 +703,6 @@ cursor_positions:
   - :path: app/models/event.rb
     :cursor_offset: 181
     :timestamp: 2016-05-25 14:59:06 +04:00
-  - :path: app/assets/stylesheets/_variables.scss
-    :cursor_offset: 406
-    :timestamp: 2016-03-06 20:55:28 +03:00
-    :selection_offset: 392
-    :block_selection_mode: false
   - :path: app/views/users/index.html.haml
     :cursor_offset: 165
     :timestamp: 2016-05-24 08:02:11 +04:00
@@ -750,9 +728,6 @@ cursor_positions:
   - :path: db/migrate/20160525031737_create_events.rb
     :cursor_offset: 229
     :timestamp: 2016-05-25 18:38:14 +04:00
-  - :path: db/schema.rb
-    :cursor_offset: 9636
-    :timestamp: 2016-05-25 14:57:58 +04:00
   - :path: app/models/comment.rb
     :cursor_offset: 1042
     :timestamp: 2016-05-26 04:15:20 +04:00
@@ -810,12 +785,6 @@ cursor_positions:
   - :path: app/views/application/collect_search.js.haml
     :cursor_offset: 51
     :timestamp: 2016-01-05 23:50:17 +03:00
-  - :path: app/models/box.rb
-    :cursor_offset: 12408
-    :timestamp: 2016-05-27 21:30:38 +04:00
-  - :path: app/views/polishes/colour_search.html.haml
-    :cursor_offset: 251
-    :timestamp: 2016-06-04 08:09:15 +04:00
   - :path: app/views/layouts/application.html.haml
     :cursor_offset: 135
     :timestamp: 2016-06-06 15:32:21 +04:00
@@ -828,29 +797,15 @@ cursor_positions:
   - :path: app/controllers/page_controller.rb
     :cursor_offset: 2600
     :timestamp: 2016-06-11 22:59:40 +04:00
-  - :path: app/controllers/application_controller.rb
-    :cursor_offset: 8622
-    :timestamp: 2016-05-20 16:34:23 +04:00
-    :selection_offset: 8612
-    :block_selection_mode: false
   - :path: config/locales/en.yml
     :cursor_offset: 1430
     :timestamp: 2016-06-11 23:10:01 +04:00
-  - :path: app/models/polish.rb
-    :cursor_offset: 6821
-    :timestamp: 2016-05-27 17:10:21 +04:00
-  - :path: app/views/polishes/_form.html.haml
-    :cursor_offset: 468
-    :timestamp: 2016-05-13 21:31:44 +04:00
   - :path: app/assets/javascripts/lab.js
     :cursor_offset: 0
     :timestamp: 2016-05-31 07:38:31 +04:00
   - :path: lib/colour_methods.rb
     :cursor_offset: 660
     :timestamp: 2016-06-14 11:30:57 +04:00
-  - :path: app/assets/javascripts/common.coffee
-    :cursor_offset: 930
-    :timestamp: 2016-06-14 11:13:40 +04:00
   - :path: app/helpers/polishes_helper.rb
     :cursor_offset: 0
     :timestamp: 2016-03-12 17:48:46 +03:00
@@ -859,9 +814,6 @@ cursor_positions:
     :timestamp: 2016-04-16 23:33:09 +04:00
     :selection_offset: 244
     :block_selection_mode: false
-  - :path: app/assets/stylesheets/_base.scss
-    :cursor_offset: 15303
-    :timestamp: 2016-06-15 20:23:50 +04:00
   - :path: app/models/defaults.rb
     :cursor_offset: 1234
     :timestamp: 2016-06-16 08:10:13 +04:00
@@ -879,10 +831,54 @@ cursor_positions:
   - :path: app/assets/javascripts/local.coffee
     :cursor_offset: 5087
     :timestamp: 2016-06-15 20:16:52 +04:00
-  - :path: app/controllers/polishes_controller.rb
-    :cursor_offset: 1746
-    :timestamp: 2016-06-16 12:09:17 +04:00
   - :path: app/models/brand.rb
     :cursor_offset: 729
     :timestamp: 2016-03-02 09:54:02 +03:00
+  - :path: .gitignore
+    :cursor_offset: 653
+    :timestamp: 2016-05-07 20:05:22 +04:00
+  - :path: app/views/polishes/colour_search.html.haml
+    :cursor_offset: 1348
+    :timestamp: 2016-06-18 21:57:49 +04:00
+  - :path: app/assets/stylesheets/_base.scss
+    :cursor_offset: 14896
+    :timestamp: 2016-06-16 20:00:13 +04:00
+  - :path: app/assets/javascripts/common.coffee
+    :cursor_offset: 963
+    :timestamp: 2016-06-16 17:45:11 +04:00
+  - :path: app/assets/stylesheets/_variables.scss
+    :cursor_offset: 144
+    :timestamp: 2016-03-06 20:55:28 +03:00
+  - :path: app/views/polishes/_form.html.haml
+    :cursor_offset: 2029
+    :timestamp: 2016-05-13 21:31:44 +04:00
+  - :path: app/models/polish.rb
+    :cursor_offset: 23802
+    :timestamp: 2016-06-21 13:12:38 +04:00
+  - :path: app/assets/stylesheets/_icons.scss
+    :cursor_offset: 1620
+    :timestamp: 2016-01-18 16:09:23 +03:00
+  - :path: app/models/box.rb
+    :cursor_offset: 1591
+    :timestamp: 2016-06-21 22:04:51 +04:00
+  - :path: db/schema.rb
+    :cursor_offset: 12579
+    :timestamp: 2016-05-25 14:57:58 +04:00
+  - :path: app/controllers/polishes_controller.rb
+    :cursor_offset: 7044
+    :timestamp: 2016-06-16 12:09:17 +04:00
+    :selection_offset: 7049
+    :block_selection_mode: false
+  - :path: app/controllers/brands_controller.rb
+    :cursor_offset: 1057
+    :timestamp: 2016-03-06 10:09:14 +03:00
+  - :path: app/controllers/application_controller.rb
+    :cursor_offset: 2190
+    :timestamp: 2016-06-21 13:50:53 +04:00
+  - :path: app/views/polishes/_polish_preview.haml
+    :cursor_offset: 611
+    :timestamp: 2016-05-13 19:54:10 +04:00
+  - :path: app/views/polishes/_polish.html.haml
+    :cursor_offset: 3002
+    :timestamp: 2016-06-22 13:03:23 +04:00
 files_to_retain: 0
