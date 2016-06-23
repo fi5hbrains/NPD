@@ -801,9 +801,6 @@ cursor_positions:
   - :path: config/secrets.yml
     :cursor_offset: 657
     :timestamp: 2015-11-04 19:46:18 +03:00
-  - :path: config/routes.rb
-    :cursor_offset: 1399
-    :timestamp: 2016-06-03 09:16:47 +04:00
   - :path: config/boot.rb
     :cursor_offset: 0
     :timestamp: 2015-04-09 20:56:52 +04:00
@@ -853,9 +850,6 @@ cursor_positions:
     :timestamp: 2016-06-16 12:09:17 +04:00
     :selection_offset: 5177
     :block_selection_mode: false
-  - :path: db/schema.rb
-    :cursor_offset: 12579
-    :timestamp: 2016-05-25 14:57:58 +04:00
   - :path: app/models/box.rb
     :cursor_offset: 1591
     :timestamp: 2016-06-21 22:04:51 +04:00
@@ -888,4 +882,10 @@ cursor_positions:
   - :path: Capfile
     :cursor_offset: 697
     :timestamp: 2016-04-14 22:53:11 +04:00
+  - :path: db/schema.rb
+    :cursor_offset: 8895
+    :timestamp: 2016-06-23 21:09:24 +04:00
+  - :path: config/routes.rb
+    :cursor_offset: 276
+    :timestamp: 2016-06-23 21:36:19 +04:00
 files_to_retain: 0

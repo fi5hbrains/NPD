@@ -37,6 +37,7 @@
                 by
                 = link_to v.user_name, user_path(v.user_name) if v.user_name
               %td= v.updated_at.strftime("%d %m %Y %H:%M")
+              %td= link_to 'reverse', brand_polish_rollback_path(@brand.slug,@polish.slug,v.id), method: :post
     = @polish.h
     = @polish.s
     = @polish.l

@@ -87,6 +87,26 @@ class PolishesController < ApplicationController
     set_bottles
   end
   
+  def rollback
+    set_polish
+    old_slug = @polish.slug
+    old_owner = @polish.user_id
+    version = PolishVersion.find(params[:version_id])
+    @polish.assign_attributes YAML.load(version.polish)
+    all_layers_bottom_up
+    @polish.bottling_status = false
+    rename_polish_files old_slug if old_slug != @polish.slug
+    @polish.save_version("rollback;#{version.version}")
+    @polish.user_id = current_user.id
+    @polish.notify
+    @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id) || l.new_record?}
+    @polish.generate_preview @layers, params[:changes]
+    @polish.save
+    @polish.flatten_layers @layers
+    # @polish.delay(queue: current_user.id).flatten_layers @layers
+    redirect_to @brand, notice: 'Older version is restored' 
+  end
+  
   def collect
     unless params[:box].blank?
       collection = (@box = current_user.boxes.find_or_initialize_by slug: slugify(params[:box]) ).box_items

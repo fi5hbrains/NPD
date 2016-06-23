@@ -212,7 +212,7 @@ class Polish < ActiveRecord::Base
       end
       top_layer = layer.layer_type
 
-      if !layer.frozen? && (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < self.coats_count)
+      if !layer.frozen? && (changed_layers.blank? || (!changed_layers[layer.ordering.to_s].blank? && changed_layers[layer.ordering.to_s] != 0 || old_coats_count < self.coats_count))
         base = self.layer_tmp(layer.ordering)
         layer.opacity ||= 100
         

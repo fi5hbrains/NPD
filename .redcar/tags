@@ -1,4 +1,4 @@
-1466679593
+1466705461
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -296,6 +296,7 @@ retry	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/smart_poll.js	fun
 rgb_hex_to_dec	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgb_hex_to_dec 
 rgbdec_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgbdec_to_hsl 
 rgbhex_to_hsl	/Users/fish/Dropbox/work/Interpol/lib/colour_methods.rb	  def rgbhex_to_hsl 
+rollback	/Users/fish/Dropbox/work/Interpol/app/controllers/polishes_controller.rb	  def rollback
 s_range	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def s_range
 s_range=	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	  def s_range=(ranges)
 save_version	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def save_version 

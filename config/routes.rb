@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create, :update, :destroy], path: 'comment'
   
+  post 'lab/:brand_id/:polish_id/rollback/:version_id', to: 'polishes#rollback', as: 'brand_polish_rollback'
   post 'vote/:votable_type/:votable_id', to: 'users#vote', as: 'vote'
   post 'note/:polish_id', to: 'polishes#note', as: 'note'
   post 'collect/:polish_id', to: 'polishes#collect', as: 'collect'
