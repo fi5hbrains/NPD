@@ -10,6 +10,7 @@ set :linked_dirs, %w{log public/uploads public/downloads public/assets/defaults/
 set :branch, "master"
 set :rails_env, "production" #added for delayed job 
 set :delayed_job_pid_dir, '/tmp'
+set :delayed_job_workers, 1
 set :passenger_restart_with_touch, true
 
 namespace :deploy do

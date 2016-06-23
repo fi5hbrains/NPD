@@ -342,10 +342,12 @@ class Polish < ActiveRecord::Base
                   Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet)
                 end
               else
-                Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
+                Magick.convert(fill(layer.c_base), convert_list , coat(base, c))
+                # Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert(fill(layer.c_base), convert_list , coat(base, c))
                 if layer.magnet_intensity > 0
                   Defaults::MAGNETS.each do |magnet|
-                    Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet) unless magnet == self.magnet
+                    Magick.convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet) unless magnet == self.magnet
+                    # Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).convert base, '-compose dissolve -define compose:args=' + layer.magnet_intensity.to_s, self.magnet_url(base,magnet) unless magnet == self.magnet
                   end
                 end
               end
@@ -435,7 +437,7 @@ class Polish < ActiveRecord::Base
   end
   
   def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo, ordering, c)
-    if c == 0
+    if c == 0 || true
       Magick.convert mask_base, mask_stack, mask_pass            
       Magick.convert p_shadow_base, shadow_stack, particles_shadow_pass
       Magick.convert p_hl_base, highlight_stack, particles_hl_pass

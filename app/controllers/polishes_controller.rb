@@ -133,7 +133,8 @@ class PolishesController < ApplicationController
       @polish.save_version('create')
       @polish.generate_preview @layers, params[:changes]
       @polish.save
-      @polish.delay(queue: current_user.id).flatten_layers @layers
+      # @polish.delay(queue: current_user.id).flatten_layers @layers
+      @polish.flatten_layers @layers
       redirect_to @brand, notice: 'Polish was successfully created.' 
     else
       @polishes = @brand.polishes.order('created_at desc').page(params[:page]).per(12)
@@ -178,7 +179,8 @@ class PolishesController < ApplicationController
         @polish.layers.each{|l| l.destroy unless @layers.map(&:id).include?(l.id) || l.new_record?}
         @polish.generate_preview @layers, params[:changes]
         @polish.save
-        @polish.delay(queue: current_user.id).flatten_layers @layers
+        @polish.flatten_layers @layers
+        # @polish.delay(queue: current_user.id).flatten_layers @layers
         redirect_to @brand, notice: 'Polish was successfully updated.' 
       end
     else
