@@ -1,4 +1,4 @@
-1466650653
+1466659990
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -196,7 +196,7 @@ flatten_layers	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def flat
 folder	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def folder;
 gather	/Users/fish/Dropbox/work/Interpol/app/controllers/boxes_controller.rb	  def gather
 generate_bottle	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def generate_bottle 
-generate_glitter	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo)
+generate_glitter	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo, ordering, c)
 generate_preview	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def generate_preview 
 generate_word	/Users/fish/Dropbox/work/Interpol/app/models/invite.rb	  def self.generate_word
 getSize	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function getSize( type )

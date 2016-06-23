@@ -311,12 +311,7 @@ class Polish < ActiveRecord::Base
                   p_hl_base = particles_hl_pass
                   holo_base = holo_pass            
                 end
-
-                if c == 0
-                  self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
-                else
-                  self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
-                end
+                self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0, layer.ordering, c)
                 multiplier -= Defaults::STACK_LIMIT
                 pass += 1
               end
@@ -439,11 +434,18 @@ class Polish < ActiveRecord::Base
     self.update_attributes bottling_status: true
   end
   
-  def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo)
-    Magick.convert mask_base, mask_stack, mask_pass            
-    Magick.convert p_shadow_base, shadow_stack, particles_shadow_pass
-    Magick.convert p_hl_base, highlight_stack, particles_hl_pass
-    Magick.convert holo_base, holo_stack, holo_pass if is_holo
+  def generate_glitter( mask_base, mask_stack, mask_pass, p_shadow_base, shadow_stack, particles_shadow_pass, p_hl_base, highlight_stack, particles_hl_pass, holo_base, holo_stack, holo_pass, is_holo, ordering, c)
+    if c == 0
+      Magick.convert mask_base, mask_stack, mask_pass            
+      Magick.convert p_shadow_base, shadow_stack, particles_shadow_pass
+      Magick.convert p_hl_base, highlight_stack, particles_hl_pass
+      Magick.convert holo_base, holo_stack, holo_pass if is_holo
+    else
+      Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: ordering ).convert mask_base, mask_stack, mask_pass            
+      Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: ordering ).convert p_shadow_base, shadow_stack, particles_shadow_pass
+      Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: ordering ).convert p_hl_base, highlight_stack, particles_hl_pass
+      Magick.delay( queue: (self.user_id || 'lalala'), layer_ordering: ordering ).convert holo_base, holo_stack, holo_pass if is_holo
+    end
   end
   
   def self.find_brand_polishes brand, polish = nil, brands = nil
