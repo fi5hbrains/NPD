@@ -1,4 +1,4 @@
-1466586289
+1466650653
 Ad	/Users/fish/Dropbox/work/Interpol/app/models/ad.rb	class Ad 
 AdImageUploader	/Users/fish/Dropbox/work/Interpol/app/uploaders/ad_image_uploader.rb	class AdImageUploader 
 AdTest	/Users/fish/Dropbox/work/Interpol/test/models/ad_test.rb	class AdTest 
@@ -272,8 +272,8 @@ p	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def p
 p	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.p 
 parse_usernames	/Users/fish/Dropbox/work/Interpol/app/models/comment.rb	  def parse_usernames
 path	/Users/fish/Dropbox/work/Interpol/lib/magick_methods.rb	  def path;
-path	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def path
 path	/Users/fish/Dropbox/work/Interpol/app/controllers/application_controller.rb	  def path;
+path	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def path
 pngquant	/Users/fish/Dropbox/work/Interpol/app/models/magick.rb	  def self.pngquant 
 pointerdown	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function pointerdown(e)
 polish_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def polish_folder 
@@ -344,8 +344,8 @@ tmp_folder	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def tmp_fold
 to_link	/Users/fish/Dropbox/work/Interpol/app/helpers/application_helper.rb	  def to_link 
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/brand.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/user.rb	  def to_param;
-to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
 to_param	/Users/fish/Dropbox/work/Interpol/app/models/box.rb	  def to_param;
+to_param	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_param;
 to_yaml	/Users/fish/Dropbox/work/Interpol/app/models/polish.rb	  def to_yaml
 toggle	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/colour_picker.js	function toggle(event)
 unique	/Users/fish/Dropbox/work/Interpol/app/assets/javascripts/slider.js	function unique(array)

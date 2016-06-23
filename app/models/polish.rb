@@ -315,7 +315,7 @@ class Polish < ActiveRecord::Base
                 if c == 0
                   self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
                 else
-                  self.delay( queue: (self.user_id || 'lalala'), layer_ordering: layer.ordering ).generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
+                  self.generate_glitter( mask_base, mask_stack[c], mask_pass, p_shadow_base, shadow_stack[c], particles_shadow_pass, p_hl_base, highlight_stack[c], particles_hl_pass, holo_base, holo_stack[c], holo_pass, layer.holo_intensity > 0)
                 end
                 multiplier -= Defaults::STACK_LIMIT
                 pass += 1
