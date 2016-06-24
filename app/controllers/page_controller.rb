@@ -59,7 +59,7 @@ class PageController < ApplicationController
       agent = Mechanize.new
       
 
-      page = agent.get 'http://www.cirquecolors.com/creme/'
+      page = agent.get 'http://www.cirquecolors.com/all/'
       brand = Brand.find_by_slug 'cirque'
       shades = page.at('.ProductList').search('li')
       shades.each do |shade|
