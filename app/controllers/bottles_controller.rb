@@ -62,7 +62,7 @@ class BottlesController < ApplicationController
   private
   
   def bottle_params
-    params.require(:bottle).permit(:name, :blur)
+    params.require(:bottle).permit(:name, :blur, :volume)
   end
   def set_brand; @brand = Brand.find_by_slug(params[:brand_id]) end
   def set_bottle; @bottle = Bottle.find(params[:id]) end

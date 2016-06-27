@@ -3,6 +3,11 @@
   #bottleLayers<= render 'upload_preview' if @bottle.layers.count > 0
   = f.file_field :layers, multiple: true, 'data-updatable' => true, class: 'hidden'
   = f.label :layers, t('placeholder.add_images'), class: 'previewButton inline'
-  = f.number_field :blur, placeholder: t('placeholder.blur'), min: 0, max: 100
+  %br
+  = f.number_field :volume, min: 0, max: 99, class: 'inline'
+  = t('placeholder.volume')
+  %br
+  = f.number_field :blur, min: 0, max: 100, class: 'inline'
+  = t('placeholder.blur')
   = f.submit t('form.preview'), name: 'preview', class: 'previewButton hidden'
   = f.submit

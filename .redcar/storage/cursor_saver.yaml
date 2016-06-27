@@ -888,4 +888,7 @@ cursor_positions:
   - :path: app/models/bottle.rb
     :cursor_offset: 566
     :timestamp: 2016-06-23 14:59:53 +04:00
+  - :path: db/migrate/20160627094148_add_volume_to_bottles.rb
+    :cursor_offset: 119
+    :timestamp: 2016-06-27 13:42:35 +04:00
 files_to_retain: 0

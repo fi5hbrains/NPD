@@ -70,6 +70,7 @@ en:
     export_columns: 'Number of columns'
   placeholder:
     name: 'Name'
+    volume: 'Volume (ml)'
     prefix: 'Serie or Line Name'
     password: 'Password'
     email: 'Email'
@@ -82,7 +83,7 @@ en:
     synonym: 'Names separated by semicolon'
     link: 'Website'
     bottle_name: 'Name'
-    blur: 'Blur Level'
+    blur: 'Blur amount'
     add_images: 'Add Layer Images'
     add_to_new_list: 'Add to new list'
     list_name: 'List name'
