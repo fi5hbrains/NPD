@@ -200,7 +200,7 @@ class Polish < ActiveRecord::Base
       layer.shadow_colour ||= 'rgba(0,0,0,.4)'
       
       layer.ordering = i
-      Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
+      #Delayed::Job.where(layer_ordering: layer.ordering).each(&:destroy)
       unless %w(base sand).include? layer.layer_type
         noise_density[layer.layer_type] += layer.particle_density
         noise_size[layer.layer_type] = [noise_size[layer.layer_type], layer.particle_size].max
@@ -332,7 +332,7 @@ class Polish < ActiveRecord::Base
 #{" \\( #{path + highlight} -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " unless layer.layer_type == 'glitter' } \
 #{"\\( #{path + mask} -background white -alpha shape \\) -alpha on -compose DstIn -composite "} \
 #{"\\( #{path + particles_shadow} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'glitter'} \
-#{"\\( #{path + flake_shadow_tmp + mask.split('.png')[1]} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'flake'} \
+#{"\\( #{path + flake_shadow_tmp + mask.split('.png')[1]} -background black -alpha shape \\) -compose Over -composite " if layer.layer_type == 'flake' && layer.particle_size > 20} \
 #{"\\( #{path + particles_hl} -alpha off -background '#{layer.highlight_colour}' -alpha shape \\) -compose dissolve -define compose:args=#{get_alpha(layer.highlight_colour)} -composite " if layer.layer_type == 'glitter'} \
               -depth 8 "
               if c == 0
